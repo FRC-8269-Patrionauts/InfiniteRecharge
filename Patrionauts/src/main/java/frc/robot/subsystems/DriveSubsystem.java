@@ -1,18 +1,16 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Controller;
+import javax.swing.JOptionPane;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.spline.Spline.ControlVector;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 /**
  * A subsystem that controls driving the robot.
  * 
- * TODO(alonzo): Implement the DriveSubsystem. This class was originally named
+ * TODO(alfonzo): Implement the DriveSubsystem. This class was originally named
  * Movement in the design doc, but is now named DriveSubsystem.
  * 
  * Take a look at this example:
@@ -30,18 +28,35 @@ import frc.robot.Constants;
  * 
  * - The drive subsystem may need make sure that the movement is smooth.
  * 
- * TODO(ryssa and alonzo): We may need encoders here, you two should coordinate to figure out
+ * TODO(ryssa and alfonzo): We may need encoders here, you two should coordinate to figure out
  * how to implement them for this system.
  */
-public class DriveSubsystem {
-  private final PWMVictorSPX leftMotor1 = new PWMVictorSPX(Constants.LEFT_MOTOR_1);
-  private final PWMVictorSPX leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
-  private final PWMVictorSPX rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
-  private final PWMVictorSPX rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
+public class DriveSubsystem extends SubsystemBase {
+  private final SpeedController leftMotor1 = new PWMVictorSPX(0);
+  private final SpeedController leftmotor2 = new PWMVictorSPX(1);
+  private final SpeedController rightMotor1 = new PWMVictorSPX(2);
+  private final SpeedController rightMotor2 = new PWMVictorSPX(3);
 
   public DriveSubsystem() {
 
   }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+  public void setLeftMotors (double speed) {
+    leftMotor1.set(speed);
+    leftmotor2.set(speed);
+  }
+
+  public void setRightMotors(double speed) {
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+
+
+
 
 
 }

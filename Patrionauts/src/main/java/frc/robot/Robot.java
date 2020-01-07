@@ -1,8 +1,11 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -10,97 +13,26 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * documentation.
  */
 public class Robot extends TimedRobot {
+  private static final int kMotorPort = 0;
+  private static final int kJoystickPort = 0;
+
+  private SpeedController m_motor;
+  private Joystick m_joystick;
+
+  private final DriveSubsystem base = new DriveSubsystem();
   
 
-  private Command autonomousCommand;
-
-  private RobotContainer robotContainer;
-
-  /**
-   * This function is run when the robot is first started up and should be used
-   * for any initialization code.
-   */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer. This will perform all our button bindings,
-    // and put our
-    // autonomous chooser on the dashboard.
-    robotContainer = new RobotContainer();
+    m_motor = new PWMVictorSPX(kMotorPort);
+    m_joystick = new Joystick(kJoystickPort);
   }
-
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for
-   * items like diagnostics that you want ran during disabled, autonomous,
-   * teleoperated and test.
-   */
-  @Override
-  public void robotPeriodic() {
-    // Runs the CommandScheduler which is responsible for polling buttons, adding
-    // commands, already-scheduled commands, and running subsystem periodic()
-    // methods.
-    CommandScheduler.getInstance().run();
-  }
-
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   */
-  @Override
-  public void disabledInit() {
-  }
-
-  @Override
-  public void disabledPeriodic() {
-  }
-
-  /**
-   * This autonomous runs the autonomous command selected by your
-   * {@link RobotContainer} class.
-   */
-  @Override
-  public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) {
-      autonomousCommand.schedule();
-    }
-  }
-
-  /**
-   * This function is called periodically during autonomous.
-   */
-  @Override
-  public void autonomousPeriodic() {
-  }
-
-  @Override
-  public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (autonomousCommand != null) {
-      autonomousCommand.cancel();
-    }
-  }
-
-  /**
-   * This function is called periodically during operator control.
-   */
+//please god oh mighty, let this bot move with the swifthness as that of one graced by your hand
   @Override
   public void teleopPeriodic() {
-  }
+    base.setRightMotors(m_joystick.getY());
+    base.setLeftMotors(-m_joystick.getY());
 
-  @Override
-  public void testInit() {
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
   }
-
-  /**
-   * This function is called periodically during test mode.
-   */
-  @Override
-  public void testPeriodic() {
-  }
+}
 }

@@ -20,7 +20,7 @@ public class AutonomousCommand extends CommandBase {
         this.shoot = shoot;
         // If we add another subsystem to this command, we must add it to
         // addRequirements.
-        addRequirements(drive, camera, shoot);
+       // addRequirements(drive, camera, shoot);
     }
 
     @Override
