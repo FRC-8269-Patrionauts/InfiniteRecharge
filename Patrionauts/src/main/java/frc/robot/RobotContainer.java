@@ -22,7 +22,7 @@ import frc.robot.subsystems.ShootSubsystem;
 public class RobotContainer {
 
   // Devices
-  Joystick joystick = new Joystick(0); // TODO(team): initialize this correctly.
+  private final Joystick joystick = new Joystick(0); // TODO(team): initialize this correctly.
 
   // Subsystems
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
@@ -52,5 +52,25 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autonomousCommand;
+  }
+
+  public Joystick getJoystick() {
+    return this.joystick;
+  }
+
+  public CameraSubsystem getCameraSubsystem() {
+    return this.cameraSubsystem;
+  }
+
+  public DriveSubsystem getDriveSubsystem() {
+    return this.driveSubsystem;
+  }
+
+  public ShootSubsystem getShootSubsystem() {
+    return this.shootSubsystem;
+  }
+
+  public HumanDriveCommand getHumanDriveCommand() {
+    return this.humanDriveCommand;
   }
 }
