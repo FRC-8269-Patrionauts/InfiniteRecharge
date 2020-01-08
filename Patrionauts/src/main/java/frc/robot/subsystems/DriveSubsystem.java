@@ -29,10 +29,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * to figure out how to implement them for this system.
  */
 public class DriveSubsystem extends SubsystemBase {
-  private final SpeedController leftMotor1 = new PWMVictorSPX(12);
-  private final SpeedController leftmotor2 = new PWMVictorSPX(13);
-  private final SpeedController rightMotor1 = new PWMVictorSPX(14);
-  private final SpeedController rightMotor2 = new PWMVictorSPX(15);
+  //ports in the roboRIO
+  private final SpeedController leftMotor1 = new PWMVictorSPX(3);
+  private final SpeedController leftmotor2 = new PWMVictorSPX(2);
+  private final SpeedController rightMotor1 = new PWMVictorSPX(0);
+  private final SpeedController rightMotor2 = new PWMVictorSPX(1);
 
   public DriveSubsystem() {
 

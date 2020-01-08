@@ -32,7 +32,7 @@ public class RobotContainer {
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick);
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
-      shootSubsystem);
+      shootSubsystem, colorWheelSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
