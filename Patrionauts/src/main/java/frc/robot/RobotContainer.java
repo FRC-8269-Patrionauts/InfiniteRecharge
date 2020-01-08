@@ -22,7 +22,8 @@ import frc.robot.subsystems.ShootSubsystem;
 public class RobotContainer {
 
   // Devices
-  private final Joystick joystick = new Joystick(0); // TODO(team): initialize this correctly.
+  private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
+  private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
 
   // Subsystems
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
@@ -56,6 +57,10 @@ public class RobotContainer {
 
   public Joystick getJoystick() {
     return this.joystick;
+  }
+
+  public XboxController getGamepad() {
+    return this.gamepad;
   }
 
   public CameraSubsystem getCameraSubsystem() {

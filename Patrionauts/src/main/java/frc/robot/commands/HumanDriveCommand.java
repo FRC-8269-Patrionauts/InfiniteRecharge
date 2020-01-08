@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -20,10 +21,12 @@ import frc.robot.subsystems.DriveSubsystem;
 public class HumanDriveCommand extends CommandBase {
 
   private final DriveSubsystem drive;
+  //private final XboxController gamepad;
   private final Joystick joystick;
 
   public HumanDriveCommand(DriveSubsystem drive, Joystick joystick) {
     this.drive = drive;
+    //this.gamepad = gamepad;
     this.joystick = joystick;
     // If we add another subsystem to this command, we must add it to
     // addRequirements.
