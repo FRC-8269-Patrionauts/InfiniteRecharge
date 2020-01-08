@@ -1,8 +1,5 @@
 package frc.robot.subsystems;
 
-import javax.swing.JOptionPane;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -28,8 +25,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * 
  * - The drive subsystem may need make sure that the movement is smooth.
  * 
- * TODO(ryssa and alfonzo): We may need encoders here, you two should coordinate to figure out
- * how to implement them for this system.
+ * TODO(ryssa and alfonzo): We may need encoders here, you two should coordinate
+ * to figure out how to implement them for this system.
  */
 public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor1 = new PWMVictorSPX(12);
@@ -45,7 +42,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void setLeftMotors (double speed) {
+
+  public void setLeftMotors(double speed) {
     leftMotor1.set(speed);
     leftmotor2.set(speed);
   }
@@ -54,9 +52,4 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotor1.set(speed);
     rightMotor2.set(speed);
   }
-
-
-
-
-
 }

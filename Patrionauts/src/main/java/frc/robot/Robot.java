@@ -1,12 +1,12 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.DriveSubsystem;
+=======
+>>>>>>> bee3e895c14c90907855ea22520ae60595509ee6
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -14,27 +14,24 @@ import frc.robot.subsystems.DriveSubsystem;
  * documentation.
  */
 public class Robot extends TimedRobot {
-  private static final int kMotorPort = 0;
-  private static final int kJoystickPort = 0;
-
-  private SpeedController m_motor;
-  private Joystick m_joystick;
-
-  private final DriveSubsystem base = new DriveSubsystem();
-  
+  private final RobotContainer robotContainer = new RobotContainer();
 
   @Override
   public void robotInit() {
-    m_motor = new PWMVictorSPX(kMotorPort);
-    m_joystick = new Joystick(kJoystickPort);
   }
-//please god oh mighty, let this bot move with the swifthness as that of one graced by your hand
+
+  // please god oh mighty, let this bot move with the swifthness as that of one
+  // graced by your hand
   @Override
   public void teleopPeriodic() {
+<<<<<<< HEAD
     base.setRightMotors(m_joystick.getY());
     base.setLeftMotors(-m_joystick.getY());
     
 
+=======
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
+    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
+>>>>>>> bee3e895c14c90907855ea22520ae60595509ee6
   }
-}
 }
