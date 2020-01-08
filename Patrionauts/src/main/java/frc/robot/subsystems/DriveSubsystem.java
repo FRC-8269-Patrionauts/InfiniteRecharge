@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 /**
  * A subsystem that controls driving the robot.
@@ -32,10 +33,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * how to implement them for this system.
  */
 public class DriveSubsystem extends SubsystemBase {
-  private final SpeedController leftMotor1 = new PWMVictorSPX(0);
-  private final SpeedController leftmotor2 = new PWMVictorSPX(1);
-  private final SpeedController rightMotor1 = new PWMVictorSPX(2);
-  private final SpeedController rightMotor2 = new PWMVictorSPX(3);
+  private final SpeedController leftMotor1 = new PWMVictorSPX(Constants.LEFT_MOTOR_1);
+  private final SpeedController leftmotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
+  private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
+  private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
 
   public DriveSubsystem() {
 
@@ -49,7 +50,6 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor1.set(speed);
     leftmotor2.set(speed);
   }
-
   public void setRightMotors(double speed) {
     rightMotor1.set(speed);
     rightMotor2.set(speed);
