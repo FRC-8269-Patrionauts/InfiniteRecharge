@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -17,13 +16,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
   }
-
   // please god oh mighty, let this bot move with the swifthness as that of one
   // graced by your hand
   @Override
   public void teleopPeriodic() {
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
+
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
 
   }
 }
