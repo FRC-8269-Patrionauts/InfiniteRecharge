@@ -45,29 +45,18 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setLeftMotors(double speed) {
+  public void setBase(double speed) {
     leftMotor1.set(speed);
     leftMotor2.set(speed);
+    rightMotor1.set(-speed);
+    rightMotor2.set(-speed);
   }
-  public void setRightMotors(double speed) {
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
-  }
-
-  public void pivotTurnLeft(double speed){
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
+  public void rotation(double speed){
+    rightMotor1.set(-speed);
+    rightMotor2.set(-speed);
     leftMotor1.set(-speed);
     leftMotor2.set(-speed);
   }
-
-  public void pivotTurnRight(double speed){
-    rightMotor1.set(-speed);
-    rightMotor2.set(-speed);
-    leftMotor1.set(speed);
-    leftMotor2.set(speed);
-  }
-
   public void stop(){
     rightMotor1.set(0);
     rightMotor2.set(0);
