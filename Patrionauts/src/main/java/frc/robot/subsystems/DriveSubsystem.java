@@ -66,43 +66,46 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
 //autonnomous thingies
-public void setBase(double speed, double time) {
-    leftMotor1.set(-speed);
-    leftMotor2.set(-speed);
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
-    Timer.delay(time);
-  }
-public void setRotation(double speed, double time) {
+
+public void setRotation(double speed) {
     leftMotor1.set(speed);
     leftMotor2.set(speed);
     rightMotor1.set(speed);
     rightMotor2.set(speed);
-    Timer.delay(time);
   }
-public void setRightTurn(double speed, double time) {
+public void setRightTurn(double speed) {
     leftMotor1.set(-speed);
     leftMotor2.set(-speed);
     rightMotor1.set(0);
     rightMotor2.set(0);
-    Timer.delay(time);
   }
-public void setLeftTurn(double speed, double time) {
+public void setLeftTurn(double speed) {
     leftMotor1.set(0);
     leftMotor2.set(0);
     rightMotor1.set(speed);
     rightMotor2.set(speed);
-    Timer.delay(time);
-  }
-  public void StopPlease(double speed, int time) {
-    leftMotor1.set(0);
-    leftMotor2.set(0);
-    rightMotor1.set(0);
-    rightMotor2.set(0);
-    Timer.delay(30);
   }
     
+  public double getLeftMotor1Speed(){
+    return leftMotor1.get();
+  }
 
+  public double getLeftMotor2Speed(){
+    return leftMotor2.get();
+  }
+
+  public double getRightMotor1Speed(){
+    return rightMotor1.get();
+  }
+
+  public double getRightMotor2Speed(){
+    return rightMotor2.get();
+  }
+
+  public double[] getSpeeds(){
+    return new double[]{getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed()};
+  }
+  
 }
   
 

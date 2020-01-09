@@ -4,8 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -14,20 +16,32 @@ import frc.robot.subsystems.DriveSubsystem;
  * documentation.
  */
 public class Robot extends TimedRobot {
+
   private final RobotContainer robotContainer = new RobotContainer();
+  private AutonomousCommand autonomousCommand;
+  private Timer timer = new Timer();
 
   @Override
   public void autonomousInit() {  
     // -~-
+    autonomousCommand = robotContainer.getAutonomousCommand();
+    timer.reset();
+    timer.start();
   }
   @Override
   public void autonomousPeriodic() {
-    robotContainer.getDriveSubsystem().setBase(.5, 2);
-    robotContainer.getDriveSubsystem().setRotation(.5, 1);
-    robotContainer.getDriveSubsystem().setBase(-.5, 2);
-    robotContainer.getDriveSubsystem().StopPlease(0, 1);
-  }
 
+    if (timer.get() < 2) {
+      autonomousCommand.phaseOne();
+    } else if (timer.get() < 3) {
+      autonomousCommand.phaseTwo();
+    } else if (timer.get() < 5) {
+      autonomousCommand.phaseThree();
+    } else {
+      autonomousCommand.phaseFour();
+    }
+  }
+    
   public void robotInit() {
 
   }
@@ -44,7 +58,6 @@ public class Robot extends TimedRobot {
     } else {
       robotContainer.getDriveSubsystem().stop();
     }
-
 
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
     //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
