@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.HumanDriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -19,7 +20,22 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
+  private HumanDriveCommand humanDriveCommand;
   private Timer timer = new Timer();
+  private double currentTime;
+
+  /**
+   * This function is called once each time the robot enters Disabled mode.
+   */
+  @Override
+  public void disabledInit() {
+  }
+
+  @Override
+  public void disabledPeriodic() {
+  }
+
+  
 
   @Override
   public void autonomousInit() {  
@@ -27,15 +43,22 @@ public class Robot extends TimedRobot {
     autonomousCommand = robotContainer.getAutonomousCommand();
     timer.reset();
     timer.start();
+
+    // schedule the autonomous command (example)
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
+    }
   }
   @Override
   public void autonomousPeriodic() {
 
-    if (timer.get() < 2) {
+    currentTime = timer.get();
+
+    if (currentTime < 2) {
       autonomousCommand.phaseOne();
-    } else if (timer.get() < 3) {
+    } else if (currentTime < 3) {
       autonomousCommand.phaseTwo();
-    } else if (timer.get() < 5) {
+    } else if (currentTime < 5) {
       autonomousCommand.phaseThree();
     } else {
       autonomousCommand.phaseFour();
@@ -49,15 +72,29 @@ public class Robot extends TimedRobot {
 //------------------------------------------------------------------------------------------------------------------------------------------------
 //                                                                                  teleop
   @Override
+  public void teleopInit() {
+    humanDriveCommand = robotContainer.getHumanDriveCommand();
+
+    timer.reset();
+    timer.start();
+    
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
+    }
+  }
+
+  @Override
   public void teleopPeriodic() {
 
     if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-      robotContainer.getDriveSubsystem().rotation(robotContainer.getJoystick().getTwist());
+      humanDriveCommand.drive(robotContainer.getJoystick().getTwist());
     } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-      robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+      humanDriveCommand.rotate(robotContainer.getJoystick().getY());
     } else {
-      robotContainer.getDriveSubsystem().stop();
+      humanDriveCommand.stop();
     }
+
+
 
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
     //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));

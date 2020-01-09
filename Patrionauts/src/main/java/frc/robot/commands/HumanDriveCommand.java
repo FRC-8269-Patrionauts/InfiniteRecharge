@@ -40,4 +40,16 @@ public class HumanDriveCommand extends CommandBase {
   @Override
   public void execute() {
   }
+
+  public void drive(double speed) {
+    drive.setBase(speed);
+  }
+
+  public void rotate(double speed) {
+    drive.rotation(speed);
+  }
+
+  public void stop(){
+    drive.stop();
+  }
 }
