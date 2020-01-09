@@ -1,11 +1,13 @@
+package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class colorWheelSubsystem extends SubsystemBase
+public class ColorWheelSubsystem extends SubsystemBase
 {
     public String targetColor;
     public String myColor;
 
-    public colorWheelSubsystem()
+    public ColorWheelSubsystem()
     {
 
     }
