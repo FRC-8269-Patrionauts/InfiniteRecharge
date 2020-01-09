@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * A subsystem that controls driving the robot.
@@ -64,5 +65,49 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor2.set(0);
   }
 
+//autonnomous thingies
+
+public void setRotation(double speed) {
+    leftMotor1.set(speed);
+    leftMotor2.set(speed);
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+public void setRightTurn(double speed) {
+    leftMotor1.set(-speed);
+    leftMotor2.set(-speed);
+    rightMotor1.set(0);
+    rightMotor2.set(0);
+  }
+public void setLeftTurn(double speed) {
+    leftMotor1.set(0);
+    leftMotor2.set(0);
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+    
+  public double getLeftMotor1Speed(){
+    return leftMotor1.get();
+  }
+
+  public double getLeftMotor2Speed(){
+    return leftMotor2.get();
+  }
+
+  public double getRightMotor1Speed(){
+    return rightMotor1.get();
+  }
+
+  public double getRightMotor2Speed(){
+    return rightMotor2.get();
+  }
+
+  public double[] getSpeeds(){
+    return new double[]{getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed()};
+  }
   
 }
+  
+
+  
+

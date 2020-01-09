@@ -14,6 +14,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutonomousCommand;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * This sample program shows how to control a motor using a joystick. In the
@@ -27,7 +32,7 @@ public class Robot extends TimedRobot {
   private static final int rightMotor1Port = 0;
   private static final int rightMotor2Port = 1;
   private static final int leftMotor1Port = 2;
-  private static final int leftMotor2Port = 3;  
+  private static final int leftMotor2Port = 3;
   private static final int kJoystickPort = 1;
 
   private SpeedController rightMotor1;
@@ -36,9 +41,28 @@ public class Robot extends TimedRobot {
   private SpeedController leftMotor2;
 
   private Joystick m_joystick;
-  
+
 
   @Override
+  public void autonomousInit() {
+    // -~-
+    autonomousCommand = robotContainer.getAutonomousCommand();
+    timer.reset();
+    timer.start();
+  }
+  @Override
+  public void autonomousPeriodic() {
+    if (timer.get() < 2) {
+      autonomousCommand.phaseOne();
+    } else if (timer.get() < 3) {
+      autonomousCommand.phaseTwo();
+    } else if (timer.get() < 5) {
+      autonomousCommand.phaseThree();
+    } else {
+      autonomousCommand.phaseFour();
+    }
+  }
+
   public void robotInit() {
     rightMotor1 = new PWMVictorSPX(rightMotor1Port);
     rightMotor2 = new PWMVictorSPX(rightMotor2Port);
@@ -53,7 +77,7 @@ public class Robot extends TimedRobot {
     rightMotor2.set(1);
     leftMotor1.set(1);
     leftMotor2.set(1);
-    
+
   }
   @Override
   public void teleopPeriodic() {
