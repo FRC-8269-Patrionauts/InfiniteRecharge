@@ -30,6 +30,9 @@ public class Robot extends TimedRobot {
     robotContainer.getDriveSubsystem().setRotation(.5, 1);
     robotContainer.getDriveSubsystem().setBase(-5, 2);
     robotContainer.getDriveSubsystem().StopPlease(0, 1);
+
+  public void robotInit() {
+
   }
 //                                                                                autonomous
 //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,6 +47,18 @@ public class Robot extends TimedRobot {
     } else {
       robotContainer.getDriveSubsystem().stop();
     }
+
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
+    //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getRawAxis(3)); // right stick y value
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getRawAxis(1)); // left stick y value
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV())
+
+
   }
 }
 
