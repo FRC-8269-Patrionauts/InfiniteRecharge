@@ -1,17 +1,7 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
@@ -21,30 +11,18 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
- * This sample program shows how to control a motor using a joystick. In the
- * operator control part of the program, the joystick is read and the value is
- * written to the motor.
- *
- * <p>Joystick analog values range from -1 to 1 and speed controller inputs also
- * range from -1 to 1 making it easy to work together.
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the TimedRobot
+ * documentation.
  */
 public class Robot extends TimedRobot {
-  private static final int rightMotor1Port = 0;
-  private static final int rightMotor2Port = 1;
-  private static final int leftMotor1Port = 2;
-  private static final int leftMotor2Port = 3;
-  private static final int kJoystickPort = 1;
 
-  private SpeedController rightMotor1;
-  private SpeedController rightMotor2;
-  private SpeedController leftMotor1;
-  private SpeedController leftMotor2;
-
-  private Joystick m_joystick;
-
+  private final RobotContainer robotContainer = new RobotContainer();
+  private AutonomousCommand autonomousCommand;
+  private Timer timer = new Timer();
 
   @Override
-  public void autonomousInit() {
+  public void autonomousInit() {  
     // -~-
     autonomousCommand = robotContainer.getAutonomousCommand();
     timer.reset();
@@ -63,30 +41,33 @@ public class Robot extends TimedRobot {
       autonomousCommand.phaseFour();
     }
   }
-
+    
   public void robotInit() {
-    rightMotor1 = new PWMVictorSPX(rightMotor1Port);
-    rightMotor2 = new PWMVictorSPX(rightMotor2Port);
-    leftMotor1 = new PWMVictorSPX(leftMotor1Port);
-    leftMotor2 = new PWMVictorSPX(leftMotor2Port);
-    m_joystick = new Joystick(kJoystickPort);
-  }
-
-  @Override
-  public void autonomousInit() {
-    rightMotor1.set(1);
-    rightMotor2.set(1);
-    leftMotor1.set(1);
-    leftMotor2.set(1);
 
   }
+//                                                                                autonomous
+//------------------------------------------------------------------------------------------------------------------------------------------------
+//                                                                                  teleop
   @Override
   public void teleopPeriodic() {
-    rightMotor1.set(1);
-    rightMotor2.set(1);
-    leftMotor1.set(1);
-    leftMotor2.set(1);
 
-    //SmartDashboard.putString("Motor Value: ", rightMotor)
+    if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
+      robotContainer.getDriveSubsystem().rotation(robotContainer.getJoystick().getTwist());
+    } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
+      robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+    } else {
+      robotContainer.getDriveSubsystem().stop();
+    }
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
+    //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getRawAxis(3)); // right stick y value
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getRawAxis(1)); // left stick y value
+
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV())
+
+
   }
 }
