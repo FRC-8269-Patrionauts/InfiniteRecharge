@@ -25,16 +25,15 @@ public class Robot extends TimedRobot {
     robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY()); // moves using y value of joystick
     robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
 
-    i
-
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
     //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
 
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getRawAxis(3)); // right stick y value
     //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getRawAxis(1)); // left stick y value
     
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
 
   }
+
 }
