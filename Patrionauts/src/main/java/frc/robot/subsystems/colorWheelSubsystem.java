@@ -7,7 +7,7 @@ public class ColorWheelSubsystem extends SubsystemBase
     public String targetColor;
     public String myColor;
 
-    public colorWheelSubsystem()
+    public ColorWheelSubsystem()
     {
 
     }

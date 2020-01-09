@@ -24,14 +24,14 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2));
-    robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(1));
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getRawAxis(1));
-
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY()); // moves using y value of joystick
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
-
+    if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
+      robotContainer.getDriveSubsystem().rotation(robotContainer.getJoystick().getTwist());
+    } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
+      robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+    } else {
+      robotContainer.getDriveSubsystem().stop();
+    }
+    
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2)); // moves using "twist" yaw value
     //robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
 
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getRawAxis(1)); // left stick y value
     
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
-    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV())
 
   }
 
