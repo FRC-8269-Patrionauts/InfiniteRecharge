@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
   }
     
   public void robotInit() {
-
+    //TODO: Init robot here
   }
 //                                                                                autonomous
 //------------------------------------------------------------------------------------------------------------------------------------------------
