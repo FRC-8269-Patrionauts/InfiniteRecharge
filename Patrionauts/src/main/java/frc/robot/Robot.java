@@ -21,11 +21,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
-    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
+    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
 
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
 
   }
 }
