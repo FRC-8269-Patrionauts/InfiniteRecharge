@@ -72,7 +72,7 @@ public class RobotContainer {
   /**
    * Returns the command for human driving.
    */
-  public Command getAutonomousCommand() {
+  public AutonomousCommand getAutonomousCommand() {
     return this.autonomousCommand;
   }
 

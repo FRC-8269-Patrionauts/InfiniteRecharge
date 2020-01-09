@@ -30,4 +30,18 @@ public class AutonomousCommand extends CommandBase {
     @Override
     public void execute() {
     }
+
+    public void phaseOne(){
+        drive.setBase(.5); 
+    }
+    public void phaseTwo(){
+        drive.rotation(.5);
+    }
+    public void phaseThree(){
+        drive.setBase(-.5);
+    }
+
+    public void phaseFour(){
+        drive.stop();
+    }
 }
