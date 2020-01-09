@@ -14,13 +14,13 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
 
   @Override
-  public void robotInit() {
+  public void robotInit() {  
   }
   // please god oh mighty, let this bot move with the swifthness as that of one
   // graced by your hand
   @Override
   public void teleopPeriodic() {
-
+    
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
     //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
 
