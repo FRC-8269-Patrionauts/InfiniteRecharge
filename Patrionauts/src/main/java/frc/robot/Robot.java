@@ -15,7 +15,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
 
   @Override
-  public void robotInit() {
+  public void robotInit() {  
   }
   // please god oh mighty, let this bot move with the swifthness as that of one
   // graced by your hand
@@ -32,6 +32,9 @@ public class Robot extends TimedRobot {
 
     //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getRawAxis(3)); // right stick y value
     //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getRawAxis(1)); // left stick y value
+    
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
+    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
 
   }
 }
