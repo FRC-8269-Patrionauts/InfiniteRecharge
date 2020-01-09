@@ -1,9 +1,5 @@
 package frc.robot;
 
-import java.sql.Time;
-
-import javax.swing.Timer;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -28,8 +24,9 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     robotContainer.getDriveSubsystem().setBase(.5, 2);
     robotContainer.getDriveSubsystem().setRotation(.5, 1);
-    robotContainer.getDriveSubsystem().setBase(-5, 2);
+    robotContainer.getDriveSubsystem().setBase(-.5, 2);
     robotContainer.getDriveSubsystem().StopPlease(0, 1);
+  }
 
   public void robotInit() {
 
