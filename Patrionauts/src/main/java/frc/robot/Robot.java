@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void autonomousPeriodic() {
+
     if (timer.get() < 2) {
       autonomousCommand.phaseOne();
     } else if (timer.get() < 3) {
