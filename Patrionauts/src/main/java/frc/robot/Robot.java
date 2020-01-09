@@ -1,8 +1,10 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -20,12 +22,11 @@ public class Robot extends TimedRobot {
   // graced by your hand
   @Override
   public void teleopPeriodic() {
-
-    //robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getY());
-    //robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getY());
-     
-    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getGamepad().getPOV());
-    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getGamepad().getPOV());
+    
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(2));
+    robotContainer.getDriveSubsystem().setLeftMotors(robotContainer.getJoystick().getRawAxis(2));
+    robotContainer.getDriveSubsystem().setRightMotors(robotContainer.getJoystick().getRawAxis(1));
+    robotContainer.getDriveSubsystem().setLeftMotors(-robotContainer.getJoystick().getRawAxis(1));
 
   }
 }
