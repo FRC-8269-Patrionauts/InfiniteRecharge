@@ -32,7 +32,7 @@ import frc.robot.Constants;
 public class DriveSubsystem extends SubsystemBase {
 
   private final SpeedController leftMotor1 = new PWMVictorSPX(Constants.LEFT_MOTOR_1);
-  private final SpeedController leftmotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
+  private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
 
@@ -44,12 +44,36 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
   public void setLeftMotors(double speed) {
     leftMotor1.set(speed);
-    leftmotor2.set(speed);
+    leftMotor2.set(speed);
   }
   public void setRightMotors(double speed) {
     rightMotor1.set(speed);
     rightMotor2.set(speed);
   }
+
+  public void pivotTurnLeft(double speed){
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+    leftMotor1.set(-speed);
+    leftMotor2.set(-speed);
+  }
+
+  public void pivotTurnRight(double speed){
+    rightMotor1.set(-speed);
+    rightMotor2.set(-speed);
+    leftMotor1.set(speed);
+    leftMotor2.set(speed);
+  }
+
+  public void stop(){
+    rightMotor1.set(0);
+    rightMotor2.set(0);
+    leftMotor1.set(0);
+    leftMotor2.set(0);
+  }
+
+  
 }
