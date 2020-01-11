@@ -3,8 +3,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
@@ -49,7 +47,7 @@ public class RobotContainer {
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
 
-  // Command
+  // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick);
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
       shootSubsystem);
