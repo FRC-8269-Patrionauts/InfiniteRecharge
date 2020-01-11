@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
@@ -12,7 +13,6 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
-
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -28,20 +28,20 @@ public class RobotContainer {
   // Devices
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
-  
-  //Gamepad Buttons
-  JoystickButton X = new JoystickButton(gamepad, 0); 
-  JoystickButton A = new JoystickButton(gamepad, 1); 
-  JoystickButton B = new JoystickButton(gamepad, 2); 
-  JoystickButton Y = new JoystickButton(gamepad, 3); 
-  JoystickButton leftBumper = new JoystickButton(gamepad, 4); 
-  JoystickButton rightBumper = new JoystickButton(gamepad, 5); 
-  JoystickButton leftTrigger = new JoystickButton(gamepad, 6); 
-  JoystickButton rightTrigger = new JoystickButton(gamepad, 7); 
-  JoystickButton back = new JoystickButton(gamepad, 8); 
-  JoystickButton start = new JoystickButton(gamepad, 9);
-  JoystickButton leftJoystickClick = new JoystickButton(gamepad, 10); 
-  JoystickButton rightJoystickClick = new JoystickButton(gamepad, 11); 
+
+  // Gamepad Buttons
+  JoystickButton X = new JoystickButton(gamepad, Constants.GAMEPAD_X);
+  JoystickButton A = new JoystickButton(gamepad, Constants.GAMEPAD_A);
+  JoystickButton B = new JoystickButton(gamepad, Constants.GAMEPAD_B);
+  JoystickButton Y = new JoystickButton(gamepad, Constants.GAMEPAD_Y);
+  JoystickButton leftBumper = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_BUMPER);
+  JoystickButton rightBumper = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_BUMPER);
+  JoystickButton leftTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_TRIGGER);
+  JoystickButton rightTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_TRIGGER);
+  JoystickButton back = new JoystickButton(gamepad, Constants.GAMEPAD_BACK);
+  JoystickButton start = new JoystickButton(gamepad, Constants.GAMEPAD_START);
+  JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
+  JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
   // Subsystems
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
@@ -66,7 +66,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+
   }
 
   /**
@@ -84,7 +84,7 @@ public class RobotContainer {
     return this.gamepad;
   }
 
-  public JoystickButton getButton(){
+  public JoystickButton getButton() {
     return this.leftJoystickClick;
   }
 

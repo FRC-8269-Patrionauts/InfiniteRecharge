@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -14,6 +15,8 @@ public class AutonomousCommand extends CommandBase {
     private final CameraSubsystem camera;
     private final ShootSubsystem shoot;
 
+    private final Timer timer = new Timer();
+
     public AutonomousCommand(DriveSubsystem drive, CameraSubsystem camera, ShootSubsystem shoot) {
         this.drive = drive;
         this.camera = camera;
@@ -25,23 +28,37 @@ public class AutonomousCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        timer.reset();
+        timer.start();
     }
 
     @Override
     public void execute() {
+        double currentTime = timer.get();
+        if (currentTime < 2) {
+            phaseOne();
+        } else if (currentTime < 3) {
+            phaseTwo();
+        } else if (currentTime < 5) {
+            phaseThree();
+        } else {
+            phaseFour();
+        }
     }
 
-    public void phaseOne(){
-        drive.setBase(.5); 
+    public void phaseOne() {
+        drive.setBase(.5);
     }
-    public void phaseTwo(){
+
+    public void phaseTwo() {
         drive.rotation(.5);
     }
-    public void phaseThree(){
+
+    public void phaseThree() {
         drive.setBase(-.5);
     }
 
-    public void phaseFour(){
+    public void phaseFour() {
         drive.stop();
     }
 }
