@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
 
 /**
@@ -27,6 +28,22 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
+    }
+    robotContainer.getHumanDriveCommand().schedule();
+  }
+
+  @Override
+  public void teleopPeriodic() {
+
+    SmartDashboard.putNumber("Joystick Twist", robotContainer.getJoystick().getTwist());
+    SmartDashboard.putNumber("Joystick Y", robotContainer.getJoystick().getY());
+    
+    if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
+      robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
+    } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
+      robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+    } else {
+      robotContainer.getDriveSubsystem().stop();
     }
   }
 }

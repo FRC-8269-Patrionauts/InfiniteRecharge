@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -49,6 +50,11 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor2.set(speed);
     rightMotor1.set(-speed);
     rightMotor2.set(-speed);
+
+    SmartDashboard.putNumber("Left Motor 1", leftMotor1.get());
+    SmartDashboard.putNumber("Left Motor 2", leftMotor2.get());
+    SmartDashboard.putNumber("Right Motor 1", rightMotor1.get());
+    SmartDashboard.putNumber("Right Motor 2", rightMotor2.get());
   }
 
   public void rotation(double speed) {
@@ -65,27 +71,30 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor2.set(0);
   }
 
-  // autonnomous thingies
+  // // autonnomous thingies
 
   public void setRotation(double speed) {
-    leftMotor1.set(speed);
-    leftMotor2.set(speed);
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
+    setBase(speed);
+    // leftMotor1.set(speed);
+    // leftMotor2.set(speed);
+    // rightMotor1.set(speed);
+    // rightMotor2.set(speed);
   }
 
   public void setRightTurn(double speed) {
-    leftMotor1.set(-speed);
-    leftMotor2.set(-speed);
-    rightMotor1.set(0);
-    rightMotor2.set(0);
+    setBase(speed);
+    // leftMotor1.set(-speed);
+    // leftMotor2.set(-speed);
+    // rightMotor1.set(0);
+    // rightMotor2.set(0);
   }
 
   public void setLeftTurn(double speed) {
-    leftMotor1.set(0);
-    leftMotor2.set(0);
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
+    setBase(speed);
+    // leftMotor1.set(0);
+    // leftMotor2.set(0);
+    // rightMotor1.set(speed);
+    // rightMotor2.set(speed);
   }
 
   public double getLeftMotor1Speed() {
