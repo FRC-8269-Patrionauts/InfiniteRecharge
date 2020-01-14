@@ -79,7 +79,7 @@ public class PathFollower {
 
     // TODO: Implement this method.
     private Spark getLeftMotor() {
-        return null;
+        return false;
     }
 
     // TODO: Implement this method.

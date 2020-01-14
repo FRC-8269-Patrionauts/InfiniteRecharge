@@ -1,8 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.SmartDashboardCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -13,10 +13,12 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
+  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer);
 
   @Override
   public void autonomousInit() {
     autonomousCommand = robotContainer.getAutonomousCommand();
+
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
@@ -34,9 +36,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
-    SmartDashboard.putNumber("Joystick Twist", robotContainer.getJoystick().getTwist());
-    SmartDashboard.putNumber("Joystick Y", robotContainer.getJoystick().getY());
     
     // if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
     //   robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
@@ -45,13 +44,17 @@ public class Robot extends TimedRobot {
     // } else {
     //   robotContainer.getDriveSubsystem().stop();
     // }
-   
+
+    smartDashboardCommand.addDrive();
+  
+
     if (Math.abs(robotContainer.getJoystick().getY()) > .1 || Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
       robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(), robotContainer.getJoystick().getTwist());
   } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
       robotContainer.getDriveSubsystem().Strafe(robotContainer.getJoystick().getX());
-} else {
-  robotContainer.getDriveSubsystem().stop();
-}
+  } else {
+      robotContainer.getDriveSubsystem().stop();
+  }
+
 }
 }
