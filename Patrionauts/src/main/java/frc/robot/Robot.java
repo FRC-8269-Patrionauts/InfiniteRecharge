@@ -48,8 +48,10 @@ public class Robot extends TimedRobot {
    
     if (Math.abs(robotContainer.getJoystick().getY()) > .1 || Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
       robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(), robotContainer.getJoystick().getTwist());
-  }else {
-    robotContainer.getDriveSubsystem().stop();
-  }
+  } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
+      robotContainer.getDriveSubsystem().Strafe(robotContainer.getJoystick().getX());
+} else {
+  robotContainer.getDriveSubsystem().stop();
+}
 }
 }

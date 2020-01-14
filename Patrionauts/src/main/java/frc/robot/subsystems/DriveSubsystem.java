@@ -73,6 +73,8 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotor1.set(speed);
     rightMotor2.set(speed);
   }
+
+  
   /*
    * "cleaned up" version of the arcade drive, it alows
    *  us to rotate and go forward and rotate 
@@ -102,6 +104,15 @@ public class DriveSubsystem extends SubsystemBase {
     }
     setLeftPower(-leftPower);
     setRightPower(rightPower);
+  }
+
+  public void Strafe(double x) {   //please for the love of all that is holy stafe with the grace of our permethious
+    double xValue = x;
+    if (Math.abs(xValue) < 0.2){
+      xValue = 0;
+    }
+      setBase(x, -x, x, -x);
+
   }
   
   public void rotation(double speed) {
@@ -137,6 +148,17 @@ public class DriveSubsystem extends SubsystemBase {
     // rightMotor1.set(speed);
     // rightMotor2.set(speed);
   }
+
+  public SpeedController getLeftMotor1(){
+    return leftMotor1;
+  }public SpeedController getLeftMotor2(){
+    return leftMotor2;
+  }public SpeedController getRightMotor1(){
+    return rightMotor1;
+  }public SpeedController getRightMotor2(){
+    return rightMotor2;
+  }
+
 
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
