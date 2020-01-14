@@ -57,18 +57,59 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Right Motor 2", rightMotor2.get());
   }
 
+  public void setBase(double lM1, double lM2, double rM1, double rM2) {
+    leftMotor1.set(lM1);
+    leftMotor2.set(lM2);
+    rightMotor1.set(rM1);
+    rightMotor2.set(rM2);
+  }
+
+  public void setLeftPower(double speed) {
+    leftMotor1.set(speed);
+    leftMotor2.set(speed);
+  }
+
+  public void setRightPower(double speed) {
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+  /*
+   * "cleaned up" version of the arcade drive, it alows
+   *  us to rotate and go forward and rotate 
+   * at the same time and vise versa 
+   */
+
+  public void arcadeDrive(double y, double x){    //"cleaned up" version of the arcade drive, it alows us to rotate and go forward and rotate at the same time and vise versa 
+    double yValue = y;
+    double xValue = -x;
+    if (Math.abs(xValue) < 0.2) {
+      xValue = 0;
+    }
+    if (Math.abs(yValue) < 0.2) {
+      yValue = 0;
+    }
+    double leftPower = yValue + xValue;
+    double rightPower = yValue - xValue;
+    if (leftPower < -1) {
+      leftPower = -1;
+    } else if (leftPower > 1) {
+      leftPower = 1;
+    }
+    if (rightPower < -1) {
+      rightPower = -1;
+    }else if (rightPower > 1){
+      rightPower = 1;
+    }
+    setLeftPower(-leftPower);
+    setRightPower(rightPower);
+  }
+  
   public void rotation(double speed) {
-    rightMotor1.set(-speed);
-    rightMotor2.set(-speed);
-    leftMotor1.set(-speed);
-    leftMotor2.set(-speed);
+    setBase(-speed,-speed,-speed,-speed);
   }
 
   public void stop() {
-    rightMotor1.set(0);
-    rightMotor2.set(0);
-    leftMotor1.set(0);
-    leftMotor2.set(0);
+   setBase(0, 0, 0, 0);
   }
 
   // // autonnomous thingies

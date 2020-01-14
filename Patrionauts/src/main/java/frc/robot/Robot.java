@@ -38,12 +38,18 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Joystick Twist", robotContainer.getJoystick().getTwist());
     SmartDashboard.putNumber("Joystick Y", robotContainer.getJoystick().getY());
     
-    if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-      robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
-    } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-      robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
-    } else {
-      robotContainer.getDriveSubsystem().stop();
-    }
+    // if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
+    //   robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
+    // } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
+    //   robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+    // } else {
+    //   robotContainer.getDriveSubsystem().stop();
+    // }
+   
+    if (Math.abs(robotContainer.getJoystick().getY()) > .1 || Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
+      robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(), robotContainer.getJoystick().getTwist());
+  }else {
+    robotContainer.getDriveSubsystem().stop();
   }
+}
 }
