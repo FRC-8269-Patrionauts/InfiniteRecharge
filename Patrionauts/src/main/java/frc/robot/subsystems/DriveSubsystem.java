@@ -108,11 +108,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void Strafe(double x) {   //please for the love of all that is holy stafe with the grace of our permethious
     double xValue = x;
-    if (Math.abs(xValue) < 0.2){
+    if (Math.abs(xValue) < .5){
       xValue = 0;
     }
       setBase(x, -x, x, -x);
-
   }
   
   public void rotation(double speed) {
