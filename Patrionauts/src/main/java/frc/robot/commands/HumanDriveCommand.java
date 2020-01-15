@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
@@ -21,12 +22,12 @@ import frc.robot.subsystems.DriveSubsystem;
 public class HumanDriveCommand extends CommandBase {
 
   private final DriveSubsystem driveSubsystem;
-  // private final XboxController gamepad;
+  private final XboxController gamepad;
   private final Joystick joystick;
 
-  public HumanDriveCommand(DriveSubsystem driveSubsystem, Joystick joystick) {
+  public HumanDriveCommand(DriveSubsystem driveSubsystem, Joystick joystick, XboxController gamepad) {
     this.driveSubsystem = driveSubsystem;
-    // this.gamepad = gamepad;
+    this.gamepad = gamepad;
     this.joystick = joystick;
 
     // If we add another subsystem to this command, we must add it to
@@ -36,7 +37,20 @@ public class HumanDriveCommand extends CommandBase {
 
   @Override
   public void execute() {
- 
-
+    if (joystick != null) {
+      if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
+        driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
+      } else if (Math.abs(joystick.getX()) > .2) {
+        driveSubsystem.Strafe(joystick.getX());
+      } else {
+        driveSubsystem.stop();
+      }
+    } else if (gamepad != null) {
+      if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .1) {
+        driveSubsystem.arcadeDrive(gamepad.getRawAxis(1), gamepad.getRawAxis(2));
+      } else {
+        driveSubsystem.stop();
+      }
+    }
   }
 }

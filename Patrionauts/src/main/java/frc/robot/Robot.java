@@ -1,7 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.SmartDashboardCommand;
 
 /**
@@ -13,7 +15,13 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
+  private HumanDriveCommand humanDriveCommand;
   private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer);
+
+  @Override
+  public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void autonomousInit() {
@@ -27,39 +35,21 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    humanDriveCommand = robotContainer.getHumanDriveCommand();
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    robotContainer.getHumanDriveCommand().schedule();
+    if (humanDriveCommand != null) {
+      humanDriveCommand.schedule();
+    }
   }
 
   @Override
   public void teleopPeriodic() {
 
-    // if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-    // robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
-    // } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-    // robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
-    // } else {
-    // robotContainer.getDriveSubsystem().stop();
-    // }
-   
-    if (Math.abs(robotContainer.getJoystick().getY()) > .2 || Math.abs(robotContainer.getJoystick().getTwist()) > .2) {
-      robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(), robotContainer.getJoystick().getTwist());
-  } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
-
     smartDashboardCommand.addDrive();
     smartDashboardCommand.addGamepad();
     smartDashboardCommand.addJoystick();
-
-    if (Math.abs(robotContainer.getJoystick().getY()) > .1 || Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-      robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(),
-          robotContainer.getJoystick().getTwist());
-    } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
-      robotContainer.getDriveSubsystem().Strafe(robotContainer.getJoystick().getX());
-    } else {
-      robotContainer.getDriveSubsystem().stop();
-    }
 
   }
 }
