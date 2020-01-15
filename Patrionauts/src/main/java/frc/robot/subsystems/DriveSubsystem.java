@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -50,11 +49,6 @@ public class DriveSubsystem extends SubsystemBase {
     leftMotor2.set(speed);
     rightMotor1.set(-speed);
     rightMotor2.set(-speed);
-
-    SmartDashboard.putNumber("Left Motor 1", leftMotor1.get());
-    SmartDashboard.putNumber("Left Motor 2", leftMotor2.get());
-    SmartDashboard.putNumber("Right Motor 1", rightMotor1.get());
-    SmartDashboard.putNumber("Right Motor 2", rightMotor2.get());
   }
 
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
