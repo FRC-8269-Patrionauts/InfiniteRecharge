@@ -19,7 +19,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     autonomousCommand = robotContainer.getAutonomousCommand();
 
-
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
       autonomousCommand.schedule();
@@ -36,25 +35,27 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    
+
     // if (Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-    //   robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
+    // robotContainer.getDriveSubsystem().rotation(-robotContainer.getJoystick().getTwist());
     // } else if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-    //   robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
+    // robotContainer.getDriveSubsystem().setBase(robotContainer.getJoystick().getY());
     // } else {
-    //   robotContainer.getDriveSubsystem().stop();
+    // robotContainer.getDriveSubsystem().stop();
     // }
 
     smartDashboardCommand.addDrive();
-  
+    smartDashboardCommand.addGamepad();
+    smartDashboardCommand.addJoystick();
 
     if (Math.abs(robotContainer.getJoystick().getY()) > .1 || Math.abs(robotContainer.getJoystick().getTwist()) > .1) {
-      robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(), robotContainer.getJoystick().getTwist());
-  } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
+      robotContainer.getDriveSubsystem().arcadeDrive(robotContainer.getJoystick().getY(),
+          robotContainer.getJoystick().getTwist());
+    } else if (Math.abs(robotContainer.getJoystick().getX()) > .2) {
       robotContainer.getDriveSubsystem().Strafe(robotContainer.getJoystick().getX());
-  } else {
+    } else {
       robotContainer.getDriveSubsystem().stop();
-  }
+    }
 
-}
+  }
 }
