@@ -35,7 +35,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
-
+  
+  double speedMult = 1;
   public DriveSubsystem() {
   }
 
@@ -52,20 +53,20 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
-    leftMotor1.set(lM1);
-    leftMotor2.set(lM2);
-    rightMotor1.set(rM1);
-    rightMotor2.set(rM2);
+    leftMotor1.set(lM1*speedMult);
+    leftMotor2.set(lM2*speedMult);
+    rightMotor1.set(rM1*speedMult);
+    rightMotor2.set(rM2*speedMult);
   }
 
   public void setLeftPower(double speed) {
-    leftMotor1.set(speed);
-    leftMotor2.set(speed);
+    leftMotor1.set(speed*speedMult);
+    leftMotor2.set(speed*speedMult);
   }
 
   public void setRightPower(double speed) {
-    rightMotor1.set(speed);
-    rightMotor2.set(speed);
+    rightMotor1.set(speed*speedMult);
+    rightMotor2.set(speed*speedMult);
   }
 
   
@@ -116,31 +117,12 @@ public class DriveSubsystem extends SubsystemBase {
    setBase(0, 0, 0, 0);
   }
 
+  public void setSpeed(double speed){
+    this.speedMult = speed;
+  }
+
   // // autonnomous thingies
 
-  public void setRotation(double speed) {
-    setBase(speed);
-    // leftMotor1.set(speed);
-    // leftMotor2.set(speed);
-    // rightMotor1.set(speed);
-    // rightMotor2.set(speed);
-  }
-
-  public void setRightTurn(double speed) {
-    setBase(speed);
-    // leftMotor1.set(-speed);
-    // leftMotor2.set(-speed);
-    // rightMotor1.set(0);
-    // rightMotor2.set(0);
-  }
-
-  public void setLeftTurn(double speed) {
-    setBase(speed);
-    // leftMotor1.set(0);
-    // leftMotor2.set(0);
-    // rightMotor1.set(speed);
-    // rightMotor2.set(speed);
-  }
 
   public SpeedController getLeftMotor1(){
     return leftMotor1;
