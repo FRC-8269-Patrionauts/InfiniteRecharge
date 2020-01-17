@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 /**
  * A subsystem that controls driving the robot.
@@ -107,6 +108,10 @@ public class DriveSubsystem extends SubsystemBase {
       xValue = 0;
     }
       setBase(x, -x, x, -x);
+  }
+
+  public void spin180(double speed){
+    
   }
   
   public void rotation(double speed) {
