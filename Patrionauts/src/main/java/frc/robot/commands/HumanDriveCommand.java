@@ -37,11 +37,11 @@ public class HumanDriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (joystick != null) {
-      if (joystick.getRawButton(2)) {
-        driveSubsystem.setSpeed(((-joystick.getThrottle() + 1) / 2));
-      }
+    if (joystick != null) { 
+      
+      if (joystick.getRawButton(2)){
       driveSubsystem.setSpeed(((-joystick.getThrottle() + 1) / 2));
+      }
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
         driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
       } else if (Math.abs(joystick.getX()) > .2) {
