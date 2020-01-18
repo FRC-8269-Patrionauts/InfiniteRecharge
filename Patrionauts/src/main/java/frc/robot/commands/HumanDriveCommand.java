@@ -44,8 +44,6 @@ public class HumanDriveCommand extends CommandBase {
       }
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
         driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
-      } else if (Math.abs(joystick.getX()) > .2) {
-        driveSubsystem.Strafe(joystick.getX());
       } else {
         driveSubsystem.stop();
       }
