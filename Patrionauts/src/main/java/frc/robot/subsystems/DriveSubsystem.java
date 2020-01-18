@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -70,6 +71,9 @@ public class DriveSubsystem extends SubsystemBase {
       xValue = 0;
     }
       setBase(x, -x, x, -x);
+  }
+  public void setBaseAll(double speed){
+    setBase(-speed,-speed,speed,speed);
   }
 
   public void spin180(double speed){

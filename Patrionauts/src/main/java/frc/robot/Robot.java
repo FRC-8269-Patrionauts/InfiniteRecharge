@@ -17,7 +17,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
   private HumanDriveCommand humanDriveCommand;
-  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer, robotContainer.getCameraSubsystem();
+  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer, robotContainer.getCameraSubsystem());
 
   @Override
   public void robotInit() {
