@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -36,6 +38,11 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
+
+  private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
+  private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
+
+  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
   
   double speedMult = 1;
   public DriveSubsystem() {
@@ -46,13 +53,6 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setBase(double speed) {
-    leftMotor1.set(speed);
-    leftMotor2.set(speed);
-    rightMotor1.set(-speed);
-    rightMotor2.set(-speed);
-  }
-
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
     leftMotor1.set(lM1*speedMult);
     leftMotor2.set(lM2*speedMult);
@@ -60,49 +60,11 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotor2.set(rM2*speedMult);
   }
 
-  public void setLeftPower(double speed) {
-    leftMotor1.set(speed*speedMult);
-    leftMotor2.set(speed*speedMult);
+  public void arcadeDrive(double x, double z){ 
+    drive.arcadeDrive(x * speedMult, z * speedMult);
   }
 
-  public void setRightPower(double speed) {
-    rightMotor1.set(speed*speedMult);
-    rightMotor2.set(speed*speedMult);
-  }
-
-  
-  /*
-   * "cleaned up" version of the arcade drive, it alows
-   *  us to rotate and go forward and rotate 
-   * at the same time and vise versa 
-   */
-
-  public void arcadeDrive(double y, double x){    //"cleaned up" version of the arcade drive, it alows us to rotate and go forward and rotate at the same time and vise versa 
-    double yValue = y;
-    double xValue = -x;
-    if (Math.abs(xValue) < 0.2) {
-      xValue = 0;
-    }
-    if (Math.abs(yValue) < 0.2) {
-      yValue = 0;
-    }
-    double leftPower = yValue + xValue;
-    double rightPower = yValue - xValue;
-    if (leftPower < -1) {
-      leftPower = -1;
-    } else if (leftPower > 1) {
-      leftPower = 1;
-    }
-    if (rightPower < -1) {
-      rightPower = -1;
-    }else if (rightPower > 1){
-      rightPower = 1;
-    }
-    setLeftPower(-leftPower);
-    setRightPower(rightPower);
-  }
-
-  public void Strafe(double x) {   //please for the love of all that is holy stafe with the grace of our permethious
+  public void strafe(double x) {   //please for the love of all that is holy stafe with the grace of our permethious
     double xValue = x;
     if (Math.abs(xValue) < .5){
       xValue = 0;
@@ -111,7 +73,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void spin180(double speed){
-    
+    // we need encoders
   }
   
   public void rotation(double speed) {
@@ -119,39 +81,37 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-   setBase(0, 0, 0, 0);
+    drive.stopMotor();
   }
 
   public void setSpeed(double speed){
     this.speedMult = speed;
   }
-
-  // // autonnomous thingies
+  // autonnomous thingies
 
 
   public SpeedController getLeftMotor1(){
     return leftMotor1;
-  }public SpeedController getLeftMotor2(){
+  }
+  public SpeedController getLeftMotor2(){
     return leftMotor2;
-  }public SpeedController getRightMotor1(){
+  }
+  public SpeedController getRightMotor1(){
     return rightMotor1;
-  }public SpeedController getRightMotor2(){
+  }
+  public SpeedController getRightMotor2(){
     return rightMotor2;
   }
-
 
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
   }
-
   public double getLeftMotor2Speed() {
     return leftMotor2.get();
   }
-
   public double getRightMotor1Speed() {
     return rightMotor1.get();
   }
-
   public double getRightMotor2Speed() {
     return rightMotor2.get();
   }

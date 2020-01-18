@@ -47,7 +47,7 @@ public class AutonomousCommand extends CommandBase {
     }
 
     public void phaseOne() {
-        drive.setBase(.5);
+        drive.arcadeDrive(.5, 0);
     }
 
     public void phaseTwo() {
@@ -55,7 +55,7 @@ public class AutonomousCommand extends CommandBase {
     }
 
     public void phaseThree() {
-        drive.setBase(-.5);
+        drive.arcadeDrive(-.5, 0);
     }
 
     public void phaseFour() {
