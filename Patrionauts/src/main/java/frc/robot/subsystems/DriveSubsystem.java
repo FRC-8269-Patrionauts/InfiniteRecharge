@@ -55,7 +55,7 @@ public class DriveSubsystem extends SubsystemBase {
   private static final double SPEED_STEP_UP = 0.04;
   private static final double SPEED_STEP_DOWN = 0.05;
 
-  double speedMult = 1;
+  double maxSpeed = 1;
 
   public DriveSubsystem() {
    // drive.setDeadband(0);
@@ -70,13 +70,13 @@ public class DriveSubsystem extends SubsystemBase {
     } else if (goalSpeedx < currentSpeedx) {
       currentSpeedx -= SPEED_STEP_DOWN;
     }
-    if (currentSpeedx > 1) {
-      currentSpeedx = 1;
-    } else if (currentSpeedx < -1) {
-      currentSpeedx = -1;
+    if (currentSpeedx > maxSpeed) {
+      currentSpeedx = maxSpeed;
+    } else if (currentSpeedx < -maxSpeed) {
+      currentSpeedx = -maxSpeed;
     }
-    if (Math.abs(currentSpeedx) > 1){
-      currentSpeedx = 1;
+    if (Math.abs(currentSpeedx) > maxSpeed){
+      currentSpeedx = maxSpeed;
     }
 
     if (goalSpeedz > currentSpeedz) {
@@ -84,10 +84,10 @@ public class DriveSubsystem extends SubsystemBase {
     } else if (goalSpeedz < currentSpeedz) {
       currentSpeedz -= SPEED_STEP_DOWN;
     }
-    if (currentSpeedz > 1) {
-      currentSpeedz = 1;
-    } else if (currentSpeedz < -1) {
-      currentSpeedz = -1;
+    if (currentSpeedz > maxSpeed) {
+      currentSpeedz = maxSpeed;
+    } else if (currentSpeedz < -maxSpeed) {
+      currentSpeedz = -maxSpeed;
     }
 
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05){
@@ -142,10 +142,13 @@ public class DriveSubsystem extends SubsystemBase {
     setBase(.2, .2, .2, .2);
   }
 
-  public void setSpeed(double speed) {
-    this.speedMult = speed;
+  public void setMaxSpeed(double speed) {
+    this.maxSpeed = speed;
   }
-  // autonnomous thingies
+
+  public double getMaxSpeed(){
+    return maxSpeed;
+  }
 
   public SpeedController getLeftMotor1() {
     return leftMotor1;
@@ -181,6 +184,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double[] getSpeeds() {
     return new double[] { getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed() };
+  }
+
+  public DifferentialDrive getDifferentialDrive(){
+    return drive;
   }
 
 }

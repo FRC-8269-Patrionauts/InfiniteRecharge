@@ -35,7 +35,7 @@ public class AutonomousCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double currentTime = timer.get();
+        double currentTime = getCurrentTime();
         if (currentTime < 2) {
             phaseOne();
         } else if (currentTime < 4) {
@@ -61,5 +61,9 @@ public class AutonomousCommand extends CommandBase {
 
     public void phaseFour() {
         drive.stop();
+    }
+
+    public double getCurrentTime(){
+        return Timer.getFPGATimestamp();
     }
 }
