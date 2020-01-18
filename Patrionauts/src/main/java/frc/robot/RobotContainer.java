@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -42,6 +43,15 @@ public class RobotContainer {
   JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
+  //Joystick Buttons
+  JoystickButton button1 = new JoystickButton(joystick, 1);
+
+  //Sensors
+  //Initializing an encoder on DIO pins 4 and 5 
+  Encoder flywheel1 = new Encoder(4,5);
+  Encoder flywheel2 = new Encoder(6,7);
+
+
   // Subsystems
   private final VisionSubsystem visionSubsystem = new VisionSubsystem();
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
@@ -67,7 +77,9 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    X.whenPressed(getAutonomousCommand());
+    Y.whenPressed(getHumanDriveCommand());
+    A.whenPressed(getColorWheelCommand());
   }
 
   /**
@@ -107,5 +119,9 @@ public class RobotContainer {
 
   public HumanDriveCommand getHumanDriveCommand() {
     return this.humanDriveCommand;
+  }
+
+  public ColorWheelCommand getColorWheelCommand() {
+    return this.colorWheelCommand;
   }
 }
