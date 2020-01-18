@@ -11,6 +11,7 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -42,6 +43,7 @@ public class RobotContainer {
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
   // Subsystems
+  private final VisionSubsystem visionSubsystem = new VisionSubsystem();
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
@@ -89,6 +91,10 @@ public class RobotContainer {
 
   public CameraSubsystem getCameraSubsystem() {
     return this.cameraSubsystem;
+  }
+
+  public VisionSubsystem getVisionSubsystem() {
+    return this.visionSubsystem;
   }
 
   public DriveSubsystem getDriveSubsystem() {

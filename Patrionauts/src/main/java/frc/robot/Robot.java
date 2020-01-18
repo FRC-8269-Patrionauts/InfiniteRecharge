@@ -6,6 +6,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.SmartDashboardCommand;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -16,7 +17,12 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
   private HumanDriveCommand humanDriveCommand;
-  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer);
+  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer, robotContainer.getCameraSubsystem();
+
+  @Override
+  public void robotInit() {
+    smartDashboardCommand.addCamera();
+  }
 
   @Override
   public void robotPeriodic() {

@@ -2,15 +2,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.CameraSubsystem;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SmartDashboardCommand extends CommandBase {
 
     private RobotContainer robotContainer;
+    private CameraSubsystem cameraSubsystem;
 
-    public SmartDashboardCommand(RobotContainer robotContainer) {
+    public SmartDashboardCommand(RobotContainer robotContainer, CameraSubsystem cameraSubsystem) {
         this.robotContainer = robotContainer;
+        this.cameraSubsystem = cameraSubsystem;
     }
 
     public void addDrive() {
@@ -51,6 +54,10 @@ public class SmartDashboardCommand extends CommandBase {
         robotContainer.getGamepad().getStickButton(Hand.kLeft));
         SmartDashboard.putBoolean("Gamepad | Right Joystick Click",
         robotContainer.getGamepad().getStickButton(Hand.kRight));
+    }
+
+    public void addCamera(){
+        cameraSubsystem.startAutomaticCapture();
     }
 
 }
