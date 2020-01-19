@@ -21,12 +21,15 @@ public class SmartDashboardCommand extends CommandBase {
         SmartDashboard.putNumber("Drive | Left Motor 2: ", robotContainer.getDriveSubsystem().getLeftMotor2Speed());
         SmartDashboard.putNumber("Drive | Right Motor 1: ", robotContainer.getDriveSubsystem().getRightMotor1Speed());
         SmartDashboard.putNumber("Drive | Right Motor 2: ", robotContainer.getDriveSubsystem().getRightMotor2Speed());
+        SmartDashboard.putNumber("Drive | speedMult", robotContainer.getDriveSubsystem().getMaxSpeed());
     }
 
     public void addJoystick() {
         SmartDashboard.putNumber("Joystick | X", robotContainer.getJoystick().getX());
         SmartDashboard.putNumber("Joystick | Y", robotContainer.getJoystick().getY());
         SmartDashboard.putNumber("Joystick | Twist", robotContainer.getJoystick().getTwist());
+        SmartDashboard.putNumber("Joystick | Fin", robotContainer.getJoystick().getThrottle());
+        SmartDashboard.putBoolean("Joystick | Side Button", robotContainer.getJoystick().getRawButton(2));
     }
 
     public void addGamepad() {
