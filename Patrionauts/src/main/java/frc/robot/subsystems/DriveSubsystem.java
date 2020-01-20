@@ -14,25 +14,25 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * A subsystem that controls driving the robot.
- * 
+ *
  * TODO(alonzo): Implement the DriveSubsystem. This class was originally named
  * Movement in the design doc, but is now named DriveSubsystem.
- * 
+ *
  * Take a look at this example:
  * https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/motorcontrol/Robot.java
- * 
+ *
  * Things to consider:
- * 
+ *
  * - You may need SpeedControllers for each of the motors
- * 
+ *
  * - The autonomous mode may need to use the drive subsystem to turn left or
  * right
- * 
+ *
  * - The teleop mode may need to control the drive subsystem using joystick or
  * gamepad inputs
- * 
+ *
  * - The drive subsystem may need make sure that the movement is smooth.
- * 
+ *
  * TODO(ryssa and alonzo): We may need encoders here, you two should coordinate
  * to figure out how to implement them for this system.
  */
@@ -62,6 +62,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double goalSpeedx = Constants.GOAL_SPEED;
   private double goalSpeedz = Constants.GOAL_SPEED;
+  private final Encoder leftEncoder = new Encoder(3, 4);
   private double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
@@ -182,6 +183,14 @@ public class DriveSubsystem extends SubsystemBase {
     return rightMotor2;
   }
 
+  public Spark getNeoMotor() {
+    return neoMotor;
+  }
+
+  public Encoder getLeftEncoder(){
+    return leftEncoder;
+  }
+
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
   }
@@ -205,8 +214,8 @@ public class DriveSubsystem extends SubsystemBase {
   public DifferentialDrive getDifferentialDrive() {
     return drive;
   }
-  
-  
-  
+
+
+
 
 }

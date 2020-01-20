@@ -21,6 +21,7 @@ public class SmartDashboardCommand extends CommandBase {
         SmartDashboard.putNumber("Drive | Left Motor 2: ", robotContainer.getDriveSubsystem().getLeftMotor2Speed());
         SmartDashboard.putNumber("Drive | Right Motor 1: ", robotContainer.getDriveSubsystem().getRightMotor1Speed());
         SmartDashboard.putNumber("Drive | Right Motor 2: ", robotContainer.getDriveSubsystem().getRightMotor2Speed());
+        SmartDashboard.putNumber("Drive | Encoder pos: ", robotContainer.getDriveSubsystem().getLeftEncoder().get());
         //SmartDashboard.putNumber("Drive | speedMult", robotContainer.getDriveSubsystem().getMaxSpeed());
         //SmartDashboard.putNumber("Drive | Gyro Angle", Math.abs(robotContainer.getGyro().getAngle()));
     }
