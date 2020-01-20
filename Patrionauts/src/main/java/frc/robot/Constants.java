@@ -37,5 +37,7 @@ public final class Constants {
 	public static final int GAMEPAD_LEFT_ANALOG_CLICK = 10;
 	public static final int GAMEPAD_RIGHT_ANALOG_CLICK = 11;
 
+	public static final int JOYSTICK_11 = 11;
+
 
 }
