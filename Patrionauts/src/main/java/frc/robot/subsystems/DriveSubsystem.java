@@ -62,8 +62,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double goalSpeedx = Constants.GOAL_SPEED;
   private double goalSpeedz = Constants.GOAL_SPEED;
-  private double goalSpeedx = 0;
-  private double goalSpeedz = 0;
   private double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
