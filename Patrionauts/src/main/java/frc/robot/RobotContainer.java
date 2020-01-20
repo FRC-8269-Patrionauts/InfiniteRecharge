@@ -107,9 +107,9 @@ public class RobotContainer {
     return this.joystick;
   }
 
-  public AnalogGyro getGyro(){
-    return this.gyro;
-  }
+  //public AnalogGyro getGyro(){
+    //return //this.gyro;
+  //}
 
   public XboxController getGamepad() {
     return this.gamepad;
