@@ -1,10 +1,10 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GenericHID;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DetectedTarget;
@@ -32,7 +33,7 @@ public class RobotContainer {
   // Devices
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
-  //private final AnalogGyro gyro = new AnalogGyro(0);
+  // private final AnalogGyro gyro = new AnalogGyro(0);
   private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   // Gamepad Buttons
@@ -69,12 +70,12 @@ public class RobotContainer {
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
       shootSubsystem);
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
+  private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
     // driveSubsystem.setBase(.3);
   }
-
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -83,9 +84,10 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    X.whenPressed(getAutonomousCommand());
-    Y.whenPressed(getHumanDriveCommand());
-    A.whenPressed(getColorWheelCommand());
+    X.whenPressed(autonomousCommand);
+    Y.whenPressed(humanDriveCommand);
+    A.whenPressed(colorWheelCommand);
+    B.whenPressed(testTurningCommand);
   }
 
   /**
@@ -94,12 +96,11 @@ public class RobotContainer {
   public AutonomousCommand getAutonomousCommand() {
     return this.autonomousCommand;
   }
+
   /*
-  public AnalogGyro getGyro() {
-    return this.gyro;
-  }
-  */
-  public AHRS getAHRS(){
+   * public AnalogGyro getGyro() { return this.gyro; }
+   */
+  public AHRS getAHRS() {
     return this.ahrs;
   }
 
@@ -107,9 +108,9 @@ public class RobotContainer {
     return this.joystick;
   }
 
-  //public AnalogGyro getGyro(){
-    //return //this.gyro;
-  //}
+  // public AnalogGyro getGyro(){
+  // return //this.gyro;
+  // }
 
   public XboxController getGamepad() {
     return this.gamepad;
@@ -123,8 +124,6 @@ public class RobotContainer {
     return this.cameraSubsystem;
   }
 
-  
-
   public DriveSubsystem getDriveSubsystem() {
     return this.driveSubsystem;
   }
@@ -133,7 +132,7 @@ public class RobotContainer {
     return this.shootSubsystem;
   }
 
-  public ColorWheelSubsystem getColorWheelSubsystem(){
+  public ColorWheelSubsystem getColorWheelSubsystem() {
     return this.colorWheelSubsystem;
   }
 

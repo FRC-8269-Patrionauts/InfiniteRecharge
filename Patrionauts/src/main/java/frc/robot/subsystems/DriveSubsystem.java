@@ -1,16 +1,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.Encoder
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 /**
  * A subsystem that controls driving the robot.
@@ -116,7 +112,7 @@ public class DriveSubsystem extends SubsystemBase {
     goalSpeedz = z;
   }
 
-  public void turn(double speed) {
+  public void turn(double degrees) {
   }
 
   public void stop() {
