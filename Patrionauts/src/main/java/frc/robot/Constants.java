@@ -19,6 +19,13 @@ public final class Constants {
 	public static final int LEFT_MOTOR_2 = 1;
 	public static final int RIGHT_MOTOR_1 = 2;
 	public static final int RIGHT_MOTOR_2 = 3;
+
+	public static final double CURRENT_SPEED = 0;
+	public static final double GOAL_SPEED = 0;
+	public static final double SPEED_STEP_DOWN = 0.05;
+	public static final double SPEED_STEP_UP = 0.04;
+	public static final double MAX_SPEED = 1;
+
 	
 	public static final int FLYWHEEL_MOTOR1 = 4;
 	public static final int FLYWHEEL_MOTOR2 = 6;
@@ -36,6 +43,8 @@ public final class Constants {
 	public static final int GAMEPAD_START = 9;
 	public static final int GAMEPAD_LEFT_ANALOG_CLICK = 10;
 	public static final int GAMEPAD_RIGHT_ANALOG_CLICK = 11;
+	
+	
 
 
 }

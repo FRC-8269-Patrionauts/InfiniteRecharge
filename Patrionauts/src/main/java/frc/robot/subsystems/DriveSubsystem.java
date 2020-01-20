@@ -46,14 +46,14 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
-  private double goalSpeedx = 0;
-  private double goalSpeedz = 0;
+  private double goalSpeedx = Constants.GOAL_SPEED;
+  private double goalSpeedz = Constants.GOAL_SPEED;
 
-  private double currentSpeedx = 0;
-  private double currentSpeedz = 0;
+  private double currentSpeedx = Constants.CURRENT_SPEED;
+  private double currentSpeedz = Constants.CURRENT_SPEED;
 
-  private static final double SPEED_STEP_UP = 0.04;
-  private static final double SPEED_STEP_DOWN = 0.05;
+  private static final double SPEED_STEP_UP = Constants.SPEED_STEP_UP;
+  private static final double SPEED_STEP_DOWN = Constants.SPEED_STEP_DOWN;
 
   double maxSpeed = 1;
 
