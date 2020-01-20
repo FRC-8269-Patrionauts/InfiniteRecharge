@@ -2,8 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.AnalogGyro;
+//import edu.wpi.first.wpilibj.AnalogGyro;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
@@ -29,7 +31,8 @@ public class RobotContainer {
   // Devices
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
-  private final AnalogGyro gyro = new AnalogGyro(0);
+  //private final AnalogGyro gyro = new AnalogGyro(0);
+  private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   // Gamepad Buttons
   JoystickButton X = new JoystickButton(gamepad, Constants.GAMEPAD_X);
@@ -90,9 +93,13 @@ public class RobotContainer {
   public AutonomousCommand getAutonomousCommand() {
     return this.autonomousCommand;
   }
-
+  /*
   public AnalogGyro getGyro() {
     return this.gyro;
+  }
+  */
+  public AHRS getAHRS(){
+    return this.ahrs;
   }
 
   public Joystick getJoystick() {

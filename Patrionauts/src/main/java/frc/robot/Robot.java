@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     smartDashboardCommand.addCamera();
-    robotContainer.getGyro().reset();
+    robotContainer.getAHRS().reset();
   }
 
   @Override
@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     smartDashboardCommand.addDrive();
-    smartDashboardCommand.addGamepad();
+    //smartDashboardCommand.addGamepad();
     smartDashboardCommand.addJoystick();
-
+    smartDashboardCommand.addIMU();
   }
 }
