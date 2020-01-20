@@ -22,6 +22,7 @@ public class SmartDashboardCommand extends CommandBase {
         SmartDashboard.putNumber("Drive | Right Motor 1: ", robotContainer.getDriveSubsystem().getRightMotor1Speed());
         SmartDashboard.putNumber("Drive | Right Motor 2: ", robotContainer.getDriveSubsystem().getRightMotor2Speed());
         SmartDashboard.putNumber("Drive | speedMult", robotContainer.getDriveSubsystem().getMaxSpeed());
+        SmartDashboard.putNumber("Drive | Gyro Angle", robotContainer.getGyro().getAngle());
     }
 
     public void addJoystick() {
@@ -61,6 +62,14 @@ public class SmartDashboardCommand extends CommandBase {
 
     public void addCamera(){
         cameraSubsystem.startAutomaticCapture();
+    }
+    public void addLimeLightValues(){
+        SmartDashboard.putNumber("Area", 
+        robotContainer.getDetectedTarget().getArea());
+        SmartDashboard.putNumber("X-Axis", 
+        robotContainer.getDetectedTarget().getXOffset());
+        SmartDashboard.putNumber("Y-Axis", 
+        robotContainer.getDetectedTarget().getYOffset());
     }
 
 }
