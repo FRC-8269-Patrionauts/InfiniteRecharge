@@ -1,5 +1,6 @@
 // package frc.robot.pathfollowing;
 
+// import edu.wpi.first.wpilibj.trajectory.Trajectory;
 // import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 
 // public class TrajectoryLoader {
@@ -10,5 +11,5 @@
 
 //     }
 
-//     public 
+//     public Trajectory path
 // }

@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.Encoder
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -48,6 +48,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+
+  private final Encoder leftEncoder = new Encoder(3, 4);
 
   private double goalSpeedx = 0;
   private double goalSpeedz = 0;
@@ -129,6 +131,10 @@ public class DriveSubsystem extends SubsystemBase {
     setBase(-speed, -speed, speed, speed);
   }
 
+  public void setMotorTest(double speed) {
+    neoMotor.set(speed);
+  }
+
   public void spin180(double speed) {
     // we need encoders
   }
@@ -167,6 +173,14 @@ public class DriveSubsystem extends SubsystemBase {
 
   public SpeedController getRightMotor2() {
     return rightMotor2;
+  }
+
+  public Spark getNeoMotor() {
+    return neoMotor;
+  }
+
+  public Encoder getLeftEncoder(){
+    return leftEncoder;
   }
 
   public double getLeftMotor1Speed() {

@@ -2,7 +2,7 @@
   "lengthUnit": "Inch",
   "maxVelocity": 10.0,
   "maxAcceleration": 5.0,
-  "wheelBase": 10.0,
-  "gameName": "FIRST Power Up",
+  "wheelBase": 6.0,
+  "gameName": "Destination: Deep Space",
   "outputDir": "../src/main/deploy"
 }
