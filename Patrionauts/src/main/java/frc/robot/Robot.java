@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    robotContainer.getDriveSubsystem().getLeftEncoder().setDistancePerPulse(1./256.);
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -122,5 +123,12 @@ public class Robot extends TimedRobot {
     //smartDashboardCommand.addGamepad();
     smartDashboardCommand.addJoystick();
     smartDashboardCommand.addIMU();
+    if (robotContainer.getJoystick().getRawButton(11)) {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(.3);
+    } else if (robotContainer.getJoystick().getRawButton(12)) {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(-.3);;
+    } else {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(0);
+    }
   }
 }
