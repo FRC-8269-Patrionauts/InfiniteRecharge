@@ -116,6 +116,13 @@ public class DriveSubsystem extends SubsystemBase {
     goalSpeedz = z;
   }
 
+  public void turn(double speed) {
+  }
+
+  public void stop() {
+    arcadeDrive(0, 0);
+  }
+
   public void strafe(double x) { // please for the love of all that is holy strafe with the grace of our
                                  // permethious
     double xValue = x;
@@ -123,26 +130,6 @@ public class DriveSubsystem extends SubsystemBase {
       xValue = 0;
     }
     setBase(x, -x, x, -x);
-  }
-
-  public void setBaseAll(double speed) {
-    setBase(-speed, -speed, speed, speed);
-  }
-
-  public void spin180(double speed) {
-    // we need encoders
-  }
-
-  public void rotation(double speed) {
-    setBase(-speed, -speed, -speed, -speed);
-  }
-
-  public void stop() {
-    arcadeDrive(0, 0);
-  }
-
-  public void Limit() {// idk man
-    setBase(.2, .2, .2, .2);
   }
 
   public void setMaxSpeed(double speed) {
