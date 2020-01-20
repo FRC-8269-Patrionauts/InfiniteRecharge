@@ -6,7 +6,6 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
-
 /**
  * A command that puts the robot in full autonomous mode.
  */
@@ -48,22 +47,22 @@ public class AutonomousCommand extends CommandBase {
     }
 
     public void phaseOne() {
-        drive.setBaseAll(.4);
+        drive.arcadeDrive(.4, 0);
     }
 
     public void phaseTwo() {
-        drive.rotation(.4);
+        drive.arcadeDrive(0, .4);
     }
 
     public void phaseThree() {
-        drive.setBaseAll(-.4);
+        drive.arcadeDrive(0, -.4);
     }
 
     public void phaseFour() {
         drive.stop();
     }
 
-    public double getCurrentTime(){
+    public double getCurrentTime() {
         return Timer.getFPGATimestamp();
     }
 }
