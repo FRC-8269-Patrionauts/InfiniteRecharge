@@ -18,6 +18,7 @@ import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DetectedTarget;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
+import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -34,7 +35,8 @@ public class RobotContainer {
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
   // private final AnalogGyro gyro = new AnalogGyro(0);
-  private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  private final AHRS imu = new AHRS(SPI.Port.kMXP);
+  
 
   // Gamepad Buttons
   JoystickButton X = new JoystickButton(gamepad, Constants.GAMEPAD_X);
@@ -60,10 +62,12 @@ public class RobotContainer {
 
   // Subsystems
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget();
+
+  private final PIDController pidController = new PIDController(Kp, Ki, Kd);
 
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -101,7 +105,7 @@ public class RobotContainer {
    * public AnalogGyro getGyro() { return this.gyro; }
    */
   public AHRS getAHRS() {
-    return this.ahrs;
+    return this.imu;
   }
 
   public Joystick getJoystick() {
@@ -147,4 +151,6 @@ public class RobotContainer {
   public DetectedTarget getDetectedTarget() {
     return this.detectedTarget;
   }
+  
+
 }
