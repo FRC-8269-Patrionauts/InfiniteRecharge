@@ -58,9 +58,9 @@ public class SmartDashboardCommand extends CommandBase {
         robotContainer.getGamepad().getTriggerAxis(Hand.kRight));
         SmartDashboard.putBoolean("Gamepad | Back Button",
         robotContainer.getGamepad().getBackButton());
-        SmartDashboard.putBoolean("Gamepad | Start Button", 
+        SmartDashboard.putBoolean("Gamepad | Start Button",
         robotContainer.getGamepad().getStartButton());
-        SmartDashboard.putBoolean("Gamepad | Left Joystick Click", 
+        SmartDashboard.putBoolean("Gamepad | Left Joystick Click",
         robotContainer.getGamepad().getStickButton(Hand.kLeft));
         SmartDashboard.putBoolean("Gamepad | Right Joystick Click",
         robotContainer.getGamepad().getStickButton(Hand.kRight));
@@ -68,6 +68,14 @@ public class SmartDashboardCommand extends CommandBase {
 
     public void addCamera(){
         cameraSubsystem.startAutomaticCapture();
+    }
+    public void addLimeLightValues(){
+        SmartDashboard.putNumber("Area",
+        robotContainer.getDetectedTarget().getArea());
+        SmartDashboard.putNumber("X-Axis",
+        robotContainer.getDetectedTarget().getXOffset());
+        SmartDashboard.putNumber("Y-Axis",
+        robotContainer.getDetectedTarget().getYOffset());
     }
 
 }

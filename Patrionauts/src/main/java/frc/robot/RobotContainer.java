@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 //import edu.wpi.first.wpilibj.AnalogGyro;
@@ -13,9 +14,9 @@ import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
+import frc.robot.subsystems.DetectedTarget;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -48,21 +49,20 @@ public class RobotContainer {
   JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
-  //Joystick Buttons
+  // Joystick Buttons
   JoystickButton button1 = new JoystickButton(joystick, 1);
 
-  //Sensors
-  //Initializing an encoder on DIO pins 4 and 5 
-  Encoder flywheel1 = new Encoder(4,5);
-  Encoder flywheel2 = new Encoder(6,7);
-
+  // Sensors
+  // Initializing an encoder on DIO pins 4 and 5
+  Encoder flywheel1 = new Encoder(4, 5);
+  Encoder flywheel2 = new Encoder(6, 7);
 
   // Subsystems
-  private final VisionSubsystem visionSubsystem = new VisionSubsystem();
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
+  private final DetectedTarget detectedTarget = new DetectedTarget();
 
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -74,6 +74,7 @@ public class RobotContainer {
     configureButtonBindings();
     // driveSubsystem.setBase(.3);
   }
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -106,6 +107,10 @@ public class RobotContainer {
     return this.joystick;
   }
 
+  public AnalogGyro getGyro(){
+    return this.gyro;
+  }
+
   public XboxController getGamepad() {
     return this.gamepad;
   }
@@ -118,9 +123,7 @@ public class RobotContainer {
     return this.cameraSubsystem;
   }
 
-  public VisionSubsystem getVisionSubsystem() {
-    return this.visionSubsystem;
-  }
+  
 
   public DriveSubsystem getDriveSubsystem() {
     return this.driveSubsystem;
@@ -140,5 +143,9 @@ public class RobotContainer {
 
   public ColorWheelCommand getColorWheelCommand() {
     return this.colorWheelCommand;
+  }
+
+  public DetectedTarget getDetectedTarget() {
+    return this.detectedTarget;
   }
 }
