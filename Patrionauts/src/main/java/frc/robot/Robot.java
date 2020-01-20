@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     smartDashboardCommand.addCamera();
+    robotContainer.getGyro().reset();
   }
 
   @Override

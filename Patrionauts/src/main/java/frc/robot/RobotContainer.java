@@ -92,6 +92,10 @@ public class RobotContainer {
     return this.autonomousCommand;
   }
 
+  public AnalogGyro getGyro() {
+    return this.gyro;
+  }
+
   public Joystick getJoystick() {
     return this.joystick;
   }
@@ -120,6 +124,10 @@ public class RobotContainer {
 
   public ShootSubsystem getShootSubsystem() {
     return this.shootSubsystem;
+  }
+
+  public ColorWheelSubsystem getColorWheelSubsystem(){
+    return this.colorWheelSubsystem;
   }
 
   public HumanDriveCommand getHumanDriveCommand() {

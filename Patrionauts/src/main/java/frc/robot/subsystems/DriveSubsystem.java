@@ -51,14 +51,14 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double currentSpeedx = 0;
   private double currentSpeedz = 0;
- 
+
   private static final double SPEED_STEP_UP = 0.04;
   private static final double SPEED_STEP_DOWN = 0.05;
 
   double maxSpeed = 1;
 
   public DriveSubsystem() {
-   // drive.setDeadband(0);
+    // drive.setDeadband(0);
   }
 
   @Override
@@ -75,7 +75,7 @@ public class DriveSubsystem extends SubsystemBase {
     } else if (currentSpeedx < -maxSpeed) {
       currentSpeedx = -maxSpeed;
     }
-    if (Math.abs(currentSpeedx) > maxSpeed){
+    if (Math.abs(currentSpeedx) > maxSpeed) {
       currentSpeedx = maxSpeed;
     }
 
@@ -90,10 +90,10 @@ public class DriveSubsystem extends SubsystemBase {
       currentSpeedz = -maxSpeed;
     }
 
-    if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05){
+    if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
       drive.arcadeDrive(currentSpeedx, currentSpeedz);
-    } 
-      //Update to currentSpeedX and Z
+    }
+    // Update to currentSpeedX and Z
 
   }
 
@@ -146,7 +146,7 @@ public class DriveSubsystem extends SubsystemBase {
     this.maxSpeed = speed;
   }
 
-  public double getMaxSpeed(){
+  public double getMaxSpeed() {
     return maxSpeed;
   }
 
@@ -186,7 +186,7 @@ public class DriveSubsystem extends SubsystemBase {
     return new double[] { getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed() };
   }
 
-  public DifferentialDrive getDifferentialDrive(){
+  public DifferentialDrive getDifferentialDrive() {
     return drive;
   }
 
