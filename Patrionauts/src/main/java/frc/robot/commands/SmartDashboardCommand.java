@@ -21,7 +21,7 @@ public class SmartDashboardCommand extends CommandBase {
         SmartDashboard.putNumber("Drive | Left Motor 2: ", robotContainer.getDriveSubsystem().getLeftMotor2Speed());
         SmartDashboard.putNumber("Drive | Right Motor 1: ", robotContainer.getDriveSubsystem().getRightMotor1Speed());
         SmartDashboard.putNumber("Drive | Right Motor 2: ", robotContainer.getDriveSubsystem().getRightMotor2Speed());
-        SmartDashboard.putNumber("Drive | Encoder pos: ", robotContainer.getDriveSubsystem().getLeftEncoder().get());
+        //SmartDashboard.putNumber("Drive | Encoder pos: ", robotContainer.getDriveSubsystem().getLeftEncoder().get());
         //SmartDashboard.putNumber("Drive | speedMult", robotContainer.getDriveSubsystem().getMaxSpeed());
         //SmartDashboard.putNumber("Drive | Gyro Angle", Math.abs(robotContainer.getGyro().getAngle()));
     }
@@ -38,6 +38,8 @@ public class SmartDashboardCommand extends CommandBase {
         SmartDashboard.putNumber("Joystick | Twist", robotContainer.getJoystick().getTwist());
         SmartDashboard.putNumber("Joystick | Fin", robotContainer.getJoystick().getThrottle());
         SmartDashboard.putBoolean("Joystick | Side Button", robotContainer.getJoystick().getRawButton(2));
+        SmartDashboard.putBoolean("Joystick | 11", robotContainer.getJoystick().getRawButton(11));
+
     }
 
     public void addGamepad() {

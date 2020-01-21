@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    robotContainer.getDriveSubsystem().getLeftEncoder().setDistancePerPulse(1./256.);
+    //robotContainer.getDriveSubsystem().getLeftEncoder().setDistancePerPulse(1./256.);
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
