@@ -3,6 +3,7 @@ package frc.robot;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
@@ -58,13 +59,22 @@ public class Robot extends TimedRobot {
       autonomousCommand.schedule();
     }
   }
-
+  //AUTOALIGN 
+  NetworkTable table = NetworkTable.getTable("limelight");
   @Override
   public void autonomousPeriodic() {
     // for robot characterization
     // Retrieve values to send back before telling the motors to do something
     double now = autonomousCommand.getCurrentTime();
 
+ 
+    //AUTOALIGN
+    double angle = table.getDouble("tx", 0.0);
+    double error = (angle / 45) * 2.0;
+    robotContainer.getDriveSubsystem().arcadeDrive(0,error );
+
+    
+    /*
     double leftPosition = leftEncoderPosition.get();
     double leftRate = leftEncoderRate.get();
 
@@ -97,6 +107,7 @@ public class Robot extends TimedRobot {
     numberArray[9] = gyroAngleRadians.get();
 
     telemetryEntry.setNumberArray(numberArray);
+    */
   }
 
   @Override
