@@ -2,17 +2,15 @@ package frc.robot;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.SmartDashboardCommand;
-
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
-import edu.wpi.first.wpilibj.RobotController;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +22,8 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
   private HumanDriveCommand humanDriveCommand;
-  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer, robotContainer.getCameraSubsystem());
+  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer,
+      robotContainer.getCameraSubsystem());
 
   Supplier<Double> leftEncoderPosition;
   Supplier<Double> leftEncoderRate;
@@ -41,8 +40,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    // Disable LiveWindow telemetry which causes the "loop time of 0.02s overrun"
+    // warning.
+    LiveWindow.disableAllTelemetry();
+
     smartDashboardCommand.addCamera();
-    robotContainer.getGyro().reset();
+    robotContainer.getAHRS().reset();
   }
 
   @Override
@@ -52,6 +55,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    //robotContainer.getDriveSubsystem().getLeftEncoder().setDistancePerPulse(1./256.);
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -59,7 +63,7 @@ public class Robot extends TimedRobot {
       autonomousCommand.schedule();
     }
   }
-  //AUTOALIGN 
+  //AUTOALIGN
   NetworkTable table = NetworkTable.getTable("limelight");
   @Override
   public void autonomousPeriodic() {
@@ -67,13 +71,13 @@ public class Robot extends TimedRobot {
     // Retrieve values to send back before telling the motors to do something
     double now = autonomousCommand.getCurrentTime();
 
- 
+
     //AUTOALIGN
     double angle = table.getDouble("tx", 0.0);
     double error = (angle / 45) * 2.0;
     robotContainer.getDriveSubsystem().arcadeDrive(0,error );
 
-    
+
     /*
     double leftPosition = leftEncoderPosition.get();
     double leftRate = leftEncoderRate.get();
@@ -92,7 +96,8 @@ public class Robot extends TimedRobot {
     priorAutospeed = autospeed;
 
     // command motors to do things
-    robotContainer.getDriveSubsystem().getDifferentialDrive().tankDrive((rotateEntry.getBoolean(false) ? -1 : 1) * autospeed, autospeed, false);
+    robotContainer.getDriveSubsystem().getDifferentialDrive()
+        .tankDrive((rotateEntry.getBoolean(false) ? -1 : 1) * autospeed, autospeed, false);
 
     // send telemetry data array back to NT
     numberArray[0] = now;
@@ -125,8 +130,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     smartDashboardCommand.addDrive();
-    smartDashboardCommand.addGamepad();
+    //smartDashboardCommand.addGamepad();
     smartDashboardCommand.addJoystick();
-
+    smartDashboardCommand.addIMU();
+    if (robotContainer.getJoystick().getRawButton(11)) {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(.3);
+    } else if (robotContainer.getJoystick().getRawButton(12)) {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(-.3);;
+    } else {
+      robotContainer.getDriveSubsystem().getNeoMotor().set(0);
+    }
   }
 }

@@ -1,36 +1,39 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 /**
  * A subsystem that controls driving the robot.
- * 
+ *
  * TODO(alonzo): Implement the DriveSubsystem. This class was originally named
  * Movement in the design doc, but is now named DriveSubsystem.
- * 
+ *
  * Take a look at this example:
  * https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/motorcontrol/Robot.java
- * 
+ *
  * Things to consider:
- * 
+ *
  * - You may need SpeedControllers for each of the motors
- * 
+ *
  * - The autonomous mode may need to use the drive subsystem to turn left or
  * right
- * 
+ *
  * - The teleop mode may need to control the drive subsystem using joystick or
  * gamepad inputs
- * 
+ *
  * - The drive subsystem may need make sure that the movement is smooth.
- * 
+ *
  * TODO(ryssa and alonzo): We may need encoders here, you two should coordinate
  * to figure out how to implement them for this system.
  */
@@ -40,60 +43,76 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
+  private final Spark neoMotor = new Spark(4);
+
+  int P, I, D = 1;
+  int integral, previous_error, setpoint = 0;
 
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
   private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
+  private final AHRS imu;
+
+  private final double turnKp = 10;
+  private final double turnKi = 3;
+  private final double turnKd = 0;
+  private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+
+  // private final Encoder leftEncoder = new Encoder(3, 4);
 
   private double goalSpeedx = 0;
   private double goalSpeedz = 0;
+  private double goalAngle = 0;
 
-  private double currentSpeedx = 0;
-  private double currentSpeedz = 0;
+  private double currentSpeedx = Constants.CURRENT_SPEED;
+  private double currentSpeedz = Constants.CURRENT_SPEED;
 
-  private static final double SPEED_STEP_UP = 0.04;
-  private static final double SPEED_STEP_DOWN = 0.05;
+  private static final double SPEED_STEP_UP = Constants.SPEED_STEP_UP;
+  private static final double SPEED_STEP_DOWN = Constants.SPEED_STEP_DOWN;
 
   double maxSpeed = 1;
 
-  public DriveSubsystem() {
+  public DriveSubsystem(AHRS imu) {
     // drive.setDeadband(0);
+    this.imu = imu;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     // leftMotor1
-    if (goalSpeedx > currentSpeedx) {
-      currentSpeedx += SPEED_STEP_UP;
-    } else if (goalSpeedx < currentSpeedx) {
-      currentSpeedx -= SPEED_STEP_DOWN;
-    }
-    if (currentSpeedx > maxSpeed) {
-      currentSpeedx = maxSpeed;
-    } else if (currentSpeedx < -maxSpeed) {
-      currentSpeedx = -maxSpeed;
-    }
-    if (Math.abs(currentSpeedx) > maxSpeed) {
-      currentSpeedx = maxSpeed;
-    }
+    /*
+     * if (goalSpeedx > currentSpeedx) { currentSpeedx += SPEED_STEP_UP; } else if
+     * (goalSpeedx < currentSpeedx) { currentSpeedx -= SPEED_STEP_DOWN; } if
+     * (currentSpeedx > maxSpeed) { currentSpeedx = maxSpeed; } else if
+     * (currentSpeedx < -maxSpeed) { currentSpeedx = -maxSpeed; } if
+     * (Math.abs(currentSpeedx) > maxSpeed) { currentSpeedx = maxSpeed; }
+     * 
+     * if (goalSpeedz > currentSpeedz) { currentSpeedz += SPEED_STEP_UP; } else if
+     * (goalSpeedz < currentSpeedz) { currentSpeedz -= SPEED_STEP_DOWN; } if
+     * (currentSpeedz > maxSpeed) { currentSpeedz = maxSpeed; } else if
+     * (currentSpeedz < -maxSpeed) { currentSpeedz = -maxSpeed; }
+     * 
+     * if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
+     * drive.arcadeDrive(currentSpeedx, currentSpeedz); }
+     */
 
-    if (goalSpeedz > currentSpeedz) {
-      currentSpeedz += SPEED_STEP_UP;
-    } else if (goalSpeedz < currentSpeedz) {
-      currentSpeedz -= SPEED_STEP_DOWN;
-    }
-    if (currentSpeedz > maxSpeed) {
-      currentSpeedz = maxSpeed;
-    } else if (currentSpeedz < -maxSpeed) {
-      currentSpeedz = -maxSpeed;
-    }
-
-    if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
-      drive.arcadeDrive(currentSpeedx, currentSpeedz);
-    }
     // Update to currentSpeedX and Z
+    // insert PID Loop Here
+    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+      SmartDashboard.putNumber("pidValue", pidValue);
+      SmartDashboard.putNumber("Yaw", imu.getYaw());
+      SmartDashboard.putNumber("goal", goalAngle);
+
+    drive.arcadeDrive(0, pidValue);
+
+    // figure out how to get zRotation
+    /*
+     * Should be able to take current angle, find difference from current angle to
+     * goal angle, and use that info to get zRotation
+     */
 
   }
 
@@ -113,6 +132,14 @@ public class DriveSubsystem extends SubsystemBase {
     goalSpeedz = z;
   }
 
+  public void turn(double degrees) {
+    goalAngle = degrees;
+  }
+
+  public void stop() {
+    // arcadeDrive(0, 0);
+  }
+
   public void strafe(double x) { // please for the love of all that is holy strafe with the grace of our
                                  // permethious
     double xValue = x;
@@ -120,26 +147,6 @@ public class DriveSubsystem extends SubsystemBase {
       xValue = 0;
     }
     setBase(x, -x, x, -x);
-  }
-
-  public void setBaseAll(double speed) {
-    setBase(-speed, -speed, speed, speed);
-  }
-
-  public void spin180(double speed) {
-    // we need encoders
-  }
-
-  public void rotation(double speed) {
-    setBase(-speed, -speed, -speed, -speed);
-  }
-
-  public void stop() {
-    arcadeDrive(0, 0);
-  }
-
-  public void Limit() {// idk man
-    setBase(.2, .2, .2, .2);
   }
 
   public void setMaxSpeed(double speed) {
@@ -165,6 +172,15 @@ public class DriveSubsystem extends SubsystemBase {
   public SpeedController getRightMotor2() {
     return rightMotor2;
   }
+
+  public Spark getNeoMotor() {
+    return neoMotor;
+  }
+
+  /*public Encoder getLeftEncoder() {
+    return leftEncoder;
+  }
+  */
 
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
