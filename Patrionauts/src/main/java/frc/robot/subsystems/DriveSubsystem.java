@@ -45,7 +45,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
   private final Spark neoMotor = new Spark(4);
 
-  int P, I, D = 1;
+  int P, I, D = 1;  
+
   int integral, previous_error, setpoint = 0;
 
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
@@ -53,6 +54,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final AHRS imu;
 
+  //private final double error = goalPosition - current position
+  //P = 1/(error*error)
+  
   private final double turnKp = 10;
   private final double turnKi = 3;
   private final double turnKd = 0;
@@ -84,7 +88,8 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     // leftMotor1
     /*
-     * if (goalSpeedx > currentSpeedx) { currentSpeedx += SPEED_STEP_UP; } else if
+     * if (goalSpeedx > currentSpeedx) { currentSpeedx += SPEED_STEP_UP; } 
+     * else if
      * (goalSpeedx < currentSpeedx) { currentSpeedx -= SPEED_STEP_DOWN; } if
      * (currentSpeedx > maxSpeed) { currentSpeedx = maxSpeed; } else if
      * (currentSpeedx < -maxSpeed) { currentSpeedx = -maxSpeed; } if
@@ -101,6 +106,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     // Update to currentSpeedX and Z
     // insert PID Loop Here
+   
     double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
       SmartDashboard.putNumber("pidValue", pidValue);
       SmartDashboard.putNumber("Yaw", imu.getYaw());
@@ -109,6 +115,7 @@ public class DriveSubsystem extends SubsystemBase {
     drive.arcadeDrive(0, pidValue);
 
     // figure out how to get zRotation
+
     /*
      * Should be able to take current angle, find difference from current angle to
      * goal angle, and use that info to get zRotation

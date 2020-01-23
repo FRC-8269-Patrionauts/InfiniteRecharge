@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     }
   }
   //AUTOALIGN
-  NetworkTable table = NetworkTable.getTable("limelight");
+  //NetworkTable table = NetworkTable.getTable("limelight");
   @Override
   public void autonomousPeriodic() {
     // for robot characterization
@@ -73,9 +73,9 @@ public class Robot extends TimedRobot {
 
 
     //AUTOALIGN
-    double angle = table.getDouble("tx", 0.0);
-    double error = (angle / 45) * 2.0;
-    robotContainer.getDriveSubsystem().arcadeDrive(0,error );
+    //double angle = table.getDouble("tx", 0.0);
+    //double error = (angle / 45) * 2.0;
+    //robotContainer.getDriveSubsystem().arcadeDrive(0,error );
 
 
     /*
