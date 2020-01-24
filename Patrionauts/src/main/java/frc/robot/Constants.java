@@ -56,6 +56,6 @@ public final class Constants {
 
 	public static final double kPDriveVel = 0.0;
 	*/
-	public static final int NEO_MOTOR_TEST = 4;
+	public static final int NEO_MOTOR_TEST = 1;
 
 }

@@ -133,7 +133,7 @@ public class Robot extends TimedRobot {
 
     smartDashboardCommand.addDrive();
     // smartDashboardCommand.addGamepad();
-    // smartDashboardCommand.addJoystick();
+    smartDashboardCommand.addJoystick();
     // smartDashboardCommand.addIMU();
     // if (robotContainer.getJoystick().getRawButton(11)) {
     //   robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
