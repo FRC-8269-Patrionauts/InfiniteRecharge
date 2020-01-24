@@ -66,7 +66,8 @@ public class Robot extends TimedRobot {
     }
   }
 
-  // AUTOALIGN
+
+  //AUTOALIGN
   //NetworkTable table = NetworkTable.getTable("limelight");
 
   @Override

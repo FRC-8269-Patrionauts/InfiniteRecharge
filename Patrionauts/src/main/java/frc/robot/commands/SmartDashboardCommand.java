@@ -16,6 +16,11 @@ public class SmartDashboardCommand extends CommandBase {
         this.cameraSubsystem = cameraSubsystem;
     }
 
+    public void addCommands(){
+        SmartDashboard.putBoolean("Autonomous", robotContainer.getAutonomousCommand().isFinished());
+        SmartDashboard.putBoolean("Human Drive Command", robotContainer.getHumanDriveCommand().isFinished());
+
+    }
     public void addDrive() {
         SmartDashboard.putNumber("Drive | Left Motor 1: ", robotContainer.getDriveSubsystem().getLeftMotor1Speed());
         SmartDashboard.putNumber("Drive | Left Motor 2: ", robotContainer.getDriveSubsystem().getLeftMotor2Speed());

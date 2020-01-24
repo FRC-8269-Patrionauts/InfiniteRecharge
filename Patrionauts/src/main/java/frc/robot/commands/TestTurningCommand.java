@@ -22,7 +22,7 @@ public class TestTurningCommand extends CommandBase {
     @Override
     public void execute() {
         drive.turn(180);
-        SmartDashboard.putBoolean("Blah", true);
+        SmartDashboard.putBoolean("Test Turning", true);
 
         finished = true;
     }
