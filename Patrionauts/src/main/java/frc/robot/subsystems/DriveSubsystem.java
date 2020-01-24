@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+import com.revrobotics.CANError;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 /**
  * A subsystem that controls driving the robot.
  *
@@ -43,7 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
-  private final Spark neoMotor = new Spark(4);
+  private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST,MotorType.kBrushless);
 
   int P, I, D = 1;
   int integral, previous_error, setpoint = 0;
@@ -60,10 +65,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
+  private double goalSpeedx = Constants.GOAL_SPEED;
+  private double goalSpeedz = Constants.GOAL_SPEED;
   // private final Encoder leftEncoder = new Encoder(3, 4);
-
-  private double goalSpeedx = 0;
-  private double goalSpeedz = 0;
   private double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
@@ -83,30 +87,44 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // leftMotor1
-    /*
-     * if (goalSpeedx > currentSpeedx) { currentSpeedx += SPEED_STEP_UP; } else if
-     * (goalSpeedx < currentSpeedx) { currentSpeedx -= SPEED_STEP_DOWN; } if
-     * (currentSpeedx > maxSpeed) { currentSpeedx = maxSpeed; } else if
-     * (currentSpeedx < -maxSpeed) { currentSpeedx = -maxSpeed; } if
-     * (Math.abs(currentSpeedx) > maxSpeed) { currentSpeedx = maxSpeed; }
-     * 
-     * if (goalSpeedz > currentSpeedz) { currentSpeedz += SPEED_STEP_UP; } else if
-     * (goalSpeedz < currentSpeedz) { currentSpeedz -= SPEED_STEP_DOWN; } if
-     * (currentSpeedz > maxSpeed) { currentSpeedz = maxSpeed; } else if
-     * (currentSpeedz < -maxSpeed) { currentSpeedz = -maxSpeed; }
-     * 
-     * if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
-     * drive.arcadeDrive(currentSpeedx, currentSpeedz); }
-     */
+
+    if (goalSpeedx > currentSpeedx) {
+      currentSpeedx += SPEED_STEP_UP;
+    } else if (goalSpeedx < currentSpeedx) {
+      currentSpeedx -= SPEED_STEP_DOWN;
+    }
+    if (currentSpeedx > maxSpeed) {
+      currentSpeedx = maxSpeed;
+    } else if (currentSpeedx < -maxSpeed) {
+      currentSpeedx = -maxSpeed;
+    }
+    if (Math.abs(currentSpeedx) > maxSpeed) {
+      currentSpeedx = maxSpeed;
+    }
+
+    if (goalSpeedz > currentSpeedz) {
+      currentSpeedz += SPEED_STEP_UP;
+    } else if (goalSpeedz < currentSpeedz) {
+      currentSpeedz -= SPEED_STEP_DOWN;
+    }
+    if (currentSpeedz > maxSpeed) {
+      currentSpeedz = maxSpeed;
+    } else if (currentSpeedz < -maxSpeed) {
+      currentSpeedz = -maxSpeed;
+    }
+
+    if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
+      drive.arcadeDrive(currentSpeedx, currentSpeedz);
+    }
 
     // Update to currentSpeedX and Z
     // insert PID Loop Here
     double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
-      SmartDashboard.putNumber("pidValue", pidValue);
-      SmartDashboard.putNumber("Yaw", imu.getYaw());
-      SmartDashboard.putNumber("goal", goalAngle);
+    SmartDashboard.putNumber("pidValue", pidValue);
+    SmartDashboard.putNumber("Yaw", imu.getYaw());
+    SmartDashboard.putNumber("goal", goalAngle);
 
-    drive.arcadeDrive(0, pidValue);
+    // drive.arcadeDrive(0, pidValue);
 
     // figure out how to get zRotation
     /*
@@ -173,14 +191,13 @@ public class DriveSubsystem extends SubsystemBase {
     return rightMotor2;
   }
 
-  public Spark getNeoMotor() {
-    return neoMotor;
+  public CANSparkMax getCanSparkMax() {
+    return m_motor;
   }
 
-  /*public Encoder getLeftEncoder() {
-    return leftEncoder;
-  }
-  */
+  /*
+   * public Encoder getLeftEncoder() { return leftEncoder; }
+   */
 
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
