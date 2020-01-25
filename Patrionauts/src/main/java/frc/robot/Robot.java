@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.RobotController;
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
 
     smartDashboardCommand.addCamera();
     robotContainer.getAHRS().reset();
+    robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
   }
 
   @Override
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    // robotContainer.getDriveSubsystem().getLeftEncoder().setDistancePerPulse(1./256.);
     autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -63,45 +66,49 @@ public class Robot extends TimedRobot {
     }
   }
 
+
+  //AUTOALIGN
+  //NetworkTable table = NetworkTable.getTable("limelight");
+
   @Override
   public void autonomousPeriodic() {
     // for robot characterization
     // Retrieve values to send back before telling the motors to do something
     double now = autonomousCommand.getCurrentTime();
 
-    double leftPosition = leftEncoderPosition.get();
-    double leftRate = leftEncoderRate.get();
+    // AUTOALIGN
+    //double angle = table.getDouble("tx", 0.0);
+    //double error = (angle / 45) * 2.0;
+    //robotContainer.getDriveSubsystem().arcadeDrive(0, error);
 
-    double rightPosition = rightEncoderPosition.get();
-    double rightRate = rightEncoderRate.get();
-
-    double battery = RobotController.getBatteryVoltage();
-    double motorVolts = battery * Math.abs(priorAutospeed);
-
-    double leftMotorVolts = motorVolts;
-    double rightMotorVolts = motorVolts;
-
-    // Retrieve the commanded speed from NetworkTables
-    double autospeed = autoSpeedEntry.getDouble(0);
-    priorAutospeed = autospeed;
-
-    // command motors to do things
-    robotContainer.getDriveSubsystem().getDifferentialDrive()
-        .tankDrive((rotateEntry.getBoolean(false) ? -1 : 1) * autospeed, autospeed, false);
-
-    // send telemetry data array back to NT
-    numberArray[0] = now;
-    numberArray[1] = battery;
-    numberArray[2] = autospeed;
-    numberArray[3] = leftMotorVolts;
-    numberArray[4] = rightMotorVolts;
-    numberArray[5] = leftPosition;
-    numberArray[6] = rightPosition;
-    numberArray[7] = leftRate;
-    numberArray[8] = rightRate;
-    numberArray[9] = gyroAngleRadians.get();
-
-    telemetryEntry.setNumberArray(numberArray);
+    /*
+     * double leftPosition = leftEncoderPosition.get(); double leftRate =
+     * leftEncoderRate.get();
+     * 
+     * double rightPosition = rightEncoderPosition.get(); double rightRate =
+     * rightEncoderRate.get();
+     * 
+     * double battery = RobotController.getBatteryVoltage(); double motorVolts =
+     * battery * Math.abs(priorAutospeed);
+     * 
+     * double leftMotorVolts = motorVolts; double rightMotorVolts = motorVolts;
+     * 
+     * // Retrieve the commanded speed from NetworkTables double autospeed =
+     * autoSpeedEntry.getDouble(0); priorAutospeed = autospeed;
+     * 
+     * // command motors to do things
+     * robotContainer.getDriveSubsystem().getDifferentialDrive()
+     * .tankDrive((rotateEntry.getBoolean(false) ? -1 : 1) * autospeed, autospeed,
+     * false);
+     * 
+     * // send telemetry data array back to NT numberArray[0] = now; numberArray[1]
+     * = battery; numberArray[2] = autospeed; numberArray[3] = leftMotorVolts;
+     * numberArray[4] = rightMotorVolts; numberArray[5] = leftPosition;
+     * numberArray[6] = rightPosition; numberArray[7] = leftRate; numberArray[8] =
+     * rightRate; numberArray[9] = gyroAngleRadians.get();
+     * 
+     * telemetryEntry.setNumberArray(numberArray);
+     */
   }
 
   @Override
@@ -118,9 +125,23 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+    if (robotContainer.getJoystick().getThrottle() > 0.01){
+      robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
+    } else {
+      robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    }
+
     smartDashboardCommand.addDrive();
-    //smartDashboardCommand.addGamepad();
+    // smartDashboardCommand.addGamepad();
     smartDashboardCommand.addJoystick();
-    smartDashboardCommand.addIMU();
+    // smartDashboardCommand.addIMU();
+    // if (robotContainer.getJoystick().getRawButton(11)) {
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
+    // } else if (robotContainer.getJoystick().getRawButton(12)) {
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(-.3);
+    //   ;
+    // } else {
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    // }
   }
 }

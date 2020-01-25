@@ -53,7 +53,7 @@ public class RobotContainer {
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
   // Joystick Buttons
-  JoystickButton button1 = new JoystickButton(joystick, 1);
+  JoystickButton button11 = new JoystickButton(joystick, 11);
 
   // Sensors
   // Initializing an encoder on DIO pins 4 and 5
@@ -67,7 +67,7 @@ public class RobotContainer {
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget();
 
-  private final PIDController pidController = new PIDController(1, 1, 1);
+  //private final PIDController pidController = new PIDController(Kp, Ki, Kd);
 
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -91,7 +91,7 @@ public class RobotContainer {
     X.whenPressed(autonomousCommand);
     Y.whenPressed(humanDriveCommand);
     A.whenPressed(colorWheelCommand);
-    B.whenPressed(testTurningCommand);
+    button11.whenPressed(testTurningCommand);
   }
 
   /**

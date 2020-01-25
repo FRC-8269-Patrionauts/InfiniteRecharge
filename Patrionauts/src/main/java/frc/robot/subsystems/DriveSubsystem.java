@@ -2,37 +2,43 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.controller.PIDController;
 
+import com.revrobotics.CANError;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * A subsystem that controls driving the robot.
- * 
+ *
  * TODO(alonzo): Implement the DriveSubsystem. This class was originally named
  * Movement in the design doc, but is now named DriveSubsystem.
- * 
+ *
  * Take a look at this example:
  * https://github.com/wpilibsuite/allwpilib/blob/master/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/motorcontrol/Robot.java
- * 
+ *
  * Things to consider:
- * 
+ *
  * - You may need SpeedControllers for each of the motors
- * 
+ *
  * - The autonomous mode may need to use the drive subsystem to turn left or
  * right
- * 
+ *
  * - The teleop mode may need to control the drive subsystem using joystick or
  * gamepad inputs
- * 
+ *
  * - The drive subsystem may need make sure that the movement is smooth.
- * 
+ *
  * TODO(ryssa and alonzo): We may need encoders here, you two should coordinate
  * to figure out how to implement them for this system.
  */
@@ -42,10 +48,10 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
-  private final Spark neoMotor = new Spark(4);
+  private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST,MotorType.kBrushless);
 
+  int P, I, D = 1;  
 
-  int P, I, D = 1;
   int integral, previous_error, setpoint = 0;
 
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
@@ -53,8 +59,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final AHRS imu;
 
-  private final double turnKp = 0;
-  private final double turnKi = 0;
+  //private final double error = goalPosition - current position
+  //P = 1/(error*error)
+  
+  private final double turnKp = 10;
+  private final double turnKi = 3;
   private final double turnKd = 0;
   private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
@@ -62,6 +71,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double goalSpeedx = Constants.GOAL_SPEED;
   private double goalSpeedz = Constants.GOAL_SPEED;
+
+  // private final Encoder leftEncoder = new Encoder(3, 4);
   private double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
@@ -86,6 +97,7 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // leftMotor1
+
     if (goalSpeedx > currentSpeedx) {
       currentSpeedx += SPEED_STEP_UP;
     } else if (goalSpeedx < currentSpeedx) {
@@ -115,19 +127,25 @@ public class DriveSubsystem extends SubsystemBase {
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
       drive.arcadeDrive(currentSpeedx, currentSpeedz);
     }
-    
 
     // Update to currentSpeedX and Z
-    //insert PID Loop Here
+    // insert PID Loop Here
+   
     double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    SmartDashboard.putNumber("pidValue", pidValue);
+    SmartDashboard.putNumber("Yaw", imu.getYaw());
+    SmartDashboard.putNumber("goal", goalAngle);
 
    // drive.arcadeDrive(0, pidValue);
 
-    //figure out how to get zRotation
-    /*Should be able to take current angle, find difference from
-    current angle to goal angle, and use that info to get zRotation
-    */
+    // drive.arcadeDrive(0, pidValue);
 
+    // figure out how to get zRotation
+
+    /*
+     * Should be able to take current angle, find difference from current angle to
+     * goal angle, and use that info to get zRotation
+     */
 
   }
 
@@ -152,7 +170,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    arcadeDrive(0, 0);
+    // arcadeDrive(0, 0);
   }
 
   public void strafe(double x) { // please for the love of all that is holy strafe with the grace of our
@@ -188,6 +206,14 @@ public class DriveSubsystem extends SubsystemBase {
     return rightMotor2;
   }
 
+  public CANSparkMax getCanSparkMax() {
+    return m_motor;
+  }
+
+  /*
+   * public Encoder getLeftEncoder() { return leftEncoder; }
+   */
+
   public double getLeftMotor1Speed() {
     return leftMotor1.get();
   }
@@ -211,8 +237,5 @@ public class DriveSubsystem extends SubsystemBase {
   public DifferentialDrive getDifferentialDrive() {
     return drive;
   }
-  
-  
-  
 
 }
