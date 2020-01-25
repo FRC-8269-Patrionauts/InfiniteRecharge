@@ -44,9 +44,17 @@ public final class Constants {
 	public static final int GAMEPAD_LEFT_ANALOG_CLICK = 10;
 	public static final int GAMEPAD_RIGHT_ANALOG_CLICK = 11;
 	
-	
-
+	public static final int JOYSTICK_3 = 3;
+	public static final int JOYSTICK_4 = 4;
+	public static final int JOYSTICK_5 = 5;
+	public static final int JOYSTICK_6 = 6;
+	public static final int JOYSTICK_7 = 7;
+	public static final int JOYSTICK_8 = 8;
+	public static final int JOYSTICK_9 = 9;
+	public static final int JOYSTICK_10 = 10;
 	public static final int JOYSTICK_11 = 11;
+	public static final int JOYSTICK_12 = 12;
+
 	/*
 	public static final double ksVolts = 0.0;
 	public static final double ksVoltsSecondsPerMeter = 0.0;

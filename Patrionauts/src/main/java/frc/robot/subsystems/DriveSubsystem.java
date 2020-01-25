@@ -62,10 +62,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   //private final double error = goalPosition - current position
   //P = 1/(error*error)
+  /*Turn = k*error
+  where Tp is the turn power for going forward
+  //one motor will be Tp+turn (left)
+  the other will be Tp-turn (right)
+  */
   
-  private final double turnKp = 10;
-  private final double turnKi = 3;
-  private final double turnKd = 0;
+  private final double turnKp = 1;
+  private final double turnKi = 1;
+  private final double turnKd = 1;
   private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
@@ -238,6 +243,18 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DifferentialDrive getDifferentialDrive() {
     return drive;
+  }
+  public void setSetpoint(int setpoint){
+    this.setpoint = setpoint;
+  }
+
+  public void PID(){
+    double error = setpoint - imu.getAngle();
+    this.integral += (error*.02);
+    double derivative = (error - this.previous_error) / .02;
+    //this.rcw = P*error + I*this.integral
+
+
   }
 
 }
