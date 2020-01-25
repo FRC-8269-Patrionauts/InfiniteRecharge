@@ -1,10 +1,10 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -12,11 +12,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
-import com.revrobotics.CANError;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * A subsystem that controls driving the robot.
@@ -48,7 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
-  private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST,MotorType.kBrushless);
+  private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST, MotorType.kBrushless);
 
   int P, I, D = 1;  
 
