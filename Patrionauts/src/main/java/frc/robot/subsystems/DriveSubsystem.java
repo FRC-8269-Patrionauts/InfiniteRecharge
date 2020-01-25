@@ -39,11 +39,17 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
+  /*
   private final SpeedController leftMotor1 = new PWMVictorSPX(Constants.LEFT_MOTOR_1);
   private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
   private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
   private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
+  */
   private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST, MotorType.kBrushless);
+  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
+  private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
+  private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
+  private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
 
   int P, I, D = 1;  
 
@@ -92,7 +98,7 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // leftMotor1
-
+    /*
     if (goalSpeedx > currentSpeedx) {
       currentSpeedx += SPEED_STEP_UP;
     } else if (goalSpeedx < currentSpeedx) {
@@ -117,6 +123,7 @@ public class DriveSubsystem extends SubsystemBase {
     } else if (currentSpeedz < -maxSpeed) {
       currentSpeedz = -maxSpeed;
     }
+    */
 
 
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
@@ -185,19 +192,19 @@ public class DriveSubsystem extends SubsystemBase {
     return maxSpeed;
   }
 
-  public SpeedController getLeftMotor1() {
+  public CANSparkMax getLeftMotor1() {
     return leftMotor1;
   }
 
-  public SpeedController getLeftMotor2() {
+  public CANSparkMax getLeftMotor2() {
     return leftMotor2;
   }
 
-  public SpeedController getRightMotor1() {
+  public CANSparkMax getRightMotor1() {
     return rightMotor1;
   }
 
-  public SpeedController getRightMotor2() {
+  public CANSparkMax getRightMotor2() {
     return rightMotor2;
   }
 
