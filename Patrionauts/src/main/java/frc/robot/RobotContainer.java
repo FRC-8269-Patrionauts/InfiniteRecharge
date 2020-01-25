@@ -53,7 +53,17 @@ public class RobotContainer {
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
   // Joystick Buttons
-  JoystickButton button11 = new JoystickButton(joystick, 11);
+  JoystickButton button3Joystick = new JoystickButton(joystick, 3);
+  JoystickButton button4Joystick = new JoystickButton(joystick, 4);
+  JoystickButton button5Joystick = new JoystickButton(joystick, 5);
+  JoystickButton button6Joystick = new JoystickButton(joystick, 6);
+  JoystickButton button7Joystick = new JoystickButton(joystick, 7);
+  JoystickButton button8Joystick = new JoystickButton(joystick, 8);
+  JoystickButton button9Joystick = new JoystickButton(joystick, 9);
+  JoystickButton button10Joystick = new JoystickButton(joystick, 10);
+  JoystickButton button11Joystick = new JoystickButton(joystick, 11);
+  JoystickButton button12Joystick = new JoystickButton(joystick, 12);
+
 
   // Sensors
   // Initializing an encoder on DIO pins 4 and 5
