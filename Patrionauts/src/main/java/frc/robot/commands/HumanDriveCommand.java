@@ -44,12 +44,16 @@ public class HumanDriveCommand extends CommandBase {
       driveSubsystem.setMaxSpeed(((-joystick.getThrottle() + 1) / 2));
       }
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
-        driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
+        if (Math.abs(joystick.getTwist()) > .1) {
+          driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
+        } else {
+          driveSubsystem.arcadeDrive(joystick.getY(), 0);
+        }
       } else {
         driveSubsystem.stop();
       }
     } else if (gamepad != null) {
-      if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .1) {
+      if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .2) {
         driveSubsystem.arcadeDrive(gamepad.getRawAxis(1), gamepad.getRawAxis(2));
       } else {
         driveSubsystem.stop();

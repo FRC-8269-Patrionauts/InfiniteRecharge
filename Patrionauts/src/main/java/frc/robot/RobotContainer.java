@@ -67,7 +67,7 @@ public class RobotContainer {
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget();
 
-  private final PIDController pidController = new PIDController(Kp, Ki, Kd);
+  private final PIDController pidController = new PIDController(1, 1, 1);
 
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
