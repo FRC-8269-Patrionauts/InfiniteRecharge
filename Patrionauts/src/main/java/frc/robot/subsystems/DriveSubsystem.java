@@ -66,6 +66,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double goalSpeedx = Constants.GOAL_SPEED;
   private double goalSpeedz = Constants.GOAL_SPEED;
+
   // private final Encoder leftEncoder = new Encoder(3, 4);
   private double goalAngle = 0;
 
@@ -74,6 +75,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   private static final double SPEED_STEP_UP = Constants.SPEED_STEP_UP;
   private static final double SPEED_STEP_DOWN = Constants.SPEED_STEP_DOWN;
+
+  //  static final double COUNTS_PER_MOTOR_REV = 0;
+  //  static final double WHEEL_DIAMETER_INCHES = 6.0;
+  //  static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * 3.1415);
+  //  static final double DRIVE_SPEED = .4;
 
   double maxSpeed = 1;
 
@@ -112,10 +118,10 @@ public class DriveSubsystem extends SubsystemBase {
       currentSpeedz = -maxSpeed;
     }
 
+
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
       drive.arcadeDrive(currentSpeedx, currentSpeedz);
     }
-
 
     // Update to currentSpeedX and Z
     // insert PID Loop Here
@@ -124,6 +130,8 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
+
+   // drive.arcadeDrive(0, pidValue);
 
     // drive.arcadeDrive(0, pidValue);
 
@@ -137,10 +145,10 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
-    // goalSpeedlM1 = lM1;
-    // goalSpeedlM2 = lM2;
-    // goalSpeedrM1 = -rM1;
-    // goalSpeedrM2 = -rM2;
+     //goalSpeedx = Constants.GOAL_SPEED;
+      //goalSpeedz = Constants.GOAL_SPEED;
+    //  goalSpeedrM1 = -rM1;
+    //  goalSpeedrM2 = -rM2;
     // leftMotor1.set(lM1*speedMult);
     // leftMotor2.set(lM2*speedMult);
     // rightMotor1.set(rM1*speedMult);
