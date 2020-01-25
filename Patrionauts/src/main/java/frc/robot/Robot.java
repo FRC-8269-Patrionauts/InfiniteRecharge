@@ -125,7 +125,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    if (robotContainer.getJoystick().getThrottle() > 0.01){
+    if (Math.abs(robotContainer.getJoystick().getThrottle()) > 0.1){
       robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
     } else {
       robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
