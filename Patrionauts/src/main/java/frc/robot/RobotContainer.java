@@ -101,7 +101,7 @@ public class RobotContainer {
     X.whenPressed(autonomousCommand);
     Y.whenPressed(humanDriveCommand);
     A.whenPressed(colorWheelCommand);
-    button11.whenPressed(testTurningCommand);
+    button11Joystick.whenPressed(testTurningCommand);
   }
 
   /**

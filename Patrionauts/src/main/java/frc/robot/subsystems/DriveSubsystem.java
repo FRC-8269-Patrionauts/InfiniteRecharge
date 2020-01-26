@@ -68,10 +68,11 @@ public class DriveSubsystem extends SubsystemBase {
   the other will be Tp-turn (right)
   */
   
-  private final double turnKp = 1;
-  private final double turnKi = 1;
-  private final double turnKd = 1;
+  private final double turnKp = .05;
+  private final double turnKi = .001;
+  private final double turnKd = 0;
   private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+  
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -253,8 +254,8 @@ public class DriveSubsystem extends SubsystemBase {
     this.integral += (error*.02);
     double derivative = (error - this.previous_error) / .02;
     //this.rcw = P*error + I*this.integral
-
-
   }
+
+  
 
 }
