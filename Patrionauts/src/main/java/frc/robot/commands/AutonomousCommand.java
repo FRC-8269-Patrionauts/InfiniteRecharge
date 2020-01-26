@@ -34,6 +34,7 @@ public class AutonomousCommand extends CommandBase {
 
     @Override
     public void execute() {
+        /*
         double currentTime = getCurrentTime();
         if (currentTime < 2) {
             phaseOne();
@@ -44,6 +45,9 @@ public class AutonomousCommand extends CommandBase {
         } else {
             phaseFour();
         }
+        */
+
+        drive.getTestMotor().set(.2);
     }
 
     public void phaseOne() {

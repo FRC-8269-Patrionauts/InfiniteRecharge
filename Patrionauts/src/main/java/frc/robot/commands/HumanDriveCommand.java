@@ -38,7 +38,7 @@ public class HumanDriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    /*
+    
     if (joystick != null) { 
       
       if (joystick.getRawButton(2)){
@@ -61,9 +61,6 @@ public class HumanDriveCommand extends CommandBase {
       }
      
       }
-      */
     }
-    
-    
   }
 

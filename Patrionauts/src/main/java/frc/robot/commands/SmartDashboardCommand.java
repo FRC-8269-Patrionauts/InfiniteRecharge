@@ -29,6 +29,14 @@ public class SmartDashboardCommand extends CommandBase {
         //SmartDashboard.putNumber("Drive | Encoder pos: ", robotContainer.getDriveSubsystem().getLeftEncoder().get());
         //SmartDashboard.putNumber("Drive | speedMult", robotContainer.getDriveSubsystem().getMaxSpeed());
         //SmartDashboard.putNumber("Drive | Gyro Angle", Math.abs(robotContainer.getGyro().getAngle()));
+        SmartDashboard.putNumber("Drive | LM1Enc", 
+                robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition());
+        SmartDashboard.putNumber("Drive | LM2Enc",
+                robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition());
+        SmartDashboard.putNumber("Drive | RM1Enc",
+                robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition());
+        SmartDashboard.putNumber("Drive | R2Enc",
+                robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition());
     }
 
     public void addIMU() {

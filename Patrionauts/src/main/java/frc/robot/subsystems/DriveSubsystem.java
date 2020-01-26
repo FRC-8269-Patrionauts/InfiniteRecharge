@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.PWMVictorSPX;
@@ -39,19 +40,28 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
-  /*
-  private final SpeedController leftMotor1 = new PWMVictorSPX(Constants.LEFT_MOTOR_1);
-  private final SpeedController leftMotor2 = new PWMVictorSPX(Constants.LEFT_MOTOR_2);
-  private final SpeedController rightMotor1 = new PWMVictorSPX(Constants.RIGHT_MOTOR_1);
-  private final SpeedController rightMotor2 = new PWMVictorSPX(Constants.RIGHT_MOTOR_2);
-  */
-  private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST, MotorType.kBrushless);
-  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
+  private final SpeedController testMotor = new PWMVictorSPX(6);
+  // private final SpeedController leftMotor1 = testMotor;
+  // private final SpeedController leftMotor2 = testMotor;
+  // private final SpeedController rightMotor1 = testMotor;
+  // private final SpeedController rightMotor2 = testMotor;
+   
+  //private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST, MotorType.kBrushless);
   private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
+  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
 
-  int P, I, D = 1;  
+  private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
+  private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
+  private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
+  private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
+
+  // private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
+  // private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
+  // private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
+
+  int P, I, D = 1;
 
   int integral, previous_error, setpoint = 0;
 
@@ -60,14 +70,13 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final AHRS imu;
 
-  //private final double error = goalPosition - current position
-  //P = 1/(error*error)
-  /*Turn = k*error
-  where Tp is the turn power for going forward
-  //one motor will be Tp+turn (left)
-  the other will be Tp-turn (right)
-  */
-  
+  // private final double error = goalPosition - current position
+  // P = 1/(error*error)
+  /*
+   * Turn = k*error where Tp is the turn power for going forward //one motor will
+   * be Tp+turn (left) the other will be Tp-turn (right)
+   */
+
   private final double turnKp = 1;
   private final double turnKi = 1;
   private final double turnKd = 1;
@@ -87,10 +96,11 @@ public class DriveSubsystem extends SubsystemBase {
   private static final double SPEED_STEP_UP = Constants.SPEED_STEP_UP;
   private static final double SPEED_STEP_DOWN = Constants.SPEED_STEP_DOWN;
 
-  //  static final double COUNTS_PER_MOTOR_REV = 0;
-  //  static final double WHEEL_DIAMETER_INCHES = 6.0;
-  //  static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * 3.1415);
-  //  static final double DRIVE_SPEED = .4;
+  // static final double COUNTS_PER_MOTOR_REV = 0;
+  // static final double WHEEL_DIAMETER_INCHES = 6.0;
+  // static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) /
+  // (WHEEL_DIAMETER_INCHES * 3.1415);
+  // static final double DRIVE_SPEED = .4;
 
   double maxSpeed = 1;
 
@@ -103,33 +113,25 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // leftMotor1
-    /*
-    if (goalSpeedx > currentSpeedx) {
-      currentSpeedx += SPEED_STEP_UP;
-    } else if (goalSpeedx < currentSpeedx) {
-      currentSpeedx -= SPEED_STEP_DOWN;
-    }
-    if (currentSpeedx > maxSpeed) {
-      currentSpeedx = maxSpeed;
-    } else if (currentSpeedx < -maxSpeed) {
-      currentSpeedx = -maxSpeed;
-    }
-    if (Math.abs(currentSpeedx) > maxSpeed) {
-      currentSpeedx = maxSpeed;
-    }
-
-    if (goalSpeedz > currentSpeedz) {
-      currentSpeedz += SPEED_STEP_UP;
-    } else if (goalSpeedz < currentSpeedz) {
-      currentSpeedz -= SPEED_STEP_DOWN;
-    }
-    if (currentSpeedz > maxSpeed) {
-      currentSpeedz = maxSpeed;
-    } else if (currentSpeedz < -maxSpeed) {
-      currentSpeedz = -maxSpeed;
-    }
-    */
-
+    
+      if (goalSpeedx > currentSpeedx) {
+         currentSpeedx += SPEED_STEP_UP; 
+        }  else if (goalSpeedx < currentSpeedx) {
+           currentSpeedx -= SPEED_STEP_DOWN; 
+          }
+       if (currentSpeedx > maxSpeed) {
+          currentSpeedx = maxSpeed;
+         }  else if (currentSpeedx < -maxSpeed) {
+            currentSpeedx = -maxSpeed;
+           } 
+          if
+      (Math.abs(currentSpeedx) > maxSpeed) { currentSpeedx = maxSpeed; }
+      
+      if (goalSpeedz > currentSpeedz) { currentSpeedz += SPEED_STEP_UP; } else if
+      (goalSpeedz < currentSpeedz) { currentSpeedz -= SPEED_STEP_DOWN; } if
+      (currentSpeedz > maxSpeed) { currentSpeedz = maxSpeed; } else if
+      (currentSpeedz < -maxSpeed) { currentSpeedz = -maxSpeed; }
+     
 
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
       drive.arcadeDrive(currentSpeedx, currentSpeedz);
@@ -137,13 +139,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     // Update to currentSpeedX and Z
     // insert PID Loop Here
-   
+
     double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
     SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
 
-   // drive.arcadeDrive(0, pidValue);
+    // drive.arcadeDrive(0, pidValue);
 
     // drive.arcadeDrive(0, pidValue);
 
@@ -157,10 +159,10 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
-     //goalSpeedx = Constants.GOAL_SPEED;
-      //goalSpeedz = Constants.GOAL_SPEED;
-    //  goalSpeedrM1 = -rM1;
-    //  goalSpeedrM2 = -rM2;
+    // goalSpeedx = Constants.GOAL_SPEED;
+    // goalSpeedz = Constants.GOAL_SPEED;
+    // goalSpeedrM1 = -rM1;
+    // goalSpeedrM2 = -rM2;
     // leftMotor1.set(lM1*speedMult);
     // leftMotor2.set(lM2*speedMult);
     // rightMotor1.set(rM1*speedMult);
@@ -213,8 +215,12 @@ public class DriveSubsystem extends SubsystemBase {
     return rightMotor2;
   }
 
-  public CANSparkMax getCanSparkMax() {
-    return m_motor;
+  // public CANSparkMax getCanSparkMax() {
+  //   return m_motor;
+  // }
+
+  public SpeedController getTestMotor() {
+    return testMotor;
   }
 
   /*
@@ -241,19 +247,35 @@ public class DriveSubsystem extends SubsystemBase {
     return new double[] { getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed() };
   }
 
+  public CANEncoder getLeftMotor2Encoder() {
+    return leftMotor2Encoder;
+  }
+
+  public CANEncoder getLeftMotor1Encoder() {
+    return leftMotor1Encoder;
+  }
+
+  public CANEncoder getRightMotor1Encoder() {
+    return rightMotor1Encoder;
+  }
+
+  public CANEncoder getRightMotor2Encoder() {
+    return rightMotor2Encoder;
+  }
+
   public DifferentialDrive getDifferentialDrive() {
     return drive;
   }
-  public void setSetpoint(int setpoint){
+
+  public void setSetpoint(int setpoint) {
     this.setpoint = setpoint;
   }
 
-  public void PID(){
+  public void PID() {
     double error = setpoint - imu.getAngle();
-    this.integral += (error*.02);
+    this.integral += (error * .02);
     double derivative = (error - this.previous_error) / .02;
-    //this.rcw = P*error + I*this.integral
-
+    // this.rcw = P*error + I*this.integral
 
   }
 
