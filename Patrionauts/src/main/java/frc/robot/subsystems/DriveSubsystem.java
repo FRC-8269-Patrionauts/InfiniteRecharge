@@ -46,7 +46,8 @@ public class DriveSubsystem extends SubsystemBase {
   // private final SpeedController rightMotor1 = testMotor;
   // private final SpeedController rightMotor2 = testMotor;
 
-  //private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST, MotorType.kBrushless);
+  // private final CANSparkMax m_motor = new CANSparkMax(Constants.NEO_MOTOR_TEST,
+  // MotorType.kBrushless);
   private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
   private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
@@ -57,9 +58,12 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
   private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
 
-  // private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
-  // private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
-  // private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
+  // private final CANSparkMax leftMotor2 = new
+  // CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
+  // private final CANSparkMax rightMotor1 = new
+  // CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
+  // private final CANSparkMax rightMotor2 = new
+  // CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
 
   int P, I, D = 1;
 
@@ -76,19 +80,11 @@ public class DriveSubsystem extends SubsystemBase {
    * Turn = k*error where Tp is the turn power for going forward //one motor will
    * be Tp+turn (left) the other will be Tp-turn (right)
    */
-  //private final double error = goalPosition - current position
-  //P = 1/(error*error)
-  /*Turn = k*error
-  where Tp is the turn power for going forward
-  //one motor will be Tp+turn (left)
-  the other will be Tp-turn (right)
-  */
 
   private final double turnKp = .05;
   private final double turnKi = .001;
   private final double turnKd = 0;
   private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
-
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -113,33 +109,35 @@ public class DriveSubsystem extends SubsystemBase {
   double maxSpeed = 1;
 
   public DriveSubsystem(AHRS imu) {
-    // drive.setDeadband(0);
     this.imu = imu;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    // leftMotor1
+    if (goalSpeedx > currentSpeedx) {
+      currentSpeedx += SPEED_STEP_UP;
+    } else if (goalSpeedx < currentSpeedx) {
+      currentSpeedx -= SPEED_STEP_DOWN;
+    }
+    if (currentSpeedx > maxSpeed) {
+      currentSpeedx = maxSpeed;
+    } else if (currentSpeedx < -maxSpeed) {
+      currentSpeedx = -maxSpeed;
+    }
+    if (Math.abs(currentSpeedx) > maxSpeed) {
+      currentSpeedx = maxSpeed;
+    }
 
-      if (goalSpeedx > currentSpeedx) {
-         currentSpeedx += SPEED_STEP_UP;
-        }  else if (goalSpeedx < currentSpeedx) {
-           currentSpeedx -= SPEED_STEP_DOWN;
-          }
-       if (currentSpeedx > maxSpeed) {
-          currentSpeedx = maxSpeed;
-         }  else if (currentSpeedx < -maxSpeed) {
-            currentSpeedx = -maxSpeed;
-           }
-          if
-      (Math.abs(currentSpeedx) > maxSpeed) { currentSpeedx = maxSpeed; }
-
-      if (goalSpeedz > currentSpeedz) { currentSpeedz += SPEED_STEP_UP; } else if
-      (goalSpeedz < currentSpeedz) { currentSpeedz -= SPEED_STEP_DOWN; } if
-      (currentSpeedz > maxSpeed) { currentSpeedz = maxSpeed; } else if
-      (currentSpeedz < -maxSpeed) { currentSpeedz = -maxSpeed; }
-
+    if (goalSpeedz > currentSpeedz) {
+      currentSpeedz += SPEED_STEP_UP;
+    } else if (goalSpeedz < currentSpeedz) {
+      currentSpeedz -= SPEED_STEP_DOWN;
+    }
+    if (currentSpeedz > maxSpeed) {
+      currentSpeedz = maxSpeed;
+    } else if (currentSpeedz < -maxSpeed) {
+      currentSpeedz = -maxSpeed;
+    }
 
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
       drive.arcadeDrive(currentSpeedx, currentSpeedz);
@@ -224,7 +222,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   // public CANSparkMax getCanSparkMax() {
-  //   return m_motor;
+  // return m_motor;
   // }
 
   public SpeedController getTestMotor() {
@@ -279,13 +277,15 @@ public class DriveSubsystem extends SubsystemBase {
     this.setpoint = setpoint;
   }
 
+  public PIDController getTurnPIDController() {
+    return turnPID;
+  }
+
   public void PID() {
     double error = setpoint - imu.getAngle();
     this.integral += (error * .02);
     double derivative = (error - this.previous_error) / .02;
-
+    // this.rcw = P*error + I*this.integral
   }
-
-
 
 }

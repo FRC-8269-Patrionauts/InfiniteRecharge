@@ -12,31 +12,23 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.SmartDashboardCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DetectedTarget;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
-import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
- * 
- * TODO(team): Think about all of the other devices, subsystems, and commands
- * that we'll need here. For example, a command for auto assisted aiming, a
- * command for moving the wheel, a subsystem for moving the wheel, etc.
- * 
- * TODO(jacob): finish setting up these systems, commands, and devices.
  */
 public class RobotContainer {
 
   // Devices
-  private final Joystick joystick = new Joystick(Constants.JOYSTICK_1); // TODO(team): initialize this correctly.
+  private final Joystick joystick = new Joystick(Constants.JOYSTICK_1);
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
-  // private final AnalogGyro gyro = new AnalogGyro(0);
   private final AHRS imu = new AHRS(SPI.Port.kMXP);
-  
 
   // Gamepad Buttons
   JoystickButton X = new JoystickButton(gamepad, Constants.GAMEPAD_X);
@@ -64,7 +56,6 @@ public class RobotContainer {
   JoystickButton button11Joystick = new JoystickButton(joystick, 11);
   JoystickButton button12Joystick = new JoystickButton(joystick, 12);
 
-
   // Sensors
   // Initializing an encoder on DIO pins 4 and 5
   Encoder flywheel1 = new Encoder(4, 5);
@@ -77,18 +68,16 @@ public class RobotContainer {
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget();
 
-  //private final PIDController pidController = new PIDController(Kp, Ki, Kd);
-
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
       shootSubsystem);
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
+  private final SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(this);
 
   public RobotContainer() {
     configureButtonBindings();
-    // driveSubsystem.setBase(.3);
   }
 
   /**
@@ -111,20 +100,13 @@ public class RobotContainer {
     return this.autonomousCommand;
   }
 
-  /*
-   * public AnalogGyro getGyro() { return this.gyro; }
-   */
-  public AHRS getAHRS() {
+  public AHRS getImu() {
     return this.imu;
   }
 
   public Joystick getJoystick() {
     return this.joystick;
   }
-
-  // public AnalogGyro getGyro(){
-  // return //this.gyro;
-  // }
 
   public XboxController getGamepad() {
     return this.gamepad;
@@ -158,9 +140,12 @@ public class RobotContainer {
     return this.colorWheelCommand;
   }
 
+  public SmartDashboardCommand getSmartDashboardCommand() {
+    return this.smartDashboardCommand;
+  }
+
   public DetectedTarget getDetectedTarget() {
     return this.detectedTarget;
   }
-  
 
 }

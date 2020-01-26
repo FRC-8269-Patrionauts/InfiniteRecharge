@@ -23,8 +23,6 @@ public class Robot extends TimedRobot {
   private final RobotContainer robotContainer = new RobotContainer();
   private AutonomousCommand autonomousCommand;
   private HumanDriveCommand humanDriveCommand;
-  private SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(robotContainer,
-      robotContainer.getCameraSubsystem());
 
   Supplier<Double> leftEncoderPosition;
   Supplier<Double> leftEncoderRate;
@@ -41,7 +39,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    
 
     // Disable LiveWindow telemetry which causes the "loop time of 0.02s overrun"
     // warning.
@@ -55,15 +52,17 @@ public class Robot extends TimedRobot {
     robotContainer.getDriveSubsystem().getRightMotor1().setInverted(true);
     robotContainer.getDriveSubsystem().getRightMotor2().setInverted(true);
 
-
-    smartDashboardCommand.addCamera();
-    robotContainer.getAHRS().reset();
-    //robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
+    robotContainer.getImu().reset();
+    // robotContainer.getCameraSubsystem().startAutomaticCapture();
   }
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
+    try {
+      CommandScheduler.getInstance().run();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -77,9 +76,8 @@ public class Robot extends TimedRobot {
     }
   }
 
-
-  //AUTOALIGN
-  //NetworkTable table = NetworkTable.getTable("limelight");
+  // AUTOALIGN
+  // NetworkTable table = NetworkTable.getTable("limelight");
 
   @Override
   public void autonomousPeriodic() {
@@ -88,9 +86,9 @@ public class Robot extends TimedRobot {
     double now = autonomousCommand.getCurrentTime();
 
     // AUTOALIGN
-    //double angle = table.getDouble("tx", 0.0);
-    //double error = (angle / 45) * 2.0;
-    //robotContainer.getDriveSubsystem().arcadeDrive(0, error);
+    // double angle = table.getDouble("tx", 0.0);
+    // double error = (angle / 45) * 2.0;
+    // robotContainer.getDriveSubsystem().arcadeDrive(0, error);
 
     /*
      * double leftPosition = leftEncoderPosition.get(); double leftRate =
@@ -135,39 +133,35 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
     // if (Math.abs(robotContainer.getJoystick().getThrottle()) > 0.5){
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
+    // robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle()
+    // / 4);
     // } else {
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    // robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
     // }
 
     if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-      
-      //robotContainer.getDriveSubsystem().getLeftMotor1().set(robotContainer.getJoystick().getY() / 4);
+
+      // robotContainer.getDriveSubsystem().getLeftMotor1().set(robotContainer.getJoystick().getY()
+      // / 4);
       robotContainer.getDriveSubsystem().getLeftMotor2().set(robotContainer.getJoystick().getY() / 4);
-      //robotContainer.getDriveSubsystem().getRightMotor1().set(robotContainer.getJoystick().getY() / 4);
+      // robotContainer.getDriveSubsystem().getRightMotor1().set(robotContainer.getJoystick().getY()
+      // / 4);
       robotContainer.getDriveSubsystem().getRightMotor2().set(robotContainer.getJoystick().getY() / 4);
     } else {
-      //robotContainer.getDriveSubsystem().getLeftMotor1().set(0);
+      // robotContainer.getDriveSubsystem().getLeftMotor1().set(0);
       robotContainer.getDriveSubsystem().getLeftMotor2().set(0);
-      //robotContainer.getDriveSubsystem().getRightMotor1().set(0);
+      // robotContainer.getDriveSubsystem().getRightMotor1().set(0);
       robotContainer.getDriveSubsystem().getRightMotor2().set(0);
     }
 
-
-
-    smartDashboardCommand.addDrive();
-    // smartDashboardCommand.addGamepad();
-    smartDashboardCommand.addJoystick();
-    // smartDashboardCommand.addIMU();
     // if (robotContainer.getJoystick().getRawButton(11)) {
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
+    // robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
     // } else if (robotContainer.getJoystick().getRawButton(12)) {
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(-.3);
-    //   ;
+    // robotContainer.getDriveSubsystem().getCanSparkMax().set(-.3);
+    // ;
     // } else {
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    // robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
     // }
   }
 }
