@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
     smartDashboardCommand.addCamera();
     robotContainer.getAHRS().reset();
-    robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
+  //  robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
   }
 
   @Override
@@ -125,11 +125,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    if (robotContainer.getJoystick().getThrottle() > 0.01){
-      robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
-    } else {
-      robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
-    }
+    // if (robotContainer.getJoystick().getThrottle() > 0.01){
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
+    // } else {
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    // }
 
     smartDashboardCommand.addDrive();
     // smartDashboardCommand.addGamepad();
