@@ -9,16 +9,6 @@ import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * A command that allows the driver to take control of driving.
- * 
- * This should be used as the default command for the {@link DriveSubsystem}.
- * When this command is executing, the Joystick or Gamepad should be sending
- * inputs to the {@link DriveSubsystem} to move the robot.
- * 
- * TODO(jacob): Coordinate with Alonzo for the following:
- * 
- * - We need to read input from the Joystick or Gamepad controller whenever
- * execute is called. We need to call the DriveSubsystems methods with that
- * data. What should that method be named, and what arguments should we send it.
  */
 public class HumanDriveCommand extends CommandBase {
 
@@ -38,11 +28,10 @@ public class HumanDriveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    /*
-    if (joystick != null) { 
-      
-      if (joystick.getRawButton(2)){
-      driveSubsystem.setMaxSpeed(((-joystick.getThrottle() + 1) / 2));
+    if (joystick != null) {
+
+      if (joystick.getRawButton(2)) {
+        driveSubsystem.setMaxSpeed(((-joystick.getThrottle() + 1) / 2));
       }
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
         if (Math.abs(joystick.getTwist()) > .1) {
@@ -59,11 +48,6 @@ public class HumanDriveCommand extends CommandBase {
       } else {
         driveSubsystem.stop();
       }
-     
-      }
-      */
     }
-    
-    
   }
-
+}

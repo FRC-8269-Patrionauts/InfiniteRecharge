@@ -1,7 +1,5 @@
 package frc.robot;
 
-import com.fasterxml.jackson.databind.deser.impl.FailingDeserializer;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -17,10 +15,10 @@ public final class Constants {
 	public static final int JOYSTICK_1 = 0;
 	public static final int GAMEPAD_1 = 1;
 
-	public static final int LEFT_MOTOR_1 = 0;
-	public static final int LEFT_MOTOR_2 = 1;
-	public static final int RIGHT_MOTOR_1 = 2;
-	public static final int RIGHT_MOTOR_2 = 3;
+	public static final int LEFT_MOTOR_1 = 3;
+	public static final int LEFT_MOTOR_2 = 2;
+	public static final int RIGHT_MOTOR_1 = 5;
+	public static final int RIGHT_MOTOR_2 = 4;
 
 	public static final double CURRENT_SPEED = 0;
 	public static final double GOAL_SPEED = 0;
@@ -46,9 +44,17 @@ public final class Constants {
 	public static final int GAMEPAD_LEFT_ANALOG_CLICK = 10;
 	public static final int GAMEPAD_RIGHT_ANALOG_CLICK = 11;
 	
-	
-
+	public static final int JOYSTICK_3 = 3;
+	public static final int JOYSTICK_4 = 4;
+	public static final int JOYSTICK_5 = 5;
+	public static final int JOYSTICK_6 = 6;
+	public static final int JOYSTICK_7 = 7;
+	public static final int JOYSTICK_8 = 8;
+	public static final int JOYSTICK_9 = 9;
+	public static final int JOYSTICK_10 = 10;
 	public static final int JOYSTICK_11 = 11;
+	public static final int JOYSTICK_12 = 12;
+
 	/*
 	public static final double ksVolts = 0.0;
 	public static final double ksVoltsSecondsPerMeter = 0.0;
@@ -56,6 +62,6 @@ public final class Constants {
 
 	public static final double kPDriveVel = 0.0;
 	*/
-	public static final int NEO_MOTOR_TEST = 1;
+	public static final int  NEO_MOTOR_TEST = 1;
 
 }
