@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -40,7 +41,9 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
-  private final SpeedController testMotor = new PWMVictorSPX(6);
+  public static double kP;
+
+private final SpeedController testMotor = new PWMVictorSPX(6);
   // private final SpeedController leftMotor1 = testMotor;
   // private final SpeedController leftMotor2 = testMotor;
   // private final SpeedController rightMotor1 = testMotor;
@@ -81,10 +84,11 @@ public class DriveSubsystem extends SubsystemBase {
    * be Tp+turn (left) the other will be Tp-turn (right)
    */
 
-  private final double turnKp = .05;
-  private final double turnKi = .001;
-  private final double turnKd = 0;
-  private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+  public final double turnKp = .05;
+  public final double turnKi = .001;
+  public final double turnKd = 0;
+  public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+  
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -300,11 +304,17 @@ public class DriveSubsystem extends SubsystemBase {
     return turnPID;
   }
 
-  public void PID() {
+  protected void useOutput(double output, double setpoint) {
+  
+  }
+
+ 
+  /*public void PID() {
     double error = setpoint - imu.getAngle();
     this.integral += (error * .02);
     double derivative = (error - this.previous_error) / .02;
     // this.rcw = P*error + I*this.integral
   }
+  */
 
 }
