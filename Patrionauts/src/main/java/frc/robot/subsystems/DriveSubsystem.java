@@ -164,6 +164,24 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
 
+  public void setNeoMovment(double speed){
+    leftMotor1.set(speed);
+    leftMotor2.set(speed);
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+
+  public void setNeoTurning(double speed){
+    leftMotor1.set(-speed);
+    leftMotor2.set(-speed);
+    rightMotor1.set(speed);
+    rightMotor2.set(speed);
+  }
+
+  
+
+  
+
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
     // goalSpeedx = Constants.GOAL_SPEED;
     // goalSpeedz = Constants.GOAL_SPEED;
@@ -176,8 +194,9 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double x, double z) {
-    goalSpeedx = x;
-    goalSpeedz = z;
+     goalSpeedx = x;
+     goalSpeedz = z;
+    
   }
 
   public void turn(double degrees) {

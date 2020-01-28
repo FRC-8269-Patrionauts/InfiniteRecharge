@@ -44,6 +44,9 @@ public class Robot extends TimedRobot {
     // warning.
     LiveWindow.disableAllTelemetry();
 
+    smartDashboardCommand.addCamera();
+    robotContainer.getAHRS().reset();
+  //  robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
     robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
     robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
 
@@ -142,6 +145,11 @@ public class Robot extends TimedRobot {
 
     if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
 
+    // if (robotContainer.getJoystick().getThrottle() > 0.01){
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
+    // } else {
+    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
+    // }
       // robotContainer.getDriveSubsystem().getLeftMotor1().set(robotContainer.getJoystick().getY()
       // / 4);
       robotContainer.getDriveSubsystem().getLeftMotor2().set(robotContainer.getJoystick().getY() / 4);
@@ -154,6 +162,7 @@ public class Robot extends TimedRobot {
       // robotContainer.getDriveSubsystem().getRightMotor1().set(0);
       robotContainer.getDriveSubsystem().getRightMotor2().set(0);
     }
+
 
     // if (robotContainer.getJoystick().getRawButton(11)) {
     // robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
