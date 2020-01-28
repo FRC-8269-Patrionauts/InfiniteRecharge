@@ -23,7 +23,7 @@ public final class Constants {
 	public static final double CURRENT_SPEED = 0;
 	public static final double GOAL_SPEED = 0;
 	public static final double SPEED_STEP_DOWN = 0.05;
-	public static final double SPEED_STEP_UP = 0.05;
+	public static final double SPEED_STEP_UP = 0.03;
 	public static final double MAX_SPEED = 1;
 
 	
