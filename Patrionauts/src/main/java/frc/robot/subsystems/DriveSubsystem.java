@@ -41,7 +41,6 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
-  public static double kP;
 
 private final SpeedController testMotor = new PWMVictorSPX(6);
   // private final SpeedController leftMotor1 = testMotor;
@@ -75,7 +74,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
   private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
-  private final AHRS imu;
+  public final AHRS imu;
 
   // private final double error = goalPosition - current position
   // P = 1/(error*error)
@@ -96,7 +95,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
   private double goalSpeedz = Constants.GOAL_SPEED;
 
   // private final Encoder leftEncoder = new Encoder(3, 4);
-  private double goalAngle = 0;
+  public double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
   private double currentSpeedz = Constants.CURRENT_SPEED;
@@ -150,7 +149,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
     // Update to currentSpeedX and Z
     // insert PID Loop Here
 
-    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    //double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
     SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
@@ -166,6 +165,11 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
      * goal angle, and use that info to get zRotation
      */
 
+  }
+
+  public void pidTurn(int degrees){
+    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    drive.arcadeDrive(0, pidValue);
   }
 
   public void setNeoMovment(double speed){

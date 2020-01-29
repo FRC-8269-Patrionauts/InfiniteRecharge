@@ -23,6 +23,9 @@ public class TestTurningCommand extends CommandBase {
     public void execute() {
         drive.turn(180);
         SmartDashboard.putBoolean("Test Turning", true);
+        double pidValue = drive.turnPID.calculate(drive.imu.getYaw(), drive.goalAngle);
+        
+        drive.arcadeDrive(0, pidValue);
 
         finished = true;
     }
