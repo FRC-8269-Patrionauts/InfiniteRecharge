@@ -178,6 +178,13 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotor2.set(speed);
   }
 
+  public void setNeoMoveTurn(double speed){
+    leftMotor1.set(speed);
+    leftMotor2.set(speed);
+    rightMotor1.set(0);
+    rightMotor2.set(0);
+  }
+
   
 
   
