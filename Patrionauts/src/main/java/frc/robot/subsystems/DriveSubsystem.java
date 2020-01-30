@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -40,7 +41,8 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
-  private final SpeedController testMotor = new PWMVictorSPX(6);
+
+private final SpeedController testMotor = new PWMVictorSPX(6);
   // private final SpeedController leftMotor1 = testMotor;
   // private final SpeedController leftMotor2 = testMotor;
   // private final SpeedController rightMotor1 = testMotor;
@@ -72,7 +74,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
   private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
-  private final AHRS imu;
+  public final AHRS imu;
 
   // private final double error = goalPosition - current position
   // P = 1/(error*error)
@@ -81,10 +83,11 @@ public class DriveSubsystem extends SubsystemBase {
    * be Tp+turn (left) the other will be Tp-turn (right)
    */
 
-  private final double turnKp = .05;
-  private final double turnKi = .001;
-  private final double turnKd = 0;
-  private final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+  public final double turnKp = .05;
+  public final double turnKi = .001;
+  public final double turnKd = 0;
+  public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+  
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -92,7 +95,7 @@ public class DriveSubsystem extends SubsystemBase {
   private double goalSpeedz = Constants.GOAL_SPEED;
 
   // private final Encoder leftEncoder = new Encoder(3, 4);
-  private double goalAngle = 0;
+  public double goalAngle = 0;
 
   private double currentSpeedx = Constants.CURRENT_SPEED;
   private double currentSpeedz = Constants.CURRENT_SPEED;
@@ -146,7 +149,7 @@ public class DriveSubsystem extends SubsystemBase {
     // Update to currentSpeedX and Z
     // insert PID Loop Here
 
-    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    //double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
     SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
@@ -162,6 +165,11 @@ public class DriveSubsystem extends SubsystemBase {
      * goal angle, and use that info to get zRotation
      */
 
+  }
+
+  public void pidTurn(int degrees){
+    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    drive.arcadeDrive(0, pidValue);
   }
 
   public void setNeoMovment(double speed){
@@ -307,11 +315,17 @@ public class DriveSubsystem extends SubsystemBase {
     return turnPID;
   }
 
-  public void PID() {
+  protected void useOutput(double output, double setpoint) {
+  
+  }
+
+ 
+  /*public void PID() {
     double error = setpoint - imu.getAngle();
     this.integral += (error * .02);
     double derivative = (error - this.previous_error) / .02;
     // this.rcw = P*error + I*this.integral
   }
+  */
 
 }
