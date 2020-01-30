@@ -87,7 +87,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
   public final double turnKi = .001;
   public final double turnKd = 0;
   public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
-  
+
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -149,8 +149,8 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
     // Update to currentSpeedX and Z
     // insert PID Loop Here
 
-    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
-    SmartDashboard.putNumber("pidValue", pidValue);
+    //double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    //SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
 
@@ -193,9 +193,9 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
     rightMotor2.set(0);
   }
 
-  
 
-  
+
+
 
   public void setBase(double lM1, double lM2, double rM1, double rM2) {
     // goalSpeedx = Constants.GOAL_SPEED;
@@ -211,7 +211,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
   public void arcadeDrive(double x, double z) {
      goalSpeedx = x;
      goalSpeedz = z;
-    
+
   }
 
   public void turn(double degrees) {
@@ -316,10 +316,10 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
   }
 
   protected void useOutput(double output, double setpoint) {
-  
+
   }
 
- 
+
   /*public void PID() {
     double error = setpoint - imu.getAngle();
     this.integral += (error * .02);
