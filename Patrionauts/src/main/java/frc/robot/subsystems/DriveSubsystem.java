@@ -149,7 +149,7 @@ private final SpeedController testMotor = new PWMVictorSPX(6);
     // Update to currentSpeedX and Z
     // insert PID Loop Here
 
-    //double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
+    double pidValue = turnPID.calculate(imu.getYaw(), goalAngle);
     SmartDashboard.putNumber("pidValue", pidValue);
     SmartDashboard.putNumber("Yaw", imu.getYaw());
     SmartDashboard.putNumber("goal", goalAngle);
