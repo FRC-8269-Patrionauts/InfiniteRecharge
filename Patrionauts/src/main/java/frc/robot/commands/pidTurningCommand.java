@@ -6,11 +6,13 @@ import frc.robot.subsystems.DriveSubsystem;
 
 public class pidTurningCommand extends  PIDSubsystem {
 
-  
+    DriveSubsystem driveSubsystem;
 
-    public pidTurningCommand() {
-
-        super(new PIDController(DriveSubsystem.turnKp, DriveSubsystem.turnKi, DriveSubsystem.kD));
+    public pidTurningCommand(DriveSubsystem driveSubsystem) {
+        super(new PIDController(driveSubsystem.turnKp, driveSubsystem.turnKi, driveSubsystem.turnKd));
+        this.driveSubsystem = driveSubsystem;
+        //super(new PIDController(driveSubsystem.turnKp, driveSubsystem.turnKi, driveSubsystem.turnKd);
+        //super(new PIDController(0.05, 0.1, 0);
         // TODO Auto-generated constructor stub
     }
 
