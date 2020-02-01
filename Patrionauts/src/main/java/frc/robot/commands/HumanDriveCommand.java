@@ -2,9 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -30,7 +28,6 @@ public class HumanDriveCommand extends CommandBase {
   public void execute() {
     if (joystick != null) {
 
-    
       if (Math.abs(joystick.getY()) > .3 || Math.abs(joystick.getTwist()) > .3) {
         if (Math.abs(joystick.getTwist()) > .3) {
           driveSubsystem.arcadeDrive(-joystick.getY(), -joystick.getTwist());
@@ -40,17 +37,14 @@ public class HumanDriveCommand extends CommandBase {
       } else {
         driveSubsystem.stop();
       }
-  
-
+    }
 
     if (gamepad != null) {
-
       if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .2) {
         driveSubsystem.arcadeDrive(gamepad.getRawAxis(1), gamepad.getRawAxis(2));
       } else {
         driveSubsystem.stop();
       }
     }
-  }
   }
 }
