@@ -3,7 +3,6 @@ package frc.robot;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
@@ -13,6 +12,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -73,6 +73,7 @@ public class RobotContainer {
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
+  private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -139,6 +140,10 @@ public class RobotContainer {
 
   public TestTurningCommand getTestTurningCommand() {
     return this.testTurningCommand;
+  }
+
+  public TestShootCommand getTestShootCommand() {
+    return this.testShootCommand;
   }
 
   public ColorWheelCommand getColorWheelCommand() {

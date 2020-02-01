@@ -8,8 +8,6 @@ public class TestShootCommand extends CommandBase {
 
     private final ShootSubsystem shoot;
 
-    private boolean finished = false;
-
     public TestShootCommand(ShootSubsystem shoot) {
         this.shoot = shoot;
         addRequirements(shoot);
@@ -17,19 +15,10 @@ public class TestShootCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        shoot.setFlyWheel(.5);
     }
 
     @Override
     public void execute() {
-        SmartDashboard.putBoolean("Test flywheel", true);
+        shoot.setFlyWheel(0.5);
     }
-
-    public boolean isFinished() {
-        SmartDashboard.putBoolean("Test flywheel", false);
-        return finished;
-    }
-
-
-
 }

@@ -35,9 +35,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   public final AHRS imu;
 
-  public final double turnKp = .003;
-  public final double turnKi = .002;
-  public final double turnKd = 0;
+  public final double turnKp = .042;
+  public final double turnKi = .0007;
+  public final double turnKd = .008;
   public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
@@ -53,6 +53,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DriveSubsystem(AHRS imu) {
     this.imu = imu;
+    turnPID.reset();
+    turnPID.enableContinuousInput(-180, 180);
   }
 
   @Override
@@ -70,10 +72,12 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void turn(double degrees) {
     isTurning = true;
-    turnPID.reset();
-    turnPID.enableContinuousInput(-180, 180);
     turnPID.setSetpoint(imu.getYaw() + degrees);
     turnPID.setTolerance(2);
+  }
+
+  public void turnToExactAngle(double angle) {
+
   }
 
   public void arcadeDrive(double forward, double turn) {

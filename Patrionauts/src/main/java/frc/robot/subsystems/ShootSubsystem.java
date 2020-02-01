@@ -31,17 +31,15 @@ public class ShootSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-
 
   }
 
-  public void setFlyWheel (double speed){
+  public void setFlyWheel(double speed) {
     flyWheelMotor1.set(speed);
     flyWheelMotor2.set(-speed);
   }
 
-  public void stopFlyWheel (){
+  public void stopFlyWheel() {
     flyWheelMotor1.set(0);
     flyWheelMotor2.set(0);
   }
