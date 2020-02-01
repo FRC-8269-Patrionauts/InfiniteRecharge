@@ -51,8 +51,8 @@ public class Robot extends TimedRobot {
 
     robotContainer.getDriveSubsystem().getLeftMotor1().setInverted(false);
     robotContainer.getDriveSubsystem().getLeftMotor2().setInverted(false);
-    robotContainer.getDriveSubsystem().getRightMotor1().setInverted(true);
-    robotContainer.getDriveSubsystem().getRightMotor2().setInverted(true);
+    robotContainer.getDriveSubsystem().getRightMotor1().setInverted(false);
+    robotContainer.getDriveSubsystem().getRightMotor2().setInverted(false);
 
     robotContainer.getImu().reset();
     // robotContainer.getCameraSubsystem().startAutomaticCapture();
