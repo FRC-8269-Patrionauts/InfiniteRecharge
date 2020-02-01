@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutonomousCommand;
@@ -143,6 +144,10 @@ public class RobotContainer {
 
   public HumanDriveCommand getHumanDriveCommand() {
     return this.humanDriveCommand;
+  }
+
+  public TestTurningCommand getTestTurningCommand() {
+    return this.testTurningCommand;
   }
 
   public ColorWheelCommand getColorWheelCommand() {

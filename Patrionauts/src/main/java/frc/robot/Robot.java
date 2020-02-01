@@ -2,16 +2,15 @@ package frc.robot;
 
 import java.util.function.Supplier;
 
-import edu.wpi.first.networktables.NetworkTable;
+import com.revrobotics.CANError;
+
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
-import frc.robot.commands.SmartDashboardCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,14 +45,13 @@ public class Robot extends TimedRobot {
 
     // smartDashboardCommand.addCamera();
     // robotContainer.getAHRS().reset();
-  //  robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
     robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
     robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
 
     robotContainer.getDriveSubsystem().getLeftMotor1().setInverted(false);
     robotContainer.getDriveSubsystem().getLeftMotor2().setInverted(false);
-    robotContainer.getDriveSubsystem().getRightMotor1().setInverted(true);
-    robotContainer.getDriveSubsystem().getRightMotor2().setInverted(true);
+    robotContainer.getDriveSubsystem().getRightMotor1().setInverted(false);
+    robotContainer.getDriveSubsystem().getRightMotor2().setInverted(false);
 
     robotContainer.getImu().reset();
     // robotContainer.getCameraSubsystem().startAutomaticCapture();
@@ -136,41 +134,5 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    // if (Math.abs(robotContainer.getJoystick().getThrottle()) > 0.5){
-    // robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle()
-    // / 4);
-    // } else {
-    // robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
-    // }
-
-    if (Math.abs(robotContainer.getJoystick().getY()) > .1) {
-
-    // if (robotContainer.getJoystick().getThrottle() > 0.01){
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(robotContainer.getJoystick().getThrottle() / 4);
-    // } else {
-    //   robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
-    // }
-      // robotContainer.getDriveSubsystem().getLeftMotor1().set(robotContainer.getJoystick().getY()
-      // / 4);
-      robotContainer.getDriveSubsystem().getLeftMotor2().set(robotContainer.getJoystick().getY() / 4);
-      // robotContainer.getDriveSubsystem().getRightMotor1().set(robotContainer.getJoystick().getY()
-      // / 4);
-      robotContainer.getDriveSubsystem().getRightMotor2().set(robotContainer.getJoystick().getY() / 4);
-    } else {
-      // robotContainer.getDriveSubsystem().getLeftMotor1().set(0);
-      robotContainer.getDriveSubsystem().getLeftMotor2().set(0);
-      // robotContainer.getDriveSubsystem().getRightMotor1().set(0);
-      robotContainer.getDriveSubsystem().getRightMotor2().set(0);
-    }
-
-
-    // if (robotContainer.getJoystick().getRawButton(11)) {
-    // robotContainer.getDriveSubsystem().getCanSparkMax().set(.3);
-    // } else if (robotContainer.getJoystick().getRawButton(12)) {
-    // robotContainer.getDriveSubsystem().getCanSparkMax().set(-.3);
-    // ;
-    // } else {
-    // robotContainer.getDriveSubsystem().getCanSparkMax().set(0);
-    // }
   }
 }
