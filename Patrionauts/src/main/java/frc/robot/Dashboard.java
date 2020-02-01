@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class Dashboard extends CommandBase {
-
         private final RobotContainer robotContainer;
 
         /**
@@ -37,13 +36,14 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("Commands")
                                 .add("HumanDriveCommand", (Sendable) robotContainer.getHumanDriveCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
-                Shuffleboard.getTab("Commands").add("Dashboard", (Sendable) this).withWidget(BuiltInWidgets.kCommand)
-                                .withPosition(4, 0).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
                                 .add("TestTurningCommand", (Sendable) robotContainer.getTestTurningCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
                                 .add("ColorWheelCommand", (Sendable) robotContainer.getColorWheelCommand())
+                                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
+                Shuffleboard.getTab("Commands")
+                                .add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
 
         }

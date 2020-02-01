@@ -3,16 +3,37 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class DetectedTarget extends SubsystemBase {
-  double kpAim = -0.1;
+public class DetectedTarget {
+ /*  double kpAim = -0.1;
   double kpDistance = -0.1;
   double minAimCommand = 0.05;
   double headingError = -getXOffset();
   double distanceError = -getYOffset();
   double steeringAdjust = 0.0;
+  */
+  private final double xOffset;
+  private final double yOffset;
+  private final double area;
 
-  @Override
-  public void periodic() {
+public DetectedTarget(double xOffset, double yOffset, double area){
+  this.xOffset = xOffset;
+  this.yOffset = yOffset;
+  this.area = area;
+}
+
+public double getXOffset() {
+  return xOffset;
+}
+
+public double getYOffset() {
+  return yOffset;
+}
+
+public double getArea() {
+  return area;
+}
+ // @Override
+ /* public void periodic() {
 
     if (getXOffset() > 1.0) {
       steeringAdjust = kpAim * headingError - minAimCommand;
@@ -27,20 +48,6 @@ public class DetectedTarget extends SubsystemBase {
 
   }
 
-  public double getArea() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-  }
-
-  public double getXOffset() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-  }
-
-  public double getYOffset() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-  }
-
-  public boolean hasDetectedTarget() {
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
-  }
+  */
 
 }

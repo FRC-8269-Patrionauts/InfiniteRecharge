@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.AlignAtTargetCommand;
+=======
+>>>>>>> 6367a3fdf87738084840d64a286d0b737040b664
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
@@ -25,42 +29,40 @@ import frc.robot.subsystems.ShootSubsystem;
  * The container for the robot. Contains subsystems, IO devices, and commands.
  */
 public class RobotContainer {
-
   // Devices
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_1);
   private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
-  private final AHRS imu = new AHRS(SPI.Port.kMXP);
 
   // Gamepad Buttons
-  JoystickButton X = new JoystickButton(gamepad, Constants.GAMEPAD_X);
-  JoystickButton A = new JoystickButton(gamepad, Constants.GAMEPAD_A);
-  JoystickButton B = new JoystickButton(gamepad, Constants.GAMEPAD_B);
-  JoystickButton Y = new JoystickButton(gamepad, Constants.GAMEPAD_Y);
-  JoystickButton leftBumper = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_BUMPER);
-  JoystickButton rightBumper = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_BUMPER);
-  JoystickButton leftTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_TRIGGER);
-  JoystickButton rightTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_TRIGGER);
-  JoystickButton back = new JoystickButton(gamepad, Constants.GAMEPAD_BACK);
-  JoystickButton start = new JoystickButton(gamepad, Constants.GAMEPAD_START);
-  JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
-  JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
+  private final JoystickButton gamepadX = new JoystickButton(gamepad, Constants.GAMEPAD_X);
+  private final JoystickButton gamepadA = new JoystickButton(gamepad, Constants.GAMEPAD_A);
+  private final JoystickButton gamepadB = new JoystickButton(gamepad, Constants.GAMEPAD_B);
+  private final JoystickButton gamepadY = new JoystickButton(gamepad, Constants.GAMEPAD_Y);
+  private final JoystickButton gamepadLeftBumper = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_BUMPER);
+  private final JoystickButton gamepadRightBumper = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_BUMPER);
+  private final JoystickButton gamepadLeftTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_TRIGGER);
+  private final JoystickButton gamepadRightTrigger = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_TRIGGER);
+  private final JoystickButton gamepadBack = new JoystickButton(gamepad, Constants.GAMEPAD_BACK);
+  private final JoystickButton gamepadStart = new JoystickButton(gamepad, Constants.GAMEPAD_START);
+  private final JoystickButton gamepadLeftJoystickClick = new JoystickButton(gamepad,
+      Constants.GAMEPAD_LEFT_ANALOG_CLICK);
+  private final JoystickButton gamepadRightJoystickClick = new JoystickButton(gamepad,
+      Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
   // Joystick Buttons
-  JoystickButton button3Joystick = new JoystickButton(joystick, 3);
-  JoystickButton button4Joystick = new JoystickButton(joystick, 4);
-  JoystickButton button5Joystick = new JoystickButton(joystick, 5);
-  JoystickButton button6Joystick = new JoystickButton(joystick, 6);
-  JoystickButton button7Joystick = new JoystickButton(joystick, 7);
-  JoystickButton button8Joystick = new JoystickButton(joystick, 8);
-  JoystickButton button9Joystick = new JoystickButton(joystick, 9);
-  JoystickButton button10Joystick = new JoystickButton(joystick, 10);
-  JoystickButton button11Joystick = new JoystickButton(joystick, 11);
-  JoystickButton button12Joystick = new JoystickButton(joystick, 12);
+  private final JoystickButton joystickButton3 = new JoystickButton(joystick, 3);
+  private final JoystickButton joystickButton4 = new JoystickButton(joystick, 4);
+  private final JoystickButton joystickButton5 = new JoystickButton(joystick, 5);
+  private final JoystickButton joystickButton6 = new JoystickButton(joystick, 6);
+  private final JoystickButton joystickButton7 = new JoystickButton(joystick, 7);
+  private final JoystickButton joystickButton8 = new JoystickButton(joystick, 8);
+  private final JoystickButton joystickButton9 = new JoystickButton(joystick, 9);
+  private final JoystickButton joystickButton10 = new JoystickButton(joystick, 10);
+  private final JoystickButton joystickButton11 = new JoystickButton(joystick, 11);
+  private final JoystickButton joystickButton12 = new JoystickButton(joystick, 12);
 
   // Sensors
-  // Initializing an encoder on DIO pins 4 and 5
-  Encoder flywheel1 = new Encoder(4, 5);
-  Encoder flywheel2 = new Encoder(6, 7);
+  private final AHRS imu = new AHRS(SPI.Port.kMXP);
 
   // Subsystems
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
@@ -76,7 +78,7 @@ public class RobotContainer {
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
-
+  private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
   public RobotContainer() {
     configureButtonBindings();
     new Dashboard(this);
@@ -89,12 +91,12 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    B.whenPressed(shootCommand);// shoot after auto alignment is done and fly wheel is ramped up
-    A.whenPressed(autonomousCommand);// auto align and auto ramp up
-    X.whenPressed(autonomousCommand);
-    Y.whenPressed(humanDriveCommand);
-    A.whenPressed(colorWheelCommand);
-    button11Joystick.whenPressed(testTurningCommand);
+    gamepadB.whenPressed(shootCommand);// shoot after auto alignment is done and fly wheel is ramped up
+    gamepadA.whenPressed(autonomousCommand);// auto align and auto ramp up
+    gamepadX.whenPressed(autonomousCommand);
+    gamepadY.whenPressed(humanDriveCommand);
+    gamepadA.whenPressed(colorWheelCommand);
+    joystickButton11.whenPressed(testTurningCommand);
   }
 
   /**
@@ -118,10 +120,6 @@ public class RobotContainer {
 
   public XboxController getGamepad() {
     return this.gamepad;
-  }
-
-  public JoystickButton getButton() {
-    return this.leftJoystickClick;
   }
 
   public CameraSubsystem getCameraSubsystem() {
@@ -154,6 +152,9 @@ public class RobotContainer {
 
   public DetectedTarget getDetectedTarget() {
     return this.detectedTarget;
+  }
+  public AlignAtTargetCommand getAlignAtTargetCommand(){
+    return this.alignAtTargetCommand;
   }
 
 }

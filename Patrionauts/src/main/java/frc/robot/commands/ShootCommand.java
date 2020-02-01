@@ -5,10 +5,6 @@ import frc.robot.subsystems.ShootSubsystem;
 
 /**
  * A command to shoot a power cell.
- * 
- * TODO(jacob): This shoot command should be able to be initiated from both the
- * {@link AutonomousCommand} and a button from the joystick/Gamepad.
- * 
  */
 public class ShootCommand extends CommandBase {
 

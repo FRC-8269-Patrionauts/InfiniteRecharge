@@ -17,17 +17,11 @@ public class TestTurningCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        drive.turn(180);
+        drive.turn(90);
     }
 
     @Override
     public void execute() {
         SmartDashboard.putBoolean("Test Turning", true);
     }
-
-    public boolean isFinished() {
-        SmartDashboard.putBoolean("Test Turning", false);
-        return finished;
-    }
-
 }

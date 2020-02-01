@@ -27,5 +27,15 @@ public class CameraSubsystem extends SubsystemBase {
   public void disablePowerPortPipeline() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
   }
+  
+  public boolean hasDetectedTarget() {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
+  }
+  public DetectedTarget getDetectedTarget(){
+    double area = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+    double xOffset =  NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    double yOffset =  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    return new DetectedTarget(xOffset, yOffset, area);
+  }
 
 }
