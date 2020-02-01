@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class SmartDashboardCommand extends CommandBase {
+public class Dashboard extends CommandBase {
 
         private final RobotContainer robotContainer;
 
@@ -21,7 +21,7 @@ public class SmartDashboardCommand extends CommandBase {
          * Find the more detailed documentation of widgets here:
          * https://github.com/wpilibsuite/allwpilib/blob/master/wpilibj/src/main/java/edu/wpi/first/wpilibj/shuffleboard/BuiltInWidgets.java
          */
-        public SmartDashboardCommand(RobotContainer robotContainer) {
+        public Dashboard(RobotContainer robotContainer) {
                 this.robotContainer = robotContainer;
                 configureCommands();
                 configureDriveSubsystem();
@@ -37,8 +37,8 @@ public class SmartDashboardCommand extends CommandBase {
                 Shuffleboard.getTab("Commands")
                                 .add("HumanDriveCommand", (Sendable) robotContainer.getHumanDriveCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
-                Shuffleboard.getTab("Commands").add("SmartDashboardCommand", (Sendable) this)
-                                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);
+                Shuffleboard.getTab("Commands").add("Dashboard", (Sendable) this).withWidget(BuiltInWidgets.kCommand)
+                                .withPosition(4, 0).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
                                 .add("TestTurningCommand", (Sendable) robotContainer.getTestTurningCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
