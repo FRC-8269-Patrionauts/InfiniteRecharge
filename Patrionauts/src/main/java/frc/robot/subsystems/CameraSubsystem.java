@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class CameraSubsystem extends SubsystemBase {
 
   public CameraSubsystem() {
-   
+
   }
 
   @Override
@@ -15,21 +15,17 @@ public class CameraSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void startAutomaticCapture(){
-      CameraServer.getInstance().startAutomaticCapture();
+  public void startAutomaticCapture() {
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
-  public void enablePowerPortPipeline(){
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); 
+  public void enablePowerPortPipeline() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
 
   }
 
-  public void disablePowerPortPipeline(){
+  public void disablePowerPortPipeline() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-  }
-
-  public boolean hasDetectedTarget(){
-    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1;
   }
 
 }
