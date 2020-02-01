@@ -60,7 +60,7 @@ public class DriveSubsystem extends SubsystemBase {
     if (isTurning) {
       calculatedPIDValue = turnPID.calculate(imu.getYaw());
       calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
-      drive.arcadeDrive(calculatedPIDValue, 0);
+      drive.arcadeDrive(0, calculatedPIDValue);
 
       // if (turnPID.atSetpoint()) {
       // isTurning = false;
@@ -80,7 +80,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    // arcadeDrive(0, 0);
+    arcadeDrive(0, 0);
   }
 
   public double getCalculatedPIDValue() {
