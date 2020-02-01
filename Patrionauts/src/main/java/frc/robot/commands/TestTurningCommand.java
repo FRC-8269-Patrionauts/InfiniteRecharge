@@ -24,10 +24,4 @@ public class TestTurningCommand extends CommandBase {
     public void execute() {
         SmartDashboard.putBoolean("Test Turning", true);
     }
-
-    public boolean isFinished() {
-        SmartDashboard.putBoolean("Test Turning", false);
-        return finished;
-    }
-
 }

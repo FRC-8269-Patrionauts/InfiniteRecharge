@@ -76,6 +76,7 @@ public class DriveSubsystem extends SubsystemBase {
     turnPID.enableContinuousInput(-180, 180);
     turnPID.setTolerance(.01);
     turnPID.setSetpoint(imu.getYaw() + degrees);
+    turnPID.setTolerance(2);
   }
 
   public void arcadeDrive(double forward, double turn) {
