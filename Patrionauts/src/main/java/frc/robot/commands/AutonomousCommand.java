@@ -30,24 +30,13 @@ public class AutonomousCommand extends CommandBase {
     public void initialize() {
         timer.reset();
         timer.start();
+        // drive.arcadeDrive(0.5, 0);
     }
 
     @Override
     public void execute() {
-        /*
-        double currentTime = getCurrentTime();
-        if (currentTime < 2) {
-            phaseOne();
-        } else if (currentTime < 4) {
-            phaseTwo();
-        } else if (currentTime < 5) {
-            phaseThree();
-        } else {
-            phaseFour();
-        }
-        */
-
-        drive.getTestMotor().set(.2);
+        // drive.arcadeDrive(0.5, 0);
+        // drive.getMotor1().set(0.5);
     }
 
     public void phaseOne() {
