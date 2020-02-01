@@ -16,7 +16,7 @@ public class Dashboard extends CommandBase {
         /**
          * Find the list of widgets here:
          * https://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/shuffleboard/BuiltInWidgets.html.
-         * 
+         *
          * Find the more detailed documentation of widgets here:
          * https://github.com/wpilibsuite/allwpilib/blob/master/wpilibj/src/main/java/edu/wpi/first/wpilibj/shuffleboard/BuiltInWidgets.java
          */
@@ -37,10 +37,12 @@ public class Dashboard extends CommandBase {
                                 .add("HumanDriveCommand", (Sendable) robotContainer.getHumanDriveCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
+                                .add("ColorWheelCommand", (Sendable) robotContainer.getColorWheelCommand())
+                                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);
+                Shuffleboard.getTab("Commands")
                                 .add("TestTurningCommand", (Sendable) robotContainer.getTestTurningCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
-                Shuffleboard.getTab("Commands")
-                                .add("ColorWheelCommand", (Sendable) robotContainer.getColorWheelCommand())
+                Shuffleboard.getTab("Commands").add("TestShootCommand", (Sendable) robotContainer.getTestShootCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
                                 .add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())

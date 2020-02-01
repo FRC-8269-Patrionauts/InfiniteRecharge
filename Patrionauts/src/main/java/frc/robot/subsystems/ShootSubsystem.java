@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 /**
  * A subsystem that controls shooting a powercell.
- * 
+ *
  * TODO(ryssa): Start planning out this subsystem, and the encoders/motors that
  * we'll need for this. You should implement this system.
  */
@@ -31,17 +31,15 @@ public class ShootSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-
 
   }
 
-  public void setFlyWheel (double speed){
+  public void setFlyWheel(double speed) {
     flyWheelMotor1.set(speed);
     flyWheelMotor2.set(-speed);
   }
 
-  public void stopFlyWheel (){
+  public void stopFlyWheel() {
     flyWheelMotor1.set(0);
     flyWheelMotor2.set(0);
   }

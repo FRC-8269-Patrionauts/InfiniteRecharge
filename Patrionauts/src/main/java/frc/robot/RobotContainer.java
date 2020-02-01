@@ -79,6 +79,7 @@ public class RobotContainer {
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
   private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
+  
   public RobotContainer() {
     configureButtonBindings();
     new Dashboard(this);

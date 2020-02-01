@@ -53,6 +53,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DriveSubsystem(AHRS imu) {
     this.imu = imu;
+    turnPID.reset();
+    turnPID.enableContinuousInput(-180, 180);
   }
 
   @Override
@@ -60,12 +62,12 @@ public class DriveSubsystem extends SubsystemBase {
     if (isTurning) {
       calculatedPIDValue = turnPID.calculate(imu.getYaw());
       calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
-      
+
       drive.arcadeDrive(0, calculatedPIDValue);
 
-       if (turnPID.atSetpoint()) {
-       isTurning = false;
-       }
+      if (turnPID.atSetpoint()) {
+        isTurning = false;
+      }
     }
   }
 
@@ -75,8 +77,10 @@ public class DriveSubsystem extends SubsystemBase {
     turnPID.reset();
     turnPID.enableContinuousInput(-180, 180);
     turnPID.setTolerance(.01);
-    turnPID.setSetpoint(imu.getYaw() + degrees);
-    turnPID.setTolerance(2);
+  }
+
+  public void turnToExactAngle(double angle) {
+
   }
 
   public void arcadeDrive(double forward, double turn) {

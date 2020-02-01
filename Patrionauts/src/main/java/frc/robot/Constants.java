@@ -26,10 +26,8 @@ public final class Constants {
 	public static final double SPEED_STEP_UP = 0.03;
 	public static final double MAX_SPEED = 1;
 
-	
-	public static final int FLYWHEEL_MOTOR1 = 4;
-	public static final int FLYWHEEL_MOTOR2 = 6;
-
+	public static final int FLYWHEEL_MOTOR1 = 3;
+	public static final int FLYWHEEL_MOTOR2 = 2;
 
 	public static final int GAMEPAD_X = 0;
 	public static final int GAMEPAD_A = 1;
@@ -43,8 +41,7 @@ public final class Constants {
 	public static final int GAMEPAD_START = 9;
 	public static final int GAMEPAD_LEFT_ANALOG_CLICK = 10;
 	public static final int GAMEPAD_RIGHT_ANALOG_CLICK = 11;
-	
-	
+
 	public static final int JOYSTICK_3 = 3;
 	public static final int JOYSTICK_4 = 4;
 	public static final int JOYSTICK_5 = 5;
@@ -56,12 +53,12 @@ public final class Constants {
 	public static final int JOYSTICK_11 = 11;
 	public static final int JOYSTICK_12 = 12;
 	/*
-	public static final double ksVolts = 0.0;
-	public static final double ksVoltsSecondsPerMeter = 0.0;
-	public static final double kaVoltSecondsSquaredPerMeter = 0.0;
-
-	public static final double kPDriveVel = 0.0;
-	*/
-	public static final int  NEO_MOTOR_TEST = 1;
+	 * public static final double ksVolts = 0.0; public static final double
+	 * ksVoltsSecondsPerMeter = 0.0; public static final double
+	 * kaVoltSecondsSquaredPerMeter = 0.0;
+	 * 
+	 * public static final double kPDriveVel = 0.0;
+	 */
+	public static final int NEO_MOTOR_TEST = 1;
 
 }
