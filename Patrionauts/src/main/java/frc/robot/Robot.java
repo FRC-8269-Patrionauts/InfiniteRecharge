@@ -44,8 +44,8 @@ public class Robot extends TimedRobot {
     // warning.
     LiveWindow.disableAllTelemetry();
 
-    smartDashboardCommand.addCamera();
-    robotContainer.getAHRS().reset();
+    // smartDashboardCommand.addCamera();
+    // robotContainer.getAHRS().reset();
   //  robotContainer.getDriveSubsystem().getCanSparkMax().restoreFactoryDefaults();
     robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
     robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());

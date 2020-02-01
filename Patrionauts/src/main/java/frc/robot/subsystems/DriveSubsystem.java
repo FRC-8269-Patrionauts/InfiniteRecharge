@@ -137,6 +137,7 @@ public class DriveSubsystem extends SubsystemBase {
       currentSpeedz = maxSpeed;
     } else if (currentSpeedz < -maxSpeed) {
       currentSpeedz = -maxSpeed;
+      currentSpeedz = -maxSpeed;
     }
 
     if (Math.abs(currentSpeedx) > 0.05 || Math.abs(currentSpeedz) > 0.05) {
@@ -204,7 +205,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    // arcadeDrive(0, 0);
+    arcadeDrive(0, 0);
   }
 
   public void strafe(double x) { // please for the love of all that is holy strafe with the grace of our

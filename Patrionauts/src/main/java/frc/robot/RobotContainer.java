@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.commands.SmartDashboardCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
@@ -43,6 +45,7 @@ public class RobotContainer {
   JoystickButton start = new JoystickButton(gamepad, Constants.GAMEPAD_START);
   JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
+  
 
   // Joystick Buttons
   JoystickButton button3Joystick = new JoystickButton(joystick, 3);
@@ -75,6 +78,7 @@ public class RobotContainer {
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
   private final SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(this);
+  private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -87,6 +91,8 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    B.whenPressed(shootCommand);//shoot after auto alignment is done and fly wheel is ramped up
+    A.whenPressed(autonomousCommand);//auto align and auto ramp up
     X.whenPressed(autonomousCommand);
     Y.whenPressed(humanDriveCommand);
     A.whenPressed(colorWheelCommand);
@@ -100,6 +106,9 @@ public class RobotContainer {
     return this.autonomousCommand;
   }
 
+  public ShootCommand getShootCommand() {
+    return this.shootCommand;
+  }
   public AHRS getImu() {
     return this.imu;
   }
