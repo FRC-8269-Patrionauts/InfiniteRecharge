@@ -2,16 +2,15 @@ package frc.robot;
 
 import java.util.function.Supplier;
 
-import edu.wpi.first.networktables.NetworkTable;
+import com.revrobotics.CANError;
+
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
-import frc.robot.commands.SmartDashboardCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the

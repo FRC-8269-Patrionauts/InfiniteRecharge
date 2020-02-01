@@ -1,18 +1,17 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
 
 /**
@@ -26,8 +25,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
 
-  private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
   private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
+  private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
   private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
   private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
 
@@ -36,16 +35,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   public final AHRS imu;
 
-  public final double turnKp = .05;
-  public final double turnKi = .001;
+  public final double turnKp = .003;
+  public final double turnKi = .002;
   public final double turnKd = 0;
   public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
-  boolean isTurning = true;
-  double integral, previous_error, setpoint = 0;
-  double goalPIDYaw = 0;
+  boolean isTurning = false;
+  double calculatedPIDValue = 0;
 
   // static final double COUNTS_PER_MOTOR_REV = 0;
   // static final double WHEEL_DIAMETER_INCHES = 6.0;
@@ -60,18 +58,20 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if (isTurning) {
-      double turnPidValue = turnPID.calculate(imu.getYaw(), goalPIDYaw);
-      drive.arcadeDrive(0, turnPidValue);
+      calculatedPIDValue = turnPID.calculate(imu.getYaw());
+      calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
+      drive.arcadeDrive(calculatedPIDValue, 0);
 
-      if (turnPID.atSetpoint()) {
-        isTurning = false;
-      }
+      // if (turnPID.atSetpoint()) {
+      // isTurning = false;
+      // }
     }
   }
 
   public void turn(double degrees) {
     isTurning = true;
     turnPID.reset();
+    turnPID.enableContinuousInput(-180, 180);
     turnPID.setSetpoint(imu.getYaw() + degrees);
   }
 
@@ -80,7 +80,11 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    arcadeDrive(0, 0);
+    // arcadeDrive(0, 0);
+  }
+
+  public double getCalculatedPIDValue() {
+    return calculatedPIDValue;
   }
 
   public CANSparkMax getLeftMotor1() {
@@ -141,10 +145,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DifferentialDrive getDifferentialDrive() {
     return drive;
-  }
-
-  public void setSetpoint(int setpoint) {
-    this.setpoint = setpoint;
   }
 
   public PIDController getTurnPIDController() {

@@ -137,6 +137,10 @@ public class RobotContainer {
     return this.humanDriveCommand;
   }
 
+  public TestTurningCommand getTestTurningCommand() {
+    return this.testTurningCommand;
+  }
+
   public ColorWheelCommand getColorWheelCommand() {
     return this.colorWheelCommand;
   }

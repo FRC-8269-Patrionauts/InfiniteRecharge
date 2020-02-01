@@ -17,7 +17,7 @@ public class TestTurningCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        drive.turn(45);
+        drive.turn(180);
     }
 
     @Override
