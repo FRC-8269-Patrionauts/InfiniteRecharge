@@ -8,14 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.SmartDashboardCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -46,7 +44,6 @@ public class RobotContainer {
   JoystickButton start = new JoystickButton(gamepad, Constants.GAMEPAD_START);
   JoystickButton leftJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_LEFT_ANALOG_CLICK);
   JoystickButton rightJoystickClick = new JoystickButton(gamepad, Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
-  
 
   // Joystick Buttons
   JoystickButton button3Joystick = new JoystickButton(joystick, 3);
@@ -78,11 +75,11 @@ public class RobotContainer {
       shootSubsystem);
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
-  private final SmartDashboardCommand smartDashboardCommand = new SmartDashboardCommand(this);
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
+    new Dashboard(this);
   }
 
   /**
@@ -92,8 +89,8 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    B.whenPressed(shootCommand);//shoot after auto alignment is done and fly wheel is ramped up
-    A.whenPressed(autonomousCommand);//auto align and auto ramp up
+    B.whenPressed(shootCommand);// shoot after auto alignment is done and fly wheel is ramped up
+    A.whenPressed(autonomousCommand);// auto align and auto ramp up
     X.whenPressed(autonomousCommand);
     Y.whenPressed(humanDriveCommand);
     A.whenPressed(colorWheelCommand);
@@ -110,6 +107,7 @@ public class RobotContainer {
   public ShootCommand getShootCommand() {
     return this.shootCommand;
   }
+
   public AHRS getImu() {
     return this.imu;
   }
@@ -152,10 +150,6 @@ public class RobotContainer {
 
   public ColorWheelCommand getColorWheelCommand() {
     return this.colorWheelCommand;
-  }
-
-  public SmartDashboardCommand getSmartDashboardCommand() {
-    return this.smartDashboardCommand;
   }
 
   public DetectedTarget getDetectedTarget() {
