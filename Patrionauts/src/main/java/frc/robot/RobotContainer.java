@@ -9,15 +9,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AlignAtTargetCommand;
-=======
->>>>>>> 6367a3fdf87738084840d64a286d0b737040b664
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -69,7 +67,7 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
-  private final DetectedTarget detectedTarget = new DetectedTarget();
+  private final DetectedTarget detectedTarget = new DetectedTarget(0, 0, 0);
 
   // Commands
   private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -78,8 +76,9 @@ public class RobotContainer {
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
   private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
+  private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
   private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
-  
+
   public RobotContainer() {
     configureButtonBindings();
     new Dashboard(this);
@@ -133,6 +132,9 @@ public class RobotContainer {
 
   public ShootSubsystem getShootSubsystem() {
     return this.shootSubsystem;
+  }
+  public TestShootCommand getTestShootCommand(){
+    return this.testShootCommand;
   }
 
   public ColorWheelSubsystem getColorWheelSubsystem() {
