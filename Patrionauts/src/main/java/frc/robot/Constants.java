@@ -26,8 +26,11 @@ public final class Constants {
 	public static final double SPEED_STEP_UP = 0.03;
 	public static final double MAX_SPEED = 1;
 
-	public static final int FLYWHEEL_MOTOR1 = 3;
-	public static final int FLYWHEEL_MOTOR2 = 2;
+	public static final int FLYWHEEL_MOTOR1 = 6;
+	public static final int FLYWHEEL_MOTOR2 = 7;
+
+	public static final int INTAKE_MOTOR1 = 0;
+	public static final int INTAKE_MOTOR2 = 0;
 
 	public static final int GAMEPAD_X = 0;
 	public static final int GAMEPAD_A = 1;

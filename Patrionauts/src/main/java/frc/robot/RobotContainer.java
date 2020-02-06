@@ -9,11 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AlignAtTargetCommand;
-=======
->>>>>>> 6367a3fdf87738084840d64a286d0b737040b664
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
