@@ -71,6 +71,19 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
+  public void arcadeDrive(double forward, double turn) {
+    drive.arcadeDrive(forward, turn);
+  }
+
+  public DifferentialDrive getDifferentialDrive() {
+    return drive;
+  }
+  
+  public void stop() {
+    arcadeDrive(0, 0);
+  }
+
+  //PID
   public void turn(double degrees) {
     isTurning = true;
     imu.reset();
@@ -78,23 +91,20 @@ public class DriveSubsystem extends SubsystemBase {
     turnPID.enableContinuousInput(-180, 180);
     turnPID.setTolerance(.01);
   }
-
+ 
   public void turnToExactAngle(double angle) {
 
-  }
-
-  public void arcadeDrive(double forward, double turn) {
-    drive.arcadeDrive(forward, turn);
-  }
-
-  public void stop() {
-    arcadeDrive(0, 0);
   }
 
   public double getCalculatedPIDValue() {
     return calculatedPIDValue;
   }
-
+  
+  public PIDController getTurnPIDController() {
+    return turnPID;
+  }
+  
+  //Motors
   public CANSparkMax getLeftMotor1() {
     return leftMotor1;
   }
@@ -151,11 +161,7 @@ public class DriveSubsystem extends SubsystemBase {
     return rightMotor2Encoder;
   }
 
-  public DifferentialDrive getDifferentialDrive() {
-    return drive;
-  }
+  
 
-  public PIDController getTurnPIDController() {
-    return turnPID;
-  }
+  
 }
