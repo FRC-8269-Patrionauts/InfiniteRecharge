@@ -28,14 +28,12 @@ public class HumanDriveCommand extends CommandBase {
   public void execute() {
     if (joystick != null) {
 
-      if (Math.abs(joystick.getY()) > .3 || Math.abs(joystick.getTwist()) > .3) {
-        if (Math.abs(joystick.getTwist()) > .3) {
-          driveSubsystem.arcadeDrive(-joystick.getY(), -joystick.getTwist());
-        } else {
-          driveSubsystem.arcadeDrive(-joystick.getY(), 0);
-        }
+      if (joystick.getRawButton(2)) {
+        driveSubsystem.getLeftMotor1().set(.5);
+        driveSubsystem.getLeftMotor2().set(.5);
       } else {
-        driveSubsystem.stop();
+        driveSubsystem.getLeftMotor1().set(0);
+        driveSubsystem.getLeftMotor2().set(0);
       }
     }
 
