@@ -15,6 +15,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestEncoderAutoCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
@@ -78,6 +79,7 @@ public class RobotContainer {
   private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
   private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
   private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
+  private final TestEncoderAutoCommand testEncoderAutoCommand = new TestEncoderAutoCommand(driveSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -108,6 +110,10 @@ public class RobotContainer {
 
   public ShootCommand getShootCommand() {
     return this.shootCommand;
+  }
+
+  public TestEncoderAutoCommand getTestEncoderAutoCommand() {
+    return this.testEncoderAutoCommand;
   }
 
   public AHRS getImu() {
