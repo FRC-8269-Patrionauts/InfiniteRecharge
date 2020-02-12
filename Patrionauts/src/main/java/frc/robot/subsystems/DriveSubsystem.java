@@ -30,8 +30,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
   private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
 
-  private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
-  private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
+  //private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
+  //private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
   public final AHRS imu;
 
@@ -40,7 +40,7 @@ public class DriveSubsystem extends SubsystemBase {
   public final double turnKd = .008;
   public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
-  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+  //private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
   boolean isTurning = false;
   double calculatedPIDValue = 0;
@@ -63,7 +63,7 @@ public class DriveSubsystem extends SubsystemBase {
       calculatedPIDValue = turnPID.calculate(imu.getYaw());
       calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
 
-      drive.arcadeDrive(0, calculatedPIDValue);
+      //drive.arcadeDrive(0, calculatedPIDValue);
 
       if (turnPID.atSetpoint()) {
         isTurning = false;
@@ -72,15 +72,15 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double forward, double turn) {
-    drive.arcadeDrive(forward, turn);
+    //drive.arcadeDrive(forward, turn);
   }
 
-  public DifferentialDrive getDifferentialDrive() {
-    return drive;
-  }
+  //public DifferentialDrive getDifferentialDrive() {
+    //return drive;
+  //}
   
   public void stop() {
-    arcadeDrive(0, 0);
+    //arcadeDrive(0, 0);
   }
 
   //PID

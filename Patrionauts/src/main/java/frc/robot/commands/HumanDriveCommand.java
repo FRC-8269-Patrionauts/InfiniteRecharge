@@ -26,11 +26,16 @@ public class HumanDriveCommand extends CommandBase {
 
   @Override
   public void execute() {
+    while (true) {
+      driveSubsystem.getLeftMotor2().set(.2);
+      driveSubsystem.getLeftMotor1().set(-driveSubsystem.getLeftMotor2().get());
+    }
+    /*
     if (joystick != null) {
 
       if (joystick.getRawButton(2)) {
         driveSubsystem.getLeftMotor1().set(.5);
-        driveSubsystem.getLeftMotor2().set(.5);
+        driveSubsystem.getLeftMotor2().set(-.5);
       } else {
         driveSubsystem.getLeftMotor1().set(0);
         driveSubsystem.getLeftMotor2().set(0);
@@ -44,5 +49,6 @@ public class HumanDriveCommand extends CommandBase {
         driveSubsystem.stop();
       }
     }
+    */
   }
 }

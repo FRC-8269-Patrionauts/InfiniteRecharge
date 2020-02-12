@@ -45,13 +45,13 @@ public class Robot extends TimedRobot {
 
     // smartDashboardCommand.addCamera();
     // robotContainer.getAHRS().reset();
-    robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
-    robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
+    //robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
+    //robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
 
-    robotContainer.getDriveSubsystem().getLeftMotor1().setInverted(false);
-    robotContainer.getDriveSubsystem().getLeftMotor2().setInverted(false);
-    robotContainer.getDriveSubsystem().getRightMotor1().setInverted(false);
-    robotContainer.getDriveSubsystem().getRightMotor2().setInverted(false);
+    //robotContainer.getDriveSubsystem().getLeftMotor1().setInverted(false);
+    //robotContainer.getDriveSubsystem().getLeftMotor2().setInverted(false);
+    //robotContainer.getDriveSubsystem().getRightMotor1().setInverted(false);
+    //robotContainer.getDriveSubsystem().getRightMotor2().setInverted(false);
 
     robotContainer.getImu().reset();
     // robotContainer.getCameraSubsystem().startAutomaticCapture();
