@@ -19,6 +19,8 @@ public class TestShootCommand extends CommandBase {
 
     @Override
     public void execute() {
-        shoot.setFlyWheel(0.5);
+        while (true) {
+            shoot.setFlyWheel(0.3);
+        }
     }
 }

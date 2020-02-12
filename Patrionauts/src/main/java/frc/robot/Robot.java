@@ -45,8 +45,8 @@ public class Robot extends TimedRobot {
 
     // smartDashboardCommand.addCamera();
     // robotContainer.getAHRS().reset();
-    //robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2());
-    //robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
+    robotContainer.getDriveSubsystem().getLeftMotor1().follow(robotContainer.getDriveSubsystem().getLeftMotor2(), true);
+    robotContainer.getDriveSubsystem().getRightMotor1().follow(robotContainer.getDriveSubsystem().getRightMotor2());
 
     //robotContainer.getDriveSubsystem().getLeftMotor1().setInverted(false);
     //robotContainer.getDriveSubsystem().getLeftMotor2().setInverted(false);
@@ -135,5 +135,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    //robotContainer.getDriveSubsystem().getLeftMotor2().set(-.5);
+    robotContainer.getShootSubsystem().setFlyWheel(.5);
+    
   }
 }

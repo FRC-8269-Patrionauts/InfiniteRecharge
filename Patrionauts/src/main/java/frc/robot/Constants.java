@@ -27,7 +27,7 @@ public final class Constants {
 	public static final double MAX_SPEED = 1;
 
 	public static final int FLYWHEEL_MOTOR1 = 6;
-	public static final int FLYWHEEL_MOTOR2 = 7;
+	public static final int FLYWHEEL_MOTOR2 = 8;
 
 	public static final int INTAKE_MOTOR1 = 0;
 	public static final int INTAKE_MOTOR2 = 0;
