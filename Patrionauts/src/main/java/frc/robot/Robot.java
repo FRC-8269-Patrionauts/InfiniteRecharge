@@ -136,7 +136,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //robotContainer.getDriveSubsystem().getLeftMotor2().set(-.5);
-    robotContainer.getShootSubsystem().setFlyWheel(.5);
+    //robotContainer.getShootSubsystem().setFlyWheel(.5);
+    robotContainer.getDriveSubsystem().getLeftMotor2().set(.15);
+    robotContainer.getDriveSubsystem().getRightMotor2().set(.15);
     
   }
 }

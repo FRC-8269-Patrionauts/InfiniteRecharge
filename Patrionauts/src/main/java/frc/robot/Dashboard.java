@@ -51,10 +51,10 @@ public class Dashboard extends CommandBase {
         }
 
         private void configureDriveSubsystem() {
-                // Shuffleboard.getTab("DriveSubsystem")
-                //                 .add("DifferentialDrive",
-                //                                 (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
-                //                 .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
+                Shuffleboard.getTab("DriveSubsystem")
+                                .add("DifferentialDrive",
+                                                 (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
+                                 .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
                 Shuffleboard.getTab("DriveSubsystem")
                                 .add("Left Motor 1", robotContainer.getDriveSubsystem().getLeftMotor1Speed())
                                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 0).withSize(2, 1);
