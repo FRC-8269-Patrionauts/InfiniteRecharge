@@ -33,10 +33,13 @@ public class HumanDriveCommand extends CommandBase {
     
     if (joystick != null) {
 
-      if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
-        driveSubsystem.arcadeDrive(joystick.getY(), gamepad.getRawAxis(2));
-      } else {
-        driveSubsystem.stop();
+      // if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
+      //   driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
+      // } else {
+      //   driveSubsystem.stop();
+      // }
+      if (Math.abs(joystick.getY()) > .1) {
+        driveSubsystem.getLeftMotor2().set(joystick.getY());
       }
     }
 
