@@ -10,11 +10,11 @@ import frc.robot.subsystems.DriveSubsystem;
 public class TestEncoderAutoCommand extends CommandBase {
 
     private final DriveSubsystem drive;
-    public static final double WHEEL_DIAMETER = 4;
-	public static final double PULSE_PER_REVOLUTION = 360;
-	public static final double ENCODER_GEAR_RATIO = 0;
-	public static final double GEAR_RATIO = 8.45 / 1;
-	public static final double FUDGE_FACTOR = 1.0;
+    public static final double wheelDiameter = 6;
+    public static final double pulsePerRevolution = 360;
+    public static final double encoderGearRatio = 3;
+    public static final double gearRatio = 64.0/20.0;
+    public static final double Fudgefactor = 1.0;
   
     private final Timer timer = new Timer();
 
