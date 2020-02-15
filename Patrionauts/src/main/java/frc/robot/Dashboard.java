@@ -27,6 +27,7 @@ public class Dashboard extends CommandBase {
                 configureJoystick();
                 configureGamepad();
                 configureLimeLight();
+                configurePneumatics();
         }
 
         private void configureCommands() {
@@ -167,5 +168,10 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("LimeLight")
                                 .addNumber("Y Offset", () -> robotContainer.getDetectedTarget().getYOffset())
                                 .withPosition(2, 0);
+        }
+
+        public void configurePneumatics() {
+                Shuffleboard.getTab("Pneumatics").addBoolean("Value", () -> robotContainer.getPneumaticSubsystem().getSolenoid().get())
+                                .withPosition(0, 0);
         }
 }
