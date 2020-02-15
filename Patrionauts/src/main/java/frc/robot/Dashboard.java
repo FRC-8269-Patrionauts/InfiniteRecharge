@@ -179,4 +179,11 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("Pneumatics").addBoolean("Value", () -> robotContainer.getPneumaticSubsystem().getSolenoid().get())
                                 .withPosition(0, 0);
         }
+        public void configureShootSubsystem() {
+                Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder", 
+                         () -> robotContainer.getShootSubsystem().flyCanEncoder1RPM);
+                Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder", 
+                         () -> robotContainer.getShootSubsystem().flyCanEncoder2RPM);
+
+
 }
