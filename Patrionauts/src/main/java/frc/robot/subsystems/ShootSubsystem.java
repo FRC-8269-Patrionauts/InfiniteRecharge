@@ -25,6 +25,12 @@ public class ShootSubsystem extends SubsystemBase {
   private final SpeedControllerGroup flyWheel1 = new SpeedControllerGroup(flyWheelMotor1);
   private final SpeedControllerGroup flyWheel2 = new SpeedControllerGroup(flyWheelMotor2);
 
+  public final flyCanEncoder1.setPIDSourceType(PIDSourceType.kRate);
+
+  public final pidShooter = new PIDController(0, 0, 0, flyCanEncoder2);
+
+  double RPM = 5000.0;
+
   public ShootSubsystem() {
 
   }
@@ -32,6 +38,22 @@ public class ShootSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
+  }
+
+  public CANSparkMax getflyWheelMotor1() {
+    return flyWheelMotor1;
+  }
+
+  public CANSparkMax getflyWheelMotor2() {
+    return flyWheelMotor2;
+  }
+
+  public CANEncoder getFlyCanEncoder1() {
+    return flyCanEncoder1;
+  }
+
+  public CANEncoder getFlyCanEncoder2() {
+    return flyCanEncoder2;
   }
 
   public void setFlyWheel(double speed) {
@@ -43,5 +65,16 @@ public class ShootSubsystem extends SubsystemBase {
     flyWheelMotor1.set(0);
     flyWheelMotor2.set(0);
   }
+
+  public void setRPM() {
+    //int currentCount = flyCanEncoder1.get();
+    //double rate = flyCanEncoder1.getRate();
+
+    /*flyCanEncoder1.reset();
+    flyCanEncoder1.setMinRate(10); 
+    */
+  }
+
+  
 
 }
