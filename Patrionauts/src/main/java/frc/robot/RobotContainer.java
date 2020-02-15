@@ -22,6 +22,7 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DetectedTarget;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 /**
@@ -68,6 +69,7 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
+  private final PneumaticSubsystem pneumaticSubsytsem = new PneumaticSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget(0, 0, 0);
 
   // Commands
@@ -99,6 +101,7 @@ public class RobotContainer {
     gamepadY.whenPressed(humanDriveCommand);
     gamepadA.whenPressed(colorWheelCommand);
     joystickButton11.whenPressed(testTurningCommand);
+    
   
   }
 
@@ -140,6 +143,11 @@ public class RobotContainer {
   public ShootSubsystem getShootSubsystem() {
     return this.shootSubsystem;
   }
+
+  public PneumaticSubsystem getPneumaticSubsystem() {
+    return this.pneumaticSubsytsem;
+  }
+
   public TestShootCommand getTestShootCommand(){
     return this.testShootCommand;
   }

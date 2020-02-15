@@ -58,7 +58,7 @@ public class ShootSubsystem extends SubsystemBase {
 
   public void setFlyWheel(double speed) {
     flyWheelMotor1.set(speed);
-    //flyWheelMotor2.set(-speed);
+    flyWheelMotor2.set(-speed);
   }
 
   public void stopFlyWheel() {

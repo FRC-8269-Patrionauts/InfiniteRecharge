@@ -28,7 +28,7 @@ public class Dashboard extends CommandBase {
                 configureJoystick();
                 configureGamepad();
                 configureLimeLight();
-                configureShootSubsystem();
+                configurePneumatics();
         }
 
         private void configureCommands() {
@@ -57,7 +57,7 @@ public class Dashboard extends CommandBase {
                                 .add("DifferentialDrive",
                                                  (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
                                  .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
-               
+
                 //Motor speed
                 Shuffleboard.getTab("DriveSubsystem")
                                 .add("Left Motor 1", robotContainer.getDriveSubsystem().getLeftMotor1Speed())
@@ -175,11 +175,8 @@ public class Dashboard extends CommandBase {
                                 .withPosition(2, 0);
         }
 
-        private void configureShootSubsystem() {
-                Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder", 
-                         () -> robotContainer.getShootSubsystem().getFlyCanEncoder1().getRate()*3/360*60);
-                
-        
-                        
+        public void configurePneumatics() {
+                Shuffleboard.getTab("Pneumatics").addBoolean("Value", () -> robotContainer.getPneumaticSubsystem().getSolenoid().get())
+                                .withPosition(0, 0);
         }
 }
