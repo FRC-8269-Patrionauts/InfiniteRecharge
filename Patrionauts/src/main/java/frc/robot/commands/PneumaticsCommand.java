@@ -16,6 +16,7 @@ public class PneumaticsCommand extends CommandBase {
     }
     @Override
     public void execute() {
+        solenoidSubsystem.setVar(true);
         while (true) {
             solenoidSubsystem.getSolenoid().set(true);
         }

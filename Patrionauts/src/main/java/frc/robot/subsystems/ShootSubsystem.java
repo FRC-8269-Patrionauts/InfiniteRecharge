@@ -26,9 +26,9 @@ public class ShootSubsystem extends SubsystemBase {
   private final SpeedControllerGroup flyWheel1 = new SpeedControllerGroup(flyWheelMotor1);
   private final SpeedControllerGroup flyWheel2 = new SpeedControllerGroup(flyWheelMotor2);
 
-  public final flyCanEncoder1.setPIDSourceType(PIDSourceType.kRate);
+  //public final flyCanEncoder1.setPIDSourceType(PIDSourceType.kRate);
 
-  public final PIDController pidShooter = new PIDController(0, 0, 0, flyCanEncoder1);
+  //public final PIDController pidShooter = new PIDController(0, 0, 0, flyCanEncoder1);
 
   public final double RPM = 5000.0;
   //diameter of the Green compliant wheels
@@ -39,8 +39,8 @@ public class ShootSubsystem extends SubsystemBase {
   public final double gearRatio = 1.0;
 
   //counts per second using the getRate() function
-  public final double flyCanEncoder1Count = flyCanEncoder1.getRate();
-  public final double flyCanEncoder2Count = flyCanEncoder2.getRate();
+  public final double flyCanEncoder1Count = 0; //flyCanEncoder1.getRate();
+  public final double flyCanEncoder2Count = 0; //flyCanEncoder2.getRate();
   
 
   public final double flyCanEncoder1RPM = flyCanEncoder1Count/countsPerRev

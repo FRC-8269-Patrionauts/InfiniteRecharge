@@ -28,8 +28,8 @@ public class TestEncoderAutoCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / 
-        ENCODER_GEAR_RATIO / GEAR_RATIO * FUDGE_FACTOR;
+        //final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / 
+        //ENCODER_GEAR_RATIO / GEAR_RATIO * FUDGE_FACTOR;
 
         timer.reset();
         timer.start();
