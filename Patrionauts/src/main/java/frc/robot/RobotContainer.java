@@ -98,6 +98,8 @@ public class RobotContainer {
      */
     private void configureJoystickButtons() {
         joystickButton11.whenPressed(testTurningCommand);
+        joystickButton3.whenPressed(openLoaderCommand);
+
     }
 
     /**
@@ -109,6 +111,7 @@ public class RobotContainer {
         gamepadX.whenPressed(autonomousCommand);
         gamepadY.whenPressed(humanDriveCommand);
         gamepadA.whenPressed(colorWheelCommand);
+        
     }
 
     public AHRS getImu() {

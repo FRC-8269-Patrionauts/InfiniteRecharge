@@ -118,23 +118,23 @@ public class Robot extends TimedRobot {
     }
 
     if (robotContainer.getJoystick().getRawButton(8)) {
-      robotContainer.getDriveSubsystem().setPower(0.2);
+      robotContainer.getDriveSubsystem().setPower(0.15);
     }
 
     if (robotContainer.getJoystick().getRawButton(9)) {
-      robotContainer.getDriveSubsystem().setPower(0.4);
+      robotContainer.getDriveSubsystem().setPower(0.25);
     }
 
     if (robotContainer.getJoystick().getRawButton(10)) {
-      robotContainer.getDriveSubsystem().setPower(0.6);
+      robotContainer.getDriveSubsystem().setPower(0.35);
     }
 
     if (robotContainer.getJoystick().getRawButton(11)) {
-      robotContainer.getDriveSubsystem().setPower(0.8);
+      robotContainer.getDriveSubsystem().setPower(0.45);
     }
 
     if (robotContainer.getJoystick().getRawButton(12)) {
-      robotContainer.getDriveSubsystem().setPower(1.0);
+      robotContainer.getDriveSubsystem().setPower(0.50);
     }
 
     robotContainer.getDriveSubsystem().getFlyMotor1().set(robotContainer.getDriveSubsystem().getPower());
