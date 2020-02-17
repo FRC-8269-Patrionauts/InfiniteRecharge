@@ -4,12 +4,15 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
  * A subsystem that controls shooting a powercell.
  */
+
+// GOAL: plug in an RPM (on shuffleboard) and the motor will go to it
 public class ShootSubsystem extends SubsystemBase {
 
     private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
@@ -18,14 +21,12 @@ public class ShootSubsystem extends SubsystemBase {
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
     private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
-    public ShootSubsystem() {
-
-    }
-
-    // public final flyCanEncoder1.setPIDSourceType(PIDSourceType.kRate);
-
     // public final PIDController pidShooter = new PIDController(0, 0, 0,
-    // flyCanEncoder1);
+    // flyWheelEncoder1);
+    public final double shootKp = 0;
+    public final double shootKi = 0;
+    public final double shootKd = 0;
+    public final PIDController shooterPID = new PIDController(shootKp, shootKi, shootKd);
 
     public final double RPM = 5000.0;
     // diameter of the Green compliant wheels
@@ -35,15 +36,33 @@ public class ShootSubsystem extends SubsystemBase {
     // gear ratio
     public final double gearRatio = 1.0;
 
+    // public final PIDController pidShooter = new PIDController(0, 0, 0,
+    // flyWheelEncoder1);
+
     // counts per second using the getRate() function
-    public final double flyCanEncoder1Count = 0; // flyCanEncoder1.getRate();
-    public final double flyCanEncoder2Count = 0; // flyCanEncoder2.getRate();
+    // public final double flyWheelEncoder1Count = flyWheelEncoder1.getRate();
+    // public final double flyWheelEncoder2Count = flyWheelEncoder2.getRate();
 
-    public final double flyCanEncoder1RPM = flyCanEncoder1Count / countsPerRev * (wheelDiameter / gearRatio);
-    public final double flyCanEncoder2RPM = flyCanEncoder2Count / countsPerRev * (wheelDiameter / gearRatio);
+    // boolean isRamping = false;
+    // double calculatedShootPIDValue = 0;
 
-    // encoder count per second/#encoder counts per rev*diameter of wheel
-    // counts per motor rev = revs of wheel/gearbox ratio
+    // public ShootSubsystem() {
+
+    // }
+
+    // // calculate RPM (from:
+    // // https://www.chiefdelphi.com/t/calculate-velocity-with-encoders/159918/2)
+    // public final double flyWheelEncoder1RPM = flyWheelEncoder1Count /
+    // countsPerRev * (wheelDiameter / gearRatio);
+    // public final double flyWheelEncoder2RPM = flyWheelEncoder2Count /
+    // countsPerRev * (wheelDiameter / gearRatio);
+
+    public final double flyWheelEncoder1RPM = 0;
+    public final double flyWheelEncoder2RPM = 0;
+
+    // // encoder count per second/#encoder counts per rev*diameter of wheel
+
+    // // counts per motor rev = revs of wheel/gearbox ratio
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(speed);
@@ -54,6 +73,37 @@ public class ShootSubsystem extends SubsystemBase {
         flyWheelMotor1.set(0);
         flyWheelMotor2.set(0);
     }
+
+    // public void setGoalRPM(double RPM) {
+    // /*
+    // * int power; //int currentCount = flyWheelEncoder1.get(); //double rate =
+    // * flyWheelEncoder1.getRate();
+    // *
+    // * setFlyWheel(power);
+    // *
+    // * flyWheelEncoder1.reset(); flyWheelEncoder1.setMinRate(10);
+    // */
+    // }
+
+    // public void yeet(double RPM) {
+    // isRamping = true;
+
+    // flyWheelEncoder1.reset();
+    // flyWheelEncoder2.reset();
+
+    // shooterPID.reset();
+
+    // shooterPID.enableContinuousInput(0, 6000);
+    // shooterPID.setTolerance(.01);
+    // }
+
+    // public double getCalculatedShootPIDValue() {
+    // return calculatedShootPIDValue;
+    // }
+
+    // public PIDController getShooterPIDController() {
+    // return shooterPID;
+    // }
 
     public CANSparkMax getflyWheelMotor1() {
         return flyWheelMotor1;
@@ -71,12 +121,4 @@ public class ShootSubsystem extends SubsystemBase {
         return flyWheelEncoder2;
     }
 
-    public void setGoalRPM() {
-        // int currentCount = flyCanEncoder1.get();
-        // double rate = flyCanEncoder1.getRate();
-
-        /*
-         * flyCanEncoder1.reset(); flyCanEncoder1.setMinRate(10);
-         */
-    }
 }
