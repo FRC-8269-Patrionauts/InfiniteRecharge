@@ -21,7 +21,6 @@ public class ColorWheelCommand extends CommandBase {
     }
 
     public boolean isFinished() {
-        // This should return true when the command is finished.
         return false;
     }
 

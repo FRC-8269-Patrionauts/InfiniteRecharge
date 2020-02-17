@@ -13,14 +13,14 @@ public class TestEncoderAutoCommand extends CommandBase {
     public static final double wheelDiameter = 6;
     public static final double pulsePerRevolution = 360;
     public static final double encoderGearRatio = 3;
-    public static final double gearRatio = 64.0/20.0;
+    public static final double gearRatio = 64.0 / 20.0;
     public static final double Fudgefactor = 1.0;
-  
+
     private final Timer timer = new Timer();
 
     public TestEncoderAutoCommand(DriveSubsystem drive) {
         this.drive = drive;
-        
+
         // If we add another subsystem to this command, we must add it to
         // addRequirements.
         addRequirements(drive);
@@ -28,8 +28,10 @@ public class TestEncoderAutoCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        //final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / 
-        //ENCODER_GEAR_RATIO / GEAR_RATIO * FUDGE_FACTOR;
+
+        // final double distancePerPulse = Math.PI * WHEEL_DIAMETER /
+        // PULSE_PER_REVOLUTION /
+        // ENCODER_GEAR_RATIO / GEAR_RATIO * FUDGE_FACTOR;
 
         timer.reset();
         timer.start();

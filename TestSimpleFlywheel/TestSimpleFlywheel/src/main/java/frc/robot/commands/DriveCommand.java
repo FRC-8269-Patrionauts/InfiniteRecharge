@@ -40,13 +40,13 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     
-    if (joystick != null) {
-      if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
-        driveSubsystem.arcadeDrive(joystick.getY() / 2, joystick.getTwist() / 2);
-      } else {
-        driveSubsystem.arcadeDrive(0, 0);
-     }
-    }
+    // if (joystick != null) {
+    //   if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
+    //     driveSubsystem.arcadeDrive(joystick.getY() / 4, joystick.getTwist() / 4);
+    //   } else {
+    //     driveSubsystem.arcadeDrive(0, 0);
+    //  }
+    // }
     
     
   }

@@ -20,8 +20,6 @@ public class TestShootRPMCommand extends CommandBase {
 
     @Override
     public void execute() {
-        while (true) {
-            shoot.setFlyWheel(0.5);
-        }
+        shoot.setFlyWheel(0.3);
     }
 }

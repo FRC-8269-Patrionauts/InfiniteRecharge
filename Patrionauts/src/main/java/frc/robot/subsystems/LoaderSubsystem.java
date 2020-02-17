@@ -3,13 +3,13 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class PneumaticSubsystem extends SubsystemBase {
-    private final Solenoid solenoid = new Solenoid(0); boolean blacklisted = solenoid.isBlackListed();
+public class LoaderSubsystem extends SubsystemBase {
+    private final Solenoid solenoid = new Solenoid(0);
     private final boolean voltageStickyFault = solenoid.getPCMSolenoidVoltageFault();
     private final boolean voltageFault = solenoid.getPCMSolenoidVoltageFault();
     private boolean var = false;
 
-    public PneumaticSubsystem() {
+    public LoaderSubsystem() {
         
     }
 
@@ -17,7 +17,7 @@ public class PneumaticSubsystem extends SubsystemBase {
         this.var = var;
     }
 
-    public boolean getVar() {
+    public boolean getVar() { 
         return var;
     }
 
@@ -25,6 +25,13 @@ public class PneumaticSubsystem extends SubsystemBase {
         return solenoid;
     }
 
-    
+    public void setSolenoidTrue(){
+        solenoid.set(true);
+    }
+
+    public void setSolenoidFalse(){
+        solenoid.set(false);
+
+    }
 
 }

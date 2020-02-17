@@ -31,9 +31,37 @@ public class Dashboard extends CommandBase {
                         () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
                 .withPosition(5, 0).withSize(2, 1);
         Shuffleboard.getTab("Drive")
-                .addNumber("RightMotor2Pos",
+                .addNumber("RightMotor1Pos",
                         () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
                 .withPosition(5, 1).withSize(2, 1);
+        
+        Shuffleboard.getTab("Drive").addNumber("RightMotor2Pos",
+                () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
+                        .withPosition(7, 1).withSize(2, 1);
+        Shuffleboard.getTab("Drive").addNumber("LeftMotor1Pos",
+                () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
+                        .withPosition(7, 3).withSize(2, 1);
+        Shuffleboard.getTab("Drive").addNumber("LeftMotor2Pos",
+                () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
+                        .withPosition(7, 5).withSize(2, 1);
+                        
+        // Shuffleboard.getTab("Drive").addNumber("flyMotor1Pos",
+        //         () -> robotContainer.getDriveSubsystem().getFlyMotor1Encoder().getPosition())
+        //                 .withPosition(1, 1).withSize(2, 1);
+        
+                        
+                
+        // Shuffleboard.getTab("Drive").addNumber("flyMotor1",
+        //         () -> robotContainer.getDriveSubsystem().getFlyMotor1().get())
+        //                 .withPosition(1, 3).withSize(2, 1);
+        // Shuffleboard.getTab("Drive").addNumber("flyMotor2",
+        //                         () -> robotContainer.getDriveSubsystem().getFlyMotor2().get())
+        //                         .withPosition(2, 1).withSize(2, 1);
+        // Shuffleboard.getTab("Drive")
+        //                         .addNumber("power", () -> robotContainer.getDriveSubsystem().getPower())
+        //                         .withPosition(2, 3).withSize(2, 1);
+                                
+
             
     }
 }
