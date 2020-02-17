@@ -8,6 +8,7 @@ public class TestShootRPMCommand extends CommandBase {
 
     private final ShootSubsystem shoot;
 
+    //
     public TestShootRPMCommand(ShootSubsystem shoot) {
         this.shoot = shoot;
         addRequirements(shoot);
@@ -20,7 +21,7 @@ public class TestShootRPMCommand extends CommandBase {
     @Override
     public void execute() {
         while (true) {
-            shoot.setFlyWheel(0.3);
+            shoot.setFlyWheel(0.5);
         }
     }
 }

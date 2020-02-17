@@ -15,6 +15,8 @@ import frc.robot.Constants;
  * TODO(ryssa): Start planning out this subsystem, and the encoders/motors that
  * we'll need for this. You should implement this system.
  */
+
+ //GOAL: plug in an RPM (on shuffleboard) and the motor will go to it
 public class ShootSubsystem extends SubsystemBase {
 
   private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
@@ -29,6 +31,13 @@ public class ShootSubsystem extends SubsystemBase {
   //public final flyCanEncoder1.setPIDSourceType(PIDSourceType.kRate);
 
   //public final PIDController pidShooter = new PIDController(0, 0, 0, flyCanEncoder1);
+  public final double shootKp = 0;
+  public final double shootKi = 0;
+  public final double shootKd = 0;
+  public final PIDController shooterPID = new PIDController(shootKp, shootKi, shootKd);
+
+  boolean isRamping = false;
+  double calculatedShootPIDValue = 0;
 
   public final double RPM = 5000.0;
   //diameter of the Green compliant wheels
@@ -39,10 +48,11 @@ public class ShootSubsystem extends SubsystemBase {
   public final double gearRatio = 1.0;
 
   //counts per second using the getRate() function
-  public final double flyCanEncoder1Count = 0; //flyCanEncoder1.getRate();
-  public final double flyCanEncoder2Count = 0; //flyCanEncoder2.getRate();
+  public final double flyCanEncoder1Count = flyCanEncoder1.getRate();
+  public final double flyCanEncoder2Count = flyCanEncoder2.getRate();
   
 
+  //calculate RPM (from: https://www.chiefdelphi.com/t/calculate-velocity-with-encoders/159918/2)
   public final double flyCanEncoder1RPM = flyCanEncoder1Count/countsPerRev
       *(wheelDiameter/gearRatio);
   public final double flyCanEncoder2RPM = flyCanEncoder2Count/countsPerRev
@@ -50,6 +60,7 @@ public class ShootSubsystem extends SubsystemBase {
 
 
   //encoder count per second/#encoder counts per rev*diameter of wheel 
+ 
   //counts per motor rev = revs of wheel/gearbox ratio
 
 
@@ -88,15 +99,37 @@ public class ShootSubsystem extends SubsystemBase {
     flyWheelMotor2.set(0);
   }
 
-  public void setGoalRPM() {
+  public void setGoalRPM(double RPM) {
+    /*
+    int power;
     //int currentCount = flyCanEncoder1.get();
     //double rate = flyCanEncoder1.getRate();
 
-    /*flyCanEncoder1.reset();
+    setFlyWheel(power);
+
+    flyCanEncoder1.reset();
     flyCanEncoder1.setMinRate(10); 
     */
   }
 
+  public void yeet(double RPM) {
+    isRamping = true;
+    
+    flyCanEncoder1.reset();
+    flyCanEncoder2.reset();
+
+    shooterPID.reset();
+
+    shooterPID.enableContinuousInput(0, 6000);
+    shooterPID.setTolerance(.01);
+  }
+
+  public double getCalculatedShootPIDValue() {
+    return calculatedShootPIDValue;
+  }
   
+  public PIDController getShooterPIDController() {
+    return shooterPID;
+  }
 
 }
