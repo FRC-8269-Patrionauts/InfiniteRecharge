@@ -40,27 +40,29 @@ public class ShootSubsystem extends SubsystemBase {
     // flyWheelEncoder1);
 
     // counts per second using the getRate() function
-    public final double flyWheelEncoder1Count = flyWheelEncoder1.getRate();
-    public final double flyWheelEncoder2Count = flyWheelEncoder2.getRate();
+    // public final double flyWheelEncoder1Count = flyWheelEncoder1.getRate();
+    // public final double flyWheelEncoder2Count = flyWheelEncoder2.getRate();
 
-    boolean isRamping = false;
-    double calculatedShootPIDValue = 0;
+    // boolean isRamping = false;
+    // double calculatedShootPIDValue = 0;
 
-    public ShootSubsystem() {
+    // public ShootSubsystem() {
 
-    }
+    // }
 
-    // calculate RPM (from:
-    // https://www.chiefdelphi.com/t/calculate-velocity-with-encoders/159918/2)
-    public final double flyWheelEncoder1RPM = flyWheelEncoder1Count / countsPerRev * (wheelDiameter / gearRatio);
-    public final double flyWheelEncoder2RPM = flyWheelEncoder2Count / countsPerRev * (wheelDiameter / gearRatio);
+    // // calculate RPM (from:
+    // // https://www.chiefdelphi.com/t/calculate-velocity-with-encoders/159918/2)
+    // public final double flyWheelEncoder1RPM = flyWheelEncoder1Count /
+    // countsPerRev * (wheelDiameter / gearRatio);
+    // public final double flyWheelEncoder2RPM = flyWheelEncoder2Count /
+    // countsPerRev * (wheelDiameter / gearRatio);
 
-    public final double flyWheelEncoder1RPM = flyWheelEncoder1Count / countsPerRev * (wheelDiameter / gearRatio);
-    public final double flyWheelEncoder2RPM = flyWheelEncoder2Count / countsPerRev * (wheelDiameter / gearRatio);
+    public final double flyWheelEncoder1RPM = 0;
+    public final double flyWheelEncoder2RPM = 0;
 
-    // encoder count per second/#encoder counts per rev*diameter of wheel
+    // // encoder count per second/#encoder counts per rev*diameter of wheel
 
-    // counts per motor rev = revs of wheel/gearbox ratio
+    // // counts per motor rev = revs of wheel/gearbox ratio
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(speed);
@@ -72,36 +74,36 @@ public class ShootSubsystem extends SubsystemBase {
         flyWheelMotor2.set(0);
     }
 
-    public void setGoalRPM(double RPM) {
-        /*
-         * int power; //int currentCount = flyWheelEncoder1.get(); //double rate =
-         * flyWheelEncoder1.getRate();
-         * 
-         * setFlyWheel(power);
-         * 
-         * flyWheelEncoder1.reset(); flyWheelEncoder1.setMinRate(10);
-         */
-    }
+    // public void setGoalRPM(double RPM) {
+    // /*
+    // * int power; //int currentCount = flyWheelEncoder1.get(); //double rate =
+    // * flyWheelEncoder1.getRate();
+    // *
+    // * setFlyWheel(power);
+    // *
+    // * flyWheelEncoder1.reset(); flyWheelEncoder1.setMinRate(10);
+    // */
+    // }
 
-    public void yeet(double RPM) {
-        isRamping = true;
+    // public void yeet(double RPM) {
+    // isRamping = true;
 
-        flyWheelEncoder1.reset();
-        flyWheelEncoder2.reset();
+    // flyWheelEncoder1.reset();
+    // flyWheelEncoder2.reset();
 
-        shooterPID.reset();
+    // shooterPID.reset();
 
-        shooterPID.enableContinuousInput(0, 6000);
-        shooterPID.setTolerance(.01);
-    }
+    // shooterPID.enableContinuousInput(0, 6000);
+    // shooterPID.setTolerance(.01);
+    // }
 
-    public double getCalculatedShootPIDValue() {
-        return calculatedShootPIDValue;
-    }
+    // public double getCalculatedShootPIDValue() {
+    // return calculatedShootPIDValue;
+    // }
 
-    public PIDController getShooterPIDController() {
-        return shooterPID;
-    }
+    // public PIDController getShooterPIDController() {
+    // return shooterPID;
+    // }
 
     public CANSparkMax getflyWheelMotor1() {
         return flyWheelMotor1;
