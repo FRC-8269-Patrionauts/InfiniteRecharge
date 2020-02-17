@@ -22,16 +22,22 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
   private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
+  //private final CANSparkMax flyMotor1 = new CANSparkMax(5, MotorType.kBrushless);
+  //private final CANSparkMax flyMotor2 = new CANSparkMax(7, MotorType.kBrushless);
 
   private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
   private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
   private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
   private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
+  //private final CANEncoder flyMotor1Encoder = flyMotor1.getEncoder();
+  //private final CANEncoder flyMotor2Encoder = flyMotor2.getEncoder();
 
   private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
   private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+
+  private double power = 0;
 
   public DriveSubsystem() {
     
@@ -42,15 +48,20 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // flyMotor1.set(0.3);
+    // flyMotor2.set(0.3);
   }
 
+  
   public void arcadeDrive(double x, double z) {
     drive.arcadeDrive(x, z);
   }
+  
 
   public CANSparkMax getLeftMotor1() {
     return leftMotor1;
   }
+  
 
   /**
    * @return the leftMotor2
@@ -74,6 +85,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
 
+
   public CANEncoder getLeftMotor1Encoder() {
     return leftMotor1Encoder;
   }
@@ -93,5 +105,14 @@ public class DriveSubsystem extends SubsystemBase {
   public DifferentialDrive getDrive() {
     return drive;
   }
+  
+
+public void setPower(double power) {
+  this.power = power;
+}
+
+public double getPower() {
+  return power;
+}
   
 }
