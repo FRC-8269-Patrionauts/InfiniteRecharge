@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
@@ -27,7 +28,7 @@ public class Dashboard extends CommandBase {
                 configureJoystick();
                 configureGamepad();
                 configureLimeLight();
-                configurePneumatics();
+                //configurePneumatics();
         }
 
         private void configureCommands() {
@@ -43,12 +44,17 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("Commands")
                                 .add("TestTurningCommand", (Sendable) robotContainer.getTestTurningCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
-                Shuffleboard.getTab("Commands").add("TestShootCommand", (Sendable) robotContainer.getTestShootCommand())
+                Shuffleboard.getTab("Commands")
+                                .add("TestShootCommand", (Sendable) robotContainer.getTestShootCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
                 Shuffleboard.getTab("Commands")
                                 .add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())
-                                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
-
+                                .withWidget(BuiltInWidgets.kCommand).withPosition(5, 1).withSize(2, 1);
+                // Shuffleboard.getTab("Commands")
+                //                 .add("SolenoidShuffle", (Sendable) robotContainer.getPneumaticsCommand())
+                //                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
+                //SmartDashboard.putData("SolenoidSmart", (Sendable) robotContainer.getPneumaticsCommand());
+                                
         }
 
         private void configureDriveSubsystem() {
@@ -56,6 +62,8 @@ public class Dashboard extends CommandBase {
                                 .add("DifferentialDrive",
                                                  (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
                                  .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
+
+                //Motor speed
                 Shuffleboard.getTab("DriveSubsystem")
                                 .add("Left Motor 1", robotContainer.getDriveSubsystem().getLeftMotor1Speed())
                                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 0).withSize(2, 1);
@@ -69,6 +77,7 @@ public class Dashboard extends CommandBase {
                                 .add("Right Motor 2", robotContainer.getDriveSubsystem().getRightMotor2Speed())
                                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(5, 1).withSize(2, 1);
 
+                //encoder positions
                 Shuffleboard.getTab("DriveSubsystem").addNumber("Left Motor 1 Encoder",
                                 () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
                                 .withPosition(3, 2).withSize(2, 1);
@@ -82,6 +91,7 @@ public class Dashboard extends CommandBase {
                                 () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
                                 .withPosition(5, 3).withSize(2, 1);
 
+                //PID
                 Shuffleboard.getTab("DriveSubsystem")
                                 .add("TurnPIDController",
                                                 (Sendable) robotContainer.getDriveSubsystem().getTurnPIDController())
@@ -171,7 +181,20 @@ public class Dashboard extends CommandBase {
         }
 
         public void configurePneumatics() {
-                Shuffleboard.getTab("Pneumatics").addBoolean("Value", () -> robotContainer.getPneumaticSubsystem().getSolenoid().get())
-                                .withPosition(0, 0);
+                //Shuffleboard.getTab("Commands").addBoolean("PneumaticsActive", () -> robotContainer.getPneumaticSubsystem().getSolenoid().get())
+                                //.withPosition(6, 2);
+                // Shuffleboard.getTab("Commands")
+                //                 .addBoolean("PneumaticsVar",
+                //                                 () -> robotContainer.getPneumaticSubsystem().getVar())
+                //                 .withPosition(6, 4);
         }
+        public void configureShootSubsystem() {
+                Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder", 
+                         () -> robotContainer.getShootSubsystem().flyCanEncoder1RPM);
+                Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder", 
+                         () -> robotContainer.getShootSubsystem().flyCanEncoder2RPM);
+        }
+
+
+
 }

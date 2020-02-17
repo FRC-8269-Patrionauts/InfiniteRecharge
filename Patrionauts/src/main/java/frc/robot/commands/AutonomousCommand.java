@@ -30,12 +30,12 @@ public class AutonomousCommand extends CommandBase {
     public void initialize() {
         timer.reset();
         timer.start();
-        drive.arcadeDrive(0.5, 0);
+        drive.arcadeDrive(0.1, 0);
     }
 
     @Override
     public void execute() {
-        // drive.arcadeDrive(0.5, 0);
+        //drive.arcadeDrive(0.1, -0.1);
     }
 
     public void phaseOne() {

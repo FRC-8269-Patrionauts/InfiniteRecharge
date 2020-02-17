@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
-      // autonomousCommand.schedule();
-      robotContainer.getTestTurningCommand().schedule();
+      autonomousCommand.schedule();
+      //robotContainer.getTestTurningCommand().schedule();
     }
   }
 
@@ -120,6 +120,11 @@ public class Robot extends TimedRobot {
      * 
      * telemetryEntry.setNumberArray(numberArray);
      */
+    robotContainer.getDriveSubsystem().getLeftMotor2().set(.2);
+    robotContainer.getDriveSubsystem().getRightMotor2().set(.2);
+    robotContainer.getDriveSubsystem().getLeftMotor1().set(.2);
+    robotContainer.getDriveSubsystem().getRightMotor1().set(.2);
+
   }
 
   @Override

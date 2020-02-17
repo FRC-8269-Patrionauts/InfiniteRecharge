@@ -14,6 +14,7 @@ import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.PneumaticsCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestEncoderAutoCommand;
 import frc.robot.commands.TestShootCommand;
@@ -69,7 +70,7 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
-  private final PneumaticSubsystem pneumaticSubsytsem = new PneumaticSubsystem();
+  //private final PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget(0, 0, 0);
 
   // Commands
@@ -82,6 +83,7 @@ public class RobotContainer {
   private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
   private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
   private final TestEncoderAutoCommand testEncoderAutoCommand = new TestEncoderAutoCommand(driveSubsystem);
+  //private final PneumaticsCommand pneumaticsCommand = new PneumaticsCommand(pneumaticSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -145,9 +147,9 @@ public class RobotContainer {
     return this.shootSubsystem;
   }
 
-  public PneumaticSubsystem getPneumaticSubsystem() {
-    return this.pneumaticSubsytsem;
-  }
+  // public PneumaticSubsystem getPneumaticSubsystem() {
+  //   return this.pneumaticSubsystem;
+  // }
 
   public TestShootCommand getTestShootCommand(){
     return this.testShootCommand;
@@ -175,5 +177,9 @@ public class RobotContainer {
   public AlignAtTargetCommand getAlignAtTargetCommand(){
     return this.alignAtTargetCommand;
   }
+
+  // public PneumaticsCommand getPneumaticsCommand() {
+  //   return this.pneumaticsCommand;
+  // }
 
 }

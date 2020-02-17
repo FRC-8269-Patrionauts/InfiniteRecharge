@@ -30,17 +30,17 @@ public class HumanDriveCommand extends CommandBase {
     //   driveSubsystem.getLeftMotor2().set(.2);
     //   driveSubsystem.getLeftMotor1().set(-driveSubsystem.getLeftMotor2().get());
     // }
-    
+    while (true) {
     if (joystick != null) {
 
-      // if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
-      //   driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
-      // } else {
-      //   driveSubsystem.stop();
-      // }
-      if (Math.abs(joystick.getY()) > .1) {
-        driveSubsystem.getLeftMotor2().set(joystick.getY());
+      if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
+        driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
+      } else {
+        driveSubsystem.stop();
       }
+      // if (Math.abs(joystick.getY()) > .1) {
+      //   driveSubsystem.getLeftMotor2().set(joystick.getY());
+      // }
     }
 
     if (gamepad != null) {
@@ -50,5 +50,6 @@ public class HumanDriveCommand extends CommandBase {
         driveSubsystem.stop();
       }
     }
+  }
   }
 }
