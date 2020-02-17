@@ -54,7 +54,9 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem(AHRS imu) {
         this.imu = imu;
         turnPID.reset();
+        //saying that -180 = 180 degrees
         turnPID.enableContinuousInput(-180, 180);
+        //done iff difference between where we're at and where we want to be is within .01% 
         turnPID.setTolerance(.01);
     }
 
@@ -62,6 +64,7 @@ public class DriveSubsystem extends SubsystemBase {
     public void periodic() {
         if (isTurning) {
             calculatedPIDValue = turnPID.calculate(imu.getYaw());
+            //it's essentially a limit
             calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
 
             // drive.arcadeDrive(0, calculatedPIDValue);
