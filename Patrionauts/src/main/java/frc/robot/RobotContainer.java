@@ -3,21 +3,24 @@ package frc.robot;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 /**
@@ -64,15 +67,16 @@ public class RobotContainer {
     private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
     private final ShootSubsystem shootSubsystem = new ShootSubsystem();
     private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
+    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
     // Commands
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
     private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
             shootSubsystem);
     private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
-    private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
+    private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
 
     public RobotContainer() {
@@ -160,6 +164,18 @@ public class RobotContainer {
 
     public AlignAtTargetCommand getAlignAtTargetCommand() {
         return this.alignAtTargetCommand;
+    }
+
+    public LoaderSubsystem getLoaderSubsystem() {
+        return this.loaderSubsystem;
+    }
+
+    public OpenLoaderCommand getOpenLoaderCommand() {
+        return this.openLoaderCommand;
+    }
+
+    public CloseLoaderCommand getCloseLoaderCommand() {
+        return this.closeLoaderCommand;
     }
 
 }

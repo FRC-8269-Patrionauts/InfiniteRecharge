@@ -41,6 +41,12 @@ public final class Constants {
      */
     public static final boolean ENABLE_GAMEPAD = false;
 
+    public static final int FLYWHEEL_MOTOR1 = 6;
+    public static final int FLYWHEEL_MOTOR2 = 8;
+
+    public static final int INTAKE_MOTOR1 = 0;
+    public static final int INTAKE_MOTOR2 = 0;
+
     /**
      * Set to true if the Limelight is connected, otherwise set to false.
      */
@@ -59,9 +65,6 @@ public final class Constants {
     public static final double SPEED_STEP_DOWN = 0.05;
     public static final double SPEED_STEP_UP = 0.03;
     public static final double MAX_SPEED = 1;
-
-    public static final int FLYWHEEL_MOTOR1 = 3;
-    public static final int FLYWHEEL_MOTOR2 = 2;
 
     public static final int GAMEPAD_X = 0;
     public static final int GAMEPAD_A = 1;

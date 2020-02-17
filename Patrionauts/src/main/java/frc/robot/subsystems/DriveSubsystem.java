@@ -19,139 +19,146 @@ import frc.robot.Constants;
  */
 public class DriveSubsystem extends SubsystemBase {
 
-  private final SpeedController testMotor = new PWMVictorSPX(6);
-  private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
-  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
-  private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
-  private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
+    private final SpeedController testMotor = new PWMVictorSPX(6);
+    private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
+    private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
+    private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
+    private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
 
-  private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
-  private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
-  private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
-  private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
+    private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
+    private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
+    private final CANEncoder rightMotor1Encoder = rightMotor1.getEncoder();
+    private final CANEncoder rightMotor2Encoder = rightMotor2.getEncoder();
 
-  private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
-  private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
+    private final SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
+    private final SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
-  public final AHRS imu;
+    public final AHRS imu;
 
-  public final double turnKp = .042;
-  public final double turnKi = .0007;
-  public final double turnKd = .008;
-  public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
+    public final double turnKp = .042;
+    public final double turnKi = .0007;
+    public final double turnKd = .008;
+    public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
-  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+    private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
-  boolean isTurning = false;
-  double calculatedPIDValue = 0;
+    boolean isTurning = false;
+    double calculatedPIDValue = 0;
 
-  // static final double COUNTS_PER_MOTOR_REV = 0;
-  // static final double WHEEL_DIAMETER_INCHES = 6.0;
-  // static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) /
-  // (WHEEL_DIAMETER_INCHES * 3.1415);
-  // static final double DRIVE_SPEED = .4;
+    // static final double COUNTS_PER_MOTOR_REV = 0;
+    // static final double WHEEL_DIAMETER_INCHES = 6.0;
+    // static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) /
+    // (WHEEL_DIAMETER_INCHES * 3.1415);
+    // static final double DRIVE_SPEED = .4;
 
-  public DriveSubsystem(AHRS imu) {
-    this.imu = imu;
-    turnPID.reset();
-    turnPID.enableContinuousInput(-180, 180);
-    turnPID.setTolerance(.01);
-  }
-
-  @Override
-  public void periodic() {
-    if (isTurning) {
-      calculatedPIDValue = turnPID.calculate(imu.getYaw());
-      calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
-
-      drive.arcadeDrive(0, calculatedPIDValue);
-
-      if (turnPID.atSetpoint()) {
-        isTurning = false;
-      }
+    public DriveSubsystem(AHRS imu) {
+        this.imu = imu;
+        turnPID.reset();
+        turnPID.enableContinuousInput(-180, 180);
+        turnPID.setTolerance(.01);
     }
-  }
 
-  public void turn(double degrees) {
-    isTurning = true;
-    imu.reset();
-    turnPID.setSetpoint(degrees);
-  }
+    @Override
+    public void periodic() {
+        if (isTurning) {
+            calculatedPIDValue = turnPID.calculate(imu.getYaw());
+            calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
 
-  public void turnToAngle(double angle) {
-    isTurning = true;
-    turnPID.setSetpoint(angle);
-  }
+            // drive.arcadeDrive(0, calculatedPIDValue);
 
-  public void arcadeDrive(double forward, double turn) {
-    drive.arcadeDrive(forward, turn);
-  }
+            if (turnPID.atSetpoint()) {
+                isTurning = false;
+            }
+        }
+    }
 
-  public void stop() {
-    arcadeDrive(0, 0);
-  }
+    public void arcadeDrive(double forward, double turn) {
+        // drive.arcadeDrive(forward, turn);
+    }
 
-  public double getCalculatedPIDValue() {
-    return calculatedPIDValue;
-  }
+    // public DifferentialDrive getDifferentialDrive() {
+    // return drive;
+    // }
 
-  public CANSparkMax getLeftMotor1() {
-    return leftMotor1;
-  }
+    public void stop() {
+        // arcadeDrive(0, 0);
+    }
 
-  public CANSparkMax getLeftMotor2() {
-    return leftMotor2;
-  }
+    // PID
+    public void turn(double degrees) {
+        isTurning = true;
+        imu.reset();
+        turnPID.setSetpoint(degrees);
+    }
 
-  public CANSparkMax getRightMotor1() {
-    return rightMotor1;
-  }
+    public void turnToAngle(double angle) {
+        isTurning = true;
+        turnPID.setSetpoint(angle);
+    }
 
-  public CANSparkMax getRightMotor2() {
-    return rightMotor2;
-  }
+    public double getCalculatedPIDValue() {
+        return calculatedPIDValue;
+    }
 
-  public SpeedController getTestMotor() {
-    return testMotor;
-  }
+    public PIDController getTurnPIDController() {
+        return turnPID;
+    }
 
-  public double getLeftMotor1Speed() {
-    return leftMotor1.get();
-  }
+    // Motors
+    public CANSparkMax getLeftMotor1() {
+        return leftMotor1;
+    }
 
-  public double getLeftMotor2Speed() {
-    return leftMotor2.get();
-  }
+    public CANSparkMax getLeftMotor2() {
+        return leftMotor2;
+    }
 
-  public double getRightMotor1Speed() {
-    return rightMotor1.get();
-  }
+    public CANSparkMax getRightMotor1() {
+        return rightMotor1;
+    }
 
-  public double getRightMotor2Speed() {
-    return rightMotor2.get();
-  }
+    public CANSparkMax getRightMotor2() {
+        return rightMotor2;
+    }
 
-  public CANEncoder getLeftMotor2Encoder() {
-    return leftMotor2Encoder;
-  }
+    public SpeedController getTestMotor() {
+        return testMotor;
+    }
 
-  public CANEncoder getLeftMotor1Encoder() {
-    return leftMotor1Encoder;
-  }
+    public double getLeftMotor1Speed() {
+        return leftMotor1.get();
+    }
 
-  public CANEncoder getRightMotor1Encoder() {
-    return rightMotor1Encoder;
-  }
+    public double getLeftMotor2Speed() {
+        return leftMotor2.get();
+    }
 
-  public CANEncoder getRightMotor2Encoder() {
-    return rightMotor2Encoder;
-  }
+    public double getRightMotor1Speed() {
+        return rightMotor1.get();
+    }
 
-  public DifferentialDrive getDifferentialDrive() {
-    return drive;
-  }
+    public double getRightMotor2Speed() {
+        return rightMotor2.get();
+    }
 
-  public PIDController getTurnPIDController() {
-    return turnPID;
-  }
+    public CANEncoder getLeftMotor2Encoder() {
+        return leftMotor2Encoder;
+    }
+
+    public CANEncoder getLeftMotor1Encoder() {
+        return leftMotor1Encoder;
+    }
+
+    public CANEncoder getRightMotor1Encoder() {
+        return rightMotor1Encoder;
+    }
+
+    public CANEncoder getRightMotor2Encoder() {
+        return rightMotor2Encoder;
+    }
+
+    public DifferentialDrive getDifferentialDrive() {
+        return drive;
+    }
+
 }

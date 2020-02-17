@@ -21,6 +21,10 @@ public DetectedTarget(double xOffset, double yOffset, double area){
   this.area = area;
 }
 
+//  public DetectedTarget() {
+//  }
+
+
 public double getXOffset() {
   return xOffset;
 }
