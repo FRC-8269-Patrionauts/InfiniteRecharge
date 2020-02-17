@@ -72,16 +72,6 @@ public class ShootSubsystem extends SubsystemBase {
         flyWheelMotor2.set(0);
     }
 
-    public void setFlyWheel(double speed) {
-        flyWheelMotor1.set(speed);
-        flyWheelMotor2.set(-speed);
-    }
-
-    public void stopFlyWheel() {
-        flyWheelMotor1.set(0);
-        flyWheelMotor2.set(0);
-    }
-
     public void setGoalRPM(double RPM) {
         /*
          * int power; //int currentCount = flyWheelEncoder1.get(); //double rate =
