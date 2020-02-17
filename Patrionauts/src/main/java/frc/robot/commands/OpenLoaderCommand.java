@@ -16,8 +16,6 @@ public class OpenLoaderCommand extends CommandBase {
     }
     @Override
     public void execute() {
-        while (true) {
-            solenoidSubsystem.setSolenoidTrue();
-        }
+        solenoidSubsystem.setSolenoidTrue();
     }
 }

@@ -87,8 +87,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    robotContainer.getDriveSubsystem().getLeftMotor2().set(.2);
-    robotContainer.getDriveSubsystem().getRightMotor2().set(.2);
+    // robotContainer.getDriveSubsystem().getLeftMotor2().set(.2);
+    // robotContainer.getDriveSubsystem().getRightMotor2().set(.2);
 
   }
 
@@ -113,7 +113,32 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
+    if (robotContainer.getJoystick().getRawButton(7)) {
+      robotContainer.getDriveSubsystem().setPower(0);
+    }
+
+    if (robotContainer.getJoystick().getRawButton(8)) {
+      robotContainer.getDriveSubsystem().setPower(0.2);
+    }
+
+    if (robotContainer.getJoystick().getRawButton(9)) {
+      robotContainer.getDriveSubsystem().setPower(0.4);
+    }
+
+    if (robotContainer.getJoystick().getRawButton(10)) {
+      robotContainer.getDriveSubsystem().setPower(0.6);
+    }
+
+    if (robotContainer.getJoystick().getRawButton(11)) {
+      robotContainer.getDriveSubsystem().setPower(0.8);
+    }
+
+    if (robotContainer.getJoystick().getRawButton(12)) {
+      robotContainer.getDriveSubsystem().setPower(1.0);
+    }
+
+    robotContainer.getDriveSubsystem().getFlyMotor1().set(robotContainer.getDriveSubsystem().getPower());
+    robotContainer.getDriveSubsystem().getFlyMotor2().set(-robotContainer.getDriveSubsystem().getPower());
   }
 
   @Override
