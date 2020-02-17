@@ -69,6 +69,8 @@ public class RobotContainer {
     private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
+    private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
+
     // Commands
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
     private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
@@ -78,6 +80,8 @@ public class RobotContainer {
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
     private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
+    private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
+    private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -105,17 +109,6 @@ public class RobotContainer {
         gamepadX.whenPressed(autonomousCommand);
         gamepadY.whenPressed(humanDriveCommand);
         gamepadA.whenPressed(colorWheelCommand);
-    }
-
-    /**
-     * Returns the command for human driving.
-     */
-    public AutonomousCommand getAutonomousCommand() {
-        return this.autonomousCommand;
-    }
-
-    public ShootCommand getShootCommand() {
-        return this.shootCommand;
     }
 
     public AHRS getImu() {
@@ -146,6 +139,22 @@ public class RobotContainer {
         return this.colorWheelSubsystem;
     }
 
+    public LoaderSubsystem getLoaderSubsystem() {
+        return this.loaderSubsystem;
+    }
+
+    public IntakeSubsystem getIntakeSubsystem() {
+        return this.intakeSubsystem;
+    }
+
+    public AutonomousCommand getAutonomousCommand() {
+        return this.autonomousCommand;
+    }
+
+    public ShootCommand getShootCommand() {
+        return this.shootCommand;
+    }
+
     public HumanDriveCommand getHumanDriveCommand() {
         return this.humanDriveCommand;
     }
@@ -166,10 +175,6 @@ public class RobotContainer {
         return this.alignAtTargetCommand;
     }
 
-    public LoaderSubsystem getLoaderSubsystem() {
-        return this.loaderSubsystem;
-    }
-
     public OpenLoaderCommand getOpenLoaderCommand() {
         return this.openLoaderCommand;
     }
@@ -177,5 +182,4 @@ public class RobotContainer {
     public CloseLoaderCommand getCloseLoaderCommand() {
         return this.closeLoaderCommand;
     }
-
 }

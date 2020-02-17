@@ -53,64 +53,66 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("TestShootCommand", (Sendable) robotContainer.getTestShootCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(5, 1).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("SolenoidShuffle", (Sendable) robotContainer.getOpenLoaderCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
-        SmartDashboard.putData("SolenoidSmart", (Sendable) robotContainer.getOpenLoaderCommand());
-
+        Shuffleboard.getTab("Commands").add("AlignAtTargetCommand", (Sendable) robotContainer.getAlignAtTargetCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 1).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("OpenLoaderCommand", (Sendable) robotContainer.getOpenLoaderCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 2).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("CloseLoaderCommand", (Sendable) robotContainer.getCloseLoaderCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("DifferentialDrive",
-                                                (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
-                                 .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("DifferentialDrive", (Sendable) robotContainer.getDriveSubsystem().getDifferentialDrive())
+                .withWidget(BuiltInWidgets.kDifferentialDrive).withPosition(0, 0);
 
-                //Motor speed
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("Left Motor 1", robotContainer.getDriveSubsystem().getLeftMotor1Speed())
-                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 0).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("Left Motor 2", robotContainer.getDriveSubsystem().getLeftMotor2Speed())
-                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 1).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("Right Motor 1", robotContainer.getDriveSubsystem().getRightMotor1Speed())
-                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(5, 0).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("Right Motor 2", robotContainer.getDriveSubsystem().getRightMotor2Speed())
-                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(5, 1).withSize(2, 1);
+        // Motor speed
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("Left Motor 1", robotContainer.getDriveSubsystem().getLeftMotor1Speed())
+                .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 0).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("Left Motor 2", robotContainer.getDriveSubsystem().getLeftMotor2Speed())
+                .withWidget(BuiltInWidgets.kNumberBar).withPosition(3, 1).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("Right Motor 1", robotContainer.getDriveSubsystem().getRightMotor1Speed())
+                .withWidget(BuiltInWidgets.kNumberBar).withPosition(5, 0).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("Right Motor 2", robotContainer.getDriveSubsystem().getRightMotor2Speed())
+                .withWidget(BuiltInWidgets.kNumberBar).withPosition(5, 1).withSize(2, 1);
 
-                //encoder positions
-                Shuffleboard.getTab("DriveSubsystem").addNumber("Left Motor 1 Encoder",
-                                () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
-                                .withPosition(3, 2).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem").addNumber("Left Motor 2 Encoder",
-                                () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
-                                .withPosition(3, 3).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem").addNumber("Right Motor 1 Encoder",
-                                () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
-                                .withPosition(5, 2).withSize(2, 1);
-                Shuffleboard.getTab("DriveSubsystem").addNumber("Right Motor 2 Encoder",
-                                () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
-                                .withPosition(5, 3).withSize(2, 1);
+        // encoder positions
+        Shuffleboard.getTab("DriveSubsystem")
+                .addNumber("Left Motor 1 Encoder",
+                        () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
+                .withPosition(3, 2).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .addNumber("Left Motor 2 Encoder",
+                        () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
+                .withPosition(3, 3).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .addNumber("Right Motor 1 Encoder",
+                        () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
+                .withPosition(5, 2).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem")
+                .addNumber("Right Motor 2 Encoder",
+                        () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
+                .withPosition(5, 3).withSize(2, 1);
 
-                //PID
-                Shuffleboard.getTab("DriveSubsystem")
-                                .add("TurnPIDController",
-                                                (Sendable) robotContainer.getDriveSubsystem().getTurnPIDController())
-                                .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
+        // PID
+        Shuffleboard.getTab("DriveSubsystem")
+                .add("TurnPIDController", (Sendable) robotContainer.getDriveSubsystem().getTurnPIDController())
+                .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
 
-                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
-                                .withPosition(0, 2);
-                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Pitch", () -> robotContainer.getImu().getPitch())
-                                .withPosition(1, 2);
-                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Roll", () -> robotContainer.getImu().getRoll())
-                                .withPosition(2, 2);
-                Shuffleboard.getTab("DriveSubsystem")
-                                .addNumber("Calculated Turn PID",
-                                                () -> robotContainer.getDriveSubsystem().getCalculatedPIDValue())
-                                .withPosition(7, 2).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
+                .withPosition(0, 2);
+        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Pitch", () -> robotContainer.getImu().getPitch())
+                .withPosition(1, 2);
+        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Roll", () -> robotContainer.getImu().getRoll())
+                .withPosition(2, 2);
+        Shuffleboard.getTab("DriveSubsystem")
+                .addNumber("Calculated Turn PID", () -> robotContainer.getDriveSubsystem().getCalculatedPIDValue())
+                .withPosition(7, 2).withSize(2, 1);
+    }
 
     private void configureJoystick() {
         Shuffleboard.getTab("Joystick").addNumber("X", () -> robotContainer.getJoystick().getX())
