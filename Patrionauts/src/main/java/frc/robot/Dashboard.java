@@ -194,8 +194,8 @@ public class Dashboard extends CommandBase {
 
     public void configureShootSubsystem() {
         Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder",
-                () -> robotContainer.getShootSubsystem().flyCanEncoder1RPM);
+                () -> robotContainer.getShootSubsystem().flyWheelEncoder1RPM);
         Shuffleboard.getTab("RPM").addNumber("Flywheel1 Encoder",
-                () -> robotContainer.getShootSubsystem().flyCanEncoder2RPM);
+                () -> robotContainer.getShootSubsystem().flyWheelEncoder2RPM);
     }
 }
