@@ -55,6 +55,7 @@ public class DriveSubsystem extends SubsystemBase {
     this.imu = imu;
     turnPID.reset();
     turnPID.enableContinuousInput(-180, 180);
+    turnPID.setTolerance(.01);
   }
 
   @Override
@@ -74,13 +75,12 @@ public class DriveSubsystem extends SubsystemBase {
   public void turn(double degrees) {
     isTurning = true;
     imu.reset();
-    turnPID.reset();
-    turnPID.enableContinuousInput(-180, 180);
-    turnPID.setTolerance(.01);
+    turnPID.setSetpoint(degrees);
   }
 
-  public void turnToExactAngle(double angle) {
-
+  public void turnToAngle(double angle) {
+    isTurning = true;
+    turnPID.setSetpoint(angle);
   }
 
   public void arcadeDrive(double forward, double turn) {
@@ -129,10 +129,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double getRightMotor2Speed() {
     return rightMotor2.get();
-  }
-
-  public double[] getSpeeds() {
-    return new double[] { getLeftMotor1Speed(), getLeftMotor2Speed(), getRightMotor1Speed(), getRightMotor2Speed() };
   }
 
   public CANEncoder getLeftMotor2Encoder() {

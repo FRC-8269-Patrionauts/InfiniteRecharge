@@ -10,38 +10,42 @@ import frc.robot.Constants;
 
 /**
  * A subsystem that controls shooting a powercell.
- *
- * TODO(ryssa): Start planning out this subsystem, and the encoders/motors that
- * we'll need for this. You should implement this system.
  */
 public class ShootSubsystem extends SubsystemBase {
 
-  private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
-  private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
+    private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
+    private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
 
-  private final CANEncoder flyCanEncoder1 = flyWheelMotor1.getEncoder();
-  private final CANEncoder flyCanEncoder2 = flyWheelMotor2.getEncoder();
+    private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
+    private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
-  private final SpeedControllerGroup flyWheel1 = new SpeedControllerGroup(flyWheelMotor1);
-  private final SpeedControllerGroup flyWheel2 = new SpeedControllerGroup(flyWheelMotor2);
+    public ShootSubsystem() {
 
-  public ShootSubsystem() {
+    }
 
-  }
+    public void setFlyWheel(double speed) {
+        flyWheelMotor1.set(speed);
+        flyWheelMotor2.set(-speed);
+    }
 
-  @Override
-  public void periodic() {
+    public void stopFlyWheel() {
+        flyWheelMotor1.set(0);
+        flyWheelMotor2.set(0);
+    }
 
-  }
+    public CANSparkMax getFlyWheelMotor1() {
+        return flyWheelMotor1;
+    }
 
-  public void setFlyWheel(double speed) {
-    flyWheelMotor1.set(speed);
-    flyWheelMotor2.set(-speed);
-  }
+    public CANSparkMax getFlyWheelMotor2() {
+        return flyWheelMotor2;
+    }
 
-  public void stopFlyWheel() {
-    flyWheelMotor1.set(0);
-    flyWheelMotor2.set(0);
-  }
+    public CANEncoder getFlyWheelEncoder1() {
+        return flyWheelEncoder1;
+    }
 
+    public CANEncoder getFlyWheelEncoder2() {
+        return flyWheelEncoder2;
+    }
 }
