@@ -14,7 +14,8 @@ import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.HumanDriveCommand;
-import frc.robot.commands.PneumaticsCommand;
+import frc.robot.commands.OpenLoaderCommand;
+import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestEncoderAutoCommand;
 import frc.robot.commands.TestShootCommand;
@@ -23,7 +24,7 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DetectedTarget;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 /**
@@ -70,11 +71,11 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
   private final ShootSubsystem shootSubsystem = new ShootSubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
-  //private final PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
+  private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
   private final DetectedTarget detectedTarget = new DetectedTarget(0, 0, 0);
 
   // Commands
-  private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
+  private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, loaderSubsystem, joystick, gamepad);
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
       shootSubsystem);
   private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
@@ -83,7 +84,8 @@ public class RobotContainer {
   private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
   private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem,cameraSubsystem);
   private final TestEncoderAutoCommand testEncoderAutoCommand = new TestEncoderAutoCommand(driveSubsystem);
-  //private final PneumaticsCommand pneumaticsCommand = new PneumaticsCommand(pneumaticSubsystem);
+  private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
+  private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -103,9 +105,8 @@ public class RobotContainer {
     gamepadY.whenPressed(humanDriveCommand);
     gamepadA.whenPressed(colorWheelCommand);
     joystickButton11.whenPressed(testTurningCommand);
+    //joystickButton3.whenPressed(openLoaderCommand);
     
-    
-  
   }
 
   /**
@@ -178,8 +179,16 @@ public class RobotContainer {
     return this.alignAtTargetCommand;
   }
 
-  // public PneumaticsCommand getPneumaticsCommand() {
-  //   return this.pneumaticsCommand;
-  // }
+  public LoaderSubsystem getLoaderSubsystem(){
+    return this.loaderSubsystem;
+  }
+
+  public OpenLoaderCommand getOpenLoaderCommand() {
+    return this.openLoaderCommand;
+  }
+
+  public CloseLoaderCommand getCloseLoaderCommand() {
+    return this.closeLoaderCommand;
+  }
 
 }

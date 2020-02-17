@@ -28,7 +28,7 @@ public class Dashboard extends CommandBase {
                 configureJoystick();
                 configureGamepad();
                 configureLimeLight();
-                //configurePneumatics();
+                configurePneumatics();
         }
 
         private void configureCommands() {
@@ -50,10 +50,10 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("Commands")
                                 .add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(5, 1).withSize(2, 1);
-                // Shuffleboard.getTab("Commands")
-                //                 .add("SolenoidShuffle", (Sendable) robotContainer.getPneumaticsCommand())
-                //                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
-                //SmartDashboard.putData("SolenoidSmart", (Sendable) robotContainer.getPneumaticsCommand());
+                Shuffleboard.getTab("Commands")
+                                .add("SolenoidShuffle", (Sendable) robotContainer.getOpenLoaderCommand())
+                                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
+                SmartDashboard.putData("SolenoidSmart", (Sendable) robotContainer.getOpenLoaderCommand());
                                 
         }
 

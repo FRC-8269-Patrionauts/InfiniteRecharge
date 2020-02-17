@@ -6,9 +6,11 @@ import com.revrobotics.CANError;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.HumanDriveCommand;
 
@@ -133,18 +135,14 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    if (humanDriveCommand != null) {
-      humanDriveCommand.schedule();
-    }
   
   }
 
   @Override
   public void teleopPeriodic() {
-    //robotContainer.getDriveSubsystem().getLeftMotor2().set(-.5);
-    //robotContainer.getShootSubsystem().setFlyWheel(.5);
-    //robotContainer.getDriveSubsystem().getLeftMotor2().set(.15);
-    //robotContainer.getDriveSubsystem().getRightMotor2().set(.15);
+    if (humanDriveCommand != null) {
+      humanDriveCommand.schedule();
+    }
     
   }
 }

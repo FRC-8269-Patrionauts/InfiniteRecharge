@@ -4,24 +4,30 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LoaderSubsystem;
 
 /**
  * A command that allows the driver to take control of driving.
  */
 public class HumanDriveCommand extends CommandBase {
 
+  private final LoaderSubsystem loaderSubsystem;
+
   private final DriveSubsystem driveSubsystem;
   private final XboxController gamepad;
   private final Joystick joystick;
 
-  public HumanDriveCommand(DriveSubsystem driveSubsystem, Joystick joystick, XboxController gamepad) {
+  public HumanDriveCommand(DriveSubsystem driveSubsystem, LoaderSubsystem loaderSubsystem, Joystick joystick, XboxController gamepad) {
     this.driveSubsystem = driveSubsystem;
+    this.loaderSubsystem = loaderSubsystem;
     this.gamepad = gamepad;
     this.joystick = joystick;
 
     // If we add another subsystem to this command, we must add it to
     // addRequirements.
     addRequirements(driveSubsystem);
+    addRequirements(loaderSubsystem);
+    
   }
 
   @Override
@@ -33,14 +39,17 @@ public class HumanDriveCommand extends CommandBase {
     while (true) {
     if (joystick != null) {
 
+      if (joystick.getRawButton(3)){
+        loaderSubsystem.setSolenoidTrue();
+      } else {
+        loaderSubsystem.setSolenoidFalse();
+      }
+
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
         driveSubsystem.arcadeDrive(joystick.getY(), joystick.getTwist());
       } else {
         driveSubsystem.stop();
       }
-      // if (Math.abs(joystick.getY()) > .1) {
-      //   driveSubsystem.getLeftMotor2().set(joystick.getY());
-      // }
     }
 
     if (gamepad != null) {
