@@ -6,18 +6,17 @@ import frc.robot.subsystems.LoaderSubsystem;
 public class OpenLoaderCommand extends CommandBase {
     private final LoaderSubsystem solenoidSubsystem;
 
-    public OpenLoaderCommand(LoaderSubsystem loaderSubsystem){
+    public OpenLoaderCommand(LoaderSubsystem loaderSubsystem) {
         this.solenoidSubsystem = loaderSubsystem;
         addRequirements(solenoidSubsystem);
     }
 
     @Override
-    public void initialize (){
+    public void initialize() {
     }
+
     @Override
     public void execute() {
-        while (true) {
-            solenoidSubsystem.setSolenoidTrue();
-        }
+        solenoidSubsystem.setSolenoidTrue();
     }
 }

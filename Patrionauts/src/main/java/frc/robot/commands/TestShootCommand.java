@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShootSubsystem;
 
@@ -15,12 +14,12 @@ public class TestShootCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        System.out.println("TestShootCommand initialize");
     }
 
     @Override
     public void execute() {
-        while (true) {
-            shoot.setFlyWheel(0.3);
-        }
+        shoot.setFlyWheel(0.3);
+        System.out.println("TestShootCommand execute");
     }
 }

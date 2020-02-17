@@ -26,7 +26,6 @@ public class TestTurningCommand extends CommandBase {
 
     @Override
     public void execute() {
-        SmartDashboard.putBoolean("Test Turning", true);
         if (timer.hasPeriodPassed(3)) {
             // drive.turn(90);
             timer.reset();
