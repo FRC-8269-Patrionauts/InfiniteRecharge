@@ -82,8 +82,8 @@ public class ShootSubsystem extends SubsystemBase {
     }
 
     public void yeet2(double RPM) {
-         isRamping = true;
-         pidShooter2.setSetpoint(RPM);
+        isRamping = true;
+        pidShooter2.setSetpoint(RPM);
     }
 
     //NEED
@@ -93,9 +93,13 @@ public class ShootSubsystem extends SubsystemBase {
     //call pid controller, get output of pid controller and send to motor
     //Every time we do a periodic, we use the output and send it to the motor controller
 
-    // public double getCalculatedShootPIDValue() {
-    //     return calculatedShootPIDValue;
-    // }
+    public double getCalculatedShootPIDValue1() {
+        return calculatedShootPIDValue1;
+    }
+
+    public double getCalculatedShootPIDValue2() {
+        return calculatedShootPIDValue2;
+    }
 
     public PIDController getShooterPIDController1() {
         return pidShooter1;

@@ -18,7 +18,9 @@ import frc.robot.commands.LowerIntakeCommand;
 import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.RaiseIntakeCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
+import frc.robot.commands.TestShootRPMCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -84,11 +86,16 @@ public class RobotContainer {
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
     private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
+    private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
+
     private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
     private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
-;    private final FollowPathCommand followPathCommand = new FollowPathCommand();
+    private final FollowPathCommand followPathCommand = new FollowPathCommand();
+
+    private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
+
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -180,6 +187,14 @@ public class RobotContainer {
         return this.testShootCommand;
     }
 
+    public TestShootRPMCommand getTestShootRPMCommand() {
+        return this.testShootRPMCommand;
+    }
+
+    public TestMoveFeetCommand getTestMoveFeetCommand() {
+        return this.testMoveFeetCommand;
+    }
+
     public ColorWheelCommand getColorWheelCommand() {
         return this.colorWheelCommand;
     }
@@ -200,6 +215,7 @@ public class RobotContainer {
         return this.followPathCommand;
     }
 
+
 	public LowerIntakeCommand getLowerIntakeCommand() {
 		return this.lowerIntakeCommand;
   }
@@ -210,3 +226,6 @@ public class RobotContainer {
   
 
 }
+
+}
+
