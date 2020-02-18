@@ -27,8 +27,8 @@ public class TestTurningCommand extends CommandBase {
     @Override
     public void execute() {
         if (timer.hasPeriodPassed(3)) {
-            // drive.turn(90);
             timer.reset();
         }
+
     }
 }

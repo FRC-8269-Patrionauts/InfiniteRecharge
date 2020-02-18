@@ -11,6 +11,7 @@ import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
+import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.ShootCommand;
@@ -73,8 +74,7 @@ public class RobotContainer {
 
     // Commands
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
-    private final AutonomousCommand autonomousCommand = new AutonomousCommand(driveSubsystem, cameraSubsystem,
-            shootSubsystem);
+    private final AutonomousCommand autonomousCommand = new AutonomousCommand(this);
     private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
     private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
@@ -82,6 +82,7 @@ public class RobotContainer {
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
+    private final FollowPathCommand followPathCommand = new FollowPathCommand();
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -100,6 +101,7 @@ public class RobotContainer {
         joystickButton11.whenPressed(testTurningCommand);
         joystickButton3.whenPressed(closeLoaderCommand);
         joystickButton5.whenPressed(openLoaderCommand);
+
     }
 
     /**
@@ -111,6 +113,7 @@ public class RobotContainer {
         gamepadX.whenPressed(autonomousCommand);
         gamepadY.whenPressed(humanDriveCommand);
         gamepadA.whenPressed(colorWheelCommand);
+
     }
 
     public AHRS getImu() {
@@ -183,5 +186,9 @@ public class RobotContainer {
 
     public CloseLoaderCommand getCloseLoaderCommand() {
         return this.closeLoaderCommand;
+    }
+
+    public FollowPathCommand getFollowPathCommand() {
+        return this.followPathCommand;
     }
 }

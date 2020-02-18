@@ -38,7 +38,7 @@ public final class Constants {
     public static final boolean ENABLE_GAMEPAD = false;
 
     public static final int FLYWHEEL_MOTOR1 = 6;
-    public static final int FLYWHEEL_MOTOR2 = 8;
+    public static final int FLYWHEEL_MOTOR2 = 7;
 
     public static final int INTAKE_MOTOR1 = 111;
     public static final int INTAKE_MOTOR2 = 112;
