@@ -54,6 +54,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("CloseLoaderCommand", (Sendable) robotContainer.getCloseLoaderCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("TestShootRPMCommand", (Sendable) robotContainer.getTestShootRPMCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {
@@ -201,11 +203,14 @@ public class Dashboard extends CommandBase {
 
         //PID
         Shuffleboard.getTab("Shoot Subsystem")
-                .add("ShootPIDController1", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController1();
+                .add("ShootPIDController1", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController1())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
         Shuffleboard.getTab("Shoot Subsystem")
-                .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2();
+                .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(0, 0).withSize(2, 2);
+        
+        
+                
 
     }
 }

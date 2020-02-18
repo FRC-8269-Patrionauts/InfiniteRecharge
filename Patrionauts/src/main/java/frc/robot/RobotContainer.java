@@ -16,6 +16,7 @@ import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestShootCommand;
+import frc.robot.commands.TestShootRPMCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -80,6 +81,7 @@ public class RobotContainer {
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
     private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
+    private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
@@ -169,6 +171,10 @@ public class RobotContainer {
 
     public TestShootCommand getTestShootCommand() {
         return this.testShootCommand;
+    }
+
+    public TestShootRPMCommand getTestShootRPMCommand() {
+        return this.testShootRPMCommand;
     }
 
     public ColorWheelCommand getColorWheelCommand() {
