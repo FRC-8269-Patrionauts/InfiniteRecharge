@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignAtTargetCommand;
@@ -13,7 +14,9 @@ import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.LowerIntakeCommand;
 import frc.robot.commands.OpenLoaderCommand;
+import frc.robot.commands.RaiseIntakeCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
@@ -25,6 +28,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
+import frc.robot.subsystems.IntakePneumaticSubsystem;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -71,7 +75,7 @@ public class RobotContainer {
     private final ShootSubsystem shootSubsystem = new ShootSubsystem();
     private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-
+    private final IntakePneumaticSubsystem intakePneumaticSubsystem = new IntakePneumaticSubsystem();
     private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
 
     // Commands
@@ -85,8 +89,13 @@ public class RobotContainer {
     private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
+
+    private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
+    private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
+
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
+
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -105,6 +114,8 @@ public class RobotContainer {
         joystickButton11.whenPressed(testTurningCommand);
         joystickButton3.whenPressed(closeLoaderCommand);
         joystickButton5.whenPressed(openLoaderCommand);
+        joystickButton6.whenPressed(raiseIntakeCommand);
+        joystickButton4.whenPressed(lowerIntakeCommand);
 
     }
 
@@ -203,4 +214,18 @@ public class RobotContainer {
     public FollowPathCommand getFollowPathCommand() {
         return this.followPathCommand;
     }
+
+
+	public LowerIntakeCommand getLowerIntakeCommand() {
+		return this.lowerIntakeCommand;
+  }
+
+  public RaiseIntakeCommand getRaiseIntakeCommand() {
+    return this.raiseIntakeCommand;
+  }
+  
+
 }
+
+}
+

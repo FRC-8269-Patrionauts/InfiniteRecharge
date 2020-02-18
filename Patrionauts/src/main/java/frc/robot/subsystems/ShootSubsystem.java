@@ -26,13 +26,13 @@ public class ShootSubsystem extends SubsystemBase {
     public final double shootKi1 = 0;
     public final double shootKd1 = 0;
     public final PIDController pidShooter1 = new PIDController(shootKp1, shootKi1, shootKd1);
-    
+
 
     public final double shootKp2 = 0;
     public final double shootKi2 = 0;
     public final double shootKd2 = 0;
     public final PIDController pidShooter2 = new PIDController(shootKp2, shootKi2, shootKd2);
-    
+
     public double flyWheelEncoder1RPM = 0;
     public double flyWheelEncoder2RPM = 0;
 
@@ -65,7 +65,7 @@ public class ShootSubsystem extends SubsystemBase {
             }
         }
     }
-    
+
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(speed);
         flyWheelMotor2.set(-speed);
@@ -87,8 +87,8 @@ public class ShootSubsystem extends SubsystemBase {
     }
 
     //NEED
-    //periodic, current RPM, goal RPM, take output of periodic loop and set that to motor controllers, ask it if we're done 
-    //also look at turn method and compare how it works 
+    //periodic, current RPM, goal RPM, take output of periodic loop and set that to motor controllers, ask it if we're done
+    //also look at turn method and compare how it works
 
     //call pid controller, get output of pid controller and send to motor
     //Every time we do a periodic, we use the output and send it to the motor controller
