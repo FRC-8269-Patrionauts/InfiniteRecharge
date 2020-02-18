@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderSubsystem extends SubsystemBase {
-    private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(0, 1);
-    // private final boolean voltageStickyFault = doublesolenoid.getPCMSolenoidVoltageFault();
-    // private final boolean voltageFault = solenoid.getPCMSolenoidVoltageFault();
+    private final DoubleSolenoid doubleSolenoid1 = new DoubleSolenoid(0, 1);
+    private final DoubleSolenoid doubleSolenoid2 = new DoubleSolenoid(2, 3);
+
     private boolean var = false;
 
     public LoaderSubsystem() {
@@ -23,16 +23,22 @@ public class LoaderSubsystem extends SubsystemBase {
         return var;
     }
 
-    public DoubleSolenoid getSolenoid() {
-        return doubleSolenoid;
+    public DoubleSolenoid getSolenoid1() {
+        return doubleSolenoid1;
+    }
+    public DoubleSolenoid getSolenoid2() {
+        return doubleSolenoid2;
     }
 
     public void setSolenoidTrue(){
-        doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+        doubleSolenoid1.set(DoubleSolenoid.Value.kForward);
+        doubleSolenoid2.set(DoubleSolenoid.Value.kForward);
+        
     }
 
     public void setSolenoidFalse(){
-        doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+        doubleSolenoid1.set(DoubleSolenoid.Value.kReverse);
+        doubleSolenoid2.set(DoubleSolenoid.Value.kReverse);
     }
 
 }

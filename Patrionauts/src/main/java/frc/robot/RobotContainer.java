@@ -98,6 +98,8 @@ public class RobotContainer {
      */
     private void configureJoystickButtons() {
         joystickButton11.whenPressed(testTurningCommand);
+        joystickButton3.whenPressed(closeLoaderCommand);
+        joystickButton5.whenPressed(openLoaderCommand);
     }
 
     /**

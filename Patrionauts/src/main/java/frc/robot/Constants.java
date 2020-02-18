@@ -27,7 +27,7 @@ public final class Constants {
      * {@code Joystick Button 1 on port 1 not available, check if controller is plugged in errors}
      * from showing up in the simulation.
      */
-    public static final boolean ENABLE_JOYSTICK = false;
+    public static final boolean ENABLE_JOYSTICK = true;
 
     /**
      * Set to true if the gamepad is connected, otherwise set to false. This will
