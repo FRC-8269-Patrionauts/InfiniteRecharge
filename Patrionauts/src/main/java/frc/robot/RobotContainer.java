@@ -14,6 +14,8 @@ import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OutakeCommand;
 import frc.robot.commands.LowerIntakeCommand;
 import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.RaiseIntakeCommand;
@@ -22,10 +24,11 @@ import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestShootRPMCommand;
 import frc.robot.commands.TestTurningCommand;
+import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IntakeRollerSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 import frc.robot.subsystems.IntakePneumaticSubsystem;
@@ -74,9 +77,10 @@ public class RobotContainer {
     private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
     private final ShootSubsystem shootSubsystem = new ShootSubsystem();
     private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
-    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    private final IntakeRollerSubsystem intakeRollerSubsystem = new IntakeRollerSubsystem();
     private final IntakePneumaticSubsystem intakePneumaticSubsystem = new IntakePneumaticSubsystem();
     private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
+    private final BeltSubsystem beltSubsystem = new BeltSubsystem();
 
     // Commands
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -89,6 +93,8 @@ public class RobotContainer {
     private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
+    private final IntakeCommand intakeCommand = new IntakeCommand(intakeRollerSubsystem);
+    private final OutakeCommand outakeCommand = new OutakeCommand(intakeRollerSubsystem);
 
     private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
     private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
@@ -116,6 +122,8 @@ public class RobotContainer {
         joystickButton5.whenPressed(openLoaderCommand);
         joystickButton6.whenPressed(raiseIntakeCommand);
         joystickButton4.whenPressed(lowerIntakeCommand);
+        joystickButton8.whenPressed(intakeCommand);
+        joystickButton7.whenPressed(outakeCommand);
 
     }
 
@@ -163,8 +171,8 @@ public class RobotContainer {
         return this.loaderSubsystem;
     }
 
-    public IntakeSubsystem getIntakeSubsystem() {
-        return this.intakeSubsystem;
+    public IntakeRollerSubsystem getIntakeSubsystem() {
+        return this.intakeRollerSubsystem;
     }
 
     public AutonomousCommand getAutonomousCommand() {
@@ -223,9 +231,16 @@ public class RobotContainer {
   public RaiseIntakeCommand getRaiseIntakeCommand() {
     return this.raiseIntakeCommand;
   }
+
+  public IntakeCommand getIntakeCommand() {
+    return this.intakeCommand;
+  }
+
+  public OutakeCommand getOutakeCommand() {
+    return this.outakeCommand;
+  }
   
 
 }
 
-}
 

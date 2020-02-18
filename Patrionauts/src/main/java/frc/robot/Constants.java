@@ -40,9 +40,6 @@ public final class Constants {
     public static final int FLYWHEEL_MOTOR1 = 6;
     public static final int FLYWHEEL_MOTOR2 = 7;
 
-    public static final int INTAKE_MOTOR1 = 111;
-    public static final int INTAKE_MOTOR2 = 112;
-
     /**
      * Set to true if the Limelight is connected, otherwise set to false.
      */
@@ -54,7 +51,9 @@ public final class Constants {
     public static final int LEFT_MOTOR_1 = 3;
     public static final int LEFT_MOTOR_2 = 2;
     public static final int RIGHT_MOTOR_1 = 5;
-    public static final int RIGHT_MOTOR_2 = 4;
+	public static final int RIGHT_MOTOR_2 = 4;
+	
+	public static final int BELT_MOTOR = 10;
 
     public static final double CURRENT_SPEED = 0;
     public static final double GOAL_SPEED = 0;
@@ -95,5 +94,7 @@ public final class Constants {
     public static final int NEO_MOTOR_TEST = 1;
 
     public static final double INCHES_PER_TICK = 0.44881;
+
+	public static final int INTAKE_MOTOR = 9;
 
 }

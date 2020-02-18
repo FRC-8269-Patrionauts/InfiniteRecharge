@@ -64,6 +64,10 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("TestMoveFeetCommand", (Sendable) robotContainer.getTestMoveFeetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 3).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getIntakeCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 4).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 4).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {
@@ -114,9 +118,9 @@ public class Dashboard extends CommandBase {
                 .withPosition(1, 2);
         Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Roll", () -> robotContainer.getImu().getRoll())
                 .withPosition(2, 2);
-        Shuffleboard.getTab("DriveSubsystem")
-                .addNumber("Calculated Turn PID", () -> robotContainer.getDriveSubsystem().getCalculatedPIDValue())
-                .withPosition(7, 2).withSize(2, 1);
+        // Shuffleboard.getTab("DriveSubsystem")
+        //         .addNumber("Calculated Turn PID", () -> robotContainer.getDriveSubsystem().getCalculatedPIDValue())
+        //         .withPosition(7, 2).withSize(2, 1);
     }
 
     private void configureJoystick() {
