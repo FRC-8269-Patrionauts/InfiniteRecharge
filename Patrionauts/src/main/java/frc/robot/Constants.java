@@ -94,4 +94,6 @@ public final class Constants {
      */
     public static final int NEO_MOTOR_TEST = 1;
 
+    public static final double INCHES_PER_TICK = 0.44881;
+
 }
