@@ -19,10 +19,9 @@ public class TestShootRPMCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        shoot.yeet1(10);
-        shoot.yeet2(10);
-        timer.reset();
-        timer.start();
+        shoot.yeet1(20);
+        shoot.yeet2(20);
+        
     }
 
     @Override
