@@ -54,6 +54,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("CloseLoaderCommand", (Sendable) robotContainer.getCloseLoaderCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("TestMoveFeetCommand", (Sendable) robotContainer.getTestMoveFeetCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 2).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {

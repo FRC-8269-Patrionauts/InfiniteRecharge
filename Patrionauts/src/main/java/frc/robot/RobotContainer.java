@@ -15,6 +15,7 @@ import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.OpenLoaderCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.CameraSubsystem;
@@ -83,6 +84,7 @@ public class RobotContainer {
     private final OpenLoaderCommand openLoaderCommand = new OpenLoaderCommand(loaderSubsystem);
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
+    private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -170,6 +172,10 @@ public class RobotContainer {
 
     public TestShootCommand getTestShootCommand() {
         return this.testShootCommand;
+    }
+
+    public TestMoveFeetCommand getTestMoveFeetCommand() {
+        return this.testMoveFeetCommand;
     }
 
     public ColorWheelCommand getColorWheelCommand() {
