@@ -200,12 +200,12 @@ public class Dashboard extends CommandBase {
                 .addNumber("Flywheel2 Encoder RPM", () -> robotContainer.getShootSubsystem().flyWheelEncoder2RPM);
 
         //PID
-        Shuffleboard.getTab("Shoot Subsystem")
-                .add("ShootPIDController1", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController1();
-                .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
-        Shuffleboard.getTab("Shoot Subsystem")
-                .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2();
-                .withWidget(BuiltInWidgets.kPIDController).withPosition(0, 0).withSize(2, 2);
+        // Shuffleboard.getTab("Shoot Subsystem")
+        //         .add("ShootPIDController1", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController1();
+        //         .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
+        // Shuffleboard.getTab("Shoot Subsystem")
+        //         .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2();
+        //         .withWidget(BuiltInWidgets.kPIDController).withPosition(0, 0).withSize(2, 2);
 
     }
 }
