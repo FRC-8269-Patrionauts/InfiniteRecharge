@@ -8,8 +8,7 @@ public class CloseLoaderCommand extends CommandBase {
 
     public CloseLoaderCommand(LoaderSubsystem loaderSubsystem) {
         this.solenoidSubsystem = loaderSubsystem;
-        addRequirements(solenoidSubsystem);
-        ;
+        addRequirements(solenoidSubsystem);   
     }
 
     @Override
