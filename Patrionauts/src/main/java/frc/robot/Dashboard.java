@@ -56,6 +56,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("TestShootRPMCommand", (Sendable) robotContainer.getTestShootRPMCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("TestMoveFeetCommand", (Sendable) robotContainer.getTestMoveFeetCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 2).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {
@@ -208,9 +210,9 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Shoot Subsystem")
                 .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(0, 0).withSize(2, 2);
-        
-        
-                
+
+
+
 
     }
 }

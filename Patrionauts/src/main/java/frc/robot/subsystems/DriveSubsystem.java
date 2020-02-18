@@ -40,10 +40,17 @@ public class DriveSubsystem extends SubsystemBase {
     public final double turnKd = .008;
     public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
+    public final double moveKp = 0;
+    public final double moveKi = 0;
+    public final double moveKd = 0;
+    public final PIDController movePID = new PIDController(moveKp, moveKi, moveKd);
+
     private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
     boolean isTurning = false;
-    double calculatedPIDValue = 0;
+    boolean isMoving = false;
+    double calculatedTurnPIDValue = 0;
+    double calculatedMovePIDValue = 0;
 
     // static final double COUNTS_PER_MOTOR_REV = 0;
     // static final double WHEEL_DIAMETER_INCHES = 6.0;
@@ -58,19 +65,33 @@ public class DriveSubsystem extends SubsystemBase {
         turnPID.enableContinuousInput(-180, 180);
         //done iff difference between where we're at and where we want to be is within .01% 
         turnPID.setTolerance(.01);
+        movePID.reset();
+        //movePID.enableContinuousInput(minimumInput, maximumInput);
+        movePID.setTolerance(.01);
     }
 
     @Override
     public void periodic() {
         if (isTurning) {
-            calculatedPIDValue = turnPID.calculate(imu.getYaw());
+            calculatedTurnPIDValue = turnPID.calculate(imu.getYaw());
             //it's essentially a limit
-            calculatedPIDValue = MathUtil.clamp(calculatedPIDValue, -0.5, 0.5);
+            calculatedTurnPIDValue = MathUtil.clamp(calculatedTurnPIDValue, -0.5, 0.5);
 
-            // drive.arcadeDrive(0, calculatedPIDValue);
+            // drive.arcadeDrive(0, calculatedTurnPIDValue);
 
             if (turnPID.atSetpoint()) {
                 isTurning = false;
+            }
+        }
+        if (isMoving) {
+            calculatedMovePIDValue = movePID.calculate(leftMotor1Encoder.getPosition());
+            // limit between max powers
+            calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -1, 1);
+
+            drive.arcadeDrive(calculatedMovePIDValue, 0);
+
+            if (movePID.atSetpoint()) {
+                isMoving = false;
             }
         }
     }
@@ -99,12 +120,25 @@ public class DriveSubsystem extends SubsystemBase {
         turnPID.setSetpoint(angle);
     }
 
-    public double getCalculatedPIDValue() {
-        return calculatedPIDValue;
+    public void move(double feet) {
+        isMoving = true;
+        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.INCHES_PER_TICK * 12 * feet));
+    }
+
+    public double getCalculatedTurnPIDValue() {
+        return calculatedTurnPIDValue;
+    }
+
+    public double getCalculatedMovePIDValue() {
+        return calculatedMovePIDValue;
     }
 
     public PIDController getTurnPIDController() {
         return turnPID;
+    }
+
+    public PIDController getMovePIDController() {
+        return movePID;
     }
 
     // Motors

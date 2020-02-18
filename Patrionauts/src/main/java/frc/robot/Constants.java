@@ -27,7 +27,7 @@ public final class Constants {
      * {@code Joystick Button 1 on port 1 not available, check if controller is plugged in errors}
      * from showing up in the simulation.
      */
-    public static final boolean ENABLE_JOYSTICK = false;
+    public static final boolean ENABLE_JOYSTICK = true;
 
     /**
      * Set to true if the gamepad is connected, otherwise set to false. This will
@@ -93,5 +93,7 @@ public final class Constants {
      * public static final double kPDriveVel = 0.0;
      */
     public static final int NEO_MOTOR_TEST = 1;
+
+    public static final double INCHES_PER_TICK = 0.44881;
 
 }
