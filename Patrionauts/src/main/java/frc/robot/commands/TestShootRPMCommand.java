@@ -11,6 +11,7 @@ public class TestShootRPMCommand extends CommandBase {
     private Timer timer = new Timer();
 
 
+
     //
     public TestShootRPMCommand(ShootSubsystem shoot) {
         this.shoot = shoot;
@@ -20,7 +21,7 @@ public class TestShootRPMCommand extends CommandBase {
     @Override
     public void initialize() {
         shoot.yeet1(10);
-        shoot.yeet2(10);
+        //shoot.yeet2(10);
 
     }
 

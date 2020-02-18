@@ -211,10 +211,10 @@ public class Dashboard extends CommandBase {
     public void configureShootSubsystem() {
         //Flywheel RPM's
         Shuffleboard.getTab("Shoot Subsystem")
-                .addNumber("Flywheel1 Encoder RPM", () -> robotContainer.getShootSubsystem().flyWheelEncoder1RPM)
+                .addNumber("Flywheel1 Encoder RPM", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
                 .withPosition(0,2).withSize(2, 1);
         Shuffleboard.getTab("Shoot Subsystem")
-                .addNumber("Flywheel2 Encoder RPM", () -> robotContainer.getShootSubsystem().flyWheelEncoder2RPM)
+                .addNumber("Flywheel2 Encoder RPM", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
                 .withPosition(2,2).withSize(2, 1);
 
         //PID
@@ -229,6 +229,6 @@ public class Dashboard extends CommandBase {
 
 
 
-
+        
     }
 }
