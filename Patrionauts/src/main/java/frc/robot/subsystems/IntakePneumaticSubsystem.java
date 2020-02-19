@@ -21,8 +21,8 @@ public class IntakePneumaticSubsystem extends SubsystemBase{
         doubleSolenoid4.set(DoubleSolenoid.Value.kForward);
     }
     public void setUpIntake(){
-        doubleSolenoid3.set(DoubleSolenoid.Value.kForward);
-        doubleSolenoid4.set(DoubleSolenoid.Value.kForward);
+        doubleSolenoid3.set(DoubleSolenoid.Value.kReverse);
+        doubleSolenoid4.set(DoubleSolenoid.Value.kReverse);
         
     }
 

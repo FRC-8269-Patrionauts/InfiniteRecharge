@@ -26,13 +26,13 @@ public class ShootSubsystem extends SubsystemBase {
     public final double shootKi1 = 0;
     public final double shootKd1 = 0;
     public final PIDController pidShooter1 = new PIDController(shootKp1, shootKi1, shootKd1);
-    
+
 
     public final double shootKp2 = 0;
     public final double shootKi2 = 0;
     public final double shootKd2 = 0;
     public final PIDController pidShooter2 = new PIDController(shootKp2, shootKi2, shootKd2);
-    
+
     public double flyWheelEncoder1RPM = 0;
     public double flyWheelEncoder2RPM = 0;
 
@@ -49,13 +49,14 @@ public class ShootSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         if (isRamping) {
-            double flyWheelEncoder1RPM = flyWheelEncoder1.getVelocity();
-            double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
-            calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1RPM);
-            calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2RPM);
+            //double flyWheelEncoder1RPM = flyWheelEncoder1.getVelocity();
+            //double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
 
-            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -0.5, 0.5);
-            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -0.5, 0.5);
+            calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
+            calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
+
+            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -5, 5);
+            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -5, 5);
 
             flyWheelMotor1.set(calculatedShootPIDValue1);
             flyWheelMotor2.set(calculatedShootPIDValue2);
@@ -65,7 +66,7 @@ public class ShootSubsystem extends SubsystemBase {
             }
         }
     }
-    
+
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(speed);
         flyWheelMotor2.set(-speed);
@@ -87,8 +88,8 @@ public class ShootSubsystem extends SubsystemBase {
     }
 
     //NEED
-    //periodic, current RPM, goal RPM, take output of periodic loop and set that to motor controllers, ask it if we're done 
-    //also look at turn method and compare how it works 
+    //periodic, current RPM, goal RPM, take output of periodic loop and set that to motor controllers, ask it if we're done
+    //also look at turn method and compare how it works
 
     //call pid controller, get output of pid controller and send to motor
     //Every time we do a periodic, we use the output and send it to the motor controller
@@ -110,11 +111,11 @@ public class ShootSubsystem extends SubsystemBase {
     }
 
 
-    public CANSparkMax getflyWheelMotor1() {
+    public CANSparkMax getFlyWheelMotor1() {
         return flyWheelMotor1;
     }
 
-    public CANSparkMax getflyWheelMotor2() {
+    public CANSparkMax getFlyWheelMotor2() {
         return flyWheelMotor2;
     }
 

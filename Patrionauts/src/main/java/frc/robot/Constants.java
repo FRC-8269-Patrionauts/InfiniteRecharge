@@ -14,12 +14,12 @@ public final class Constants {
      * {@code [CAN SPARK MAX] WPILib or External HAL Error} from showing up in the
      * simulation.
      */
-    public static final boolean ENABLE_DRIVE_SUBSYSTEM = false;
+    public static final boolean ENABLE_DRIVE_SUBSYSTEM = true;
 
     /**
      * Set to true if all of the components for the ShootSubsystem are connected.
      */
-    public static final boolean ENABLE_SHOOT_SUBSYSTEM = false;
+    public static final boolean ENABLE_SHOOT_SUBSYSTEM = true;
 
     /**
      * Set to true if the joystick is connected, otherwise set to false. This will
