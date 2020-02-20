@@ -8,8 +8,8 @@ import frc.robot.subsystems.ShootSubsystem;
 public class TestShootRPMCommand extends CommandBase {
 
     private final ShootSubsystem shoot;
-    private Timer timer = new Timer();
 
+    private boolean finished = false;
 
 
     //
@@ -27,6 +27,11 @@ public class TestShootRPMCommand extends CommandBase {
 
     @Override
     public void execute() {
+        SmartDashboard.putBoolean("Test Shoot RPM", true);
+    }
 
+    public boolean isFinished() {
+        SmartDashboard.putBoolean("Test Shoot RPM", false);
+        return finished;
     }
 }
