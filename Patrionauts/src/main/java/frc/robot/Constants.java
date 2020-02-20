@@ -14,7 +14,7 @@ public final class Constants {
      * {@code [CAN SPARK MAX] WPILib or External HAL Error} from showing up in the
      * simulation.
      */
-    public static final boolean ENABLE_DRIVE_SUBSYSTEM = true;
+    public static final boolean ENABLE_DRIVE_SUBSYSTEM = false;
 
     /**
      * Set to true if all of the components for the ShootSubsystem are connected.

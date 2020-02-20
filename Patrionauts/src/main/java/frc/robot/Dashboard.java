@@ -35,6 +35,7 @@ public class Dashboard extends CommandBase {
             configureLimeLight();
         }
         configurePneumatics();
+        configureBelt();
     }
 
     private void configureCommands() {
@@ -247,9 +248,15 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Shoot Subsystem")
                 .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(2, 0).withSize(2, 2);
-
-
-
+        Shuffleboard.getTab("Shoot Subsystem")
+                .addNumber("ShootPIDControllerOutput", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
+                                .withPosition(2, 3).withSize(1, 1);
         
+    }
+
+    public void configureBelt() {
+        Shuffleboard.getTab("Belt")
+                .addNumber("Belt Speed", () -> robotContainer.getBeltSubsystem().getBeltMotor().get())
+                .withPosition(2, 0).withSize(2, 2);
     }
 }

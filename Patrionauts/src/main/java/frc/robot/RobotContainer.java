@@ -129,6 +129,7 @@ public class RobotContainer {
         joystickButton8.whenPressed(intakeCommand);
         joystickButton7.whenPressed(outakeCommand);
         joystickButton1.whenPressed(beltFeedCommand);
+        joystickButton2.whenPressed(testShootRPMCommand);
 
     }
 
@@ -178,6 +179,10 @@ public class RobotContainer {
 
     public IntakeRollerSubsystem getIntakeSubsystem() {
         return this.intakeRollerSubsystem;
+    }
+
+    public BeltSubsystem getBeltSubsystem() {
+        return this.beltSubsystem;
     }
 
     public AutonomousCommand getAutonomousCommand() {

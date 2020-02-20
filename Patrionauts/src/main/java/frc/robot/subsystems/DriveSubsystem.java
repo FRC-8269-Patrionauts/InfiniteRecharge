@@ -97,7 +97,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void arcadeDrive(double forward, double turn) {
-        // drive.arcadeDrive(forward, turn);
+        drive.arcadeDrive(forward, turn);
     }
 
     // public DifferentialDrive getDifferentialDrive() {
@@ -105,7 +105,7 @@ public class DriveSubsystem extends SubsystemBase {
     // }
 
     public void stop() {
-        // arcadeDrive(0, 0);
+        arcadeDrive(0, 0);
     }
 
     // PID

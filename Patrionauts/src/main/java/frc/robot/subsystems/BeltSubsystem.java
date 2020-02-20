@@ -24,4 +24,8 @@ public class BeltSubsystem extends SubsystemBase {
         beltMoter.set(speed);
     }
 
+    public CANSparkMax getBeltMotor() {
+        return beltMoter;
+    }
+
 }
