@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.BeltFeedCommand;
 import frc.robot.commands.CloseLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.FollowPathCommand;
@@ -58,6 +59,8 @@ public class RobotContainer {
             Constants.GAMEPAD_RIGHT_ANALOG_CLICK);
 
     // Joystick Buttons
+    private final JoystickButton joystickButton1 = new JoystickButton(joystick, 1);
+    private final JoystickButton joystickButton2 = new JoystickButton(joystick, 2);
     private final JoystickButton joystickButton3 = new JoystickButton(joystick, 3);
     private final JoystickButton joystickButton4 = new JoystickButton(joystick, 4);
     private final JoystickButton joystickButton5 = new JoystickButton(joystick, 5);
@@ -95,6 +98,7 @@ public class RobotContainer {
     private final CloseLoaderCommand closeLoaderCommand = new CloseLoaderCommand(loaderSubsystem);
     private final IntakeCommand intakeCommand = new IntakeCommand(intakeRollerSubsystem);
     private final OutakeCommand outakeCommand = new OutakeCommand(intakeRollerSubsystem);
+    private final BeltFeedCommand beltFeedCommand = new BeltFeedCommand(beltSubsystem);
 
     private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
     private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
@@ -124,6 +128,7 @@ public class RobotContainer {
         joystickButton4.whenPressed(lowerIntakeCommand);
         joystickButton8.whenPressed(intakeCommand);
         joystickButton7.whenPressed(outakeCommand);
+        joystickButton1.whenPressed(beltFeedCommand);
 
     }
 
@@ -238,6 +243,10 @@ public class RobotContainer {
 
   public OutakeCommand getOutakeCommand() {
     return this.outakeCommand;
+  }
+
+  public BeltFeedCommand getBeltFeedCommand() {
+    return this.beltFeedCommand;
   }
   
 }

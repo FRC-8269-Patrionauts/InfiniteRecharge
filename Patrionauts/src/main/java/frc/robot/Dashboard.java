@@ -68,6 +68,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 4).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 4).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("BeltFeed", (Sendable) robotContainer.getBeltFeedCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 4).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {
