@@ -77,7 +77,7 @@ public class DriveSubsystem extends SubsystemBase {
             //it's essentially a limit
             calculatedTurnPIDValue = MathUtil.clamp(calculatedTurnPIDValue, -0.5, 0.5);
 
-            // drive.arcadeDrive(0, calculatedTurnPIDValue);
+            drive.arcadeDrive(0, calculatedTurnPIDValue);
 
             if (turnPID.atSetpoint()) {
                 isTurning = false;
@@ -86,7 +86,7 @@ public class DriveSubsystem extends SubsystemBase {
         if (isMoving) {
             calculatedMovePIDValue = movePID.calculate(leftMotor1Encoder.getPosition());
             // limit between max powers
-            calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -1, 1);
+            calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -.5, .5);
 
             drive.arcadeDrive(calculatedMovePIDValue, 0);
 
@@ -122,7 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void move(double feet) {
         isMoving = true;
-        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.INCHES_PER_TICK * 12 * feet));
+        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * 12 * feet));
     }
 
     public double getCalculatedTurnPIDValue() {

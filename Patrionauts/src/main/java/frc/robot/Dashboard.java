@@ -63,8 +63,8 @@ public class Dashboard extends CommandBase {
 
         Shuffleboard.getTab("Commands").add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 3).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystem").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getIntakeCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
