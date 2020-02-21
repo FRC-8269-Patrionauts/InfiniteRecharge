@@ -55,20 +55,20 @@ public class ShootSubsystem extends SubsystemBase {
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
             calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
-            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -5, 5);
-            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -5, 5);
+            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
+            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
 
             flyWheelMotor1.set(calculatedShootPIDValue1);
             flyWheelMotor2.set(calculatedShootPIDValue2);
 
-            if (pidShooter1.atSetpoint() && pidShooter2.atSetpoint()) {
+            if (pidShooter1.atSetpoint() /*&& pidShooter2.atSetpoint()*/) {
                 isRamping = false;
             }
         }
     }
 
     public void setFlyWheel(double speed) {
-        flyWheelMotor1.set(speed);
+        flyWheelMotor1.set(-speed);
         flyWheelMotor2.set(-speed);
     }
 

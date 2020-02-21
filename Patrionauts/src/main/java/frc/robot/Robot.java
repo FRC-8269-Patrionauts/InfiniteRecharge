@@ -50,4 +50,9 @@ public class Robot extends TimedRobot {
             humanDriveCommand.schedule();
         }
     }
+
+    @Override
+    public void testInit() {
+        CommandScheduler.getInstance().cancelAll();
+    }
 }

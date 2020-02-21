@@ -105,7 +105,7 @@ public class DriveSubsystem extends SubsystemBase {
     // }
 
     public void stop() {
-         arcadeDrive(0, 0);
+        arcadeDrive(0, 0);
     }
 
     // PID

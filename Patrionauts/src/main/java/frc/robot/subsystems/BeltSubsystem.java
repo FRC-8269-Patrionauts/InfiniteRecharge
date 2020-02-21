@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class BeltSubsystem extends SubsystemBase {
-    private final PWMVictorSPX beltMoter = new PWMVictorSPX(Constants.BELT_MOTOR);
+    private final PWMVictorSPX beltMotor = new PWMVictorSPX(Constants.BELT_MOTOR);
+
 
     public BeltSubsystem() {
     }
@@ -19,7 +20,11 @@ public class BeltSubsystem extends SubsystemBase {
     }
 
     public void feedBall(double speed){
-        beltMoter.set(speed);
+        beltMotor.set(speed);
+    }
+
+    public PWMVictorSPX getBeltMotor() {
+        return beltMotor;
     }
 
 }

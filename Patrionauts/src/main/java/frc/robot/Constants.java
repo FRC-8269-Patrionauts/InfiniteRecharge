@@ -6,7 +6,8 @@ package frc.robot;
  * purpose. All constants should be declared globally (i.e. public static). Do
  * not put anything functional in this class.
  */
-public final class Constants {
+public final class 
+Constants {
 
     /**
      * Set to true if all of the components for the DriveSubsystem are connected,
@@ -37,8 +38,8 @@ public final class Constants {
      */
     public static final boolean ENABLE_GAMEPAD = false;
 
-    public static final int FLYWHEEL_MOTOR1 = 6;
-    public static final int FLYWHEEL_MOTOR2 = 7;
+    public static final int FLYWHEEL_MOTOR1 = 2;
+    public static final int FLYWHEEL_MOTOR2 = 3;
 
     /**
      * Set to true if the Limelight is connected, otherwise set to false.
@@ -48,10 +49,10 @@ public final class Constants {
     public static final int JOYSTICK_1 = 0;
     public static final int GAMEPAD_1 = 1;
 
-    public static final int LEFT_MOTOR_1 = 3;
-    public static final int LEFT_MOTOR_2 = 2;
-    public static final int RIGHT_MOTOR_1 = 5;
-	public static final int RIGHT_MOTOR_2 = 4;
+    public static final int LEFT_MOTOR_1 = 6;
+    public static final int LEFT_MOTOR_2 = 7;
+    public static final int RIGHT_MOTOR_1 = 4;
+	public static final int RIGHT_MOTOR_2 = 5;
 	
 	public static final int BELT_MOTOR = 10;
 
