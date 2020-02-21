@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class BeltSubsystem extends SubsystemBase {
-    private final CANSparkMax beltMoter = new CANSparkMax(Constants.BELT_MOTOR, MotorType.kBrushless);
+    private final PWMVictorSPX beltMotor = new PWMVictorSPX(Constants.BELT_MOTOR);
 
     public BeltSubsystem() {
     }
@@ -21,11 +21,11 @@ public class BeltSubsystem extends SubsystemBase {
     }
 
     public void feedBall(double speed){
-        beltMoter.set(speed);
+        beltMotor.set(speed);
     }
 
-    public CANSparkMax getBeltMotor() {
-        return beltMoter;
+    public PWMVictorSPX getBeltMotor() {
+        return beltMotor;
     }
 
 }
