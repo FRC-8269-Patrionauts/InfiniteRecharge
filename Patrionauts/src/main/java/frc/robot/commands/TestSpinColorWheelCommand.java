@@ -8,7 +8,6 @@ public class TestSpinColorWheelCommand extends InstantCommand{
     private final ColorWheelSubsystem spinnerSubsystem;
 
     boolean foo = true;
-
     public TestSpinColorWheelCommand(ColorWheelSubsystem colorWheelSpinner){
         this.spinnerSubsystem = colorWheelSpinner;
         addRequirements(colorWheelSpinner);

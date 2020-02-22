@@ -16,6 +16,10 @@ import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.LiftBotCommand;
+import frc.robot.commands.LiftHookCommand;
+import frc.robot.commands.LowerBotCommand;
+import frc.robot.commands.LowerHookCommand;
 import frc.robot.commands.OutakeCommand;
 import frc.robot.commands.LowerIntakeCommand;
 import frc.robot.commands.OpenLoaderCommand;
@@ -31,6 +35,7 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeRollerSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 import frc.robot.subsystems.IntakePneumaticSubsystem;
@@ -85,6 +90,7 @@ public class RobotContainer {
     private final IntakePneumaticSubsystem intakePneumaticSubsystem = new IntakePneumaticSubsystem();
     private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
     private final BeltSubsystem beltSubsystem = new BeltSubsystem();
+    private final LiftSubsystem liftSubsystem = new LiftSubsystem();
 
     // Commands
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
@@ -101,6 +107,10 @@ public class RobotContainer {
     private final OutakeCommand outakeCommand = new OutakeCommand(intakeRollerSubsystem);
     private final BeltFeedCommand beltFeedCommand = new BeltFeedCommand(beltSubsystem);
     private final TestSpinColorWheelCommand testSpinColorWheelCommand = new TestSpinColorWheelCommand(colorWheelSubsystem);
+    private final LiftHookCommand liftHookCommand = new LiftHookCommand(liftSubsystem);
+    private final LowerHookCommand lowerHookCommand = new LowerHookCommand(liftSubsystem);
+    private final LiftBotCommand liftBotCommand = new LiftBotCommand(liftSubsystem);
+    private final LowerBotCommand lowerBotCommand = new LowerBotCommand(liftSubsystem);
 
     private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
     private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
@@ -188,6 +198,10 @@ public class RobotContainer {
         return this.beltSubsystem;
     }
 
+    public LiftSubsystem getLiftSubsystem(){
+        return this.liftSubsystem;
+    }
+
     public AutonomousCommand getAutonomousCommand() {
         return this.autonomousCommand;
     }
@@ -261,6 +275,21 @@ public class RobotContainer {
       return this.testSpinColorWheelCommand;
   }
   
+  public LiftHookCommand getLiftHookCommand() {
+      return this.liftHookCommand;
+  }
+
+  public LowerHookCommand getLowerHookCommand() {
+      return this.lowerHookCommand;
+  }
+
+  public LiftBotCommand getLiftBotCommand() {
+      return this.liftBotCommand;
+  }
+
+  public LowerBotCommand getLowerBotCommand() {
+      return this.lowerBotCommand;
+  }
 }
 
 
