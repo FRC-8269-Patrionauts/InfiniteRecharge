@@ -19,7 +19,7 @@ public class TestMoveFeetCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        drive.move(2);
+        drive.move(56.5);
         timer.reset();
         timer.start();
     }
