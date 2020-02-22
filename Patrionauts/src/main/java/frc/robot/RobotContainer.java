@@ -132,6 +132,7 @@ public class RobotContainer {
         joystickButton7.whenPressed(outakeCommand);
         joystickButton1.whenPressed(beltFeedCommand);
         joystickButton2.whenPressed(testShootRPMCommand);
+        joystickButton9.whenPressed(testSpinColorWheelCommand);
 
     }
 
