@@ -40,6 +40,9 @@ public class ShootSubsystem extends SubsystemBase {
     double calculatedShootPIDValue1 = 0;
     double calculatedShootPIDValue2 = 0;
 
+    double currentSpeed1 = 0;
+    double currentSpeed2 = 0;
+
 
     public ShootSubsystem() {
 
@@ -58,8 +61,15 @@ public class ShootSubsystem extends SubsystemBase {
             calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
             calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
 
-            flyWheelMotor1.set(calculatedShootPIDValue1);
-            flyWheelMotor2.set(calculatedShootPIDValue2);
+            currentSpeed1 += calculatedShootPIDValue1;
+            currentSpeed2 += calculatedShootPIDValue2;
+            
+            currentSpeed1 = MathUtil.clamp(currentSpeed1, -.5, .5);
+            currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
+            System.out.println("Current Speed 1:" + currentSpeed1 );
+
+            flyWheelMotor1.set(currentSpeed1);
+            flyWheelMotor2.set(currentSpeed2);
 
             if (pidShooter1.atSetpoint() /*&& pidShooter2.atSetpoint()*/) {
                 isRamping = false;
@@ -80,11 +90,13 @@ public class ShootSubsystem extends SubsystemBase {
     public void yeet1(double RPM) {
         isRamping = true;
         pidShooter1.setSetpoint(RPM);
+        currentSpeed1 = 0;
     }
 
     public void yeet2(double RPM) {
         isRamping = true;
         pidShooter2.setSetpoint(RPM);
+        currentSpeed2 = 0;
     }
 
     //NEED
@@ -100,6 +112,14 @@ public class ShootSubsystem extends SubsystemBase {
 
     public double getCalculatedShootPIDValue2() {
         return calculatedShootPIDValue2;
+    }
+
+    public double getCurrentSpeed1() {
+        return currentSpeed1;
+    }
+
+    public double getCurrentSpeed2() {
+        return currentSpeed2;
     }
 
     public PIDController getShooterPIDController1() {
@@ -126,5 +146,6 @@ public class ShootSubsystem extends SubsystemBase {
     public CANEncoder getFlyWheelEncoder2() {
         return flyWheelEncoder2;
     }
+
 
 }

@@ -120,9 +120,9 @@ public class DriveSubsystem extends SubsystemBase {
         turnPID.setSetpoint(angle);
     }
 
-    public void move(double feet) {
+    public void move(double inches) {
         isMoving = true;
-        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * 12 * feet));
+        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
     }
 
     public double getCalculatedTurnPIDValue() {
