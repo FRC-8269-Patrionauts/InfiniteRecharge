@@ -94,7 +94,7 @@ Constants {
      */
     public static final int NEO_MOTOR_TEST = 1;
 
-    public static final double TICKS_PER_INCH = 32 / 56.5;
+    public static final double TICKS_PER_INCH = 95.491 / 167.625;
 
 	public static final int INTAKE_MOTOR = 9;
 

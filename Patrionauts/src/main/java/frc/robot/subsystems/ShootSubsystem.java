@@ -17,10 +17,10 @@ import frc.robot.Constants;
 public class ShootSubsystem extends SubsystemBase {
 
     private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
-    private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
+    //private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
 
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
-    private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
+    //private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
     public final double shootKp1 = 0;
     public final double shootKi1 = 0;
@@ -56,7 +56,7 @@ public class ShootSubsystem extends SubsystemBase {
             //double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
 
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
-            calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
+            //calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
             calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
             calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
@@ -69,7 +69,7 @@ public class ShootSubsystem extends SubsystemBase {
             System.out.println("Current Speed 1:" + currentSpeed1 );
 
             flyWheelMotor1.set(currentSpeed1);
-            flyWheelMotor2.set(currentSpeed2);
+           // flyWheelMotor2.set(currentSpeed2);
 
             if (pidShooter1.atSetpoint() /*&& pidShooter2.atSetpoint()*/) {
                 isRamping = false;
@@ -79,12 +79,12 @@ public class ShootSubsystem extends SubsystemBase {
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(-speed);
-        flyWheelMotor2.set(-speed);
+        //flyWheelMotor2.set(-speed);
     }
 
     public void stopFlyWheel() {
         flyWheelMotor1.set(0);
-        flyWheelMotor2.set(0);
+       // flyWheelMotor2.set(0);
     }
 
     public void yeet1(double RPM) {
@@ -135,17 +135,19 @@ public class ShootSubsystem extends SubsystemBase {
         return flyWheelMotor1;
     }
 
-    public CANSparkMax getFlyWheelMotor2() {
-        return flyWheelMotor2;
+    /*public CANSparkMax getFlyWheelMotor2() {
+       // return flyWheelMotor2;
     }
+    */
 
     public CANEncoder getFlyWheelEncoder1() {
         return flyWheelEncoder1;
     }
 
-    public CANEncoder getFlyWheelEncoder2() {
-        return flyWheelEncoder2;
+    /*public CANEncoder getFlyWheelEncoder2() {
+        //return flyWheelEncoder2;
     }
+    */
 
 
 }

@@ -39,7 +39,8 @@ public class HumanDriveCommand extends CommandBase {
                 driveSubsystem.stop();
             }
         }
-
+        System.out.print("IMU Yaw: ");
+        System.out.println(driveSubsystem.imu.getYaw());
         if (Constants.ENABLE_GAMEPAD) {
             if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .2) {
                 driveSubsystem.arcadeDrive(gamepad.getRawAxis(1), gamepad.getRawAxis(2));
