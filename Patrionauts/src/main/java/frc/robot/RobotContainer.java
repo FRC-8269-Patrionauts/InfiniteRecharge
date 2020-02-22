@@ -24,6 +24,7 @@ import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestShootRPMCommand;
+import frc.robot.commands.TestSpinColorWheelCommand;
 import frc.robot.commands.TestTurningCommand;
 import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -99,6 +100,7 @@ public class RobotContainer {
     private final IntakeCommand intakeCommand = new IntakeCommand(intakeRollerSubsystem);
     private final OutakeCommand outakeCommand = new OutakeCommand(intakeRollerSubsystem);
     private final BeltFeedCommand beltFeedCommand = new BeltFeedCommand(beltSubsystem);
+    private final TestSpinColorWheelCommand testSpinColorWheelCommand = new TestSpinColorWheelCommand(colorWheelSubsystem);
 
     private final LowerIntakeCommand lowerIntakeCommand = new LowerIntakeCommand(intakePneumaticSubsystem);
     private final RaiseIntakeCommand raiseIntakeCommand = new RaiseIntakeCommand(intakePneumaticSubsystem);
@@ -252,6 +254,10 @@ public class RobotContainer {
 
   public BeltFeedCommand getBeltFeedCommand() {
     return this.beltFeedCommand;
+  }
+
+  public TestSpinColorWheelCommand getTestSpinColorWheelCommand() {
+      return this.testSpinColorWheelCommand;
   }
   
 }

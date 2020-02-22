@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorWheelSubsystem extends SubsystemBase {
+    public PWMVictorSPX colorWheelSpinner = new PWMVictorSPX(9);
     public String targetColor;
     public String myColor;
 
@@ -32,10 +34,8 @@ public class ColorWheelSubsystem extends SubsystemBase {
     }
 
     // rotates the wheel autonomously UNTIL getTargetColor is true
-    public void rotateWheel() {
-        /*
-         * PSEUDOCODE while(targetColor == false) { activate spinny motor }
-         */
+    public void rotateWheel(double speed) {
+       colorWheelSpinner.set(speed);
     }
 
     public void controlWheel() {
