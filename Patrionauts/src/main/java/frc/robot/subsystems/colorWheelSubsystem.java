@@ -36,7 +36,7 @@ public class ColorWheelSubsystem extends SubsystemBase {
     // rotates the wheel autonomously UNTIL getTargetColor is true
     public void rotateWheel(double speed) {
        colorWheelSpinner.set(speed);
-       System.out.println("asdfghjkl yessir it be spinin");
+       System.out.println("(>._____.)> bruh");
     }
 
     public void controlWheel() {
