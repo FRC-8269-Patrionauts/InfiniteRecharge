@@ -73,7 +73,14 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestColorWheelSpinner", (Sendable) robotContainer.getTestSpinColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
-
+        Shuffleboard.getTab("Commands").add("LiftHookCommand", (Sendable) robotContainer.getLiftHookCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("LowerHookCommand", (Sendable) robotContainer.getLowerHookCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("LiftBotCommand", (Sendable) robotContainer.getLiftBotCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("LowerBotCommand", (Sendable) robotContainer.getLowerBotCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
     }
 
     private void configureDriveSubsystem() {

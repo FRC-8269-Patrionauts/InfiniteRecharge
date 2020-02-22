@@ -9,20 +9,9 @@ public class LoaderSubsystem extends SubsystemBase {
     private final DoubleSolenoid doubleSolenoid1 = new DoubleSolenoid(0, 1);
     private final DoubleSolenoid doubleSolenoid2 = new DoubleSolenoid(2, 3);
 
-    private boolean var = false;
-
     public LoaderSubsystem() {
         
     }
-
-    public void setVar(boolean var) {
-        this.var = var;
-    }
-
-    public boolean getVar() { 
-        return var;
-    }
-
     public DoubleSolenoid getSolenoid1() {
         return doubleSolenoid1;
     }
