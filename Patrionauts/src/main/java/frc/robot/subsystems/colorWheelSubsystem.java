@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorWheelSubsystem extends SubsystemBase {
-    public PWMVictorSPX colorWheelSpinner = new PWMVictorSPX(9);
+    public PWMVictorSPX colorWheelSpinner = new PWMVictorSPX(1);
     public String targetColor;
     public String myColor;
 
@@ -36,6 +36,7 @@ public class ColorWheelSubsystem extends SubsystemBase {
     // rotates the wheel autonomously UNTIL getTargetColor is true
     public void rotateWheel(double speed) {
        colorWheelSpinner.set(speed);
+       System.out.println("asdfghjkl yessir it be spinin");
     }
 
     public void controlWheel() {

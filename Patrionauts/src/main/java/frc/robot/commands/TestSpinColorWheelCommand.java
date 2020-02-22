@@ -17,7 +17,7 @@ public class TestSpinColorWheelCommand extends CommandBase{
 
     @Override
     public void execute() {
-        spinnerSubsystem.rotateWheel(.5);
+        spinnerSubsystem.rotateWheel(.2);
     }
 
 }
