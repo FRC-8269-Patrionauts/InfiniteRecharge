@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LiftSubsystem extends SubsystemBase{
     private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(0); //lifts of the hook to hang
 
-    private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(0); //pulls the robot up
-    private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(0);
+    private final PWMVictorSPX BotLiftMotor1 = HookLiftMotor; //pulls the robot up
+    private final PWMVictorSPX BotLiftMotor2 = HookLiftMotor;
 
     public LiftSubsystem(){
 
