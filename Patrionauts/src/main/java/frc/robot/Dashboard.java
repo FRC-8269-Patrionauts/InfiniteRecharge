@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class Dashboard extends CommandBase {
@@ -36,6 +39,7 @@ public class Dashboard extends CommandBase {
         }
         configurePneumatics();
         configureBelt();
+        configureCamera();
     }
 
     private void configureCommands() {
@@ -45,8 +49,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("ColorWheel", (Sendable) robotContainer.getColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);     
-        Shuffleboard.getTab("TestCommands").add("TestTurning", (Sendable) robotContainer.getTestTurningCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
+        Shuffleboard.getTab("DriveSubsystemPID").add("TestTurning", (Sendable) robotContainer.getTestTurningCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("AlignAtTarge", (Sendable) robotContainer.getAlignAtTargetCommand())
@@ -63,7 +67,7 @@ public class Dashboard extends CommandBase {
 
         
 
-        Shuffleboard.getTab("DriveSubsystem").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
+        Shuffleboard.getTab("DriveSubsystemPID").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getIntakeCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
@@ -120,27 +124,32 @@ public class Dashboard extends CommandBase {
                         () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
                 .withPosition(6, 1).withSize(1, 1);
 
+                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
+                                .withPosition(0, 2);
+                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Pitch", () -> robotContainer.getImu().getPitch())
+                                .withPosition(1, 2);
+                Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Roll", () -> robotContainer.getImu().getRoll())
+                                .withPosition(2, 2);
+
         // PID
-        Shuffleboard.getTab("DriveSubsystem")
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .add("TurnPIDController", (Sendable) robotContainer.getDriveSubsystem().getTurnPIDController())
-                .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 0).withSize(2, 2);
-
-        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
-                .withPosition(0, 2);
-        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Pitch", () -> robotContainer.getImu().getPitch())
-                .withPosition(1, 2);
-        Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Roll", () -> robotContainer.getImu().getRoll())
-                .withPosition(2, 2);
-
-        Shuffleboard.getTab("DriveSubsystem")
+                .withWidget(BuiltInWidgets.kPIDController).withPosition(0, 0).withSize(2, 2);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("Calculated Turn PID", () -> robotContainer.getDriveSubsystem().getCalculatedTurnPIDValue())
-                .withPosition(3, 2).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
-                .add("MovePIDController", (Sendable) robotContainer.getDriveSubsystem().getMovePIDController())
-                .withWidget(BuiltInWidgets.kPIDController).withPosition(7, 2).withSize(2, 2);
-        Shuffleboard.getTab("DriveSubsystem")
-                .addNumber("Calculated Move PID", () -> robotContainer.getDriveSubsystem().getCalculatedMovePIDValue())
-                .withPosition(5, 2).withSize(1, 1);
+                .withPosition(0, 2).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
+                .add("MoveLeftPIDController", (Sendable) robotContainer.getDriveSubsystem().getMoveLeftPIDController())
+                .withWidget(BuiltInWidgets.kPIDController).withPosition(2, 0).withSize(2, 2);
+        Shuffleboard.getTab("DriveSubsystemPID")
+                .addNumber("CalculatedMoveLeftPID", () -> robotContainer.getDriveSubsystem().getCalculatedMoveRightPIDValue())
+                .withPosition(2, 2).withSize(1, 1);
+         Shuffleboard.getTab("DriveSubsystemPID").add("MoveRightPIDController",
+                (Sendable) robotContainer.getDriveSubsystem().getMoveRightPIDController())
+                .withWidget(BuiltInWidgets.kPIDController).withPosition(4, 0).withSize(2, 2);
+        Shuffleboard.getTab("DriveSubsystemPID").addNumber("CalculatedMoveRightPID",
+                () -> robotContainer.getDriveSubsystem().getCalculatedMoveRightPIDValue())
+                .withPosition(4, 2).withSize(1, 1);
     }
 
     private void configureJoystick() {
@@ -281,5 +290,14 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Belt Speed", () -> robotContainer.getBeltSubsystem().getBeltMotor().get())
                 .withPosition(0, 3).withSize(1, 1);
+    }
+
+    public void configureCamera() {
+        //CvSource outputStream = CameraServer.getInstance().putVideo("BotCam", 1920, 1080);
+        UsbCamera outputStream = CameraServer.getInstance().startAutomaticCapture();
+        //outputStream.setResolution(640, 480);
+        Shuffleboard.getTab("Camera")
+                .add("BotCam", outputStream)
+                .withPosition(0, 0).withSize(7, 4);
     }
 }

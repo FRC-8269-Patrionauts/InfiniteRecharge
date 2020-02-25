@@ -40,17 +40,23 @@ public class DriveSubsystem extends SubsystemBase {
     public final double turnKd = .008;
     public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
-    public final double moveKp = 0;
-    public final double moveKi = 0;
-    public final double moveKd = 0;
-    public final PIDController movePID = new PIDController(moveKp, moveKi, moveKd);
+    public final double moveLeftKp = 0.1;
+    public final double moveLeftKi = 0;
+    public final double moveLeftKd = 0;
+    public final PIDController moveLeftPID = new PIDController(moveLeftKp, moveLeftKi, moveLeftKd);
+
+    public final double moveRightKp = 0.1;
+    public final double moveRightKi = 0;
+    public final double moveRightKd = 0;
+    public final PIDController moveRightPID = new PIDController(moveRightKp, moveRightKi, moveRightKd);
 
     private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
     boolean isTurning = false;
     boolean isMoving = false;
     double calculatedTurnPIDValue = 0;
-    double calculatedMovePIDValue = 0;
+    double calculatedMoveLeftPIDValue = 0;
+    double calculatedMoveRightPIDValue = 0;
 
     // static final double COUNTS_PER_MOTOR_REV = 0;
     // static final double WHEEL_DIAMETER_INCHES = 6.0;
@@ -65,9 +71,11 @@ public class DriveSubsystem extends SubsystemBase {
         turnPID.enableContinuousInput(-180, 180);
         //done iff difference between where we're at and where we want to be is within .01% 
         turnPID.setTolerance(.01);
-        movePID.reset();
+        moveLeftPID.reset();
+        moveRightPID.reset();
         //movePID.enableContinuousInput(minimumInput, maximumInput);
-        movePID.setTolerance(.01);
+        moveLeftPID.setTolerance(.01);
+        moveRightPID.setTolerance(.01);
     }
 
     @Override
@@ -84,13 +92,15 @@ public class DriveSubsystem extends SubsystemBase {
             }
         }
         if (isMoving) {
-            calculatedMovePIDValue = movePID.calculate(leftMotor1Encoder.getPosition());
+            calculatedMoveLeftPIDValue = moveLeftPID.calculate(leftMotor1Encoder.getPosition());
+            calculatedMoveRightPIDValue = moveRightPID.calculate(rightMotor1Encoder.getPosition());
             // limit between max powers
-            calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -.5, .5);
+            calculatedMoveLeftPIDValue = MathUtil.clamp(calculatedMoveLeftPIDValue, -.5, .5);
+            calculatedMoveRightPIDValue = MathUtil.clamp(calculatedMoveRightPIDValue, -.5, .5);
 
-            drive.arcadeDrive(calculatedMovePIDValue, 0);
+            drive.tankDrive(calculatedMoveLeftPIDValue, calculatedMoveRightPIDValue);
 
-            if (movePID.atSetpoint()) {
+            if (moveLeftPID.atSetpoint() && moveRightPID.atSetpoint()) {
                 isMoving = false;
             }
         }
@@ -122,23 +132,32 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void move(double inches) {
         isMoving = true;
-        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
+        moveLeftPID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
+        moveRightPID.setSetpoint(rightMotor1Encoder.getPosition() - (Constants.TICKS_PER_INCH * inches));
     }
 
     public double getCalculatedTurnPIDValue() {
         return calculatedTurnPIDValue;
     }
 
-    public double getCalculatedMovePIDValue() {
-        return calculatedMovePIDValue;
+    public double getCalculatedMoveLeftPIDValue() {
+        return calculatedMoveLeftPIDValue;
+    }
+
+    public double getCalculatedMoveRightPIDValue() {
+        return calculatedMoveRightPIDValue;
     }
 
     public PIDController getTurnPIDController() {
         return turnPID;
     }
 
-    public PIDController getMovePIDController() {
-        return movePID;
+    public PIDController getMoveLeftPIDController() {
+        return moveLeftPID;
+    }
+
+    public PIDController getMoveRightPIDController() {
+        return moveRightPID;
     }
 
     // Motors
