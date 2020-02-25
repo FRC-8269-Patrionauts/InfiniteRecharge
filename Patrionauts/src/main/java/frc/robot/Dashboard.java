@@ -235,6 +235,7 @@ public class Dashboard extends CommandBase {
                 .addNumber("Flywheel2 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
                 .withPosition(2,2).withSize(2, 1);
 
+        
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 1 Speed", () -> robotContainer.getShootSubsystem().getFlyWheelMotor1().get())
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(4, 0).withSize(2, 1);
