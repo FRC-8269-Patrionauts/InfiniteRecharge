@@ -67,14 +67,14 @@ public class ShootSubsystem extends SubsystemBase {
             //currentSpeed2 = flyWheelMotor2.get();
             
 
-            double newCurrentSpeed1 = currentSpeed1 += calculatedShootPIDValue1;
+            currentSpeed1 += calculatedShootPIDValue1;
             //currentSpeed2 += calculatedShootPIDValue2;
             
-            newCurrentSpeed1 = MathUtil.clamp(newCurrentSpeed1, -.5, .5);
+            //newCurrentSpeed1 = MathUtil.clamp(newCurrentSpeed1, -.5, .5);
             //currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
-            System.out.println("Current Speed 1:" + newCurrentSpeed1 );
+            System.out.println("Current Speed 1:" + currentSpeed1 );
 
-            flyWheelMotor1.set(newCurrentSpeed1);
+            flyWheelMotor1.set(currentSpeed1);
            // flyWheelMotor2.set(currentSpeed2);
 
             if (pidShooter1.atSetpoint() /*&& pidShooter2.atSetpoint()*/) {
@@ -151,7 +151,7 @@ public class ShootSubsystem extends SubsystemBase {
     }
 
     public double calculateFlywheel1Velocity(){
-        double flyWheelMotor1.getVelocity();
+        return flyWheelEncoder1.getVelocity();
     }
 
     /*public CANEncoder getFlyWheelEncoder2() {

@@ -244,7 +244,10 @@ public class Dashboard extends CommandBase {
                 .addNumber("Flywheel2 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
                 .withPosition(2,2).withSize(2, 1);
 
-        
+        Shuffleboard.getTab("ShootSubsystem")
+                .addNumber("Flywheel1 Encoder Value", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
+                .withPosition(8, 0).withSize(2, 1);
+
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 1 Speed", () -> robotContainer.getShootSubsystem().getFlyWheelMotor1().get())
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(4, 0).withSize(2, 1);
@@ -261,6 +264,7 @@ public class Dashboard extends CommandBase {
                 .addNumber("FlyWheel 2 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed2())
                 .withPosition(0,2).withSize(2,1);*/
 
+        
         //Add test shoot widget to shoot subsystem tab
         Shuffleboard.getTab("ShootSubsystem").add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
