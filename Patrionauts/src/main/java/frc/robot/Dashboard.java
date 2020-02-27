@@ -107,22 +107,22 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(4, 1).withSize(1, 1);
 
         // encoder positions
-        Shuffleboard.getTab("DriveSubsystem")
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("LM1 Enc",
                         () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
-                .withPosition(5, 0).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(6, 0).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("LM2 Enc",
                         () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
-                .withPosition(5, 1).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(6, 1).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("RM1 Enc",
                         () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
-                .withPosition(6, 0).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(7, 0).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("RM2 Enc",
                         () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
-                .withPosition(6, 1).withSize(1, 1);
+                .withPosition(7, 1).withSize(1, 1);
 
                 Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
                                 .withPosition(0, 2);
