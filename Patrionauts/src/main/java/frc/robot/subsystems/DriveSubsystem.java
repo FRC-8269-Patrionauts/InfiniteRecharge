@@ -98,7 +98,7 @@ public class DriveSubsystem extends SubsystemBase {
             calculatedMoveLeftPIDValue = MathUtil.clamp(calculatedMoveLeftPIDValue, -.5, .5);
             calculatedMoveRightPIDValue = MathUtil.clamp(calculatedMoveRightPIDValue, -.5, .5);
 
-            drive.tankDrive(calculatedMoveLeftPIDValue, calculatedMoveRightPIDValue);
+            drive.tankDrive(calculatedMoveLeftPIDValue, -calculatedMoveRightPIDValue);
 
             if (moveLeftPID.atSetpoint() && moveRightPID.atSetpoint()) {
                 isMoving = false;
