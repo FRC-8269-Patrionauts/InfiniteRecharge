@@ -117,6 +117,13 @@ public class DriveSubsystem extends SubsystemBase {
     public void stop() {
         arcadeDrive(0, 0);
     }
+    
+    public void goForward(double speed){
+        leftMotor1.set(speed);
+        leftMotor2.set(speed);
+        rightMotor1.set(speed);
+        rightMotor2.set(speed);
+    }
 
     // PID
     public void turn(double degrees) {
