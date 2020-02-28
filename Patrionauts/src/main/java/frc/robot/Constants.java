@@ -38,8 +38,8 @@ Constants {
      */
     public static final boolean ENABLE_GAMEPAD = false;
 
-    public static final int FLYWHEEL_MOTOR1 = 2;
-    public static final int FLYWHEEL_MOTOR2 = 3;
+    public static final int FLYWHEEL_MOTOR1 = 3;
+    public static final int FLYWHEEL_MOTOR2 = 2;
 
     /**
      * Set to true if the Limelight is connected, otherwise set to false.

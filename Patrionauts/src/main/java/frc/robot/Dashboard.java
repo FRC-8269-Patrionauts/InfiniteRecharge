@@ -237,15 +237,15 @@ public class Dashboard extends CommandBase {
 
     public void configureShootSubsystem() {
         //display calculated values
-        Shuffleboard.getTab("ShootSubsystem")
+        /*Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
                 .withPosition(0,2).withSize(2, 1);
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel2 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
                 .withPosition(2,2).withSize(2, 1);
-
+*/
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("Flywheel1 Encoder Value", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
+                .addNumber("Flywheel1 Encoder Output", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
                 .withPosition(8, 0).withSize(2, 1);
 
         Shuffleboard.getTab("ShootSubsystem")
@@ -258,7 +258,7 @@ public class Dashboard extends CommandBase {
         
         //Calculated current speed
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("FlyWheel 1 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
+                .addNumber("FlyWheel 1 Calculated Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
                 .withPosition(0,1).withSize(2,1);
         /* Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 2 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed2())

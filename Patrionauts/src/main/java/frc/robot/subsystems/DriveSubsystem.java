@@ -100,7 +100,7 @@ public class DriveSubsystem extends SubsystemBase {
 
             drive.tankDrive(calculatedMoveLeftPIDValue, -calculatedMoveRightPIDValue);
 
-            if (moveLeftPID.atSetpoint() && moveRightPID.atSetpoint()) {
+            if (moveLeftPID.atSetpoint() || moveRightPID.atSetpoint()) {
                 isMoving = false;
             }
         }
