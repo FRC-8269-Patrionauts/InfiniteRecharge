@@ -18,6 +18,7 @@ import frc.robot.commands.HumanDriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LiftBotCommand;
 import frc.robot.commands.LiftHookCommand;
+import frc.robot.commands.LoaderTiltForwardCommand;
 import frc.robot.commands.LowerBotCommand;
 import frc.robot.commands.LowerHookCommand;
 import frc.robot.commands.OutakeCommand;
@@ -110,6 +111,7 @@ public class RobotContainer {
     private final LowerHookCommand lowerHookCommand = new LowerHookCommand(liftSubsystem);
     private final LiftBotCommand liftBotCommand = new LiftBotCommand(liftSubsystem);
     private final LowerBotCommand lowerBotCommand = new LowerBotCommand(liftSubsystem);
+    private final LoaderTiltForwardCommand loaderTiltForwardCommand = new LoaderTiltForwardCommand(loaderSubsystem);
 
     private final SetIntakeRollerCommand setIntakeRollerCommand = new SetIntakeRollerCommand(intakePneumaticSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
@@ -138,7 +140,7 @@ public class RobotContainer {
         joystickButton7.whenPressed(outakeCommand);
         joystickButton1.whenPressed(beltFeedCommand);
         joystickButton2.whenPressed(testShootRPMCommand);
-        joystickButton9.whenPressed(testSpinColorWheelCommand);
+        joystickButton10.whenPressed(testSpinColorWheelCommand);
 
     }
 
@@ -277,6 +279,12 @@ public class RobotContainer {
   public LowerBotCommand getLowerBotCommand() {
       return this.lowerBotCommand;
   }
+
+  public LoaderTiltForwardCommand getLoaderTiltForwardCommand() {
+      return this.loaderTiltForwardCommand;
+  }
+
+
 }
 
 
