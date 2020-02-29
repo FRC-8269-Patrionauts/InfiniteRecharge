@@ -17,16 +17,16 @@ import frc.robot.Constants;
 public class ShootSubsystem extends SubsystemBase {
 
     private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
-    //private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
+    // private final CANSparkMax flyWheelMotor2 = new
+    // CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
 
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
-    //private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
+    // private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
     public final double shootKp1 = 0;
     public final double shootKi1 = 0;
     public final double shootKd1 = 0;
     public final PIDController pidShooter1 = new PIDController(shootKp1, shootKi1, shootKd1);
-
 
     public final double shootKp2 = 0;
     public final double shootKi2 = 0;
@@ -36,7 +36,7 @@ public class ShootSubsystem extends SubsystemBase {
     public double flyWheelEncoder1RPM = 0;
     public double flyWheelEncoder2RPM = 0;
 
-    public double flywheelMotor1Velocity = 0; 
+    public double flywheelMotor1Velocity = 0;
 
     boolean isRamping = false;
     double calculatedShootPIDValue1 = 0;
@@ -45,52 +45,49 @@ public class ShootSubsystem extends SubsystemBase {
     double currentSpeed1 = 0;
     double currentSpeed2 = 0;
 
-
     public ShootSubsystem() {
 
     }
 
-
     @Override
     public void periodic() {
         if (isRamping) {
-            //double flyWheelEncoder1RPM = flyWheelEncoder1.getVelocity();
-            //double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
+            // double flyWheelEncoder1RPM = flyWheelEncoder1.getVelocity();
+            // double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
 
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
-            //calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
+            // calculatedShootPIDValue2 =
+            // pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
             calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
-            //calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
+            // calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
 
-            currentSpeed1 = flyWheelMotor1.get();
-            //currentSpeed2 = flyWheelMotor2.get();
-            
+            // currentSpeed2 = flyWheelMotor2.get();
 
             currentSpeed1 += calculatedShootPIDValue1;
-            //currentSpeed2 += calculatedShootPIDValue2;
-            
-            //newCurrentSpeed1 = MathUtil.clamp(newCurrentSpeed1, -.5, .5);
-            //currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
-            System.out.println("Current Speed 1:" + currentSpeed1 );
+            // currentSpeed2 += calculatedShootPIDValue2;
 
+            currentSpeed1 = MathUtil.clamp(currentSpeed1, -.5, .5);
+            // currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
+
+            System.out.println("Setting currentSpeed " + currentSpeed1);
             flyWheelMotor1.set(currentSpeed1);
-           // flyWheelMotor2.set(currentSpeed2);
+            // flyWheelMotor2.set(currentSpeed2);
 
-            if (pidShooter1.atSetpoint() /*&& pidShooter2.atSetpoint()*/) {
-                isRamping = false;
+            if (pidShooter1.atSetpoint() /* && pidShooter2.atSetpoint() */) {
+                // isRamping = false;
             }
         }
     }
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(-speed);
-        //flyWheelMotor2.set(-speed);
+        // flyWheelMotor2.set(-speed);
     }
 
     public void stopFlyWheel() {
         flyWheelMotor1.set(0);
-       // flyWheelMotor2.set(0);
+        // flyWheelMotor2.set(0);
     }
 
     public void yeet1(double RPM) {
@@ -105,12 +102,14 @@ public class ShootSubsystem extends SubsystemBase {
         currentSpeed2 = 0;
     }
 
-    //NEED
-    //periodic, current RPM, goal RPM, take output of periodic loop and set that to motor controllers, ask it if we're done
-    //also look at turn method and compare how it works
+    // NEED
+    // periodic, current RPM, goal RPM, take output of periodic loop and set that to
+    // motor controllers, ask it if we're done
+    // also look at turn method and compare how it works
 
-    //call pid controller, get output of pid controller and send to motor
-    //Every time we do a periodic, we use the output and send it to the motor controller
+    // call pid controller, get output of pid controller and send to motor
+    // Every time we do a periodic, we use the output and send it to the motor
+    // controller
 
     public double getCalculatedShootPIDValue1() {
         return calculatedShootPIDValue1;
@@ -136,28 +135,24 @@ public class ShootSubsystem extends SubsystemBase {
         return pidShooter2;
     }
 
-
     public CANSparkMax getFlyWheelMotor1() {
         return flyWheelMotor1;
     }
 
-    /*public CANSparkMax getFlyWheelMotor2() {
-       // return flyWheelMotor2;
-    }
-    */
+    /*
+     * public CANSparkMax getFlyWheelMotor2() { // return flyWheelMotor2; }
+     */
 
     public CANEncoder getFlyWheelEncoder1() {
         return flyWheelEncoder1;
     }
 
-    public double calculateFlywheel1Velocity(){
+    public double calculateFlywheel1Velocity() {
         return flyWheelEncoder1.getVelocity();
     }
 
-    /*public CANEncoder getFlyWheelEncoder2() {
-        //return flyWheelEncoder2;
-    }
-    */
-
+    /*
+     * public CANEncoder getFlyWheelEncoder2() { //return flyWheelEncoder2; }
+     */
 
 }

@@ -14,13 +14,11 @@ public class TestShootCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("TestShootCommand initialize");
     }
 
     @Override
     public void execute() {
-        //shoot.setFlyWheel(1);
-        System.out.println("TestShootCommand execute");
+        shoot.setFlyWheel(1);
     }
 
 }

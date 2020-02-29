@@ -6,8 +6,7 @@ package frc.robot;
  * purpose. All constants should be declared globally (i.e. public static). Do
  * not put anything functional in this class.
  */
-public final class 
-Constants {
+public final class Constants {
 
     /**
      * Set to true if all of the components for the DriveSubsystem are connected,
@@ -28,7 +27,7 @@ Constants {
      * {@code Joystick Button 1 on port 1 not available, check if controller is plugged in errors}
      * from showing up in the simulation.
      */
-    public static final boolean ENABLE_JOYSTICK = true;
+    public static final boolean ENABLE_JOYSTICK = false;
 
     /**
      * Set to true if the gamepad is connected, otherwise set to false. This will
@@ -52,9 +51,9 @@ Constants {
     public static final int LEFT_MOTOR_1 = 6;
     public static final int LEFT_MOTOR_2 = 7;
     public static final int RIGHT_MOTOR_1 = 4;
-	public static final int RIGHT_MOTOR_2 = 5;
-	
-	public static final int BELT_MOTOR = 10;
+    public static final int RIGHT_MOTOR_2 = 5;
+
+    public static final int BELT_MOTOR = 10;
 
     public static final double CURRENT_SPEED = 0;
     public static final double GOAL_SPEED = 0;
@@ -96,6 +95,6 @@ Constants {
 
     public static final double TICKS_PER_INCH = 95.491 / 167.625;
 
-	public static final int INTAKE_MOTOR = 9;
+    public static final int INTAKE_MOTOR = 9;
 
 }
