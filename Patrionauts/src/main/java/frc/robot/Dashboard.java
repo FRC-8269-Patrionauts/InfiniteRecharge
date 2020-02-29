@@ -107,22 +107,22 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(4, 1).withSize(1, 1);
 
         // encoder positions
-        Shuffleboard.getTab("DriveSubsystem")
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("LM1 Enc",
                         () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
-                .withPosition(5, 0).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(6, 0).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("LM2 Enc",
                         () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
-                .withPosition(5, 1).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(6, 1).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("RM1 Enc",
                         () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
-                .withPosition(6, 0).withSize(1, 1);
-        Shuffleboard.getTab("DriveSubsystem")
+                .withPosition(7, 0).withSize(1, 1);
+        Shuffleboard.getTab("DriveSubsystemPID")
                 .addNumber("RM2 Enc",
                         () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
-                .withPosition(6, 1).withSize(1, 1);
+                .withPosition(7, 1).withSize(1, 1);
 
                 Shuffleboard.getTab("DriveSubsystem").addNumber("IMU Yaw", () -> robotContainer.getImu().getYaw())
                                 .withPosition(0, 2);
@@ -237,12 +237,16 @@ public class Dashboard extends CommandBase {
 
     public void configureShootSubsystem() {
         //display calculated values
-        Shuffleboard.getTab("ShootSubsystem")
+        /*Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
                 .withPosition(0,2).withSize(2, 1);
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel2 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
                 .withPosition(2,2).withSize(2, 1);
+*/
+        Shuffleboard.getTab("ShootSubsystem")
+                .addNumber("Flywheel1 Encoder Output", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
+                .withPosition(8, 0).withSize(2, 1);
 
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 1 Speed", () -> robotContainer.getShootSubsystem().getFlyWheelMotor1().get())
@@ -254,12 +258,13 @@ public class Dashboard extends CommandBase {
         
         //Calculated current speed
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("FlyWheel 1 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
+                .addNumber("FlyWheel 1 Calculated Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
                 .withPosition(0,1).withSize(2,1);
         /* Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 2 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed2())
                 .withPosition(0,2).withSize(2,1);*/
 
+        
         //Add test shoot widget to shoot subsystem tab
         Shuffleboard.getTab("ShootSubsystem").add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);

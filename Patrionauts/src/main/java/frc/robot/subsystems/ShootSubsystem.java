@@ -36,6 +36,8 @@ public class ShootSubsystem extends SubsystemBase {
     public double flyWheelEncoder1RPM = 0;
     public double flyWheelEncoder2RPM = 0;
 
+    public double flywheelMotor1Velocity = 0; 
+
     boolean isRamping = false;
     double calculatedShootPIDValue1 = 0;
     double calculatedShootPIDValue2 = 0;
@@ -59,13 +61,17 @@ public class ShootSubsystem extends SubsystemBase {
             //calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
             calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
-            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
+            //calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
+
+            currentSpeed1 = flyWheelMotor1.get();
+            //currentSpeed2 = flyWheelMotor2.get();
+            
 
             currentSpeed1 += calculatedShootPIDValue1;
-            currentSpeed2 += calculatedShootPIDValue2;
+            //currentSpeed2 += calculatedShootPIDValue2;
             
-            currentSpeed1 = MathUtil.clamp(currentSpeed1, -.5, .5);
-            currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
+            //newCurrentSpeed1 = MathUtil.clamp(newCurrentSpeed1, -.5, .5);
+            //currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
             System.out.println("Current Speed 1:" + currentSpeed1 );
 
             flyWheelMotor1.set(currentSpeed1);
@@ -142,6 +148,10 @@ public class ShootSubsystem extends SubsystemBase {
 
     public CANEncoder getFlyWheelEncoder1() {
         return flyWheelEncoder1;
+    }
+
+    public double calculateFlywheel1Velocity(){
+        return flyWheelEncoder1.getVelocity();
     }
 
     /*public CANEncoder getFlyWheelEncoder2() {

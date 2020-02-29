@@ -50,6 +50,17 @@ public class DriveSubsystem extends SubsystemBase {
     public final double moveRightKd = 0;
     public final PIDController moveRightPID = new PIDController(moveRightKp, moveRightKi, moveRightKd);
 
+    public final double moveKp = 0.1;
+    public final double moveKi = 0;
+    public final double moveKd = 0;
+    public final PIDController movePID = new PIDController(moveKp, moveKi, moveKd);
+
+    public final double moveAlignKp = 0.1;
+    public final double moveAlignKi = 0;
+    public final double moveAlignKd = 0;
+    public final PIDController moveAlignPID = new PIDController(moveAlignKp, moveAlignKi, moveAlignKd);
+
+
     private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
     boolean isTurning = false;
@@ -57,6 +68,8 @@ public class DriveSubsystem extends SubsystemBase {
     double calculatedTurnPIDValue = 0;
     double calculatedMoveLeftPIDValue = 0;
     double calculatedMoveRightPIDValue = 0;
+    double calculatedMovePIDValue = 0;
+    double calculatedMoveAlignPIDValue = 0;
 
     // static final double COUNTS_PER_MOTOR_REV = 0;
     // static final double WHEEL_DIAMETER_INCHES = 6.0;
@@ -92,17 +105,30 @@ public class DriveSubsystem extends SubsystemBase {
             }
         }
         if (isMoving) {
+            /*
             calculatedMoveLeftPIDValue = moveLeftPID.calculate(leftMotor1Encoder.getPosition());
             calculatedMoveRightPIDValue = moveRightPID.calculate(rightMotor1Encoder.getPosition());
             // limit between max powers
             calculatedMoveLeftPIDValue = MathUtil.clamp(calculatedMoveLeftPIDValue, -.5, .5);
             calculatedMoveRightPIDValue = MathUtil.clamp(calculatedMoveRightPIDValue, -.5, .5);
 
-            drive.tankDrive(calculatedMoveLeftPIDValue, calculatedMoveRightPIDValue);
+            drive.tankDrive(calculatedMoveLeftPIDValue, -calculatedMoveRightPIDValue);
 
-            if (moveLeftPID.atSetpoint() && moveRightPID.atSetpoint()) {
+            if (moveLeftPID.atSetpoint() || moveRightPID.atSetpoint()) {
                 isMoving = false;
             }
+            */
+            calculatedMovePIDValue = movePID.calculate(leftMotor1Encoder.getPosition());
+            calculatedMoveAlignPIDValue = moveAlignPID.calculate(imu.getYaw());
+
+            calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -.5, .5);
+            calculatedMoveAlignPIDValue = MathUtil.clamp(calculatedMoveAlignPIDValue, -.2, .2);
+
+            drive.arcadeDrive(calculatedMovePIDValue, calculatedMoveAlignPIDValue);
+
+            if (movePID.atSetpoint() && moveAlignPID.atSetpoint()) {
+                isMoving = false;
+            }  
         }
     }
 
@@ -116,6 +142,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void stop() {
         arcadeDrive(0, 0);
+    }
+    
+    public void goForward(double speed){
+        leftMotor1.set(speed);
+        leftMotor2.set(speed);
+        rightMotor1.set(speed);
+        rightMotor2.set(speed);
     }
 
     // PID
@@ -132,8 +165,12 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void move(double inches) {
         isMoving = true;
+        /*
         moveLeftPID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
         moveRightPID.setSetpoint(rightMotor1Encoder.getPosition() - (Constants.TICKS_PER_INCH * inches));
+        */
+        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
+        moveAlignPID.setSetpoint(imu.getYaw());
     }
 
     public double getCalculatedTurnPIDValue() {
@@ -148,6 +185,14 @@ public class DriveSubsystem extends SubsystemBase {
         return calculatedMoveRightPIDValue;
     }
 
+    public double getCalculatedMovePIDValue() {
+        return calculatedMovePIDValue;
+    }
+
+    public double getCalculatedMoveAlignPIDValue() {
+        return calculatedMoveAlignPIDValue;
+    }
+
     public PIDController getTurnPIDController() {
         return turnPID;
     }
@@ -158,6 +203,14 @@ public class DriveSubsystem extends SubsystemBase {
 
     public PIDController getMoveRightPIDController() {
         return moveRightPID;
+    }
+
+    public PIDController getMovePIDController() {
+        return movePID;
+    }
+
+    public PIDController getMoveAlignPIDController(){
+        return moveAlignPID;
     }
 
     // Motors

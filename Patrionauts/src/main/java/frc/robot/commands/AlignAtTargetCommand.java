@@ -25,6 +25,11 @@ public class AlignAtTargetCommand extends CommandBase {
         if (camera.hasDetectedTarget()){
             DetectedTarget target = camera.getDetectedTarget();
             drive.turn(target.getXOffset());
+
+            while(target.getArea() < 0) //0 is the placeholder for the ideal area "distance"
+            {
+                drive.goForward(.2);
+            }
         }
     }
 
