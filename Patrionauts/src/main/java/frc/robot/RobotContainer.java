@@ -38,6 +38,7 @@ import frc.robot.subsystems.IntakeRollerSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
+//import sun.java2d.cmm.PCMM;
 import frc.robot.subsystems.IntakePneumaticSubsystem;
 
 /**
@@ -47,6 +48,7 @@ public class RobotContainer {
     // Devices
     private final Joystick joystick = new Joystick(Constants.JOYSTICK_1);
     private final XboxController gamepad = new XboxController(Constants.GAMEPAD_1);
+    
 
     // Gamepad Buttons
     private final JoystickButton gamepadX = new JoystickButton(gamepad, Constants.GAMEPAD_X);
@@ -93,7 +95,7 @@ public class RobotContainer {
     private final LiftSubsystem liftSubsystem = new LiftSubsystem();
 
     // Commands
-    private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, joystick, gamepad);
+    private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, intakeRollerSubsystem, joystick, gamepad);
     private final AutonomousCommand autonomousCommand = new AutonomousCommand(this);
     private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
     private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);

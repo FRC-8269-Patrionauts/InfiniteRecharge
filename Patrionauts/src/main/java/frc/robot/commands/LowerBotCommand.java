@@ -15,11 +15,11 @@ public class LowerBotCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (bru == true){
-            botLowerSubsystem.lowerBot(.5);
+            botLowerSubsystem.lowerBot1(.5);
             bru = false;
         } else {
             bru = true;
-            botLowerSubsystem.liftBot(0);
+            botLowerSubsystem.liftBot1(0);
         }
     }
 }

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeRollerSubsystem;
 
 /**
  * A command that allows the driver to take control of driving.
@@ -13,11 +14,14 @@ import frc.robot.subsystems.DriveSubsystem;
 public class HumanDriveCommand extends CommandBase {
 
     private final DriveSubsystem driveSubsystem;
+    private final IntakeRollerSubsystem intakeSubsystem;
     private final XboxController gamepad;
+    //private final RobotContainer robotContainer;
     private final Joystick joystick;
 
-    public HumanDriveCommand(DriveSubsystem driveSubsystem, Joystick joystick, XboxController gamepad) {
+    public HumanDriveCommand(DriveSubsystem driveSubsystem, IntakeRollerSubsystem intakeSubsystem, Joystick joystick, XboxController gamepad) {
         this.driveSubsystem = driveSubsystem;
+        this.intakeSubsystem = intakeSubsystem;
         this.gamepad = gamepad;
         this.joystick = joystick;
 
@@ -28,6 +32,8 @@ public class HumanDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
+        intakeSubsystem.setFunnelOpen();
+
         if (Constants.ENABLE_JOYSTICK) {
             if (Math.abs(joystick.getY()) > .3 || Math.abs(joystick.getTwist()) > .3) {
                 if (Math.abs(joystick.getTwist()) > .3) {

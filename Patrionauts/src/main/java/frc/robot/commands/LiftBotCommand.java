@@ -15,11 +15,11 @@ public class LiftBotCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (bru == true){
-            botLiftSubsystem.liftBot(.5);
+            botLiftSubsystem.liftBot1(.5);
             bru = false;
         } else {
             bru = true;
-            botLiftSubsystem.liftBot(0);
+            botLiftSubsystem.liftBot1(0);
         }
     }
 }
