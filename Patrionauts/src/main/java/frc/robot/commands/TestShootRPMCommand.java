@@ -28,7 +28,7 @@ public class TestShootRPMCommand extends CommandBase {
     @Override
     public void execute() {
         shoot.yeet1(10);
-        shoot.yeet2(10);
+        //shoot.yeet2(10);
         
     }
 

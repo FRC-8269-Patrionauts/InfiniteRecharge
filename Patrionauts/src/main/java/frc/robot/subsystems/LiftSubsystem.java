@@ -6,12 +6,13 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SolenoidBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class LiftSubsystem extends SubsystemBase{
-    private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(0); //lifts of the hook to hang
+    private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(Constants.UNKNOWN); //lifts of the hook to hang
 
-    private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(10); //pulls the robot up
-    private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(11);
+    private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(Constants.LIFT_MOTOR_1); //pulls the robot up
+    private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(Constants.LIFT_MOTOR_2);
 
     private final DoubleSolenoid TransmissionSolenoid = new DoubleSolenoid(0, 1);
 

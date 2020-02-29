@@ -49,12 +49,28 @@ Constants {
     public static final int JOYSTICK_1 = 0;
     public static final int GAMEPAD_1 = 1;
 
+	
+   
+    public static final int UNKNOWN = 0;
+    public static final int COLOR_WHEEL_MOTOR = 1;
+    public static final int LIFT_MOTOR_1 = 2;
+    public static final int LIFT_MOTOR_2 = 3;
+    public static final int RIGHT_MOTOR_1 = 4;
+    public static final int RIGHT_MOTOR_2 = 5;
     public static final int LEFT_MOTOR_1 = 6;
     public static final int LEFT_MOTOR_2 = 7;
-    public static final int RIGHT_MOTOR_1 = 4;
-	public static final int RIGHT_MOTOR_2 = 5;
-	
-	public static final int BELT_MOTOR = 10;
+
+    public static final int INTAKE_MOTOR = 9;
+    public static final int BELT_MOTOR = 10;
+    public static final int Tilt_MOTOR = 11;
+
+
+
+
+
+
+
+    
 
     public static final double CURRENT_SPEED = 0;
     public static final double GOAL_SPEED = 0;
@@ -92,10 +108,9 @@ Constants {
      * 
      * public static final double kPDriveVel = 0.0;
      */
-    public static final int NEO_MOTOR_TEST = 1;
+    //public static final int NEO_MOTOR_TEST = 1;
 
     public static final double TICKS_PER_INCH = 95.491 / 167.625;
 
-	public static final int INTAKE_MOTOR = 9;
 
 }
