@@ -127,11 +127,19 @@ public class DriveSubsystem extends SubsystemBase {
         turnPID.setSetpoint(degrees);
     }
 
+    public boolean isStillTurning()
+    {
+        return isTurning;
+    }
+
     public void move(double inches) {
         isMoving = true;
         movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
         imu.reset();
         moveAlignPID.setSetpoint(imu.getYaw());
+    }
+    public boolean isStillMoving(){
+        return isMoving;
     }
 
     public double getCalculatedTurnPIDValue() {

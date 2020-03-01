@@ -102,6 +102,11 @@ public class ShootSubsystem extends SubsystemBase {
         currentSpeed2 = 0;
     }
 
+    public boolean isStillRamping()
+    {
+        return isRamping;
+    }
+
     // NEED
     // periodic, current RPM, goal RPM, take output of periodic loop and set that to
     // motor controllers, ask it if we're done

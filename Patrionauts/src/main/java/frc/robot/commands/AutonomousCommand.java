@@ -9,7 +9,7 @@ import frc.robot.RobotContainer;
 public class AutonomousCommand extends CommandBase {
 
     public enum State {
-        FOLLOW_PATH, ALIGN_AT_TARGET, SHOOT
+        FOLLOW_PATH, START_ALIGN, ALIGN_AT_TARGET, START_SHOOT, SHOOT
     }
 
     private State state = null;
@@ -23,12 +23,16 @@ public class AutonomousCommand extends CommandBase {
     @Override
     public void execute() {
         if (state == null) {
-            state = State.FOLLOW_PATH;
-            robotContainer.getFollowPathCommand().schedule();
-        } else if (state == State.FOLLOW_PATH && robotContainer.getFollowPathCommand().isFinished()) {
+            state = State.START_ALIGN;
+        } 
+        if(state == State.START_ALIGN){
             state = State.ALIGN_AT_TARGET;
             robotContainer.getAlignAtTargetCommand().schedule();
-        } else if (state == State.ALIGN_AT_TARGET && robotContainer.getAlignAtTargetCommand().isFinished()) {
+        }
+        if(state == State.ALIGN_AT_TARGET && robotContainer.getAlignAtTargetCommand().isFinished()){
+            state = State.START_SHOOT;
+        }
+        if(state == State.START_SHOOT){
             state = State.SHOOT;
             robotContainer.getShootCommand().schedule();
         }

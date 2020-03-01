@@ -9,7 +9,7 @@ import frc.robot.Constants;
 
 public class BeltSubsystem extends SubsystemBase {
     private final PWMVictorSPX beltMotor = new PWMVictorSPX(Constants.BELT_MOTOR);
-
+    private boolean isFeeding = false;
 
     public BeltSubsystem() {
     }
@@ -20,7 +20,12 @@ public class BeltSubsystem extends SubsystemBase {
     }
 
     public void feedBall(double speed){
+        isFeeding = true;
         beltMotor.set(speed);
+    }
+
+    public boolean isStillFeeding(){
+        return isFeeding;
     }
 
     public PWMVictorSPX getBeltMotor() {

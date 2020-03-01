@@ -53,7 +53,7 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("AlignAtTarge", (Sendable) robotContainer.getAlignAtTargetCommand())
+        Shuffleboard.getTab("Commands").add("AlignAtTarget", (Sendable) robotContainer.getAlignAtTargetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LoaderPneumatics", (Sendable) robotContainer.getSetLoaderCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);

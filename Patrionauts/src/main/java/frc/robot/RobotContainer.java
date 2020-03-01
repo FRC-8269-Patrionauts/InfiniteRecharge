@@ -97,7 +97,7 @@ public class RobotContainer {
     private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, intakeRollerSubsystem, joystick, gamepad);
     private final AutonomousCommand autonomousCommand = new AutonomousCommand(this);
     private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
-    private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
+    private final ShootCommand shootCommand = new ShootCommand(shootSubsystem, beltSubsystem);
     private final AlignAtTargetCommand alignAtTargetCommand = new AlignAtTargetCommand(driveSubsystem, cameraSubsystem);
     private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
