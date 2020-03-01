@@ -1,12 +1,13 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.LiftSubsystem;
 
 public class LowerBotCommand extends InstantCommand{
     private final LiftSubsystem botLowerSubsystem;
 
-    boolean bru = true;
+    boolean lift = true;
     public LowerBotCommand(LiftSubsystem liftSubsystem){
         this.botLowerSubsystem = liftSubsystem;
         addRequirements(liftSubsystem);
@@ -14,12 +15,14 @@ public class LowerBotCommand extends InstantCommand{
 
     @Override
     public void initialize(){
-        if (bru == true){
-            botLowerSubsystem.lowerBot1(.5);
-            bru = false;
+        if (lift == true){
+            botLowerSubsystem.lowerBot1(-.4);
+            lift = false;
         } else {
-            bru = true;
-            botLowerSubsystem.liftBot1(0);
+            lift = true;
+            botLowerSubsystem.lowerBot1(0);
         }
     }
+     
+
 }

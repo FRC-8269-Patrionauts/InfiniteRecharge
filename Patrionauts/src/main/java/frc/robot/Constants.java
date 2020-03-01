@@ -53,10 +53,6 @@ Constants {
     public static final int UNKNOWN = 0;
     public static final int COLOR_WHEEL_MOTOR = 1; // vex ;
     public static final int LIFT_MOTOR_1 = 2; //vex
-
-    public static final int FLYWHEEL_MOTOR2 = 2; // spark ;
-    public static final int FLYWHEEL_MOTOR1 = 3; // spark ;
-
     public static final int LIFT_MOTOR_2 = 3; //vex
     public static final int RIGHT_MOTOR_1 = 4; //spark ;
     public static final int RIGHT_MOTOR_2 = 5; //spark ;
@@ -65,6 +61,8 @@ Constants {
     public static final int INTAKE_MOTOR = 9; //vex
     public static final int BELT_MOTOR = 10; //vex
     public static final int TILT_MOTOR = 11; //spark ;
+    public static final int FLYWHEEL_MOTOR2 = 12; // spark ;
+    public static final int FLYWHEEL_MOTOR1 = 13; // spark ;
 
 
     public static final double CURRENT_SPEED = 0;
