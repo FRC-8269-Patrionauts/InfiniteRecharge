@@ -48,7 +48,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("HumanDrive", (Sendable) robotContainer.getHumanDriveCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("ColorWheel", (Sendable) robotContainer.getColorWheelCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);     
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);
         Shuffleboard.getTab("DriveSubsystemPID").add("TestTurning", (Sendable) robotContainer.getTestTurningCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
@@ -61,7 +61,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("SetIntakePosition", (Sendable) robotContainer.getSetIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
 
-        
+
 
         Shuffleboard.getTab("DriveSubsystemPID").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
@@ -254,7 +254,7 @@ public class Dashboard extends CommandBase {
                 .addNumber("FlyWheel 2 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed2())
                 .withPosition(0,2).withSize(2,1);*/
 
-       
+
         //Flywheel RPM's
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Encoder RPM", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getVelocity())
