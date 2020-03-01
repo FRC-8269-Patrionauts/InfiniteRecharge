@@ -265,4 +265,9 @@ public class Dashboard extends CommandBase {
                 .addNumber("Belt Speed", () -> robotContainer.getBeltSubsystem().getBeltMotor().get())
                 .withPosition(0, 3).withSize(1, 1);
     }
+
+    public void configureCameras(){
+        Shuffleboard.getTab("Camera").add("LimeLight" Limelightfeed);
+        Shuffleboard.getTab("Camera").add("USB Camera", USBCamera);
+    }
 }
