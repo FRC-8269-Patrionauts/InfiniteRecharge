@@ -17,21 +17,22 @@ import frc.robot.Constants;
 * Also have a method to be able to disable auto align just in case we need to manually adjust
 */
 public class IntakeRollerSubsystem extends SubsystemBase {
-    private final PWMVictorSPX rollerMoter = new PWMVictorSPX(Constants.INTAKE_MOTOR);
+    private final PWMVictorSPX rollerMotor = new PWMVictorSPX(Constants.INTAKE_MOTOR);
 
-    private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(2, 3);
-    private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(4, 5);
-
+    //private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(2, 3);
+    //private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(4, 5);
 
     public IntakeRollerSubsystem() {
     }
 
     public DoubleSolenoid getFunnelPiston1(){
-        return funnelPiston1;
+        //return funnelPiston1;
+        return null;
     }
 
     public DoubleSolenoid getFunnelPiston2(){
-        return funnelPiston2;
+        //return funnelPiston2;
+        return null;
     }
 
     @Override
@@ -40,20 +41,24 @@ public class IntakeRollerSubsystem extends SubsystemBase {
     }
 
     public void setFunnelOpen(){
-        funnelPiston1.set(DoubleSolenoid.Value.kForward); // set at begginging of tele or auto
-        funnelPiston2.set(DoubleSolenoid.Value.kForward);
+        //funnelPiston1.set(DoubleSolenoid.Value.kForward); // set at begginging of tele or auto
+        //funnelPiston2.set(DoubleSolenoid.Value.kForward);
     }
 
     public void setFunnelClose(){
-        funnelPiston1.set(DoubleSolenoid.Value.kReverse); // use to put pistons back in (just shuffleboard)
-        funnelPiston2.set(DoubleSolenoid.Value.kReverse);
+        //funnelPiston1.set(DoubleSolenoid.Value.kReverse); // use to put pistons back in (just shuffleboard)
+        //funnelPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void intake(double speed){
-        rollerMoter.set(speed);
+        rollerMotor.set(speed);
     }
     public void outake(double speed){
-        rollerMoter.set(-speed);
+        rollerMotor.set(-speed);
+    }
+
+    public PWMVictorSPX getRollerMotor() {
+        return rollerMotor;
     }
 
 }

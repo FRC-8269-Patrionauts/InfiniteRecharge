@@ -47,4 +47,8 @@ public class ColorWheelSubsystem extends SubsystemBase {
          */
     }
 
+    public PWMVictorSPX getColorWheelSpinner() {
+        return colorWheelSpinner;
+    }
+
 }

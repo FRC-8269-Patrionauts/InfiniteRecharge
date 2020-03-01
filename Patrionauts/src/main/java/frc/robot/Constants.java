@@ -42,6 +42,26 @@ public final class Constants {
      */
     public static final boolean ENABLE_LIMELIGHT = false;
 
+    /**
+     * Set to true if pneumatics are connected to the PCM, otherwise set to false.
+     */
+    public static final boolean ENABLE_PNEUMATICS = false;
+
+    /**
+     * Set to true if webcam is connected, otherwise set to false.
+     */
+     public static final boolean ENABLE_CAMERA = true;
+
+     /**
+      * Set to true if belt is connected, otherwise set to false.
+      */
+    public static final boolean ENABLE_BELT = true;
+
+    /**
+     * Set to true if color wheel subsystem is active, otherwise set to false.
+     */
+    public static final boolean ENABLE_COLORWHEEL = true;
+
     public static final int JOYSTICK_1 = 0;
     public static final int GAMEPAD_1 = 1;
 

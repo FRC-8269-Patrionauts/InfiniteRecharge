@@ -51,4 +51,12 @@ public class LoaderSubsystem extends SubsystemBase {
         // doubleSolenoid2.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public DoubleSolenoid getLoaderSolenoid1() {
+        return doubleSolenoid1;
+    }
+
+    public DoubleSolenoid getLoaderSolenoid2() {
+        return doubleSolenoid2;
+    }
+
 }

@@ -17,11 +17,10 @@ import frc.robot.Constants;
 public class ShootSubsystem extends SubsystemBase {
 
     private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
-    // private final CANSparkMax flyWheelMotor2 = new
-    // CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
+    private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
 
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
-    // private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
+    private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
     public final double shootKp1 = 0;
     public final double shootKi1 = 0;
@@ -139,9 +138,10 @@ public class ShootSubsystem extends SubsystemBase {
         return flyWheelMotor1;
     }
 
-    /*
-     * public CANSparkMax getFlyWheelMotor2() { // return flyWheelMotor2; }
-     */
+    public CANSparkMax getFlyWheelMotor2() {
+       return flyWheelMotor2;
+    }
+    
 
     public CANEncoder getFlyWheelEncoder1() {
         return flyWheelEncoder1;
@@ -151,8 +151,11 @@ public class ShootSubsystem extends SubsystemBase {
         return flyWheelEncoder1.getVelocity();
     }
 
-    /*
-     * public CANEncoder getFlyWheelEncoder2() { //return flyWheelEncoder2; }
-     */
+    public double calculateFlywheel2Velocity() {
+        return flyWheelEncoder2.getVelocity();
+    }
 
+    public CANEncoder getFlyWheelEncoder2() {
+        return flyWheelEncoder2;
+    }
 }
