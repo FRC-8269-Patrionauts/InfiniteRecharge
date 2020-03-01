@@ -232,42 +232,33 @@ public class Dashboard extends CommandBase {
     }
 
     public void configureShootSubsystem() {
-        //display calculated values
-        /*Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("Flywheel1 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
-                .withPosition(0,2).withSize(2, 1);
+        //Add test shoot WIDGET to shoot subsystem tab
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("Flywheel2 Calculated Value", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
-                .withPosition(2,2).withSize(2, 1);
-*/
+                .add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
+
+        //Display encoder positions
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Encoder Output", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
                 .withPosition(8, 0).withSize(2, 1);
-
-        Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("FlyWheel 1 Speed", () -> robotContainer.getShootSubsystem().getFlyWheelMotor1().get())
-                .withWidget(BuiltInWidgets.kNumberBar).withPosition(4, 0).withSize(2, 1);
-        
         /*Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("FlyWheel 2 Speed", () -> robotContainer.getShootSubsystem().getFlyWheelMotor2().get())
-                .withWidget(BuiltInWidgets.kNumberBar).withPosition(6, 0).withSize(2, 1);*/
-        
+                .addNumber("Flywheel2 Encoder Output", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder2().getPosition())
+                .withPosition(8, 0).withSize(2, 1);
+                */
+
         //Calculated current speed
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("FlyWheel 1 Calculated Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
+                .addNumber("FlyWheel 1 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
                 .withPosition(0,1).withSize(2,1);
         /* Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 2 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed2())
                 .withPosition(0,2).withSize(2,1);*/
 
-        
-        //Add test shoot widget to shoot subsystem tab
-        Shuffleboard.getTab("ShootSubsystem").add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
+       
         //Flywheel RPM's
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Encoder RPM", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getVelocity())
-                                .withWidget(BuiltInWidgets.kGraph).withPosition(4,1).withSize(2, 2);
+                .withWidget(BuiltInWidgets.kGraph).withPosition(4,1).withSize(2, 2);
         /*sShuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel2 Encoder RPM", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder2().getVelocity())
                                 .withWidget(BuiltInWidgets.kGraph).withPosition(6,1).withSize(2, 2);
@@ -279,12 +270,6 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("ShootSubsystem")
                 .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(2, 0).withSize(2, 2);
-        Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("ShootPIDController1Output", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue1())
-                                .withPosition(4, 3).withSize(2, 1);
-        Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("ShootPIDController2Output", () -> robotContainer.getShootSubsystem().getCalculatedShootPIDValue2())
-                                .withPosition(6, 3).withSize(2, 1);
     }
 
     public void configureBelt() {

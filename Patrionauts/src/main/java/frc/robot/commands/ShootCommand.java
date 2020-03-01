@@ -8,11 +8,11 @@ import frc.robot.subsystems.ShootSubsystem;
  */
 public class ShootCommand extends CommandBase {
 
-  private final ShootSubsystem shoot;
+  private final ShootSubsystem shooter;
 
-  public ShootCommand(ShootSubsystem shoot) {
-    this.shoot = shoot;
-    addRequirements(shoot);
+  public ShootCommand(ShootSubsystem shooter) {
+    this.shooter = shooter;
+    addRequirements(shooter);
   }
 
   @Override
@@ -21,12 +21,9 @@ public class ShootCommand extends CommandBase {
 
   @Override
   public void execute() {
-  
+    shooter.shoot1(200);
+    shooter.shoot2(200);
   }
 
-  @Override
-  public boolean isFinished() {
-    // This needs to return true when this command is finished.
-    return false;
-  }
+  
 }

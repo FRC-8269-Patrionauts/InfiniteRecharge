@@ -52,17 +52,12 @@ public class ShootSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         if (isRamping) {
-            // double flyWheelEncoder1RPM = flyWheelEncoder1.getVelocity();
-            // double flyWheelEncoder2RPM = flyWheelEncoder2.getVelocity();
 
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
-            // calculatedShootPIDValue2 =
-            // pidShooter2.calculate(flyWheelEncoder2.getVelocity());
+            // calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
             calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
             // calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
-
-            // currentSpeed2 = flyWheelMotor2.get();
 
             currentSpeed1 += calculatedShootPIDValue1;
             // currentSpeed2 += calculatedShootPIDValue2;
@@ -74,85 +69,102 @@ public class ShootSubsystem extends SubsystemBase {
             flyWheelMotor1.set(currentSpeed1);
             // flyWheelMotor2.set(currentSpeed2);
 
-            if (pidShooter1.atSetpoint() /* && pidShooter2.atSetpoint() */) {
-                // isRamping = false;
-            }
+
         }
     }
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(-speed);
-        // flyWheelMotor2.set(-speed);
+        //flyWheelMotor2.set(-speed);
     }
 
-    public void stopFlyWheel() {
+    public void stopFlyWheels() {
         flyWheelMotor1.set(0);
-        // flyWheelMotor2.set(0);
+        //flyWheelMotor2.set(0);
     }
 
-    public void yeet1(double RPM) {
+    public void shoot1(double RPM) {
         isRamping = true;
         pidShooter1.setSetpoint(RPM);
         currentSpeed1 = 0;
     }
 
-    public void yeet2(double RPM) {
+    public void shoot2(double RPM) {
         isRamping = true;
         pidShooter2.setSetpoint(RPM);
         currentSpeed2 = 0;
     }
+
+    //stop and reset
+    public void stopShooter(){
+        isRamping = false;
+        currentSpeed1 = 0;
+        currentSpeed2 = 0;
+        //sets Flywheels to 0 power
+        stopFlyWheels();
+    }
+    //shooter will ramp up and is it at it then keep running and stop when we tell it to --> Run PID continuously
+
+    //start looking into tilt pid 
 
     // NEED
     // periodic, current RPM, goal RPM, take output of periodic loop and set that to
     // motor controllers, ask it if we're done
     // also look at turn method and compare how it works
 
+
     // call pid controller, get output of pid controller and send to motor
     // Every time we do a periodic, we use the output and send it to the motor
     // controller
 
+
+    //the flywheel motors
+    public CANSparkMax getFlyWheelMotor1() {
+        return flyWheelMotor1;
+    }
+    /*public CANSparkMax getFlyWheelMotor2() { 
+        // return flyWheelMotor2; 
+    } */
+
+    //the PID controllers
+    public PIDController getShooterPIDController1() {
+        return pidShooter1;
+    }
+    public PIDController getShooterPIDController2() {
+        return pidShooter2;
+    }
+    
+    //current speed of the flywheels
+    public double getCurrentSpeed1() {
+        return currentSpeed1;
+    }
+    public double getCurrentSpeed2() {
+        return currentSpeed2;
+    }
+    
+    //calculated shoot PID Values
     public double getCalculatedShootPIDValue1() {
         return calculatedShootPIDValue1;
     }
-
     public double getCalculatedShootPIDValue2() {
         return calculatedShootPIDValue2;
     }
 
-    public double getCurrentSpeed1() {
-        return currentSpeed1;
-    }
-
-    public double getCurrentSpeed2() {
-        return currentSpeed2;
-    }
-
-    public PIDController getShooterPIDController1() {
-        return pidShooter1;
-    }
-
-    public PIDController getShooterPIDController2() {
-        return pidShooter2;
-    }
-
-    public CANSparkMax getFlyWheelMotor1() {
-        return flyWheelMotor1;
-    }
-
-    /*
-     * public CANSparkMax getFlyWheelMotor2() { // return flyWheelMotor2; }
-     */
-
+    //Flywheel encoders
     public CANEncoder getFlyWheelEncoder1() {
         return flyWheelEncoder1;
     }
+    /*
+    public CANEncoder getFlywheelEncoder2() {
+        return flyWheelEncoder2;
+    }*/
 
+    //get velocity
     public double calculateFlywheel1Velocity() {
         return flyWheelEncoder1.getVelocity();
     }
 
-    /*
-     * public CANEncoder getFlyWheelEncoder2() { //return flyWheelEncoder2; }
-     */
+   
+
 
 }
