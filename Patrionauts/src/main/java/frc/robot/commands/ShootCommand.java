@@ -10,7 +10,7 @@ import frc.robot.subsystems.ShootSubsystem;
  */
 public class ShootCommand extends CommandBase {
 
-  private final ShootSubsystem shoot;
+  private final ShootSubsystem shooter;
   private final BeltSubsystem belt;
   private static final double RPM = 50;
   private final Timer feedTimer = new Timer();
@@ -21,10 +21,10 @@ public class ShootCommand extends CommandBase {
 
   private State state = null;
 
-  public ShootCommand(ShootSubsystem shoot, BeltSubsystem belt) {
+  public ShootCommand(ShootSubsystem shooter, BeltSubsystem belt) {
     this.belt = belt;
-    this.shoot = shoot;
-    addRequirements(shoot, belt);
+    this.shooter = shooter;
+    addRequirements(shooter, belt);
   }
 
   @Override
@@ -37,12 +37,12 @@ public class ShootCommand extends CommandBase {
       state = State.STARTING_RAMPING;
     }
     if(state == State.STARTING_RAMPING){
-      shoot.yeet1(RPM);
-      shoot.yeet2(RPM);
+      shooter.shoot1(RPM);
+      shooter.shoot2(RPM);
       state = State.IS_RAMPING;
     }
     if(state == State.IS_RAMPING){
-      if(shoot.isStillRamping() == false){
+      if(shooter.isStillRamping() == false){
         state = State.STARTING_BELT;
       }
     }
