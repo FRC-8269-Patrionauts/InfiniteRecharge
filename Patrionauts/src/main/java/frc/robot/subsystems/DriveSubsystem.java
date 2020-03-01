@@ -40,41 +40,56 @@ public class DriveSubsystem extends SubsystemBase {
     public final double turnKd = .008;
     public final PIDController turnPID = new PIDController(turnKp, turnKi, turnKd);
 
-    public final double moveKp = 0;
+    public final double moveLeftKp = 0.1;
+    public final double moveLeftKi = 0;
+    public final double moveLeftKd = 0;
+    public final PIDController moveLeftPID = new PIDController(moveLeftKp, moveLeftKi, moveLeftKd);
+
+    public final double moveRightKp = 0.1;
+    public final double moveRightKi = 0;
+    public final double moveRightKd = 0;
+    public final PIDController moveRightPID = new PIDController(moveRightKp, moveRightKi, moveRightKd);
+
+    public final double moveKp = 0.1;
     public final double moveKi = 0;
     public final double moveKd = 0;
     public final PIDController movePID = new PIDController(moveKp, moveKi, moveKd);
+
+    public final double moveAlignKp = 0.1;
+    public final double moveAlignKi = 0;
+    public final double moveAlignKd = 0;
+    public final PIDController moveAlignPID = new PIDController(moveAlignKp, moveAlignKi, moveAlignKd);
 
     private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
     boolean isTurning = false;
     boolean isMoving = false;
     double calculatedTurnPIDValue = 0;
+    double calculatedMoveLeftPIDValue = 0;
+    double calculatedMoveRightPIDValue = 0;
     double calculatedMovePIDValue = 0;
-
-    // static final double COUNTS_PER_MOTOR_REV = 0;
-    // static final double WHEEL_DIAMETER_INCHES = 6.0;
-    // static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) /
-    // (WHEEL_DIAMETER_INCHES * 3.1415);
-    // static final double DRIVE_SPEED = .4;
+    double calculatedMoveAlignPIDValue = 0;
 
     public DriveSubsystem(AHRS imu) {
         this.imu = imu;
         turnPID.reset();
-        //saying that -180 = 180 degrees
+        // saying that -180 = 180 degrees
         turnPID.enableContinuousInput(-180, 180);
-        //done iff difference between where we're at and where we want to be is within .01% 
         turnPID.setTolerance(.01);
-        movePID.reset();
-        //movePID.enableContinuousInput(minimumInput, maximumInput);
-        movePID.setTolerance(.01);
+
+        // done iff difference between where we're at and where we want to be is within
+        // .01%
+        moveLeftPID.reset();
+        moveRightPID.reset();
+        moveLeftPID.setTolerance(.01);
+        moveRightPID.setTolerance(.01);
     }
 
     @Override
     public void periodic() {
         if (isTurning) {
             calculatedTurnPIDValue = turnPID.calculate(imu.getYaw());
-            //it's essentially a limit
+            // it's essentially a limit
             calculatedTurnPIDValue = MathUtil.clamp(calculatedTurnPIDValue, -0.5, 0.5);
 
             drive.arcadeDrive(0, calculatedTurnPIDValue);
@@ -85,60 +100,78 @@ public class DriveSubsystem extends SubsystemBase {
         }
         if (isMoving) {
             calculatedMovePIDValue = movePID.calculate(leftMotor1Encoder.getPosition());
-            // limit between max powers
+            calculatedMoveAlignPIDValue = moveAlignPID.calculate(imu.getYaw());
+
             calculatedMovePIDValue = MathUtil.clamp(calculatedMovePIDValue, -.5, .5);
+            calculatedMoveAlignPIDValue = MathUtil.clamp(calculatedMoveAlignPIDValue, -.2, .2);
 
-            drive.arcadeDrive(calculatedMovePIDValue, 0);
+            drive.arcadeDrive(calculatedMovePIDValue, calculatedMoveAlignPIDValue);
 
-            if (movePID.atSetpoint()) {
+            if (movePID.atSetpoint() && moveAlignPID.atSetpoint()) {
                 isMoving = false;
             }
         }
     }
 
     public void arcadeDrive(double forward, double turn) {
-         drive.arcadeDrive(forward, turn);
+        drive.arcadeDrive(forward, turn);
     }
-
-    // public DifferentialDrive getDifferentialDrive() {
-    // return drive;
-    // }
 
     public void stop() {
         arcadeDrive(0, 0);
     }
 
-    // PID
     public void turn(double degrees) {
         isTurning = true;
         imu.reset();
         turnPID.setSetpoint(degrees);
     }
 
-    public void turnToAngle(double angle) {
-        isTurning = true;
-        turnPID.setSetpoint(angle);
-    }
-
-    public void move(double feet) {
+    public void move(double inches) {
         isMoving = true;
-        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * 12 * feet));
+        movePID.setSetpoint(leftMotor1Encoder.getPosition() + (Constants.TICKS_PER_INCH * inches));
+        imu.reset();
+        moveAlignPID.setSetpoint(imu.getYaw());
     }
 
     public double getCalculatedTurnPIDValue() {
         return calculatedTurnPIDValue;
     }
 
+    public double getCalculatedMoveLeftPIDValue() {
+        return calculatedMoveLeftPIDValue;
+    }
+
+    public double getCalculatedMoveRightPIDValue() {
+        return calculatedMoveRightPIDValue;
+    }
+
     public double getCalculatedMovePIDValue() {
         return calculatedMovePIDValue;
+    }
+
+    public double getCalculatedMoveAlignPIDValue() {
+        return calculatedMoveAlignPIDValue;
     }
 
     public PIDController getTurnPIDController() {
         return turnPID;
     }
 
+    public PIDController getMoveLeftPIDController() {
+        return moveLeftPID;
+    }
+
+    public PIDController getMoveRightPIDController() {
+        return moveRightPID;
+    }
+
     public PIDController getMovePIDController() {
         return movePID;
+    }
+
+    public PIDController getMoveAlignPIDController() {
+        return moveAlignPID;
     }
 
     // Motors
