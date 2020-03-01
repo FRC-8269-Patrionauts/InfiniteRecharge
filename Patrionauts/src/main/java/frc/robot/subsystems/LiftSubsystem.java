@@ -53,6 +53,18 @@ public class LiftSubsystem extends SubsystemBase {
         BotLiftMotor1.set(-speed);
         BotLiftMotor2.set(-speed);
     }
+    
+    public PWMVictorSPX getHookLiftMotor() {
+        return HookLiftMotor;
+    }
+
+    public PWMVictorSPX getBotLiftMotor1() {
+        return BotLiftMotor1;
+    }
+
+    public PWMVictorSPX getBotliftMotor2() {
+        return BotLiftMotor2;
+    }
 
     public void liftBot2(double speed) { // lift bot without transmission
         // TransmissionSolenoid.set(DoubleSolenoid.Value.kReverse);

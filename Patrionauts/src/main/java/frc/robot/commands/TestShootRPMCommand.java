@@ -9,16 +9,27 @@ import frc.robot.subsystems.ShootSubsystem;
 
 public class TestShootRPMCommand extends InstantCommand {
 
-    private final ShootSubsystem shoot;
+    boolean uwu = true; 
+    private final ShootSubsystem shooter;
 
-    public TestShootRPMCommand(ShootSubsystem shoot) {
-        this.shoot = shoot;
-        addRequirements(shoot);
+    public TestShootRPMCommand(ShootSubsystem shooter) {
+        this.shooter = shooter;
+        addRequirements(shooter);
     }
 
     @Override
     public void initialize() {
-        shoot.yeet1(200);
-        shoot.yeet2(200);
+        if (uwu == true){
+            shooter.stopShooter();
+            uwu = false;
+        } else {
+            uwu = true;
+            shooter.shoot1(200);
+            shooter.shoot2(200);
+        }
+        
     }
+    
+   
+
 }
