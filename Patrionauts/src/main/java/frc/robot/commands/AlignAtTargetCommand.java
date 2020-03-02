@@ -11,6 +11,11 @@ public class AlignAtTargetCommand extends CommandBase {
     private final DriveSubsystem drive;
     private final CameraSubsystem camera;
 
+    public enum State {
+        TURN_ALIGN, DIST_ALIGN, FINISHED, TURNING, MOVING
+    }
+    private State state = null;
+
     public AlignAtTargetCommand(DriveSubsystem drive, CameraSubsystem camera) {
         this.drive = drive;
         this.camera = camera;
@@ -20,20 +25,41 @@ public class AlignAtTargetCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (camera.hasDetectedTarget()) {
-            DetectedTarget target = camera.getDetectedTarget();
-            drive.turn(target.getXOffset());
 
-            while (target.getArea() < 0) // 0 is the placeholder for the ideal area "distance"
-            {
-                drive.arcadeDrive(.2, 0);
+        DetectedTarget target = camera.getDetectedTarget();
+
+        if(state == null){
+            state = State.TURN_ALIGN;
+        }
+        if(state == State.TURN_ALIGN){
+            if (camera.hasDetectedTarget()) {
+                drive.turn(target.getXOffset());
+                state = State.TURNING;
+            }
+        } 
+        if(state == State.TURNING){
+            if(drive.isStillTurning()==false){
+                state = State.DIST_ALIGN;
             }
         }
+        
+        if(state == State.DIST_ALIGN){
+            if(camera.hasDetectedTarget()){
+                drive.move(-target.getYOffset());
+                state = State.MOVING;
+            }
+        }
+        if(state == State.MOVING){
+            if(drive.isStillMoving()==false){
+                state = State.FINISHED;
+            }
+        }
+           
     }
 
     public boolean isFinished() {
         // This should return true when the command is finished.
-        return false;
+        return state == State.FINISHED;
     }
 
 }

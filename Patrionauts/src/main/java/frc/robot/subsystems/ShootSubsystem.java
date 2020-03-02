@@ -110,6 +110,12 @@ public class ShootSubsystem extends SubsystemBase {
     // also look at turn method and compare how it works
 
     // stop and reset
+
+    public boolean isStillRamping() {
+        return isRamping;
+    }
+
+    // stop and reset
     public void stopShooter() {
         isRamping = false;
         currentSpeed1 = 0;

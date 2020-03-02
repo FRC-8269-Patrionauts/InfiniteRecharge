@@ -9,11 +9,17 @@ import frc.robot.subsystems.DriveSubsystem;
 public class FollowPathCommand extends CommandBase {
 
     public FollowPathCommand() {
+
     }
 
     @Override
     public void execute() {
+       
 
+    }
+
+    public boolean isFinished(){
+        return true;
     }
 
 }
