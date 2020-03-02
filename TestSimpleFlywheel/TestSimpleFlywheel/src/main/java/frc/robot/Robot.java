@@ -113,6 +113,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    if (robotContainer.getJoystick().getRawButton(3)) {
+      robotContainer.getDriveSubsystem().getFlyMotor1().set(.1);
+    }
     if (robotContainer.getJoystick().getRawButton(7)) {
       robotContainer.getDriveSubsystem().setPower(0);
     }

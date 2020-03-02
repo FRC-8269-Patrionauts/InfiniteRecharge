@@ -36,8 +36,7 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
     // rotates the wheel autonomously UNTIL getTargetColor is true
     public void rotateWheel(double speed) {
-       colorWheelSpinner.set(speed);
-       System.out.println("(>._____.)> bruh");
+        colorWheelSpinner.set(speed);
     }
 
     public void controlWheel() {
@@ -46,6 +45,10 @@ public class ColorWheelSubsystem extends SubsystemBase {
          * idk turn on the camera feed that allows drivers to see the color wheel wowee
          * buttons control the spinny motor ez
          */
+    }
+
+    public PWMVictorSPX getColorWheelSpinner() {
+        return colorWheelSpinner;
     }
 
 }

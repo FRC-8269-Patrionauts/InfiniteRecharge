@@ -6,8 +6,7 @@ package frc.robot;
  * purpose. All constants should be declared globally (i.e. public static). Do
  * not put anything functional in this class.
  */
-public final class 
-Constants {
+public final class Constants {
 
     /**
      * Set to true if all of the components for the DriveSubsystem are connected,
@@ -28,7 +27,7 @@ Constants {
      * {@code Joystick Button 1 on port 1 not available, check if controller is plugged in errors}
      * from showing up in the simulation.
      */
-    public static final boolean ENABLE_JOYSTICK = true;
+    public static final boolean ENABLE_JOYSTICK = false;
 
     /**
      * Set to true if the gamepad is connected, otherwise set to false. This will
@@ -38,20 +37,37 @@ Constants {
      */
     public static final boolean ENABLE_GAMEPAD = false;
 
-    
-
     /**
      * Set to true if the Limelight is connected, otherwise set to false.
      */
     public static final boolean ENABLE_LIMELIGHT = false;
 
+    /**
+     * Set to true if pneumatics are connected to the PCM, otherwise set to false.
+     */
+    public static final boolean ENABLE_PNEUMATICS = false;
+
+    /**
+     * Set to true if webcam is connected, otherwise set to false.
+     */
+     public static final boolean ENABLE_CAMERA = true;
+
+     /**
+      * Set to true if belt is connected, otherwise set to false.
+      */
+    public static final boolean ENABLE_BELT = true;
+
+    /**
+     * Set to true if color wheel subsystem is active, otherwise set to false.
+     */
+    public static final boolean ENABLE_COLORWHEEL = true;
+
     public static final int JOYSTICK_1 = 0;
     public static final int GAMEPAD_1 = 1;
 
-    
-   
     public static final int UNKNOWN = 0;
     public static final int COLOR_WHEEL_MOTOR = 1; // vex ;
+
     public static final int LIFT_MOTOR_1 = 2; //vex
     public static final int LIFT_MOTOR_2 = 3; //vex
     public static final int RIGHT_MOTOR_1 = 4; //spark ;
@@ -101,9 +117,8 @@ Constants {
      * 
      * public static final double kPDriveVel = 0.0;
      */
-    //public static final int NEO_MOTOR_TEST = 1;
+    // public static final int NEO_MOTOR_TEST = 1;
 
     public static final double TICKS_PER_INCH = 95.491 / 167.625;
-
 
 }

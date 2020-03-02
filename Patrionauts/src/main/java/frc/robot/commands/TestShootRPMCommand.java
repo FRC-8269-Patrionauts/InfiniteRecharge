@@ -4,33 +4,32 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.ShootSubsystem;
 
-public class TestShootRPMCommand extends CommandBase {
+public class TestShootRPMCommand extends InstantCommand {
 
-    private final ShootSubsystem shoot;
+    boolean uwu = true; 
+    private final ShootSubsystem shooter;
 
-    //private boolean finished = false;
-
-
-    //
-    public TestShootRPMCommand(ShootSubsystem shoot) {
-        this.shoot = shoot;
-        addRequirements(shoot);
+    public TestShootRPMCommand(ShootSubsystem shooter) {
+        this.shooter = shooter;
+        addRequirements(shooter);
     }
 
     @Override
     public void initialize() {
-       
-
-    }
-
-    @Override
-    public void execute() {
-        shoot.yeet1(10);
-        //shoot.yeet2(10);
+        if (uwu == true){
+            shooter.stopShooter();
+            uwu = false;
+        } else {
+            uwu = true;
+            shooter.shoot1(200);
+            shooter.shoot2(200);
+        }
         
     }
-
+    
    
+
 }

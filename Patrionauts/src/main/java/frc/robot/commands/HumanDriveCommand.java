@@ -16,10 +16,12 @@ public class HumanDriveCommand extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final IntakeSubsystem intakeSubsystem;
     private final XboxController gamepad;
-    //private final RobotContainer robotContainer;
+    // private final RobotContainer robotContainer;
     private final Joystick joystick;
 
+
     public HumanDriveCommand(DriveSubsystem driveSubsystem, IntakeSubsystem intakeSubsystem, Joystick joystick, XboxController gamepad) {
+
         this.driveSubsystem = driveSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.gamepad = gamepad;
@@ -53,8 +55,7 @@ public class HumanDriveCommand extends CommandBase {
                 driveSubsystem.stop();
             }
         }
-        System.out.print("IMU Yaw: ");
-        System.out.println(driveSubsystem.imu.getYaw());
+
         if (Constants.ENABLE_GAMEPAD) {
             if (Math.abs(gamepad.getRawAxis(1)) > .1 || Math.abs(gamepad.getRawAxis(2)) > .2) {
                 driveSubsystem.arcadeDrive(gamepad.getRawAxis(1), gamepad.getRawAxis(2));

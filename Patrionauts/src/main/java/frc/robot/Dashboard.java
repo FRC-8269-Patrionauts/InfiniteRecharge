@@ -55,6 +55,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("AlignAtTarge", (Sendable) robotContainer.getAlignAtTargetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 1).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("LoaderPneumatics", (Sendable) robotContainer.getSetLoaderCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 2).withSize(2, 1);
 
         Shuffleboard.getTab("Commands").add("SetIntakePosition", (Sendable) robotContainer.getSetIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
@@ -63,11 +65,12 @@ public class Dashboard extends CommandBase {
 
         Shuffleboard.getTab("DriveSubsystemPID").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getToggleIntakeCommand())
+        Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getIntakeCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
-        
+        Shuffleboard.getTab("Commands").add("BeltFeed", (Sendable) robotContainer.getBeltFeedCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestColorWheelSpinner", (Sendable) robotContainer.getTestSpinColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LiftHookCommand", (Sendable) robotContainer.getLiftHookCommand())
@@ -286,7 +289,7 @@ public class Dashboard extends CommandBase {
 
     public void configureBelt() {
         Shuffleboard.getTab("ShootSubsystem")
-                .addNumber("Belt Speed", () -> robotContainer.getShootSubsystem().getBeltMotor().get())
+                .addNumber("Belt Speed", () -> robotContainer.getLoaderSubsystem().getBeltMotor().get())
                 .withPosition(0, 3).withSize(1, 1);
     }
 
