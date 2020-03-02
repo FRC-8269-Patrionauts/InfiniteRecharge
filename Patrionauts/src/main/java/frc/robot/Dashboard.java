@@ -70,6 +70,9 @@ public class Dashboard extends CommandBase {
 
         Shuffleboard.getTab("TestCommands").add("TestColorWheelSpinner", (Sendable) robotContainer.getTestSpinColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
+        Shuffleboard.getTab("TestCommands").add("TestBeltCommand", (Sendable) robotContainer.getTestSpinColorWheelCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
+
         Shuffleboard.getTab("Commands").add("LiftHookCommand", (Sendable) robotContainer.getLiftHookCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LowerHookCommand", (Sendable) robotContainer.getLowerHookCommand())

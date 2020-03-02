@@ -22,6 +22,7 @@ import frc.robot.commands.LowerHookCommand;
 import frc.robot.commands.OutakeCommand;
 import frc.robot.commands.SetIntakeRollerCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestBeltCommand;
 import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestShootRPMCommand;
@@ -107,6 +108,7 @@ public class RobotContainer {
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
 
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
+    private final TestBeltCommand testBeltCommand = new TestBeltCommand(shootSubsystem);
 
 
     public RobotContainer() {
@@ -211,6 +213,10 @@ public class RobotContainer {
 
     public TestShootRPMCommand getTestShootRPMCommand() {
         return this.testShootRPMCommand;
+    }
+
+    public TestBeltCommand getTestBeltCommand() {
+        return this.testBeltCommand;
     }
 
     public TestMoveFeetCommand getTestMoveFeetCommand() {
