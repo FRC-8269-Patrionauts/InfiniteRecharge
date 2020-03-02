@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 /**
@@ -11,7 +10,6 @@ import frc.robot.subsystems.ShootSubsystem;
 public class ShootCommand extends CommandBase {
 
   private final ShootSubsystem shooter;
-  private final BeltSubsystem belt;
   private static final double RPM = 50;
   private final Timer feedTimer = new Timer();
 
@@ -21,10 +19,9 @@ public class ShootCommand extends CommandBase {
 
   private State state = null;
 
-  public ShootCommand(ShootSubsystem shooter, BeltSubsystem belt) {
-    this.belt = belt;
+  public ShootCommand(ShootSubsystem shooter) {
     this.shooter = shooter;
-    addRequirements(shooter, belt);
+    addRequirements(shooter);
   }
 
   @Override
@@ -47,7 +44,7 @@ public class ShootCommand extends CommandBase {
       }
     }
     if(state == State.STARTING_BELT){
-      belt.feedBall(.5);
+      shooter.feedBall(.5);
       feedTimer.reset();
       feedTimer.start();
       state = State.BELT_RUNNING;
