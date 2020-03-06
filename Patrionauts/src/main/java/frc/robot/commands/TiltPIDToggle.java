@@ -5,27 +5,28 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
-public class TestShootRPMCommand extends InstantCommand {
+public class TiltPIDToggle extends InstantCommand {
 
-    boolean uwu = true; 
-    private final ShootSubsystem shooter;
+    boolean run = true; 
+    private final IntakeSubsystem tilt;
 
-    public TestShootRPMCommand(ShootSubsystem shooter) {
-        this.shooter = shooter;
-        addRequirements(shooter);
+    public TiltPIDToggle(IntakeSubsystem tilt) {
+        this.tilt = tilt;
+        addRequirements(tilt);
     }
 
     @Override
     public void initialize() {
-        if (uwu == true){
-            shooter.stopShooter();
-            uwu = false;
+        if (run == true){
+            tilt.tiltToShoot(10);
+            run = false;
         } else {
-            uwu = true;
-            shooter.shoot1(100);
-            shooter.shoot2(100);
+            tilt.tiltToBottom();
+            run = true;
+
         }
         
     }
