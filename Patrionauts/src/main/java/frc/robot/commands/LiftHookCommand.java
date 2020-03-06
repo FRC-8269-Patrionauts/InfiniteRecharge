@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.LiftSubsystem;
 
-public class LiftHookCommand extends CommandBase{
+public class LiftHookCommand extends InstantCommand{
     private final LiftSubsystem hookLiftSubsystem;
 
-    boolean bru = true;
+    boolean hookLift = true;
     public LiftHookCommand(LiftSubsystem liftSubsystem){
         this.hookLiftSubsystem = liftSubsystem;
         addRequirements(liftSubsystem);
@@ -15,15 +15,15 @@ public class LiftHookCommand extends CommandBase{
 
     @Override
     public void initialize(){
-        hookLiftSubsystem.liftHook(.4);
+        if (hookLift == true){
+            hookLiftSubsystem.liftHook(.4);
+            hookLift = false;
+        } else {
+            hookLift = true;
+            hookLiftSubsystem.liftHook(0);
+        }
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        // TODO Auto-generated method stub
-        super.end(interrupted);
-        hookLiftSubsystem.liftHook(0);
-    }
 
     
 }

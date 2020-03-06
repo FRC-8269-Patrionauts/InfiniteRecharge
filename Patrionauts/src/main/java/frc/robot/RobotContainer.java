@@ -23,6 +23,7 @@ import frc.robot.commands.OutakeCommand;
 import frc.robot.commands.SetIntakeRollerCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestBeltCommand;
+import frc.robot.commands.TestIntakeRollerCommand;
 import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestShootRPMCommand;
@@ -109,6 +110,7 @@ public class RobotContainer {
 
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
     private final TestBeltCommand testBeltCommand = new TestBeltCommand(shootSubsystem);
+    private final TestIntakeRollerCommand testIntakeRollerCommand = new TestIntakeRollerCommand(intakeSubsystem);
 
 
     public RobotContainer() {
@@ -129,7 +131,7 @@ public class RobotContainer {
 
         joystickButton6.whenPressed(liftBotCommand);
         joystickButton4.whenPressed(lowerBotCommand);
-        joystickButton5.whenHeld(liftHookCommand);//change t toggel
+        joystickButton5.whenPressed(liftHookCommand);//change t toggele
         joystickButton3.whenPressed(lowerHookCommand);
 
         joystickButton7.whenPressed(loaderTiltCommand); //tilt the loader
@@ -271,6 +273,10 @@ public class RobotContainer {
 
   public LoaderTiltCommand getLoaderTiltCommand() {
       return this.loaderTiltCommand;
+  }
+
+  public TestIntakeRollerCommand getTestIntakeRollerCommand(){
+    return this.testIntakeRollerCommand;
   }
 
 
