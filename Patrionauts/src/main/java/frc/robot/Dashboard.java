@@ -248,7 +248,7 @@ public class Dashboard extends CommandBase {
                                 .addBoolean("Button 10", () -> robotContainer.getJoystick().getRawButton(10))
                                 .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
                 Shuffleboard.getTab("Joystick")
-                                .addBoolean("Button 11", () -> robotContainer.getJoystick().getRawButton(11))
+                                .addBoolean("Button 5", () -> robotContainer.getJoystick().getRawButton(5))
                                 .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
 
         }

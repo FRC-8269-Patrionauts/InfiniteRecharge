@@ -33,14 +33,14 @@ public class HumanDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        intakeSubsystem.setFunnelOpen();
+        //intakeSubsystem.setFunnelOpen();
 
         if (Constants.ENABLE_JOYSTICK) {
             if (Math.abs(joystick.getY()) > .3 || Math.abs(joystick.getTwist()) > .3) {
                 if (Math.abs(joystick.getTwist()) > .3) {
-                    driveSubsystem.arcadeDrive(-joystick.getY() / 3, joystick.getTwist() / 3);
+                    driveSubsystem.arcadeDrive(-joystick.getY() / 7, joystick.getTwist() / 7);
                 } else {
-                    driveSubsystem.arcadeDrive(-joystick.getY() / 3, 0);
+                    driveSubsystem.arcadeDrive(-joystick.getY() / 7, 0);
                 }
             } else {
                 driveSubsystem.stop();

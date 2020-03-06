@@ -14,20 +14,15 @@ public class TestShootCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        shoot.getFlyWheelMotor1().set(.2);
+        shoot.getFlyWheelMotor2().set(.2);
     }
 
     @Override
     public void execute() {
-        //shoot.setFlyWheel(1);
-        shoot.getFlyWheelMotor1().set(.1);
+        //shoot.setFlyWheel(.1);
+        //shoot.getFlyWheelMotor2().set(.2);
         System.out.println("TestShootCommand execute");
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        // TODO Auto-generated method stub
-        super.end(interrupted);
-        shoot.getFlyWheelMotor1().set(0);
     }
 
 }

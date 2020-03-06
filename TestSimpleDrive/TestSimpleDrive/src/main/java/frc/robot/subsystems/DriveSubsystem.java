@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import com.revrobotics.CANEncoder;
@@ -19,11 +20,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class DriveSubsystem extends SubsystemBase {
 
   private final CANSparkMax leftMotor2 = new CANSparkMax(Constants.LEFT_MOTOR_2, MotorType.kBrushless);
-  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
-  private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
-  private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
-  //private final CANSparkMax flyMotor1 = new CANSparkMax(5, MotorType.kBrushless);
+  private final CANSparkMax leftMotor1 = new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless); //new CANSparkMax(Constants.LEFT_MOTOR_1, MotorType.kBrushless);
+  private final CANSparkMax rightMotor1 = new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless); //new CANSparkMax(Constants.RIGHT_MOTOR_1, MotorType.kBrushless);
+  private final CANSparkMax rightMotor2 = new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless); //new CANSparkMax(Constants.RIGHT_MOTOR_2, MotorType.kBrushless);
+  //private final CANSparkMax flyMotor1 = new CANSparkMax(5 , MotorType.kBrushless);
   //private final CANSparkMax flyMotor2 = new CANSparkMax(7, MotorType.kBrushless);
+  //private final PWMVictorSPX testMotor = new PWMVictorSPX(4);
 
   private final CANEncoder leftMotor1Encoder = leftMotor1.getEncoder();
   private final CANEncoder leftMotor2Encoder = leftMotor2.getEncoder();
@@ -105,6 +107,10 @@ public class DriveSubsystem extends SubsystemBase {
   public DifferentialDrive getDrive() {
     return drive;
   }
+
+  // public PWMVictorSPX getTestMotor(){
+  //   return testMotor;
+  // }
   
 
 public void setPower(double power) {

@@ -24,8 +24,8 @@ public class TestShootRPMCommand extends InstantCommand {
             uwu = false;
         } else {
             uwu = true;
-            shooter.shoot1(200);
-            shooter.shoot2(200);
+            shooter.shoot1(10);
+            shooter.shoot2(10);
         }
         
     }

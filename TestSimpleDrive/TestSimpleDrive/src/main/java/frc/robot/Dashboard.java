@@ -23,14 +23,6 @@ public class Dashboard extends CommandBase {
                         () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
             .withPosition(3, 0).withSize(2, 1);
         Shuffleboard.getTab("Drive")
-                .addNumber("LeftMotor2Pos",
-                        () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
-                .withPosition(3, 1).withSize(2, 1);
-        Shuffleboard.getTab("Drive")
-                .addNumber("RightMotor1Pos",
-                        () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
-                .withPosition(5, 0).withSize(2, 1);
-        Shuffleboard.getTab("Drive")
                 .addNumber("RightMotor1Pos",
                         () -> robotContainer.getDriveSubsystem().getRightMotor1Encoder().getPosition())
                 .withPosition(5, 1).withSize(2, 1);
@@ -38,9 +30,6 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Drive").addNumber("RightMotor2Pos",
                 () -> robotContainer.getDriveSubsystem().getRightMotor2Encoder().getPosition())
                         .withPosition(7, 1).withSize(2, 1);
-        Shuffleboard.getTab("Drive").addNumber("LeftMotor1Pos",
-                () -> robotContainer.getDriveSubsystem().getLeftMotor1Encoder().getPosition())
-                        .withPosition(7, 3).withSize(2, 1);
         Shuffleboard.getTab("Drive").addNumber("LeftMotor2Pos",
                 () -> robotContainer.getDriveSubsystem().getLeftMotor2Encoder().getPosition())
                         .withPosition(7, 5).withSize(2, 1);

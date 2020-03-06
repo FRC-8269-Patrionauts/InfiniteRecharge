@@ -106,4 +106,8 @@ public class LoaderSubsystem extends SubsystemBase {
         tiltPID.setSetpoint(0);
     }
 
+    public boolean tiltingState(){
+        return isTilting;
+    }
+
 }

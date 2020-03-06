@@ -42,7 +42,7 @@ public class DriveCommand extends CommandBase {
     
     if (joystick != null) {
       if (Math.abs(joystick.getY()) > .1 || Math.abs(joystick.getTwist()) > .1) {
-        driveSubsystem.arcadeDrive(joystick.getY() / 2, joystick.getTwist() / 2);
+        driveSubsystem.arcadeDrive(-(joystick.getY() / 3.5), joystick.getTwist() / 3.5);
       } else {
         driveSubsystem.arcadeDrive(0, 0);
      }
