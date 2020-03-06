@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    robotContainer.getDriveSubsystem().setPower(0);
+    //robotContainer.getDriveSubsystem().setPower(0);
   }
 
   /**
@@ -87,9 +87,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    robotContainer.getDriveSubsystem().getLeftMotor2().set(.2);
-    robotContainer.getDriveSubsystem().getRightMotor2().set(.2);
-
+    //robotContainer.getDriveSubsystem().getTestMotor().set(.1);
   }
 
   @Override
@@ -104,7 +102,7 @@ public class Robot extends TimedRobot {
     }
 
     if (driveCommand != null) {
-      // driveCommand.schedule();
+      driveCommand.schedule();
     }
   }
 

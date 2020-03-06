@@ -48,7 +48,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("HumanDrive", (Sendable) robotContainer.getHumanDriveCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 0).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("ColorWheel", (Sendable) robotContainer.getColorWheelCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);     
+                .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);
         Shuffleboard.getTab("DriveSubsystemPID").add("TestTurning", (Sendable) robotContainer.getTestTurningCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
@@ -59,7 +59,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("SetIntakePosition", (Sendable) robotContainer.getSetIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
 
-        
+
 
         Shuffleboard.getTab("DriveSubsystemPID").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
@@ -73,6 +73,41 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("TestCommands").add("TestBeltCommand", (Sendable) robotContainer.getTestSpinColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
 
+                Shuffleboard.getTab("Joystick").addNumber("Twist", () -> robotContainer.getJoystick().getTwist())
+                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(0, 1).withSize(2, 1);
+                Shuffleboard.getTab("Joystick").addNumber("Throttle", () -> robotContainer.getJoystick().getThrottle())
+                                .withWidget(BuiltInWidgets.kNumberBar).withPosition(2, 1).withSize(2, 1);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Side Button", () -> robotContainer.getJoystick().getRawButton(2))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(0, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 11", () -> robotContainer.getJoystick().getRawButton(11))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 4", () -> robotContainer.getJoystick().getRawButton(4))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 3", () -> robotContainer.getJoystick().getRawButton(3))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 8", () -> robotContainer.getJoystick().getRawButton(8))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 7", () -> robotContainer.getJoystick().getRawButton(7))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 1", () -> robotContainer.getJoystick().getRawButton(1))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 2", () -> robotContainer.getJoystick().getRawButton(2))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 10", () -> robotContainer.getJoystick().getRawButton(10))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+                Shuffleboard.getTab("Joystick")
+                                .addBoolean("Button 5", () -> robotContainer.getJoystick().getRawButton(5))
+                                .withWidget(BuiltInWidgets.kBooleanBox).withPosition(1, 2);
+
         Shuffleboard.getTab("Commands").add("LiftHookCommand", (Sendable) robotContainer.getLiftHookCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LowerHookCommand", (Sendable) robotContainer.getLowerHookCommand())
@@ -81,7 +116,9 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LowerBotCommand", (Sendable) robotContainer.getLowerBotCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
-    }
+        Shuffleboard.getTab("TestCommands").add("TestIntakeRoller", (Sendable) robotContainer.getTestIntakeRollerCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
+
 
     private void configureDriveSubsystem() {
         Shuffleboard.getTab("DriveSubsystem")
@@ -235,7 +272,7 @@ public class Dashboard extends CommandBase {
         //Add test shoot widget to shoot subsystem tab
         Shuffleboard.getTab("ShootSubsystem").add("TestShootRPM", (Sendable) robotContainer.getTestShootRPMCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
-        
+
         //encoder position
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Flywheel1 Encoder Output", () -> robotContainer.getShootSubsystem().getFlyWheelEncoder1().getPosition())
@@ -251,7 +288,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 2 Power", () -> robotContainer.getShootSubsystem().getFlyWheelMotor2().get())
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(6, 0).withSize(2, 1);
-        
+
         //Calculated current speed
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("FlyWheel 1 Current Speed", () -> robotContainer.getShootSubsystem().getCurrentSpeed1())
@@ -275,7 +312,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("ShootSubsystem")
                 .add("ShootPIDController2", (Sendable) robotContainer.getShootSubsystem().getShooterPIDController2())
                 .withWidget(BuiltInWidgets.kPIDController).withPosition(2, 0).withSize(2, 2);
-        
+
     }
 
     public void configureBelt() {

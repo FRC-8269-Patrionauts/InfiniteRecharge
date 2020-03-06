@@ -52,6 +52,7 @@ public class ShootSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+
         if (isRamping) {
 
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
@@ -72,16 +73,19 @@ public class ShootSubsystem extends SubsystemBase {
             // flyWheelMotor2.set(currentSpeed2);
 
         }
+        flyWheelMotor2.set(.3);
+        flyWheelMotor1.set(.3);
     }
 
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(-speed);
-        // flyWheelMotor2.set(-speed);
+        flyWheelMotor2.set(-speed);
+
     }
 
     public void stopFlyWheels() {
         flyWheelMotor1.set(0);
-        // flyWheelMotor2.set(0);
+        flyWheelMotor2.set(0);
     }
 
     public void shoot1(double RPM) {

@@ -19,7 +19,7 @@ public class TestBeltCommand extends InstantCommand{
             beltSubsystem.feedBall(.4);
             feed = false;
         } else {
-            feed = false;
+            feed = true;
             beltSubsystem.feedBall(0);
         }
     }

@@ -19,7 +19,7 @@ public final class Constants {
     /**
      * Set to true if all of the components for the ShootSubsystem are connected.
      */
-    public static final boolean ENABLE_SHOOT_SUBSYSTEM = true;
+    public static final boolean ENABLE_SHOOT_SUBSYSTEM = false;
 
     /**
      * Set to true if the joystick is connected, otherwise set to false. This will
@@ -27,7 +27,7 @@ public final class Constants {
      * {@code Joystick Button 1 on port 1 not available, check if controller is plugged in errors}
      * from showing up in the simulation.
      */
-    public static final boolean ENABLE_JOYSTICK = false;
+    public static final boolean ENABLE_JOYSTICK = true;
 
     /**
      * Set to true if the gamepad is connected, otherwise set to false. This will
@@ -55,31 +55,32 @@ public final class Constants {
      /**
       * Set to true if belt is connected, otherwise set to false.
       */
-    public static final boolean ENABLE_BELT = true;
+    public static final boolean ENABLE_BELT = false;
 
     /**
      * Set to true if color wheel subsystem is active, otherwise set to false.
      */
-    public static final boolean ENABLE_COLORWHEEL = true;
+    public static final boolean ENABLE_COLORWHEEL = false;
 
     public static final int JOYSTICK_1 = 0;
     public static final int GAMEPAD_1 = 1;
 
     public static final int UNKNOWN = 0;
     public static final int COLOR_WHEEL_MOTOR = 1; // vex ;
+    public static final int LIFT_MOTOR_1 = 10; // vex
 
-    public static final int LIFT_MOTOR_1 = 2; //vex
-    public static final int LIFT_MOTOR_2 = 3; //vex
-    public static final int RIGHT_MOTOR_1 = 4; //spark ;
-    public static final int RIGHT_MOTOR_2 = 5; //spark ;
-    public static final int LEFT_MOTOR_1 = 6; //spark ;
-    public static final int LEFT_MOTOR_2 = 7; //spark ;
-    public static final int INTAKE_MOTOR = 9; //vex
-    public static final int BELT_MOTOR = 10; //vex
-    public static final int TILT_MOTOR = 11; //spark ;
-    public static final int FLYWHEEL_MOTOR2 = 12; // spark ;
-    public static final int FLYWHEEL_MOTOR1 = 13; // spark ;
+    public static final int FLYWHEEL_MOTOR2 = 14; // spark ;
+    public static final int FLYWHEEL_MOTOR1 = 15; // spark ;
 
+    public static final int LIFT_MOTOR_2 = 11; // vex
+    public static final int RIGHT_MOTOR_1 = 2; // spark ;
+    public static final int RIGHT_MOTOR_2 = 1; // spark ;
+    public static final int LEFT_MOTOR_1 = 12; // spark ;
+    public static final int LEFT_MOTOR_2 = 13; // spark ;
+    public static final int INTAKE_MOTOR = 9; // vex
+    public static final int BELT_MOTOR = 0; // vex
+    public static final int TILT_MOTOR_1 = 3; // spark ;
+    public static final int TILT_MOTOR_2 = 2; // vex
 
     public static final double CURRENT_SPEED = 0;
     public static final double GOAL_SPEED = 0;
@@ -114,7 +115,7 @@ public final class Constants {
      * public static final double ksVolts = 0.0; public static final double
      * ksVoltsSecondsPerMeter = 0.0; public static final double
      * kaVoltSecondsSquaredPerMeter = 0.0;
-     * 
+     *
      * public static final double kPDriveVel = 0.0;
      */
     // public static final int NEO_MOTOR_TEST = 1;

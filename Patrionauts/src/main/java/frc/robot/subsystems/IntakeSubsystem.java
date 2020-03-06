@@ -28,8 +28,8 @@ import frc.robot.Constants;
 public class IntakeSubsystem extends SubsystemBase {
     private final PWMVictorSPX rollerMoter = new PWMVictorSPX(Constants.INTAKE_MOTOR);
 
-    private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(2, 3);
-    private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(4, 5);
+    private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(1, 2, 3);
+    private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(1, 4, 5);
 
     private final DoubleSolenoid intakePiston1 = new DoubleSolenoid(4, 5); 
     private final DoubleSolenoid intakePiston2 = new DoubleSolenoid(6, 7);//intake pneumatics

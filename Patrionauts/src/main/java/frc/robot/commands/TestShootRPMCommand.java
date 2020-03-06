@@ -9,7 +9,7 @@ import frc.robot.subsystems.ShootSubsystem;
 
 public class TestShootRPMCommand extends InstantCommand {
 
-    boolean uwu = true; 
+    boolean uwu = true;
     private final ShootSubsystem shooter;
 
     public TestShootRPMCommand(ShootSubsystem shooter) {
@@ -27,9 +27,9 @@ public class TestShootRPMCommand extends InstantCommand {
             shooter.shoot1(100);
             shooter.shoot2(100);
         }
-        
+
     }
-    
-   
+
+
 
 }
