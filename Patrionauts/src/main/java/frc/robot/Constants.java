@@ -115,7 +115,7 @@ public final class Constants {
      * public static final double ksVolts = 0.0; public static final double
      * ksVoltsSecondsPerMeter = 0.0; public static final double
      * kaVoltSecondsSquaredPerMeter = 0.0;
-     * 
+     *
      * public static final double kPDriveVel = 0.0;
      */
     // public static final int NEO_MOTOR_TEST = 1;

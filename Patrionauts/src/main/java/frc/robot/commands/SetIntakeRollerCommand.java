@@ -2,26 +2,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.IntakePneumaticSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class SetIntakeRollerCommand extends InstantCommand{
-    private final IntakePneumaticSubsystem intakePneumatics;
+    private final IntakeSubsystem intakeSubsystem;
 
     boolean boop = true;
 
-    public SetIntakeRollerCommand(IntakePneumaticSubsystem intakeSolenoids){
-        this.intakePneumatics = intakeSolenoids;
+    public SetIntakeRollerCommand(IntakeSubsystem intakeSolenoids){
+        this.intakeSubsystem = intakeSolenoids;
         addRequirements(intakeSolenoids);
     }
 
     @Override
     public void initialize() {
         if (boop == true){
-            intakePneumatics.setDownIntake();
+            intakeSubsystem.setDownIntake();
             boop = false;
         } else {
             boop = true;
-            intakePneumatics.setUpIntake();
+            intakeSubsystem.setUpIntake();
         }
 
     }

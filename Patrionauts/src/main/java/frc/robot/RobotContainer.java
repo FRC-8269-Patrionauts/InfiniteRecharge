@@ -10,35 +10,32 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignAtTargetCommand;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.BeltFeedCommand;
-import frc.robot.commands.SetLoaderCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.FollowPathCommand;
 import frc.robot.commands.HumanDriveCommand;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ToggleIntakeCommand;
 import frc.robot.commands.LiftBotCommand;
 import frc.robot.commands.LiftHookCommand;
-import frc.robot.commands.LoaderTiltForwardCommand;
+import frc.robot.commands.LoaderTiltCommand;
 import frc.robot.commands.LowerBotCommand;
 import frc.robot.commands.LowerHookCommand;
 import frc.robot.commands.OutakeCommand;
 import frc.robot.commands.SetIntakeRollerCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TestBeltCommand;
+import frc.robot.commands.TestIntakeRollerCommand;
 import frc.robot.commands.TestMoveFeetCommand;
 import frc.robot.commands.TestShootCommand;
 import frc.robot.commands.TestShootRPMCommand;
 import frc.robot.commands.TestSpinColorWheelCommand;
 import frc.robot.commands.TestTurningCommand;
-import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeRollerSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 //import sun.java2d.cmm.PCMM;
-import frc.robot.subsystems.IntakePneumaticSubsystem;
 
 /**
  * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -87,14 +84,11 @@ public class RobotContainer {
     private final DriveSubsystem driveSubsystem = new DriveSubsystem(imu);
     private final ShootSubsystem shootSubsystem = new ShootSubsystem();
     private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
-    private final IntakeRollerSubsystem intakeRollerSubsystem = new IntakeRollerSubsystem();
-    private final IntakePneumaticSubsystem intakePneumaticSubsystem = new IntakePneumaticSubsystem();
-    private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
-    private final BeltSubsystem beltSubsystem = new BeltSubsystem();
+    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final LiftSubsystem liftSubsystem = new LiftSubsystem();
 
     // Commands
-    private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, intakeRollerSubsystem, joystick, gamepad);
+    private final HumanDriveCommand humanDriveCommand = new HumanDriveCommand(driveSubsystem, intakeSubsystem, joystick, gamepad);
     private final AutonomousCommand autonomousCommand = new AutonomousCommand(this);
     private final ColorWheelCommand colorWheelCommand = new ColorWheelCommand(colorWheelSubsystem);
     private final ShootCommand shootCommand = new ShootCommand(shootSubsystem);
@@ -102,21 +96,21 @@ public class RobotContainer {
     private final TestTurningCommand testTurningCommand = new TestTurningCommand(driveSubsystem);
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
     private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
-    private final SetLoaderCommand setLoaderCommand = new SetLoaderCommand(loaderSubsystem);
-    private final IntakeCommand intakeCommand = new IntakeCommand(intakeRollerSubsystem);
-    private final OutakeCommand outakeCommand = new OutakeCommand(intakeRollerSubsystem);
-    private final BeltFeedCommand beltFeedCommand = new BeltFeedCommand(beltSubsystem);
+    private final ToggleIntakeCommand toggleIntakeCommand = new ToggleIntakeCommand(intakeSubsystem);
+    private final OutakeCommand outakeCommand = new OutakeCommand(intakeSubsystem);
     private final TestSpinColorWheelCommand testSpinColorWheelCommand = new TestSpinColorWheelCommand(colorWheelSubsystem);
     private final LiftHookCommand liftHookCommand = new LiftHookCommand(liftSubsystem);
     private final LowerHookCommand lowerHookCommand = new LowerHookCommand(liftSubsystem);
     private final LiftBotCommand liftBotCommand = new LiftBotCommand(liftSubsystem);
     private final LowerBotCommand lowerBotCommand = new LowerBotCommand(liftSubsystem);
-    private final LoaderTiltForwardCommand loaderTiltForwardCommand = new LoaderTiltForwardCommand(loaderSubsystem);
+    private final LoaderTiltCommand loaderTiltCommand = new LoaderTiltCommand(shootSubsystem);
 
-    private final SetIntakeRollerCommand setIntakeRollerCommand = new SetIntakeRollerCommand(intakePneumaticSubsystem);
+    private final SetIntakeRollerCommand setIntakeRollerCommand = new SetIntakeRollerCommand(intakeSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
 
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
+    private final TestBeltCommand testBeltCommand = new TestBeltCommand(shootSubsystem);
+    private final TestIntakeRollerCommand testIntakeRollerCommand = new TestIntakeRollerCommand(intakeSubsystem);
 
 
     public RobotContainer() {
@@ -133,14 +127,20 @@ public class RobotContainer {
      * Use this method to define your button->command mappings.
      */
     private void configureJoystickButtons() {
-        joystickButton11.whenPressed(testTurningCommand);
-        joystickButton4.whenPressed(setLoaderCommand);
-        joystickButton3.whenPressed(setIntakeRollerCommand);
-        joystickButton8.whenPressed(intakeCommand);
-        joystickButton7.whenPressed(outakeCommand);
-        joystickButton1.whenPressed(beltFeedCommand);
-        joystickButton2.whenPressed(testShootRPMCommand);
-        joystickButton10.whenPressed(testSpinColorWheelCommand);
+        joystickButton1.whenPressed(shootCommand);
+
+        joystickButton6.whenPressed(liftBotCommand);
+        joystickButton4.whenPressed(lowerBotCommand);
+        joystickButton5.whenPressed(liftHookCommand);//change t toggele
+        joystickButton3.whenPressed(lowerHookCommand);
+
+        joystickButton7.whenPressed(loaderTiltCommand); //tilt the loader
+
+        joystickButton8.whenPressed(toggleIntakeCommand); //everything to begin intaking powercells , chnage name
+
+        joystickButton9.whenPressed(alignAtTargetCommand); //auto aim at target
+
+        joystickButton2.whenPressed(testSpinColorWheelCommand);
 
     }
 
@@ -184,16 +184,9 @@ public class RobotContainer {
         return this.colorWheelSubsystem;
     }
 
-    public LoaderSubsystem getLoaderSubsystem() {
-        return this.loaderSubsystem;
-    }
 
-    public IntakeRollerSubsystem getIntakeSubsystem() {
-        return this.intakeRollerSubsystem;
-    }
-
-    public BeltSubsystem getBeltSubsystem() {
-        return this.beltSubsystem;
+    public IntakeSubsystem getIntakeSubsystem() {
+        return this.intakeSubsystem;
     }
 
     public LiftSubsystem getLiftSubsystem(){
@@ -224,6 +217,10 @@ public class RobotContainer {
         return this.testShootRPMCommand;
     }
 
+    public TestBeltCommand getTestBeltCommand() {
+        return this.testBeltCommand;
+    }
+
     public TestMoveFeetCommand getTestMoveFeetCommand() {
         return this.testMoveFeetCommand;
     }
@@ -236,10 +233,6 @@ public class RobotContainer {
         return this.alignAtTargetCommand;
     }
 
-    public SetLoaderCommand getSetLoaderCommand() {
-        return this.setLoaderCommand;
-    }
-
     public FollowPathCommand getFollowPathCommand() {
         return this.followPathCommand;
     }
@@ -248,17 +241,15 @@ public class RobotContainer {
     return this.setIntakeRollerCommand;
   }
 
-  public IntakeCommand getIntakeCommand() {
-    return this.intakeCommand;
+  public ToggleIntakeCommand getToggleIntakeCommand() {
+    return this.toggleIntakeCommand;
   }
 
   public OutakeCommand getOutakeCommand() {
     return this.outakeCommand;
   }
 
-  public BeltFeedCommand getBeltFeedCommand() {
-    return this.beltFeedCommand;
-  }
+
 
   public TestSpinColorWheelCommand getTestSpinColorWheelCommand() {
       return this.testSpinColorWheelCommand;
@@ -280,8 +271,12 @@ public class RobotContainer {
       return this.lowerBotCommand;
   }
 
-  public LoaderTiltForwardCommand getLoaderTiltForwardCommand() {
-      return this.loaderTiltForwardCommand;
+  public LoaderTiltCommand getLoaderTiltCommand() {
+      return this.loaderTiltCommand;
+  }
+
+  public TestIntakeRollerCommand getTestIntakeRollerCommand(){
+    return this.testIntakeRollerCommand;
   }
 
 

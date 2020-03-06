@@ -4,6 +4,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
@@ -15,6 +16,7 @@ import frc.robot.Constants;
 
 // GOAL: plug in an RPM (on shuffleboard) and the motor will go to it
 public class ShootSubsystem extends SubsystemBase {
+    private final PWMVictorSPX beltMotor = new PWMVictorSPX(Constants.BELT_MOTOR);
 
     private final CANSparkMax flyWheelMotor1 = new CANSparkMax(Constants.FLYWHEEL_MOTOR1, MotorType.kBrushless);
     private final CANSparkMax flyWheelMotor2 = new CANSparkMax(Constants.FLYWHEEL_MOTOR2, MotorType.kBrushless);
@@ -78,6 +80,7 @@ public class ShootSubsystem extends SubsystemBase {
     public void setFlyWheel(double speed) {
         flyWheelMotor1.set(-speed);
         flyWheelMotor2.set(-speed);
+
     }
 
     public void stopFlyWheels() {
@@ -95,6 +98,25 @@ public class ShootSubsystem extends SubsystemBase {
         isRamping = true;
         pidShooter2.setSetpoint(RPM);
         currentSpeed2 = 0;
+    }
+
+    public void feedBall(double speed) {
+        beltMotor.set(speed);
+    }
+
+    public PWMVictorSPX getBeltMotor() {
+        return beltMotor;
+    }
+
+    // NEED
+    // periodic, current RPM, goal RPM, take output of periodic loop and set that to
+    // motor controllers, ask it if we're done
+    // also look at turn method and compare how it works
+
+    // stop and reset
+
+    public boolean isStillRamping() {
+        return isRamping;
     }
 
     // stop and reset

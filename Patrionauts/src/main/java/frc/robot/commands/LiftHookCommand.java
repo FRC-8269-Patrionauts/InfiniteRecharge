@@ -1,12 +1,13 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.LiftSubsystem;
 
 public class LiftHookCommand extends InstantCommand{
     private final LiftSubsystem hookLiftSubsystem;
 
-    boolean bru = true;
+    boolean hookLift = true;
     public LiftHookCommand(LiftSubsystem liftSubsystem){
         this.hookLiftSubsystem = liftSubsystem;
         addRequirements(liftSubsystem);
@@ -14,12 +15,15 @@ public class LiftHookCommand extends InstantCommand{
 
     @Override
     public void initialize(){
-        if (bru == true){
-            hookLiftSubsystem.liftHook(.2);
-            bru = false;
+        if (hookLift == true){
+            hookLiftSubsystem.liftHook(.4);
+            hookLift = false;
         } else {
-            bru = true;
+            hookLift = true;
             hookLiftSubsystem.liftHook(0);
         }
     }
+
+
+    
 }
