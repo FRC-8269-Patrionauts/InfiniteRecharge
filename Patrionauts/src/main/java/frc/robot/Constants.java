@@ -78,8 +78,8 @@ public final class Constants {
     public static final int LEFT_MOTOR_1 = 12; // spark ;
     public static final int LEFT_MOTOR_2 = 13; // spark ;
 
-    public static final int INTAKE_MOTOR = 4; // vex
-    public static final int BELT_MOTOR = 0; // vex
+    public static final int INTAKE_MOTOR = 0; // vex
+    public static final int BELT_MOTOR = 4; // vex
     public static final int TILT_MOTOR_1 = 3; // spark ;
     public static final int TILT_MOTOR_2 = 2; // spark ;
 

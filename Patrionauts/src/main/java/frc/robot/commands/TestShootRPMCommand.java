@@ -24,9 +24,9 @@ public class TestShootRPMCommand extends InstantCommand {
             uwu = false;
         } else {
             uwu = true;
-            shooter.setFlyWheel1(100);
-            shooter.setFlyWheel2(100);
-            shooter.feedBall(0.7);
+            shooter.setFlyWheel1(-2000);
+            shooter.setFlyWheel2(-2000);
+            shooter.feedBall(1);
         }
 
     }

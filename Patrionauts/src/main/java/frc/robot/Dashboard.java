@@ -39,6 +39,7 @@ public class Dashboard extends CommandBase {
         }
         configurePneumatics();
         configureCamera();
+        configureBelt();
     }
 
     private void configureCommands() {
@@ -380,8 +381,7 @@ public class Dashboard extends CommandBase {
     public void configureBelt() {
         Shuffleboard.getTab("ShootSubsystem")
                 .addNumber("Belt Speed", () -> robotContainer.getShootSubsystem().getBeltMotor().get())
-                .withPosition(0, 3).withSize(1, 1);
-
+                .withPosition(8, 1).withSize(1, 1);
     }
 
     public void configureCamera() {

@@ -50,8 +50,10 @@ public class ShootCommand extends CommandBase {
             state = State.BELT_RUNNING;
         }
         if (state == State.BELT_RUNNING) {
-            if (feedTimer.hasPeriodPassed(5.0)) {
+            if (feedTimer.hasPeriodPassed(2.0)) {
                 feedTimer.stop();
+                shooter.stopShooter();
+                shooter.feedBall(0);
                 state = State.FINISHED;
             }
         }
