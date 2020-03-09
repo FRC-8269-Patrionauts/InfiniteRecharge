@@ -69,8 +69,8 @@ public final class Constants {
     public static final int COLOR_WHEEL_MOTOR = 1; // vex ;
     public static final int LIFT_MOTOR_1 = 10; // vex
 
-    public static final int FLYWHEEL_MOTOR2 = 14; // spark ;
-    public static final int FLYWHEEL_MOTOR1 = 15; // spark ;
+    public static final int FLYWHEEL_MOTOR2 = 15; // spark ;
+    public static final int FLYWHEEL_MOTOR1 = 14; // spark ;
 
     public static final int LIFT_MOTOR_2 = 11; // vex
     public static final int RIGHT_MOTOR_1 = 2; // spark ;
