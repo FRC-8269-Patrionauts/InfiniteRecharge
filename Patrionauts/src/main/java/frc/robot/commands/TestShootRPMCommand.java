@@ -19,17 +19,16 @@ public class TestShootRPMCommand extends InstantCommand {
 
     @Override
     public void initialize() {
-        if (uwu == true){
+        if (uwu == true) {
             shooter.stopShooter();
             uwu = false;
         } else {
             uwu = true;
-            shooter.shoot1(100);
-            shooter.shoot2(100);
+            shooter.setFlyWheel1(100);
+            shooter.setFlyWheel2(100);
+            shooter.feedBall(0.7);
         }
 
     }
-
-
 
 }

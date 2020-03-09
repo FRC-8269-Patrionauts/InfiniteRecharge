@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
 
-
 /*Notes
 * Be able to auto align using webcam
 * Also have a method to be able to disable auto align just in case we need to manually adjust
@@ -31,13 +30,13 @@ public class IntakeSubsystem extends SubsystemBase {
     private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(1, 2, 3);
     private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(1, 4, 5);
 
-    private final DoubleSolenoid intakePiston1 = new DoubleSolenoid(4, 5); 
-    private final DoubleSolenoid intakePiston2 = new DoubleSolenoid(6, 7);//intake pneumatics
+    private final DoubleSolenoid intakePiston1 = new DoubleSolenoid(4, 5);
+    private final DoubleSolenoid intakePiston2 = new DoubleSolenoid(6, 7);// intake pneumatics
 
     private final DoubleSolenoid turrentPiston1 = new DoubleSolenoid(0, 1);
-    private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(2, 3); //turrent pneumatics
+    private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(2, 3); // turrent pneumatics
 
-    private final CANSparkMax loaderTiltMotor = new CANSparkMax(Constants.TILT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax loaderTiltMotor = new CANSparkMax(Constants.TILT_MOTOR_1, MotorType.kBrushless);
     private final CANEncoder loaderTiltEncoder = loaderTiltMotor.getEncoder();
 
     public final double tiltKp = .0;
@@ -54,21 +53,23 @@ public class IntakeSubsystem extends SubsystemBase {
     public DoubleSolenoid getTurrnetPiston1() {
         return turrentPiston1;
     }
+
     public DoubleSolenoid getTurrnetPiston2() {
         return turrentPiston2;
     }
 
-    public DoubleSolenoid getFunnelPiston1(){
+    public DoubleSolenoid getFunnelPiston1() {
         return funnelPiston1;
     }
 
-    public DoubleSolenoid getFunnelPiston2(){
+    public DoubleSolenoid getFunnelPiston2() {
         return funnelPiston2;
     }
 
     public DoubleSolenoid getIntakePiston1() {
         return intakePiston1;
     }
+
     public DoubleSolenoid getIntakePiston2() {
         return intakePiston2;
     }
@@ -88,46 +89,49 @@ public class IntakeSubsystem extends SubsystemBase {
         }
 
     }
-        
-    public void setDownIntake(){
+
+    public void setDownIntake() {
         intakePiston1.set(DoubleSolenoid.Value.kForward);
         intakePiston2.set(DoubleSolenoid.Value.kForward);
     }
-    public void setUpIntake(){
+
+    public void setUpIntake() {
         intakePiston1.set(DoubleSolenoid.Value.kReverse);
         intakePiston2.set(DoubleSolenoid.Value.kReverse);
-        
+
     }
-    public void setFunnelOpen(){
+
+    public void setFunnelOpen() {
         funnelPiston1.set(DoubleSolenoid.Value.kForward); // set at begginging of tele or auto
         funnelPiston2.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void setFunnelClose(){
+    public void setFunnelClose() {
         funnelPiston1.set(DoubleSolenoid.Value.kReverse); // use to put pistons back in (just shuffleboard)
         funnelPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public void setTensionerUp(){
+    public void setTensionerUp() {
         turrentPiston1.set(DoubleSolenoid.Value.kForward);
         turrentPiston2.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void setTensionerDown(){
+    public void setTensionerDown() {
         turrentPiston1.set(DoubleSolenoid.Value.kReverse);
         turrentPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public void intake(double speed){
+    public void intake(double speed) {
         rollerMoter.set(speed);
     }
-    public void outake(double speed){
+
+    public void outake(double speed) {
         rollerMoter.set(-speed);
     }
 
-    public double getCalculatedTiltPIDValue(){
+    public double getCalculatedTiltPIDValue() {
         return calculatedTiltPIDValue;
-    } 
+    }
 
     public void tiltToShoot(double encoderTicks) {
         isTilting = true;

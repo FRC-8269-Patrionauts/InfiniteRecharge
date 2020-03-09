@@ -20,7 +20,8 @@ public class AlignAtTargetCommand extends CommandBase {
         TURN_ALIGN, DIST_ALIGN, FINISHED, TURNING, MOVING
     }
 
-    private State state = null;
+    // private State state = null;
+    private State state = State.DIST_ALIGN;
 
     public AlignAtTargetCommand(DriveSubsystem drive, CameraSubsystem camera) {
         this.drive = drive;
@@ -49,11 +50,13 @@ public class AlignAtTargetCommand extends CommandBase {
         }
 
         if (state == State.DIST_ALIGN) {
-            if (camera.hasDetectedTarget()) {
-                calcCurrentDist();
-                drive.move(idealDist - currentDist);
-                state = State.MOVING;
-            }
+            // if (camera.hasDetectedTarget()) {
+            // calcCurrentDist();
+            // drive.move(idealDist - currentDist);
+            // state = State.MOVING;
+            // }
+            drive.move(-10);
+            state = State.MOVING;
         }
         if (state == State.MOVING) {
             if (drive.isStillMoving() == false) {

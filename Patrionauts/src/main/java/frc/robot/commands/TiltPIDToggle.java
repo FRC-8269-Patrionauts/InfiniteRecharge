@@ -10,7 +10,7 @@ import frc.robot.subsystems.ShootSubsystem;
 
 public class TiltPIDToggle extends InstantCommand {
 
-    boolean run = true; 
+    boolean run = true;
     private final IntakeSubsystem tilt;
 
     public TiltPIDToggle(IntakeSubsystem tilt) {
@@ -20,17 +20,15 @@ public class TiltPIDToggle extends InstantCommand {
 
     @Override
     public void initialize() {
-        if (run == true){
+        if (run == true) {
             tilt.tiltToShoot(10);
             run = false;
         } else {
-            tilt.tiltToBottom();
+            // tilt.tiltToBottom();
             run = true;
 
         }
-        
+
     }
-    
-   
 
 }
