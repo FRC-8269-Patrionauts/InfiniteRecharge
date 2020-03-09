@@ -20,7 +20,7 @@ import frc.robot.commands.LoaderTiltCommand;
 import frc.robot.commands.LowerBotCommand;
 import frc.robot.commands.LowerHookCommand;
 import frc.robot.commands.OutakeCommand;
-import frc.robot.commands.SetIntakeRollerCommand;
+import frc.robot.commands.TestIntakePneumaticsCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TestBeltCommand;
 import frc.robot.commands.TestIntakeRollerCommand;
@@ -105,7 +105,7 @@ public class RobotContainer {
     private final LowerBotCommand lowerBotCommand = new LowerBotCommand(liftSubsystem);
     private final LoaderTiltCommand loaderTiltCommand = new LoaderTiltCommand(shootSubsystem);
 
-    private final SetIntakeRollerCommand setIntakeRollerCommand = new SetIntakeRollerCommand(intakeSubsystem);
+    private final TestIntakePneumaticsCommand testIntakePneumaticsCommand = new TestIntakePneumaticsCommand(intakeSubsystem);
     private final FollowPathCommand followPathCommand = new FollowPathCommand();
 
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
@@ -237,8 +237,8 @@ public class RobotContainer {
         return this.followPathCommand;
     }
 
-  public SetIntakeRollerCommand getSetIntakeRollerCommand() {
-    return this.setIntakeRollerCommand;
+  public TestIntakePneumaticsCommand getTestIntakePneumaticsCommand() {
+    return this.testIntakePneumaticsCommand;
   }
 
   public ToggleIntakeCommand getToggleIntakeCommand() {

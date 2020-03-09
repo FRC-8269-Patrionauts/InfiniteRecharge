@@ -16,7 +16,7 @@ public class LiftHookCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (hookLift == true){
-            hookLiftSubsystem.liftHook(.4);
+            hookLiftSubsystem.liftHook(.6);
             hookLift = false;
         } else {
             hookLift = true;

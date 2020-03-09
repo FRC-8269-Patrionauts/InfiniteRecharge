@@ -56,7 +56,7 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("AlignAtTarge", (Sendable) robotContainer.getAlignAtTargetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 1).withSize(2, 1);
 
-        Shuffleboard.getTab("Commands").add("SetIntakePosition", (Sendable) robotContainer.getSetIntakeRollerCommand())
+        Shuffleboard.getTab("TestCommands").add("TestIntakePistons", (Sendable) robotContainer.getTestIntakePneumaticsCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
 
 
@@ -118,6 +118,8 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
         Shuffleboard.getTab("TestCommands").add("TestIntakeRoller", (Sendable) robotContainer.getTestIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
+        }
+                
 
 
     private void configureDriveSubsystem() {

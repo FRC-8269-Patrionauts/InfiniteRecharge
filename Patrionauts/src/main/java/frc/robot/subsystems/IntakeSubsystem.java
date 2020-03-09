@@ -37,8 +37,11 @@ public class IntakeSubsystem extends SubsystemBase {
     private final DoubleSolenoid turrentPiston1 = new DoubleSolenoid(0, 1);
     private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(2, 3); //turrent pneumatics
 
-    private final CANSparkMax loaderTiltMotor = new CANSparkMax(Constants.TILT_MOTOR, MotorType.kBrushless);
-    private final CANEncoder loaderTiltEncoder = loaderTiltMotor.getEncoder();
+    private final CANSparkMax loaderTiltMotor1 = new CANSparkMax(Constants.TILT_MOTOR_1, MotorType.kBrushless);
+    private final CANSparkMax loaderTiltMotor2 = new CANSparkMax(Constants.TILT_MOTOR_2, MotorType.kBrushless);
+
+    private final CANEncoder loaderTiltEncoder1 = loaderTiltMotor1.getEncoder();
+    private final CANEncoder loaderTiltEccoder2 = loaderTiltMotor2.getEncoder();
 
     public final double tiltKp = .0;
     public final double tiltKi = .0;
@@ -76,11 +79,11 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         if (isTilting) {
-            calculatedTiltPIDValue = tiltPID.calculate(loaderTiltEncoder.getPosition());
+            calculatedTiltPIDValue = tiltPID.calculate(loaderTiltEncoder1.getPosition());
 
             calculatedTiltPIDValue = MathUtil.clamp(calculatedTiltPIDValue, -0.5, 0.5);
 
-            loaderTiltMotor.set(calculatedTiltPIDValue);
+            loaderTiltMotor1.set(calculatedTiltPIDValue);
 
             if (tiltPID.atSetpoint()) {
                 isTilting = false;
@@ -89,11 +92,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
         
-    public void setDownIntake(){
+    public void setUpIntake(){
         intakePiston1.set(DoubleSolenoid.Value.kForward);
         intakePiston2.set(DoubleSolenoid.Value.kForward);
     }
-    public void setUpIntake(){
+    public void setDownIntake(){
         intakePiston1.set(DoubleSolenoid.Value.kReverse);
         intakePiston2.set(DoubleSolenoid.Value.kReverse);
         
@@ -131,12 +134,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void tiltToShoot(double encoderTicks) {
         isTilting = true;
-        tiltPID.setSetpoint(loaderTiltEncoder.getPosition() + encoderTicks);
+        tiltPID.setSetpoint(loaderTiltEncoder1.getPosition() + encoderTicks);
     }
 
     public void tiltToBottom(double encoderTicks) {
         isTilting = true;
-        tiltPID.setSetpoint(loaderTiltEncoder.getPosition() - encoderTicks);
+        tiltPID.setSetpoint(loaderTiltEncoder1.getPosition() - encoderTicks);
     }
 
 }
