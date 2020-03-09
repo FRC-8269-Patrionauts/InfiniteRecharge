@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.hal.sim.mockdata.PCMDataJNI;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SolenoidBase;
@@ -9,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class LiftSubsystem extends SubsystemBase {
-    private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(Constants.UNKNOWN); // lifts of the hook to hang
+    // private final PWMVictorSPX HookLiftMotor = new
+    // PWMVictorSPX(Constants.UNKNOWN); // lifts of the hook to hang
+    private final PWMVictorSPX HookLiftMotor = null;
 
     private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(Constants.LIFT_MOTOR_1); // pulls the robot up
     private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(Constants.LIFT_MOTOR_2);

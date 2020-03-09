@@ -11,7 +11,7 @@ public class ToggleIntakeCommand extends InstantCommand {
 
     public ToggleIntakeCommand(IntakeSubsystem intakeSubsystem) {
         this.rollerSubsystem = intakeSubsystem;
-        // addRequirements(rollerSubsystem);[perpetually()]
+        addRequirements(rollerSubsystem);
     }
 
     @Override

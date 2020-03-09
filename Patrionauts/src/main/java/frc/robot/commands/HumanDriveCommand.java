@@ -47,9 +47,9 @@ public class HumanDriveCommand extends CommandBase {
         if (Constants.ENABLE_JOYSTICK) {
             if (Math.abs(joystick.getY()) > .3 || Math.abs(joystick.getTwist()) > .3) {
                 if (Math.abs(joystick.getTwist()) > .3) {
-                    driveSubsystem.arcadeDrive(-joystick.getY() / 7, joystick.getTwist() / 7);
+                    driveSubsystem.arcadeDrive(-joystick.getY(), joystick.getTwist()/2);
                 } else {
-                    driveSubsystem.arcadeDrive(-joystick.getY() / 7, 0);
+                    driveSubsystem.arcadeDrive(-joystick.getY(), 0);
                 }
             } else {
                 driveSubsystem.stop();

@@ -49,10 +49,33 @@ public class Dashboard extends CommandBase {
         Shuffleboard.getTab("Commands").add("ColorWheel", (Sendable) robotContainer.getColorWheelCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 0).withSize(2, 1);
 
+        Shuffleboard.getTab("DriveSubsystemPID").add("TestTurning", (Sendable) robotContainer.getTestTurningCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
+        Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
+
+        Shuffleboard.getTab("Commands").add("Shoot", (Sendable) robotContainer.getShootCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(3, 1).withSize(2, 1);
+
         Shuffleboard.getTab("Commands").add("AlignAtTarge", (Sendable) robotContainer.getAlignAtTargetCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(4, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("SetIntakePosition", (Sendable) robotContainer.getSetIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
+
+        Shuffleboard.getTab("DriveSubsystemPID").add("TestMoveFeet", (Sendable) robotContainer.getTestMoveFeetCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(0, 3).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getToggleIntakeCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
+        Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
+
+        Shuffleboard.getTab("TestCommands")
+                .add("TestColorWheelSpinner", (Sendable) robotContainer.getTestSpinColorWheelCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
+        Shuffleboard.getTab("TestCommands")
+                .add("TestBeltCommand", (Sendable) robotContainer.getTestSpinColorWheelCommand())
+                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
+
         Shuffleboard.getTab("Commands").add("LiftHookCommand", (Sendable) robotContainer.getLiftHookCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LowerHookCommand", (Sendable) robotContainer.getLowerHookCommand())
@@ -61,28 +84,9 @@ public class Dashboard extends CommandBase {
                 .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
         Shuffleboard.getTab("Commands").add("LowerBotCommand", (Sendable) robotContainer.getLowerBotCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("RollerIntake", (Sendable) robotContainer.getToggleIntakeCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
-        Shuffleboard.getTab("Commands").add("RollerOutake", (Sendable) robotContainer.getOutakeCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 1).withSize(2, 1);
-
-        Shuffleboard.getTab("TestCommands").add("TestShoot", (Sendable) robotContainer.getTestShootCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 1).withSize(2, 1);
         Shuffleboard.getTab("TestCommands")
                 .add("TestIntakeRoller", (Sendable) robotContainer.getTestIntakeRollerCommand())
                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
-        Shuffleboard.getTab("TestCommands")
-                .add("TestColorWheelSpinner", (Sendable) robotContainer.getTestSpinColorWheelCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 2).withSize(2, 1);
-        Shuffleboard.getTab("TestCommands")
-                .add("TestBeltCommand", (Sendable) robotContainer.getTestSpinColorWheelCommand())
-                .withWidget(BuiltInWidgets.kCommand).withPosition(6, 0).withSize(2, 1);
-
-        Shuffleboard.getTab("States").addString("Autonomous",
-                () -> robotContainer.getAutonomousCommand().getState().name());
-        Shuffleboard.getTab("States").addString("AlignAtTarget",
-                () -> robotContainer.getAlignAtTargetCommand().getState().name());
-        Shuffleboard.getTab("States").addString("Shoot", () -> robotContainer.getShootCommand().getState().name());
     }
 
     private void configureDriveSubsystem() {
@@ -183,6 +187,13 @@ public class Dashboard extends CommandBase {
                 .addNumber("CalcMoveAlignPID",
                         () -> robotContainer.getDriveSubsystem().getCalculatedMoveAlignPIDValue())
                 .withPosition(1, 2).withSize(1, 1);
+
+        Shuffleboard.getTab("States").addString("Autonomous",
+                () -> robotContainer.getAutonomousCommand().getState().name());
+        Shuffleboard.getTab("States").addString("AlignAtTarget",
+                () -> robotContainer.getAlignAtTargetCommand().getState().name());
+        Shuffleboard.getTab("States").addString("Shoot", () -> robotContainer.getShootCommand().getState().name());
+
     }
 
     private void configureJoystick() {
@@ -386,5 +397,4 @@ public class Dashboard extends CommandBase {
                 .addNumber("Spinner Speed", () -> robotContainer.getColorWheelSubsystem().getColorWheelSpinner().get())
                 .withWidget(BuiltInWidgets.kNumberBar).withPosition(0, 2).withSize(1, 1);
     }
-
 }

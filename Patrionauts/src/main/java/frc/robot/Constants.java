@@ -55,7 +55,7 @@ public final class Constants {
     /**
      * Set to true if belt is connected, otherwise set to false.
      */
-    public static final boolean ENABLE_BELT = false;
+    public static final boolean ENABLE_BELT = true;
 
     /**
      * Set to true if color wheel subsystem is active, otherwise set to false.
@@ -66,21 +66,22 @@ public final class Constants {
     public static final int GAMEPAD_1 = 1;
 
     public static final int UNKNOWN = 0;
-    public static final int COLOR_WHEEL_MOTOR = 1; // vex ;
-    public static final int LIFT_MOTOR_1 = 10; // vex
+    public static final int COLOR_WHEEL_MOTOR = 3; // vex ;
+    public static final int LIFT_MOTOR_1 = 1; // vex
 
     public static final int FLYWHEEL_MOTOR1 = 14; // spark ;
     public static final int FLYWHEEL_MOTOR2 = 15; // spark ;
 
-    public static final int LIFT_MOTOR_2 = 11; // vex
-    public static final int RIGHT_MOTOR_1 = 2; // spark ;
+    public static final int LIFT_MOTOR_2 = 2; // vex
+    public static final int RIGHT_MOTOR_1 = 16; // spark ;
     public static final int RIGHT_MOTOR_2 = 1; // spark ;
     public static final int LEFT_MOTOR_1 = 12; // spark ;
     public static final int LEFT_MOTOR_2 = 13; // spark ;
-    public static final int INTAKE_MOTOR = 9; // vex
-    public static final int BELT_MOTOR = 4; // vex
+
+    public static final int INTAKE_MOTOR = 4; // vex
+    public static final int BELT_MOTOR = 0; // vex
     public static final int TILT_MOTOR_1 = 3; // spark ;
-    public static final int TILT_MOTOR_2 = 2; // vex
+    public static final int TILT_MOTOR_2 = 2; // spark ;
 
     public static final double CURRENT_SPEED = 0;
     public static final double GOAL_SPEED = 0;
