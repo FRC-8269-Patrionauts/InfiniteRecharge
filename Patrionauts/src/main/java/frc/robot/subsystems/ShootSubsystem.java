@@ -24,18 +24,15 @@ public class ShootSubsystem extends SubsystemBase {
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
     private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
-    public final double shootKp1 = 0;
+    public final double shootKp1 = .00001;
     public final double shootKi1 = 0;
     public final double shootKd1 = 0;
     public final PIDController pidShooter1 = new PIDController(shootKp1, shootKi1, shootKd1);
 
-    public final double shootKp2 = 0;
+    public final double shootKp2 = .00001;
     public final double shootKi2 = 0;
     public final double shootKd2 = 0;
     public final PIDController pidShooter2 = new PIDController(shootKp2, shootKi2, shootKd2);
-
-    public double flyWheelEncoder1RPM = 0;
-    public double flyWheelEncoder2RPM = 0;
 
     public double flywheelMotor1Velocity = 0;
 
@@ -52,102 +49,65 @@ public class ShootSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-
         if (isRamping) {
-
             calculatedShootPIDValue1 = pidShooter1.calculate(flyWheelEncoder1.getVelocity());
-            // calculatedShootPIDValue2 =
-            // pidShooter2.calculate(flyWheelEncoder2.getVelocity());
+            calculatedShootPIDValue2 = pidShooter2.calculate(flyWheelEncoder2.getVelocity());
 
-            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -.5, .5);
-            // calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -.5, .5);
+            calculatedShootPIDValue1 = MathUtil.clamp(calculatedShootPIDValue1, -1, 1);
+            calculatedShootPIDValue2 = MathUtil.clamp(calculatedShootPIDValue2, -1, 1);
 
             currentSpeed1 += calculatedShootPIDValue1;
-            // currentSpeed2 += calculatedShootPIDValue2;
+            currentSpeed2 += calculatedShootPIDValue2;
 
-            currentSpeed1 = MathUtil.clamp(currentSpeed1, -.5, .5);
-            // currentSpeed2 = MathUtil.clamp(currentSpeed2, -.5, .5);
+            currentSpeed1 = MathUtil.clamp(currentSpeed1, -1, 1);
+            currentSpeed2 = MathUtil.clamp(currentSpeed2, -1, 1);
 
-            System.out.println("Setting currentSpeed " + currentSpeed1);
             flyWheelMotor1.set(currentSpeed1);
-            // flyWheelMotor2.set(currentSpeed2);
-
+            flyWheelMotor2.set(currentSpeed2);
         }
-        flyWheelMotor2.set(.3);
-        flyWheelMotor1.set(.3);
     }
 
-    public void setFlyWheel(double speed) {
-        flyWheelMotor1.set(-speed);
-        flyWheelMotor2.set(-speed);
-
-    }
-
-    public void stopFlyWheels() {
-        flyWheelMotor1.set(0);
-        flyWheelMotor2.set(0);
-    }
-
-    public void shoot1(double RPM) {
+    public void setFlyWheel1(double rpm) {
         isRamping = true;
-        pidShooter1.setSetpoint(RPM);
         currentSpeed1 = 0;
+        pidShooter1.setSetpoint(-rpm);
     }
 
-    public void shoot2(double RPM) {
+    public void setFlyWheel2(double rpm) {
         isRamping = true;
-        pidShooter2.setSetpoint(RPM);
         currentSpeed2 = 0;
+        pidShooter2.setSetpoint(-rpm);
     }
 
     public void feedBall(double speed) {
-        beltMotor.set(speed);
+        beltMotor.set(-speed);
     }
 
     public PWMVictorSPX getBeltMotor() {
         return beltMotor;
     }
 
-    // NEED
-    // periodic, current RPM, goal RPM, take output of periodic loop and set that to
-    // motor controllers, ask it if we're done
-    // also look at turn method and compare how it works
-
-    // stop and reset
-
     public boolean isStillRamping() {
-        return isRamping;
+        return pidShooter1.atSetpoint() && pidShooter2.atSetpoint();
     }
 
-    // stop and reset
     public void stopShooter() {
         isRamping = false;
         currentSpeed1 = 0;
         currentSpeed2 = 0;
         // sets Flywheels to 0 power
-        stopFlyWheels();
+        flyWheelMotor1.set(0);
+        flyWheelMotor2.set(0);
     }
-    // shooter will ramp up and is it at it then keep running and stop when we tell
-    // it to --> Run PID continuously
-
-    // start looking into tilt pid
-
-    // NEED
-    // periodic, current RPM, goal RPM, take output of periodic loop and set that to
-    // motor controllers, ask it if we're done
-    // also look at turn method and compare how it works
-
-    // call pid controller, get output of pid controller and send to motor
-    // Every time we do a periodic, we use the output and send it to the motor
-    // controller
 
     // the flywheel motors
     public CANSparkMax getFlyWheelMotor1() {
         return flyWheelMotor1;
     }
-    /*
-     * public CANSparkMax getFlyWheelMotor2() { // return flyWheelMotor2; }
-     */
+
+    public CANSparkMax getFlyWheelMotor2() {
+        return flyWheelMotor2;
+    }
 
     // the PID controllers
     public PIDController getShooterPIDController1() {
@@ -174,10 +134,6 @@ public class ShootSubsystem extends SubsystemBase {
 
     public double getCalculatedShootPIDValue2() {
         return calculatedShootPIDValue2;
-    }
-
-    public CANSparkMax getFlyWheelMotor2() {
-        return flyWheelMotor2;
     }
 
     // Flywheel encoders

@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.hal.sim.mockdata.PCMDataJNI;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SolenoidBase;
@@ -9,11 +8,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class LiftSubsystem extends SubsystemBase {
-    private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(Constants.UNKNOWN); // lifts of the hook to hang
+    // private final PWMVictorSPX HookLiftMotor = new
+    // PWMVictorSPX(Constants.UNKNOWN); // lifts of the hook to hang
+    private final PWMVictorSPX HookLiftMotor = null;
 
     private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(Constants.LIFT_MOTOR_1); // pulls the robot up
     private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(Constants.LIFT_MOTOR_2);
-    private final DoubleSolenoid TransmissionSolenoid = new DoubleSolenoid(0, 1, 1);
+    // private final DoubleSolenoid TransmissionSolenoid = new DoubleSolenoid(0, 1,
+    // 1);
+    private final DoubleSolenoid TransmissionSolenoid = null;
 
     public LiftSubsystem() {
 
@@ -28,7 +31,7 @@ public class LiftSubsystem extends SubsystemBase {
     }
 
     public void transmissionOut() {
-         TransmissionSolenoid.set(DoubleSolenoid.Value.kReverse);
+        TransmissionSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void liftHook(double speed) {
@@ -40,19 +43,19 @@ public class LiftSubsystem extends SubsystemBase {
     }
 
     public void liftBot1(double speed) {
-        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);//lift the bot with
+        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);// lift the bot with
         // transmission engadged
         BotLiftMotor1.set(speed);
         BotLiftMotor2.set(speed);
     }
 
     public void lowerBot1(double speed) {
-        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);//lower bot with
+        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);// lower bot with
         // transmission
         BotLiftMotor1.set(-speed);
         BotLiftMotor2.set(-speed);
     }
-    
+
     public PWMVictorSPX getHookLiftMotor() {
         return HookLiftMotor;
     }

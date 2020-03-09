@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class ToggleIntakeCommand extends InstantCommand{
+public class ToggleIntakeCommand extends InstantCommand {
     private final IntakeSubsystem rollerSubsystem;
 
     boolean intake = true;
 
-    public ToggleIntakeCommand(IntakeSubsystem intakeSubsystem){
+    public ToggleIntakeCommand(IntakeSubsystem intakeSubsystem) {
         this.rollerSubsystem = intakeSubsystem;
         addRequirements(rollerSubsystem);
     }
 
     @Override
     public void initialize() {
-        if(intake == true){
+        if (intake == true) {
             rollerSubsystem.setDownIntake();
             rollerSubsystem.intake(-.8);
             rollerSubsystem.setTensionerUp(); 
