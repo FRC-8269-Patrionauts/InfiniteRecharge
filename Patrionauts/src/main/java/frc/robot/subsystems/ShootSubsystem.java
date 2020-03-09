@@ -24,12 +24,12 @@ public class ShootSubsystem extends SubsystemBase {
     private final CANEncoder flyWheelEncoder1 = flyWheelMotor1.getEncoder();
     private final CANEncoder flyWheelEncoder2 = flyWheelMotor2.getEncoder();
 
-    public final double shootKp1 = .00001;
+    public final double shootKp1 = .0001;
     public final double shootKi1 = 0;
     public final double shootKd1 = 0;
     public final PIDController pidShooter1 = new PIDController(shootKp1, shootKi1, shootKd1);
 
-    public final double shootKp2 = .00001;
+    public final double shootKp2 = .0001;
     public final double shootKi2 = 0;
     public final double shootKd2 = 0;
     public final PIDController pidShooter2 = new PIDController(shootKp2, shootKi2, shootKd2);

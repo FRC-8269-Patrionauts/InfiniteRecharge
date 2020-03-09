@@ -10,14 +10,13 @@ import frc.robot.subsystems.ShootSubsystem;
 public class ShootCommand extends CommandBase {
 
     private final ShootSubsystem shooter;
-    private static final double RPM = 100;
     private final Timer feedTimer = new Timer();
 
     public enum State {
-        STARTING_RAMPING, IS_RAMPING, STARTING_BELT, BELT_RUNNING, FINISHED
+        STARTING, STARTING_RAMPING, IS_RAMPING, STARTING_BELT, BELT_RUNNING, FINISHED
     }
 
-    private State state = null;
+    private State state = State.STARTING;
 
     public ShootCommand(ShootSubsystem shooter) {
         this.shooter = shooter;
@@ -26,16 +25,17 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        state = State.STARTING;
     }
 
     @Override
     public void execute() {
-        if (state == null) {
+        if (state == State.STARTING) {
             state = State.STARTING_RAMPING;
         }
         if (state == State.STARTING_RAMPING) {
-            shooter.setFlyWheel1(RPM);
-            shooter.setFlyWheel2(RPM);
+            shooter.setFlyWheel1(5200);
+            shooter.setFlyWheel2(5000);
             state = State.IS_RAMPING;
         }
         if (state == State.IS_RAMPING) {
@@ -44,7 +44,7 @@ public class ShootCommand extends CommandBase {
             }
         }
         if (state == State.STARTING_BELT) {
-            shooter.feedBall(0.2);
+            shooter.feedBall(1);
             feedTimer.reset();
             feedTimer.start();
             state = State.BELT_RUNNING;
@@ -59,5 +59,9 @@ public class ShootCommand extends CommandBase {
 
     public boolean isFinished() {
         return state == State.FINISHED;
+    }
+
+    public State getState() {
+        return state;
     }
 }

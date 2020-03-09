@@ -16,9 +16,9 @@ public class TestShootCommand extends InstantCommand {
     @Override
     public void initialize() {
         if (toggle) {
-            shoot.feedBall(0.7);
-            shoot.setFlyWheel1(4000);
-            shoot.setFlyWheel2(5500);
+            shoot.feedBall(1);
+            shoot.setFlyWheel1(5000);
+            shoot.setFlyWheel2(5200);
         } else if (!toggle) {
             shoot.feedBall(0);
             shoot.stopShooter();
