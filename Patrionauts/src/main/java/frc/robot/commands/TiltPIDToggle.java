@@ -24,7 +24,7 @@ public class TiltPIDToggle extends InstantCommand {
             tilt.tiltToShoot(10);
             run = false;
         } else {
-            tilt.tiltToBottom();
+            tilt.tiltToBottom(10);
             run = true;
 
         }

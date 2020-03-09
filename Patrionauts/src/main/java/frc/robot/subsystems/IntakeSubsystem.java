@@ -7,8 +7,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
@@ -37,7 +35,7 @@ public class IntakeSubsystem extends SubsystemBase {
     private final DoubleSolenoid turrentPiston1 = new DoubleSolenoid(0, 1);
     private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(2, 3); //turrent pneumatics
 
-    private final CANSparkMax loaderTiltMotor = new CANSparkMax(Constants.TILT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax loaderTiltMotor = new CANSparkMax(Constants.TILT_MOTOR_1, MotorType.kBrushless);
     private final CANEncoder loaderTiltEncoder = loaderTiltMotor.getEncoder();
 
     public final double tiltKp = .0;
