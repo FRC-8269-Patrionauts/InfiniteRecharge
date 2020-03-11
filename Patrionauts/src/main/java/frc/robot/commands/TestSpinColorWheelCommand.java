@@ -17,7 +17,7 @@ public class TestSpinColorWheelCommand extends InstantCommand {
     @Override
     public void initialize() {
         if (foo == true) {
-            spinnerSubsystem.rotateWheel(.2);
+            spinnerSubsystem.rotateWheel(.4);
             foo = false;
         } else {
             foo = true;

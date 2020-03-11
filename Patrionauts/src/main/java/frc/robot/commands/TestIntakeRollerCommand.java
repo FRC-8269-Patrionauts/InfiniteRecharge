@@ -16,11 +16,11 @@ public class TestIntakeRollerCommand extends InstantCommand {
     @Override
     public void initialize() {
         if (spin == true) {
-            rollerSubsystem.intake(.5);
+            rollerSubsystem.intake(.30);
             spin = false;
         } else {
             spin = true;
-            rollerSubsystem.outake(0);
+            rollerSubsystem.outtake(0);
         }
     }
 }

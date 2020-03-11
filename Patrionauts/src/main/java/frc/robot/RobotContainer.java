@@ -1,39 +1,13 @@
 package frc.robot;
 
-//import edu.wpi.first.wpilibj.AnalogGyro;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AlignAtTargetCommand;
-import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ColorWheelCommand;
-import frc.robot.commands.FollowPathCommand;
-import frc.robot.commands.HumanDriveCommand;
-import frc.robot.commands.LiftBotCommand;
-import frc.robot.commands.LiftHookCommand;
-import frc.robot.commands.LoaderTiltCommand;
-import frc.robot.commands.LowerBotCommand;
-import frc.robot.commands.LowerHookCommand;
-import frc.robot.commands.OutakeCommand;
-import frc.robot.commands.TestIntakePneumaticsCommand;
-import frc.robot.commands.ShootCommand;
-import frc.robot.commands.TestBeltCommand;
-import frc.robot.commands.TestIntakeRollerCommand;
-import frc.robot.commands.TestMoveFeetCommand;
-import frc.robot.commands.TestShootCommand;
-import frc.robot.commands.TestShootRPMCommand;
-import frc.robot.commands.TestSpinColorWheelCommand;
-import frc.robot.commands.TestTurningCommand;
-import frc.robot.commands.ToggleIntakeCommand;
-import frc.robot.subsystems.CameraSubsystem;
-import frc.robot.subsystems.ColorWheelSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.ShootSubsystem;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 //import sun.java2d.cmm.PCMM;
 
 /**
@@ -96,7 +70,7 @@ public class RobotContainer {
     private final TestShootCommand testShootCommand = new TestShootCommand(shootSubsystem);
     private final TestShootRPMCommand testShootRPMCommand = new TestShootRPMCommand(shootSubsystem);
     private final ToggleIntakeCommand toggleIntakeCommand = new ToggleIntakeCommand(intakeSubsystem);
-    private final OutakeCommand outakeCommand = new OutakeCommand(intakeSubsystem);
+    private final OuttakeCommand outtakeCommand = new OuttakeCommand(intakeSubsystem);
     private final TestSpinColorWheelCommand testSpinColorWheelCommand = new TestSpinColorWheelCommand(
             colorWheelSubsystem);
     private final LiftHookCommand liftHookCommand = new LiftHookCommand(liftSubsystem);
@@ -111,6 +85,8 @@ public class RobotContainer {
     private final TestMoveFeetCommand testMoveFeetCommand = new TestMoveFeetCommand(driveSubsystem);
     private final TestBeltCommand testBeltCommand = new TestBeltCommand(shootSubsystem);
     private final TestIntakeRollerCommand testIntakeRollerCommand = new TestIntakeRollerCommand(intakeSubsystem);
+    private final PowerPortPipelineCommand powerPortPipelineCommand = new PowerPortPipelineCommand(cameraSubsystem);
+    private final TestPipelineCommand testPipelineCommand = new TestPipelineCommand(cameraSubsystem);
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -139,7 +115,7 @@ public class RobotContainer {
 
         joystickButton9.whenPressed(alignAtTargetCommand); // auto aim at target
 
-        joystickButton2.whenPressed(testSpinColorWheelCommand);
+        joystickButton2.whenPressed(testIntakeRollerCommand);
 
     }
 
@@ -240,21 +216,16 @@ public class RobotContainer {
     return this.testIntakePneumaticsCommand;
   }
 
-  public ToggleIntakeCommand getToggleIntakeCommand() {
-    return this.toggleIntakeCommand;
-  }
 
-  public OutakeCommand getOutakeCommand() {
-    return this.outakeCommand;
+  public OuttakeCommand getOuttakeCommand() {
+    return this.outtakeCommand;
   }
 
     public ToggleIntakeCommand getToggleIntakeCommand() {
         return this.toggleIntakeCommand;
     }
 
-    public OutakeCommand getOutakeCommand() {
-        return this.outakeCommand;
-    }
+
 
     public TestSpinColorWheelCommand getTestSpinColorWheelCommand() {
         return this.testSpinColorWheelCommand;
@@ -282,6 +253,14 @@ public class RobotContainer {
 
     public TestIntakeRollerCommand getTestIntakeRollerCommand() {
         return this.testIntakeRollerCommand;
+    }
+
+    public PowerPortPipelineCommand getPowerPortPipelineCommand() {
+        return this.powerPortPipelineCommand;
+    }
+
+    public TestPipelineCommand getTestPipelineCommand() {
+        return this.testPipelineCommand;
     }
 
 }

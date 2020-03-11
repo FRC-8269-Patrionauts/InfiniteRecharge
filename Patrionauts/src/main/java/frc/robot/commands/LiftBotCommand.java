@@ -18,7 +18,7 @@ public class LiftBotCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (lift == true){
-            botLiftSubsystem.liftBot1(.4);
+            botLiftSubsystem.liftBot1(.6);
             lift = false;
         } else {
             lift = true;

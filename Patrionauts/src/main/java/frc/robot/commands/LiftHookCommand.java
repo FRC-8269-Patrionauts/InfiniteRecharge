@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.LiftSubsystem;
 
-public class LiftHookCommand extends InstantCommand{
+public class LiftHookCommand extends InstantCommand {
     private final LiftSubsystem hookLiftSubsystem;
 
     boolean hookLift = true;
@@ -16,11 +16,14 @@ public class LiftHookCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (hookLift == true){
-            hookLiftSubsystem.liftHook(.6);
+            hookLiftSubsystem.liftHook(1);
+            hookLiftSubsystem.lowerBot1(.3);
             hookLift = false;
         } else {
             hookLift = true;
             hookLiftSubsystem.liftHook(0);
+            hookLiftSubsystem.lowerBot1(0);
+
         }
     }
 

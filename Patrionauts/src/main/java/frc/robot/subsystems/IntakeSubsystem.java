@@ -127,11 +127,11 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void intake(double speed) {
-        rollerMoter.set(speed);
+        rollerMoter.set(-speed);
     }
 
-    public void outake(double speed) {
-        rollerMoter.set(-speed);
+    public void outtake(double speed) {
+        rollerMoter.set(speed);
     }
 
     public double getCalculatedTiltPIDValue() {

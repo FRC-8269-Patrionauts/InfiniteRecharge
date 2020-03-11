@@ -15,7 +15,7 @@ public class LowerHookCommand extends InstantCommand{
     @Override
     public void initialize(){
         if (bru == true){
-            hookLowerSubsystem.lowerHook(.6);
+            hookLowerSubsystem.lowerHook(1);
             bru = false;
         } else {
             bru = true;

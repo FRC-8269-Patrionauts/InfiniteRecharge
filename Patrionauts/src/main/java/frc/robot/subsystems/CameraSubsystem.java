@@ -19,13 +19,21 @@ public class CameraSubsystem extends SubsystemBase {
     CameraServer.getInstance().startAutomaticCapture();
   }
 
-  public void enablePowerPortPipeline() {
+  public void enablePipeline() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
 
   }
 
-  public void disablePowerPortPipeline() {
+  public void disablePipeline() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+  }
+
+  public void setPowerPortPipeline() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+  }
+
+  public void setTestPipeline() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1);
   }
 
   public boolean hasDetectedTarget() {

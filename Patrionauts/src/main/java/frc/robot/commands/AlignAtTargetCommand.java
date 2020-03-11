@@ -13,7 +13,7 @@ public class AlignAtTargetCommand extends CommandBase {
     private final DriveSubsystem drive;
     private final CameraSubsystem camera;
     private double currentDist = 0.0;
-    private double idealDist = 0.0;
+    private double idealDist = 16.0;
     private double targetHeight = 8.0;
 
     public enum State {
@@ -32,10 +32,13 @@ public class AlignAtTargetCommand extends CommandBase {
     @Override
     public void initialize() {
         state = State.STARTING;
+        camera.enablePipeline();
+        camera.setPowerPortPipeline();
     }
 
     @Override
     public void execute() {
+
         DetectedTarget target = camera.getDetectedTarget();
         if (state == State.STARTING) {
             state = State.TURN_ALIGN;
@@ -53,11 +56,11 @@ public class AlignAtTargetCommand extends CommandBase {
         }
 
         if (state == State.DIST_ALIGN) {
-            // if (camera.hasDetectedTarget()) {
-            // calcCurrentDist();
-            // drive.move(idealDist - currentDist);
-            // state = State.MOVING;
-            // }
+            if (camera.hasDetectedTarget()) {
+             calcCurrentDist();
+             drive.move(idealDist - currentDist);
+             state = State.MOVING;
+             }
             state = State.MOVING;
         }
         if (state == State.MOVING) {

@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ColorWheelSubsystem extends SubsystemBase {
-    public PWMVictorSPX colorWheelSpinner = new PWMVictorSPX(Constants.COLOR_WHEEL_MOTOR);
+    public PWMVictorSPX colorWheelSpinner = null;
     public String targetColor;
     public String myColor;
 

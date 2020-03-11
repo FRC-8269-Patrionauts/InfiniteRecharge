@@ -10,7 +10,7 @@ import frc.robot.Constants;
 public class LiftSubsystem extends SubsystemBase {
     // private final PWMVictorSPX HookLiftMotor = new
     // PWMVictorSPX(Constants.UNKNOWN); // lifts of the hook to hang
-    private final PWMVictorSPX HookLiftMotor = null;
+    private final PWMVictorSPX HookLiftMotor = new PWMVictorSPX(Constants.HOOK_LIFT_MOTOR);
 
     private final PWMVictorSPX BotLiftMotor1 = new PWMVictorSPX(Constants.LIFT_MOTOR_1); // pulls the robot up
     private final PWMVictorSPX BotLiftMotor2 = new PWMVictorSPX(Constants.LIFT_MOTOR_2);
@@ -43,15 +43,11 @@ public class LiftSubsystem extends SubsystemBase {
     }
 
     public void liftBot1(double speed) {
-        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);// lift the bot with
-        // transmission engadged
         BotLiftMotor1.set(speed);
         BotLiftMotor2.set(speed);
     }
 
     public void lowerBot1(double speed) {
-        TransmissionSolenoid.set(DoubleSolenoid.Value.kForward);// lower bot with
-        // transmission
         BotLiftMotor1.set(-speed);
         BotLiftMotor2.set(-speed);
     }
