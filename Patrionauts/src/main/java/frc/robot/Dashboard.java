@@ -94,6 +94,9 @@ public class Dashboard extends CommandBase {
                 Shuffleboard.getTab("TestCommands")
                                 .add("TestIntakeRoller", (Sendable) robotContainer.getTestIntakeRollerCommand())
                                 .withWidget(BuiltInWidgets.kCommand).withPosition(0, 1).withSize(2, 1);
+                Shuffleboard.getTab("TestCommands")
+                                .add("TestTurrentCommand", (Sendable) robotContainer.getTestTurrentPneumaticsCommand())
+                                .withWidget(BuiltInWidgets.kCommand).withPosition(2, 3).withSize(2, 1);
         }
 
         private void configureDriveSubsystem() {

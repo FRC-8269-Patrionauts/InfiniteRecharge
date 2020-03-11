@@ -18,7 +18,7 @@ public class ToggleIntakeCommand extends InstantCommand {
     public void initialize() {
         if (intake == true) {
             rollerSubsystem.setDownIntake();
-            rollerSubsystem.intake(-.8);
+            rollerSubsystem.intake(-.35);
             rollerSubsystem.setTensionerUp(); 
             intake = false;
         } else {

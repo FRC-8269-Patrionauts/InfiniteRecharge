@@ -87,6 +87,7 @@ public class RobotContainer {
     private final TestIntakeRollerCommand testIntakeRollerCommand = new TestIntakeRollerCommand(intakeSubsystem);
     private final PowerPortPipelineCommand powerPortPipelineCommand = new PowerPortPipelineCommand(cameraSubsystem);
     private final TestPipelineCommand testPipelineCommand = new TestPipelineCommand(cameraSubsystem);
+    private final TestTurrentPneumaticsCommand testTurrentPneumaticsCommand = new TestTurrentPneumaticsCommand(intakeSubsystem);
 
     public RobotContainer() {
         if (Constants.ENABLE_JOYSTICK) {
@@ -262,5 +263,10 @@ public class RobotContainer {
     public TestPipelineCommand getTestPipelineCommand() {
         return this.testPipelineCommand;
     }
+
+    public TestTurrentPneumaticsCommand getTestTurrentPneumaticsCommand() {
+        return this.testTurrentPneumaticsCommand;
+    }
+
 
 }

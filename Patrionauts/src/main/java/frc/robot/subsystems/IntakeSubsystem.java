@@ -28,11 +28,11 @@ public class IntakeSubsystem extends SubsystemBase {
     private final DoubleSolenoid funnelPiston1 = new DoubleSolenoid(1, 2, 3);
     private final DoubleSolenoid funnelPiston2 = new DoubleSolenoid(1, 4, 5);
 
-    private final DoubleSolenoid intakePiston1 = new DoubleSolenoid(4, 5);
-    private final DoubleSolenoid intakePiston2 = new DoubleSolenoid(6, 7);// intake pneumatics
+    private final DoubleSolenoid intakePiston1 = new DoubleSolenoid(2, 5); // right piston
+    private final DoubleSolenoid intakePiston2 = new DoubleSolenoid(0, 7); // left piston
 
-    private final DoubleSolenoid turrentPiston1 = new DoubleSolenoid(0, 1);
-    private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(2, 3); // turrent pneumatics
+    private final DoubleSolenoid turrentPiston1 = new DoubleSolenoid(3, 4); // right piston
+    private final DoubleSolenoid turrentPiston2 = new DoubleSolenoid(1, 6); // left piston
 
     private final CANSparkMax loaderTiltMotor1 = new CANSparkMax(Constants.TILT_MOTOR_1, MotorType.kBrushless);
     private final CANSparkMax loaderTiltMotor2 = new CANSparkMax(Constants.TILT_MOTOR_2, MotorType.kBrushless);
@@ -101,19 +101,19 @@ public class IntakeSubsystem extends SubsystemBase {
        
 
 
-         intakePiston1.set(DoubleSolenoid.Value.kReverse);
+        intakePiston1.set(DoubleSolenoid.Value.kReverse);
         intakePiston2.set(DoubleSolenoid.Value.kReverse);
 
     }
 
     public void setFunnelOpen() {
         funnelPiston1.set(DoubleSolenoid.Value.kForward); // set at begginging of tele or auto
-        funnelPiston2.set(DoubleSolenoid.Value.kForward);
+        //funnelPiston2.set(DoubleSolenoid.Value.kForward);
     }
 
     public void setFunnelClose() {
         funnelPiston1.set(DoubleSolenoid.Value.kReverse); // use to put pistons back in (just shuffleboard)
-        funnelPiston2.set(DoubleSolenoid.Value.kReverse);
+        //funnelPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void setTensionerUp() {
